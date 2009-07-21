@@ -114,6 +114,8 @@
 		439210211015C4B1004055D0 /* worn.c in Sources */ = {isa = PBXBuildFile; fileRef = 43920FB71015C4B1004055D0 /* worn.c */; };
 		439210221015C4B1004055D0 /* write.c in Sources */ = {isa = PBXBuildFile; fileRef = 43920FB81015C4B1004055D0 /* write.c */; };
 		439210231015C4B1004055D0 /* zap.c in Sources */ = {isa = PBXBuildFile; fileRef = 43920FB91015C4B1004055D0 /* zap.c */; };
+		439210A91015CD1D004055D0 /* wincocoa.m in Sources */ = {isa = PBXBuildFile; fileRef = 439210A81015CD1D004055D0 /* wincocoa.m */; };
+		439210C71015CFE1004055D0 /* monstr.c in Sources */ = {isa = PBXBuildFile; fileRef = 439210C61015CFE1004055D0 /* monstr.c */; };
 		8D11072B0486CEB800E47090 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 089C165CFE840E0CC02AAC07 /* InfoPlist.strings */; };
 		8D11072D0486CEB800E47090 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 29B97316FDCFA39411CA2CEA /* main.m */; settings = {ATTRIBUTES = (); }; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
@@ -328,6 +330,9 @@
 		439210821015C4CA004055D0 /* you.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = you.h; sourceTree = "<group>"; };
 		439210831015C4CA004055D0 /* youprop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = youprop.h; sourceTree = "<group>"; };
 		4392108B1015C943004055D0 /* date.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = date.h; sourceTree = "<group>"; };
+		439210A71015CD1D004055D0 /* wincocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wincocoa.h; sourceTree = "<group>"; };
+		439210A81015CD1D004055D0 /* wincocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wincocoa.m; sourceTree = "<group>"; };
+		439210C61015CFE1004055D0 /* monstr.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = monstr.c; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8D1107320486CEB800E47090 /* nethack-cocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "nethack-cocoa.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -395,6 +400,8 @@
 			children = (
 				32CA4F630368D1EE00C91783 /* nethack-cocoa_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				439210A71015CD1D004055D0 /* wincocoa.h */,
+				439210A81015CD1D004055D0 /* wincocoa.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -430,6 +437,7 @@
 		43920F4F1015C4B0004055D0 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				439210C61015CFE1004055D0 /* monstr.c */,
 				43920F501015C4B0004055D0 /* allmain.c */,
 				43920F511015C4B0004055D0 /* alloc.c */,
 				43920F521015C4B0004055D0 /* apply.c */,
@@ -805,6 +813,8 @@
 				439210211015C4B1004055D0 /* worn.c in Sources */,
 				439210221015C4B1004055D0 /* write.c in Sources */,
 				439210231015C4B1004055D0 /* zap.c in Sources */,
+				439210A91015CD1D004055D0 /* wincocoa.m in Sources */,
+				439210C71015CFE1004055D0 /* monstr.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
