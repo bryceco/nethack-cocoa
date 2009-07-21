@@ -11,7 +11,11 @@ You need
 
 = Details =
 
-In order to build all prerequisites (dungeon definitions etc.) you have to build the tty port first (this is taken from the [http://nethack.wikia.com/wiki/Compiling build instructions on wikia]):
+After extraction you should be able to load the xcode project (win/cocoa/nethack-cocoa.xcodeproj) and build the actual cocoa port.
+
+*The following instructions are only needed to bootstrap from a virgin nethack source tree!* These are the steps I initially had to take and are only here for completeness (and of course to confuse people :))
+
+In order to build/refresh all prerequisites (dungeon definitions etc.) from a vanilla nethack src tree you have to build the tty port first (this is taken from the [http://nethack.wikia.com/wiki/Compiling build instructions on wikia]):
 
  * in src/Makefile, uncomment line 233 and comment out line 234
  * cd to sys/unix
@@ -20,5 +24,3 @@ In order to build all prerequisites (dungeon definitions etc.) you have to build
  * in src/Makefile, uncomment line 233 and comment out line 234
  * in src/Makefile, on line 154, change CFLAGS -O to -O2
  * make (this builds the usual tty port)
-
-Now you can load the xcode project (win/cocoa/nethack-cocoa.xcodeproj) and build the actual cocoa port.
