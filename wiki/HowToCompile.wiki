@@ -11,7 +11,14 @@ You need
 
 = Details =
 
+In order to build all prerequisites (dungeon definitions etc.) you have to build the tty port first (this is taken from the [http://nethack.wikia.com/wiki/Compiling build instructions on wikia]):
+
+ * in src/Makefile, uncomment line 233 and comment out line 234
  * cd to sys/unix
  * sh setup.sh
  * cd ../..
- * make dungeon
+ * in src/Makefile, uncomment line 233 and comment out line 234
+ * in src/Makefile, on line 154, change CFLAGS -O to -O2
+ * make (this builds the usual tty port)
+
+Now you can load the xcode project (win/cocoa/nethack-cocoa.xcodeproj) and build the actual cocoa port.
