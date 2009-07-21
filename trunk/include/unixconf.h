@@ -19,20 +19,20 @@
  */
 
 /* define exactly one of the following four choices */
-/* #define BSD 1 */	/* define for 4.n/Free/Open/Net BSD  */
+#define BSD 1 */	/* define for 4.n/Free/Open/Net BSD  */
 			/* also for relatives like SunOS 4.x, DG/UX, and */
 			/* older versions of Linux */
 /* #define ULTRIX */	/* define for Ultrix v3.0 or higher (but not lower) */
 			/* Use BSD for < v3.0 */
 			/* "ULTRIX" not to be confused with "ultrix" */
-#define SYSV		/* define for System V, Solaris 2.x, newer versions */
+/*#define SYSV		/* define for System V, Solaris 2.x, newer versions */
 			/* of Linux */
 /* #define HPUX */	/* Hewlett-Packard's Unix, version 6.5 or higher */
 			/* use SYSV for < v6.5 */
 
 
 /* define any of the following that are appropriate */
-#define SVR4		/* use in addition to SYSV for System V Release 4 */
+/* #define SVR4		/* use in addition to SYSV for System V Release 4 */
 			/* including Solaris 2+ */
 #define NETWORK		/* if running on a networked system */
 			/* e.g. Suns sharing a playground through NFS */
