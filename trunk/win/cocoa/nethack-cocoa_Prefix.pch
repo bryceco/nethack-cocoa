@@ -1,0 +1,7 @@
+//
+// Prefix header for all source files of the 'nethack-cocoa' target in the 'nethack-cocoa' project
+//
+
+#ifdef __OBJC__
+    #import <Cocoa/Cocoa.h>
+#endif
