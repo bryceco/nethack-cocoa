@@ -23,6 +23,9 @@
 //  along with nethack-cocoa.  If not, see <http://www.gnu.org/licenses/>.
 
 #import "wincocoa.h"
+#import "NethackWindow.h"
+#import "WindowManager.h"
+#import "MainController.h"
 
 #include <stdio.h>
 #include "dlb.h"
@@ -139,7 +142,8 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 }
 
 void cocoa_player_selection() {
-	strcpy(pl_character, "Valkyrie");
+	strcpy(pl_character, "Val");
+	pl_race = 2;
 }
 
 void cocoa_askname() {
@@ -149,11 +153,12 @@ void cocoa_askname() {
 }
 
 void cocoa_get_nh_event() {
-	//NSLog(@"cocoa_get_nh_event");
+	NSLog(@"cocoa_get_nh_event");
 }
 
 void cocoa_exit_nhwindows(const char *str) {
 	NSLog(@"cocoa_exit_nhwindows %s", str);
+	[[MainController instance] waitForUser];
 }
 
 void cocoa_suspend_nhwindows(const char *str) {
@@ -165,18 +170,20 @@ void cocoa_resume_nhwindows() {
 }
 
 winid cocoa_create_nhwindow(int type) {
-	// todo
-	return (winid) NULL;
+	return [[WindowManager instance] createWindowWithType:type];
 }
 
 void cocoa_clear_nhwindow(winid wid) {
-	// todo
 	//NSLog(@"cocoa_clear_nhwindow %d", wid);
+	NethackWindow *w = [[WindowManager instance] windowWithId:wid];
+	[w clear];
 }
 
 void cocoa_display_nhwindow(winid wid, BOOLEAN_P block) {
 	// todo
-	//NSLog(@"cocoa_display_nhwindow %d", wid);
+	NSLog(@"cocoa_display_nhwindow %d", wid);
+	NethackWindow *w = [[WindowManager instance] windowWithId:wid];
+	[w display];
 }
 
 void cocoa_destroy_nhwindow(winid wid) {
@@ -190,7 +197,10 @@ void cocoa_curs(winid wid, int x, int y) {
 
 void cocoa_putstr(winid wid, int attr, const char *text) {
 	// todo
-	//NSLog(@"cocoa_putstr %d %s", wid, text);
+	NSLog(@"cocoa_putstr %d %s", wid, text);
+	NethackWindow *w = [[WindowManager instance] windowWithId:wid];
+	NSString *s = [NSString stringWithCString:text];
+	[w putString:s];
 }
 
 void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
@@ -234,8 +244,9 @@ void cocoa_wait_synch() {
 }
 
 void cocoa_cliparound(int x, int y) {
-	// todo
 	//NSLog(@"cocoa_cliparound %d,%d", x, y);
+	[[WindowManager instance] setClipX:x];
+	[[WindowManager instance] setClipY:y];
 }
 
 void cocoa_cliparound_window(winid wid, int x, int y) {
@@ -243,8 +254,8 @@ void cocoa_cliparound_window(winid wid, int x, int y) {
 }
 
 void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph) {
-	// todo
 	//NSLog(@"cocoa_print_glyph %d %d,%d", wid, x, y);
+	[[[WindowManager instance] windowWithId:wid] setGlyph:glyph atX:x y:y];
 }
 
 void cocoa_raw_print(const char *str) {
@@ -261,8 +272,9 @@ int cocoa_nhgetch() {
 }
 
 int cocoa_nh_poskey(int *x, int *y, int *mod) {
-	//NSLog(@"cocoa_nh_poskey");
+	NSLog(@"cocoa_nh_poskey");
 	// todo
+	[[MainController instance] waitForUser];
 	return 0;
 }
 
