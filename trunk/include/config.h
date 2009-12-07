@@ -194,6 +194,11 @@
  *	of the last level change, after running a utility program.
  */
 #define INSURANCE	/* allow crashed game recovery */
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+// todo
+#undef INSURANCE
+#endif
 
 #ifndef MAC
 # define CHDIR		/* delete if no chdir() available */

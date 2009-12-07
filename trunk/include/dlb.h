@@ -109,6 +109,13 @@ long FDECL(dlb_ftell, (DLB_P));
 # define dlb_fgetc	fgetc
 # define dlb_ftell	ftell
 
+#ifdef __APPLE__
+#include "TargetConditionals.h"
+dlb *cocoa_fopen(const char *filename, const char *mode);
+#undef dlb_fopen
+#define dlb_fopen cocoa_fopen
+#endif
+
 #endif /* DLB */
 
 

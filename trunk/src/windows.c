@@ -40,6 +40,9 @@ extern struct window_procs Gnome_procs;
 #ifdef MSWIN_GRAPHICS
 extern struct window_procs mswin_procs;
 #endif
+#ifdef COCOA_GRAPHICS
+extern struct window_procs cocoa_procs;
+#endif
 
 STATIC_DCL void FDECL(def_raw_print, (const char *s));
 
@@ -81,7 +84,10 @@ struct win_choices {
 #ifdef MSWIN_GRAPHICS
     { &mswin_procs, 0 },
 #endif
-    { 0, 0 }		/* must be last */
+#ifdef COCOA_GRAPHICS
+{ &cocoa_procs, 0 },
+#endif
+{ 0, 0 }		/* must be last */
 };
 
 STATIC_OVL
