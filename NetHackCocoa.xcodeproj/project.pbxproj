@@ -783,6 +783,7 @@
 			children = (
 				080E96DDFE201D6D7F000001 /* Classes */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				43F7ADF41129554200CF5B3C /* cocoa */,
 				43F7AB321129551500CF5B3C /* nethack */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
@@ -1240,7 +1241,6 @@
 		43F7ADC51129554200CF5B3C /* win */ = {
 			isa = PBXGroup;
 			children = (
-				43F7ADF41129554200CF5B3C /* cocoa */,
 			);
 			name = win;
 			path = nethack/win;
@@ -1294,7 +1294,8 @@
 				43F7B1DC11296B2E00CF5B3C /* NSIndexPath+Z.h */,
 				43F7B1DD11296B2E00CF5B3C /* NSIndexPath+Z.m */,
 			);
-			path = cocoa;
+			name = cocoa;
+			path = nethack/win/cocoa;
 			sourceTree = "<group>";
 		};
 		43F7AE2F1129554200CF5B3C /* tilesets */ = {
