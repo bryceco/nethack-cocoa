@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* NetHackCocoaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* NetHackCocoaAppDelegate.m */; };
+		43B5CAFD112C4DE700D71EF6 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 43B5CAFC112C4DE700D71EF6 /* petmark.png */; };
 		43F7AEA41129554300CF5B3C /* air.lev in Resources */ = {isa = PBXBuildFile; fileRef = 43F7AB341129553B00CF5B3C /* air.lev */; };
 		43F7AEA51129554300CF5B3C /* Arc-fila.lev in Resources */ = {isa = PBXBuildFile; fileRef = 43F7AB351129553B00CF5B3C /* Arc-fila.lev */; };
 		43F7AEA61129554300CF5B3C /* Arc-filb.lev in Resources */ = {isa = PBXBuildFile; fileRef = 43F7AB361129553B00CF5B3C /* Arc-filb.lev */; };
@@ -317,6 +318,7 @@
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		43B5CAFC112C4DE700D71EF6 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petmark.png; path = nethack/win/cocoa/petmark.png; sourceTree = "<group>"; };
 		43F7AB341129553B00CF5B3C /* air.lev */ = {isa = PBXFileReference; lastKnownFileType = file; path = air.lev; sourceTree = "<group>"; };
 		43F7AB351129553B00CF5B3C /* Arc-fila.lev */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arc-fila.lev"; sourceTree = "<group>"; };
 		43F7AB361129553B00CF5B3C /* Arc-filb.lev */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Arc-filb.lev"; sourceTree = "<group>"; };
@@ -806,6 +808,7 @@
 			children = (
 				43F7AB331129553B00CF5B3C /* dat */,
 				43F7AE2F1129554200CF5B3C /* tilesets */,
+				43B5CAFC112C4DE700D71EF6 /* petmark.png */,
 				8D1107310486CEB800E47090 /* NetHackCocoa-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
@@ -1511,6 +1514,7 @@
 				43F7AF401129554300CF5B3C /* wizhelp in Resources */,
 				43F7AF411129554300CF5B3C /* yendor.des in Resources */,
 				43F7B0D91129554300CF5B3C /* chozo32b.png in Resources */,
+				43B5CAFD112C4DE700D71EF6 /* petmark.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
