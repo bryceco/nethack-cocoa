@@ -799,6 +799,8 @@
 				0270BB95112E6C3E000CC97D /* InputWindowController.m */,
 				028792E2112EEE55000A5F55 /* ExtCommandWindowController.h */,
 				028792E3112EEE55000A5F55 /* ExtCommandWindowController.m */,
+				029A995F112BEDEC00225CC3 /* FlippedView.h */,
+				029A9960112BEDEC00225CC3 /* FlippedView.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -844,8 +846,6 @@
 				43F7AE341129554200CF5B3C /* ZDirection.m */,
 				43F7B1DC11296B2E00CF5B3C /* NSIndexPath+Z.h */,
 				43F7B1DD11296B2E00CF5B3C /* NSIndexPath+Z.m */,
-				029A995F112BEDEC00225CC3 /* FlippedView.h */,
-				029A9960112BEDEC00225CC3 /* FlippedView.m */,
 			);
 			name = Framework;
 			sourceTree = "<group>";
