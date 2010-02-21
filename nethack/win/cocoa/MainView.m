@@ -30,6 +30,7 @@
 #import "NhEventQueue.h"
 #import "NhEvent.h"
 #import "wincocoa.h"
+#import "TooltipWindow.h"
 
 
 @implementation MainView
@@ -54,8 +55,13 @@
 		petMark = [NSImage imageNamed:@"petmark.png"];
 	}
 	
-	[self addToolTipRect:[self bounds] owner:self userData:NULL];
-
+	
+	// we need to know when we scroll
+	NSClipView * clipView = [[self enclosingScrollView] contentView];
+	[clipView setPostsBoundsChangedNotifications: YES];
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
+												 name:NSViewBoundsDidChangeNotification object:clipView];
+	
 	return self;
 }
 
@@ -142,21 +148,47 @@
 }
 
 
-- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
+- (void)tooltipFired
 {
-	point.x = (int)(point.x / tileSize.width);
-	point.y = (int)(point.y / tileSize.height);
-	point.y = ROWNO - 1 - point.y;
+	NSPoint point = [self convertPoint:tooltipPoint fromView:nil];
+	if ( !NSPointInRect( point, [self bounds] ) )
+		return;
+		
+	int tileX = (int)(point.x / tileSize.width);
+	int tileY = (int)(point.y / tileSize.height);
+	tileY = ROWNO - 1 - tileY;
 	
 	char buf[ 100 ];
 	buf[0] = 0;
-	const char * feature = dfeature_at( point.x, point.y, buf);
-
+	const char * feature = dfeature_at( tileX, tileY, buf);
+	
 	if ( feature ) {
-		return [NSString stringWithUTF8String:feature];
-	} else {
-		return nil;
-	}
+		NSString * text = [NSString stringWithUTF8String:feature];
+		NSPoint pt = NSMakePoint( tooltipPoint.x + 2, tooltipPoint.y + 2 );
+		tooltipWindow = [[TooltipWindow alloc] initWithText:text location:pt];
+	}	
+}
+- (void)cancelTooltip
+{
+	[tooltipTimer invalidate];
+	[tooltipTimer release];
+	tooltipTimer = nil;
+	
+	if ( tooltipWindow ) {
+		[tooltipWindow close];	// automatically released when closed
+		tooltipWindow = nil;
+	}	
+}
+- (void) boundsDidChangeNotification:(NSNotification *)notification
+{
+	[self cancelTooltip];
+}
+- (void)mouseMoved:(NSEvent *)theEvent
+{
+	[self cancelTooltip];
+	
+	tooltipPoint = [theEvent locationInWindow];
+	tooltipTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tooltipFired) userInfo:nil repeats:NO] retain];
 }
 
 

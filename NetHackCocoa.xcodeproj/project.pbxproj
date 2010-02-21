@@ -15,6 +15,7 @@
 		02879367112EFEE1000A5F55 /* chozo32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02879366112EFEE1000A5F55 /* chozo32.png */; };
 		02879369112EFEED000A5F55 /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02879368112EFEED000A5F55 /* tiles32.png */; };
 		0287936B112EFEF8000A5F55 /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0287936A112EFEF8000A5F55 /* absurd128.png */; };
+		0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298DE23113136E800BC0614 /* TooltipWindow.m */; };
 		029A96BF112B164900225CC3 /* nhtiles.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96BE112B164900225CC3 /* nhtiles.bmp */; };
 		029A96C1112B178300225CC3 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96C0112B178300225CC3 /* kins32.bmp */; };
 		029A97CC112BC6DB00225CC3 /* MenuWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A97CB112BC6DB00225CC3 /* MenuWindowController.m */; };
@@ -334,6 +335,8 @@
 		02879366112EFEE1000A5F55 /* chozo32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chozo32.png; sourceTree = "<group>"; };
 		02879368112EFEED000A5F55 /* tiles32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles32.png; sourceTree = "<group>"; };
 		0287936A112EFEF8000A5F55 /* absurd128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd128.png; sourceTree = "<group>"; };
+		0298DE22113136E800BC0614 /* TooltipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipWindow.h; sourceTree = "<group>"; };
+		0298DE23113136E800BC0614 /* TooltipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TooltipWindow.m; sourceTree = "<group>"; };
 		029A96BE112B164900225CC3 /* nhtiles.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = nhtiles.bmp; sourceTree = "<group>"; };
 		029A96C0112B178300225CC3 /* kins32.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kins32.bmp; sourceTree = "<group>"; };
 		029A97CA112BC6DB00225CC3 /* MenuWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuWindowController.h; sourceTree = "<group>"; };
@@ -801,6 +804,8 @@
 				028792E3112EEE55000A5F55 /* ExtCommandWindowController.m */,
 				029A995F112BEDEC00225CC3 /* FlippedView.h */,
 				029A9960112BEDEC00225CC3 /* FlippedView.m */,
+				0298DE22113136E800BC0614 /* TooltipWindow.h */,
+				0298DE23113136E800BC0614 /* TooltipWindow.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1746,6 +1751,7 @@
 				0270BA62112E417E000CC97D /* YesNoWindowController.m in Sources */,
 				0270BB96112E6C3E000CC97D /* InputWindowController.m in Sources */,
 				028792E4112EEE55000A5F55 /* ExtCommandWindowController.m in Sources */,
+				0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

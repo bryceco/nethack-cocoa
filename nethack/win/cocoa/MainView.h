@@ -34,6 +34,10 @@
 	
 	NSSize tileSize;
 	NSImage *petMark;
+
+	NSTimer *	tooltipTimer;
+	NSPoint		tooltipPoint;
+	NSWindow *	tooltipWindow;
 }
 
 - (void)refreshMessages;
