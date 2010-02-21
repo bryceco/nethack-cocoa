@@ -1311,6 +1311,8 @@ int retryct;
 
 #if defined(UNIX) || defined(VMS)
 # ifdef NO_FILE_LINKS
+	char dir[ 200 ] = "";
+	getcwd(dir, 200);
 	while ((lockfd = open(lockname, O_RDWR|O_CREAT|O_EXCL, 0666)) == -1) {
 # else
 	while (link(filename, lockname) == -1) {

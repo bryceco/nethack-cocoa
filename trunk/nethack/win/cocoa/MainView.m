@@ -4,6 +4,7 @@
 //
 //  Created by dirk on 2/1/10.
 //  Copyright 2010 Dirk Zimmermann. All rights reserved.
+//  Copyright 2010 Bryce Cogswell. All rights reserved.
 //
 
 /*
@@ -27,29 +28,39 @@
 #import "NhMapWindow.h"
 #import "TileSet.h"
 #import "NhEventQueue.h"
+#import "NhEvent.h"
+#import "wincocoa.h"
+
 
 @implementation MainView
 
 - (id)initWithFrame:(NSRect)frame {
+	// ignore requested frame, and scale to match size of tiles we're using
+	NSString * tileSetName = @"kins32.bmp";
+	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
+	
+	// a tile set is composed of 1200 tiles, so do the math to decide what we're using
+	int tileCount = (1280*960)/(32*32);
+	NSSize totalSize = [tilesetImage size];
+	CGFloat tileWidth = sqrt( (totalSize.width * totalSize.height) / tileCount );
+	tileWidth = floor( tileWidth + 0.5 );
+	
+	tileSize.width = tileSize.height = tileWidth;
+	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
+
 	if (self = [super initWithFrame:frame]) {
-		tileSize = CGSizeMake(32.0f, 32.0f);
-		NSImage *tilesetImage = [NSImage imageNamed:@"chozo32b.png"];
-		TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:NSMakeSize(32.0f, 32.0f)];
+		TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:tileSize];
 		[TileSet setInstance:tileSet];
 		petMark = [NSImage imageNamed:@"petmark.png"];
 	}
+	
+	[self addToolTipRect:[self bounds] owner:self userData:NULL];
+
 	return self;
 }
 
 - (void)refreshMessages {
-	NSString *text = [[NhWindow messageWindow] text];
-	if (text && text.length > 0) {
-	}
-	if ([NhWindow statusWindow]) {
-		text = [[NhWindow statusWindow] text];
-		if (text && text.length > 0) {
-		}
-	}
+	assert(false);
 }
 
 - (void)cliparoundX:(int)x y:(int)y {
@@ -57,7 +68,21 @@
 	clipY = y;
 }
 
-- (void)drawRect:(NSRect)rect {
+
+// if we're too close to edge of window then scroll us back
+- (void)centerHero
+{
+	int border = 4;
+	NSPoint center = NSMakePoint( (u.ux+0.5)*tileSize.width, ((ROWNO-1-u.uy)+0.5)*tileSize.height );
+	NSRect rect = NSMakeRect( center.x-tileSize.width*border, center.y-tileSize.height*border, tileSize.width*2*border, tileSize.height*2*border );
+	[self scrollRectToVisible:rect];	 	 
+}
+
+- (void)drawRect:(NSRect)rect 
+{
+	[[NSColor blackColor] setFill];
+	[NSBezierPath fillRect:rect];
+	
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
 		// since this coordinate system is right-handed, each tile starts above left
@@ -71,16 +96,18 @@
 										start.y-j*tileSize.height);
 				NSRect r = NSMakeRect(p.x, p.y, tileSize.width, tileSize.height);
 				if (NSIntersectsRect(r, rect)) {
-					int ochar, ocolor;
-					unsigned int special;
 					int glyph = [map glyphAtX:i y:j];
 					if (glyph) {
+						int ochar, ocolor;
+						unsigned int special;
 						mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 						NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
 						[[[TileSet instance] image] drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f];
+#if 0
 						if (glyph_is_pet(glyph)) {
 							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0f];
 						}
+#endif
 					}
 				}
 			}
@@ -97,15 +124,51 @@
 - (BOOL)acceptsFirstResponder {
 	return YES;
 }
-
-- (void)keyDown:(NSEvent *)theEvent {
-	[self interpretKeyEvents:[NSArray arrayWithObject:theEvent]];
+- (BOOL)acceptsFirstMouse:(NSEvent *)theEvent
+{
+	return YES;
 }
 
-- (void)insertText:(id)aString {
-	//NSLog(@"keys %@", aString);
-	const char *pStr = [(NSString *) aString cStringUsingEncoding:NSASCIIStringEncoding];
-	[[NhEventQueue instance] addKeys:pStr];
+
+- (void)mouseDown:(NSEvent *)theEvent
+{
+	NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	mouseLoc.x = (int)(mouseLoc.x / tileSize.width);
+	mouseLoc.y = (int)(mouseLoc.y / tileSize.height);
+	mouseLoc.y = ROWNO - 1 - mouseLoc.y;
+	
+	NhEvent * e = [NhEvent eventWithX:mouseLoc.x y:mouseLoc.y];
+	[[NhEventQueue instance] addEvent:e];
+}
+
+
+- (NSString *)view:(NSView *)view stringForToolTip:(NSToolTipTag)tag point:(NSPoint)point userData:(void *)userData
+{
+	point.x = (int)(point.x / tileSize.width);
+	point.y = (int)(point.y / tileSize.height);
+	point.y = ROWNO - 1 - point.y;
+	
+	char buf[ 100 ];
+	buf[0] = 0;
+	const char * feature = dfeature_at( point.x, point.y, buf);
+
+	if ( feature ) {
+		return [NSString stringWithUTF8String:feature];
+	} else {
+		return nil;
+	}
+}
+
+
+
+- (void)keyDown:(NSEvent *)theEvent 
+{
+	if ( [theEvent type] == NSKeyDown ) {
+		wchar_t key = [WinCocoa keyWithKeyEvent:theEvent];
+		if ( key ) {
+			[[NhEventQueue instance] addKey:key];			
+		}
+	}
 }
 
 @end

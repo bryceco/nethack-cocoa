@@ -22,6 +22,8 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#import <Cocoa/Cocoa.h>
+
 @class MapView;
 @class DirectionPad;
 
@@ -30,12 +32,12 @@
 	int clipX;
 	int clipY;
 	
-	CGSize tileSize;
+	NSSize tileSize;
 	NSImage *petMark;
-	
 }
 
 - (void)refreshMessages;
 - (void)cliparoundX:(int)x y:(int)y;
+- (void)centerHero;
 
 @end

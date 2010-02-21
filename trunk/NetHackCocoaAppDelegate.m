@@ -41,7 +41,8 @@ extern int unixmain(int argc, char **argv);
 - (void) netHackMainLoop:(id)arg {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	char *argv[] = {
-		"NetHack"	
+		"NetHack",
+		"-D",
 	};
 	
 	// create necessary directories
@@ -49,20 +50,20 @@ extern int unixmain(int argc, char **argv);
 	NSString *baseDirectory = [paths objectAtIndex:0];
 	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"NetHackCocoa"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:baseDirectory]) {
-		mkdir([baseDirectory cStringUsingEncoding:NSASCIIStringEncoding], 0770);
+		mkdir([baseDirectory UTF8String], 0770);
 	}
 	NSLog(@"baseDir %@", baseDirectory);
-	setenv("NETHACKDIR", [baseDirectory cStringUsingEncoding:NSASCIIStringEncoding], 1);
+	setenv("NETHACKDIR", [baseDirectory UTF8String], 1);
 	NSString *saveDirectory = [baseDirectory stringByAppendingPathComponent:@"save"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:saveDirectory]) {
-		mkdir([saveDirectory cStringUsingEncoding:NSASCIIStringEncoding], 0770);
+		mkdir([saveDirectory UTF8String], 0770);
 	}
 		
 	// set plname (very important for save files and getlock)
 	[[NSUserName() capitalizedString] getCString:plname maxLength:PL_NSIZ encoding:NSASCIIStringEncoding];
 	
 	// call NetHack
-	unixmain(1, argv);
+	unixmain(sizeof argv/sizeof argv[0], argv);
 	
 	// clean up thread pool
 	[pool release];

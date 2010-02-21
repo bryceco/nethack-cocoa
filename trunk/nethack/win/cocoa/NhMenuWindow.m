@@ -79,4 +79,15 @@
 	[super dealloc];
 }
 
+-(char)runModal
+{
+	NSString * text = [self text];
+	if ( [text length] ) {
+		NSAlert * alert = [NSAlert alertWithMessageText:text defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+		return [alert runModal];
+	}
+	// cancelled
+	return 0;
+}
+
 @end

@@ -35,17 +35,17 @@
 }
 
 @property (nonatomic, readonly) NSString *text;
+@property (nonatomic, readonly) NSAttributedString *attributedText;
 @property (nonatomic, readonly) NSArray *messages;
 @property (nonatomic, readonly) int type;
 @property (nonatomic, assign) BOOL blocking;
 
-+ (NhWindow *)root;
 + (NhWindow *)messageWindow;
 + (NhWindow *)statusWindow;
 + (NhWindow *)mapWindow;
 
 - (id)initWithType:(int)t;
-- (void)print:(const char *)str;
+- (void)print:(const char *)str attr:(int)attr;
 - (void)clear;
 
 @end
