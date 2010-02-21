@@ -1,9 +1,9 @@
 //
-//  TileSet.h
-//  SlashEM
+//  MenuWindowController.h
+//  NetHackCocoa
 //
-//  Created by dirk on 1/17/10.
-//  Copyright 2010 Dirk Zimmermann. All rights reserved.
+//  Created by Bryce on 2/16/10.
+//  Copyright 2010 Bryce Cogswell. All rights reserved.
 //
 
 /*
@@ -22,27 +22,25 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import <Foundation/Foundation.h>
 
-extern short glyph2tile[];
+#import <Cocoa/Cocoa.h>
+#import "NhMenuWindow.h"
 
-@interface TileSet : NSObject {
+@interface MenuWindowController : NSWindowController <NSWindowDelegate> {
 	
-	NSImage *image;
-	NSSize tileSize;
-	int rows;
-	int columns;
-
+	NSSize				  minimumSize;
+	NhMenuWindow		* windowParams;
+	
+	NSMutableDictionary	* itemDict;
+	
+	IBOutlet NSView		* menuView;
+	IBOutlet NSButton	* cancelButton;
+	IBOutlet NSButton	* acceptButton;
 }
 
-@property (nonatomic, readonly) NSImage *image;
-@property (nonatomic, readonly) NSSize	tileSize;
+- (void)runModalWithMenu:(NhMenuWindow *)menu;
 
-+ (TileSet *)instance;
-+ (void)setInstance:(TileSet *)ts;
-
-- (id)initWithImage:(NSImage *)img tileSize:(NSSize)ts;
-- (NSRect)sourceRectForGlyph:(int)glyph;
-- (NSRect)sourceRectForTile:(int)tile;
-
+-(IBAction)doAccept:(id)sender;
+-(IBAction)doCancel:(id)sender;
+	
 @end

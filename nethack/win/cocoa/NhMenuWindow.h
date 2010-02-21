@@ -51,5 +51,6 @@
 // for UI
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath;
 - (void)startMenu;
+- (char)runModal;
 
 @end

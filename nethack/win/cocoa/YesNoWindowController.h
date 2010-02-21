@@ -1,9 +1,9 @@
 //
-//  TileSet.h
-//  SlashEM
+//  YesNoWindowController.h
+//  NetHackCocoa
 //
-//  Created by dirk on 1/17/10.
-//  Copyright 2010 Dirk Zimmermann. All rights reserved.
+//  Created by Bryce on 2/18/10.
+//  Copyright 2010 Bryce Cogswell. All rights reserved.
 //
 
 /*
@@ -22,27 +22,16 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import <Foundation/Foundation.h>
+#import <Cocoa/Cocoa.h>
 
-extern short glyph2tile[];
 
-@interface TileSet : NSObject {
-	
-	NSImage *image;
-	NSSize tileSize;
-	int rows;
-	int columns;
-
+@interface YesNoWindowController : NSWindowController <NSWindowDelegate> {
+	IBOutlet NSTextField *	question;
+	IBOutlet NSButton * button1;
+	IBOutlet NSButton * button2;
 }
 
-@property (nonatomic, readonly) NSImage *image;
-@property (nonatomic, readonly) NSSize	tileSize;
-
-+ (TileSet *)instance;
-+ (void)setInstance:(TileSet *)ts;
-
-- (id)initWithImage:(NSImage *)img tileSize:(NSSize)ts;
-- (NSRect)sourceRectForGlyph:(int)glyph;
-- (NSRect)sourceRectForTile:(int)tile;
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2;
+-(IBAction)performButton:(id)sender;
 
 @end

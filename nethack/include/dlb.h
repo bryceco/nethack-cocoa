@@ -112,6 +112,7 @@ long FDECL(dlb_ftell, (DLB_P));
 #if TARGET_OS_MAC
 #undef dlb_fopen
 #define dlb_fopen cocoa_dlb_fopen
+extern FILE *cocoa_dlb_fopen(const char *filename, const char *mode);
 #endif
 
 #endif /* DLB */

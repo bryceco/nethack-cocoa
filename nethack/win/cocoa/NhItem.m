@@ -32,9 +32,10 @@
 @synthesize selected;
 @synthesize maxAmount;
 
-- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident glyph:(int)g selected:(BOOL)s {
+- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch glyph:(int)g selected:(BOOL)s {
 	NSArray *lines = [t splitNetHackDetails];
-	if (self = [super initWithTitle:[lines objectAtIndex:0] inventoryLetter:ident.a_char]) {
+	
+	if (self = [super initWithTitle:[lines objectAtIndex:0] inventoryLetter:ch]) {
 		if (lines.count == 2) {
 			detail = [[lines objectAtIndex:1] copy];
 		} else {
@@ -47,10 +48,6 @@
 		maxAmount = [title parseNetHackAmount];
 	}
 	return self;
-}
-
-- (char)inventoryLetter {
-	return identifier.a_char;
 }
 
 - (void) dealloc {

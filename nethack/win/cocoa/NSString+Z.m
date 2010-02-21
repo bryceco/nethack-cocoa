@@ -40,7 +40,8 @@
 }
 
 - (BOOL) containsChar:(char)c {
-	for (int i = 0; i < self.length; ++i) {
+	int length = self.length;
+	for (int i = 0; i < length; ++i) {
 		char ct = [self characterAtIndex:i];
 		if (ct == c) {
 			return YES;

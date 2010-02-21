@@ -24,12 +24,12 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 
 #import <Cocoa/Cocoa.h>
 
-@class MainViewController;
+@class MainWindowController;
 
 @interface NetHackCocoaAppDelegate : NSObject <NSApplicationDelegate> {
     NSWindow *window;
 	NSThread *netHackThread;
-	MainViewController *mainViewController;
+	MainWindowController *mainWindowController;
 }
 
 @property (assign) IBOutlet NSWindow *window;

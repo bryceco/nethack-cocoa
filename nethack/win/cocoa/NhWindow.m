@@ -25,8 +25,10 @@
 #import "NhWindow.h"
 #include "hack.h"
 #import "NSString+Z.h"
+#import "NhMapWindow.h"
+#import "NhStatusWindow.h"
 
-static NhWindow *s_root = nil;
+
 static NhWindow *s_messageWindow = nil;
 static NhWindow *s_statusWindow = nil;
 static NhWindow *s_mapWindow = nil;
@@ -36,27 +38,30 @@ static NhWindow *s_mapWindow = nil;
 @synthesize type;
 @synthesize blocking;
 
-+ (void)initialize {
-	s_root = [[NhWindow alloc] initWithType:0];
-}
-
-+ (NhWindow *)root {
-	return s_root;
-}
-
 + (NhWindow *)messageWindow {
-	if (s_messageWindow) {
-		return s_messageWindow;
+	if (s_messageWindow == nil) {
+		s_messageWindow = [[NhWindow alloc] initWithType:NHW_MESSAGE];
 	}
-	return s_root;
+	return s_messageWindow;
 }
 
 + (NhWindow *)statusWindow {
+	if ( s_statusWindow == nil ) {
+		s_statusWindow = [[NhStatusWindow alloc] initWithType:NHW_STATUS];
+	}
 	return s_statusWindow;
 }
 
 + (NhWindow *)mapWindow {
+	if (s_mapWindow == nil) {
+		s_mapWindow = [[NhMapWindow alloc] initWithType:NHW_MAP];
+	}
 	return s_mapWindow;
+}
+
+- (BOOL)useAttributedStrings
+{
+	return type == NHW_MESSAGE;
 }
 
 - (id)initWithType:(int)t {
@@ -66,15 +71,12 @@ static NhWindow *s_mapWindow = nil;
 		lines = [[NSMutableArray alloc] init];
 		switch (t) {
 			case NHW_MESSAGE:
-				s_messageWindow = self;
 				lineDelimiter = @"\n";
 				break;
 			case NHW_STATUS:
-				s_statusWindow = self;
-				lineDelimiter = @" ";
+				lineDelimiter = @"\n";
 				break;
 			case NHW_MAP:
-				s_mapWindow = self;
 				lineDelimiter = @" ";
 				break;
 			case NHW_TEXT:
@@ -88,9 +90,37 @@ static NhWindow *s_mapWindow = nil;
 	return self;
 }
 
-- (void)print:(const char *)str {
+- (void)print:(const char *)str attr:(int)attr {
 	NSString *s = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
 	s = [s stringWithTrimmedWhitespaces];
+	
+	if ( [self useAttributedStrings] ) {
+
+		NSDictionary * dict = nil;
+
+		switch ( attr ) {
+			case ATR_NONE:
+				break;
+			case ATR_BOLD:
+				dict = [NSDictionary dictionaryWithObject:[NSFont boldSystemFontOfSize:[NSFont systemFontSize]]
+												   forKey:NSFontAttributeName];
+				break;
+			case ATR_DIM:
+			case ATR_ULINE:
+				dict = [NSDictionary dictionaryWithObject:[NSNumber numberWithInt:NSUnderlineStyleSingle]
+												   forKey:NSUnderlineStyleAttributeName];
+				break;
+			case ATR_BLINK:
+			case ATR_INVERSE:
+				dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName,
+						[NSColor blueColor], NSBackgroundColorAttributeName,
+						nil];
+				break;
+		}
+		NSAttributedString * s2 = [[[NSAttributedString alloc] initWithString:s attributes:dict] autorelease];
+		s = (id)s2;
+	}
+			
 	[self lock];
 	[lines addObject:s];
 	[self unlock];
@@ -117,13 +147,46 @@ static NhWindow *s_mapWindow = nil;
 	[self unlock];
 }
 
+
 - (NSString *) text {
-	NSString *t = nil;
+	
+	assert( ![self useAttributedStrings] );
+	
+	NSString * t = nil;
 	NSArray *messages = [self messages];
 	if (messages && messages.count > 0) {
+		
 		t = [messages componentsJoinedByString:lineDelimiter];
+		
 	}
 	return t;
+}
+
+- (NSAttributedString *) attributedText {
+
+	assert( [self useAttributedStrings] );
+	
+	NSArray *messages = [self messages];
+	if (messages && messages.count > 0) {
+		
+		NSAttributedString * delim = [[NSMutableAttributedString alloc] initWithString:lineDelimiter];
+		NSMutableAttributedString *t = nil;
+		
+		for ( NSAttributedString * msg in messages ) {
+			if ( t == nil ) {
+				t = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+			} else {
+				[t appendAttributedString:delim];
+			}
+			[t appendAttributedString:msg];
+		} 
+		
+		[delim release];
+		return t;
+		
+	} else {
+		return nil;
+	}
 }
 
 - (void)lock {

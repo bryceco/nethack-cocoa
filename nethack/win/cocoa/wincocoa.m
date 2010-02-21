@@ -25,13 +25,16 @@
 
 #include <stdio.h>
 #include <fcntl.h>
+#import <Carbon/Carbon.h>	// key codes
+
 #include "dlb.h"
 #include "hack.h"
+#include "func_tab.h"
 
 #import "wincocoa.h"
 #import "NhWindow.h"
 #import "NhMapWindow.h"
-#import "MainViewController.h"
+#import "MainWindowController.h"
 #import "NhYnQuestion.h"
 #import "NhEvent.h"
 #import "NhEventQueue.h"
@@ -125,13 +128,16 @@ coord CoordMake(xchar i, xchar j) {
 	strcpy(s_baseFilePath, [[[NSBundle mainBundle] resourcePath] cStringUsingEncoding:NSASCIIStringEncoding]);
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+#if 0
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
 								@"role:samurai,gender:male,time,autopickup,showexp,pickup_types:$!?+\"=/,norest_on_space,runmode:walk",
 								kNetHackOptions,
 								nil]];
-
+#endif
 	NSString *netHackOptions = [defaults stringForKey:kNetHackOptions];
-	setenv("NETHACKOPTIONS", [netHackOptions cStringUsingEncoding:NSASCIIStringEncoding], 1);
+	if ( netHackOptions ) {
+		setenv("NETHACKOPTIONS", [netHackOptions cStringUsingEncoding:NSASCIIStringEncoding], 1);
+	}
 	
 	[pool release];
 }
@@ -144,6 +150,55 @@ coord CoordMake(xchar i, xchar j) {
 	sprintf(path, "%s/%s", [self baseFilePath], filename);
 }
 
++ (char)keyWithKeyEvent:(NSEvent *)keyEvent
+{
+	if ( [keyEvent type] != NSKeyDown )
+		return 0;
+		
+	char key = 0;
+	switch ( [keyEvent keyCode] ) {
+			// arrows
+		case kVK_LeftArrow:				key = 'h';				break;
+		case kVK_RightArrow:			key	= 'l';				break;
+		case kVK_DownArrow:				key = 'j';				break;
+		case kVK_UpArrow:				key = 'k';				break;
+			// keypad
+		case kVK_ANSI_Keypad1:			key = 'b';				break;
+		case kVK_ANSI_Keypad2:			key = 'j';				break;
+		case kVK_ANSI_Keypad3:			key = 'n';				break;
+		case kVK_ANSI_Keypad4:			key = 'h';				break;
+		case kVK_ANSI_Keypad5:			key = '.';				break;
+		case kVK_ANSI_Keypad6:			key = 'l';				break;
+		case kVK_ANSI_Keypad7:			key = 'y';				break;
+		case kVK_ANSI_Keypad8:			key = 'k';				break;
+		case kVK_ANSI_Keypad9:			key = 'u';				break;
+			// escape
+		case kVK_Escape:				key = '\033';			break;
+	}
+	if ( key ) {
+		NSUInteger modifier = [keyEvent modifierFlags];
+		if ( modifier & NSShiftKeyMask ) {
+			key = toupper(key);
+		}
+	} else {
+		// letters
+		NSString * chars = [keyEvent charactersIgnoringModifiers];
+		NSUInteger modifier = [keyEvent modifierFlags];
+		key = [chars characterAtIndex:0];
+		if ( modifier & NSShiftKeyMask  ) {
+			// system already upcases for us
+		}
+		if ( modifier & NSControlKeyMask ) {
+			// convert to control key
+			key = toupper(key) - 'A' + 1;
+		}
+		if ( modifier & NSAlternateKeyMask ) {
+			// convert to meta key
+			key = 0x80 | key;
+		}
+	}
+	return key;
+}
 @end
 
 FILE *cocoa_dlb_fopen(const char *filename, const char *mode) {
@@ -207,17 +262,22 @@ winid cocoa_create_nhwindow(int type) {
 	NhWindow *w = nil;
 	switch (type) {
 		case NHW_MAP:
-			w = [[NhMapWindow alloc] initWithType:type];
-			break;
-		case NHW_MENU:
-			w = [[NhMenuWindow alloc] initWithType:type];
+			w =  [NhWindow mapWindow];
 			break;
 		case NHW_STATUS:
-			w = [[NhStatusWindow alloc] initWithType:type];
+			w = [NhWindow statusWindow];
+			break;
+		case NHW_MESSAGE:
+			w = [NhWindow messageWindow];
+			break;
+		case NHW_MENU:
+			w = [[NhMenuWindow alloc] initWithType:NHW_MENU];
+			break;
+		case NHW_TEXT:
+			w = [[NhWindow alloc] initWithType:NHW_TEXT];
 			break;
 		default:
-			w = [[NhWindow alloc] initWithType:type];
-			break;
+			assert(NO);
 	}
 	//NSLog(@"create_nhwindow(%x) %x", type, w);
 	return (winid) w;
@@ -231,7 +291,7 @@ void cocoa_clear_nhwindow(winid wid) {
 void cocoa_display_nhwindow(winid wid, BOOLEAN_P block) {
 	//NSLog(@"display_nhwindow %x, %i, %i", wid, ((NhWindow *) wid).type, block);
 	((NhWindow *) wid).blocking = block;
-	[[MainViewController instance] displayWindow:(NhWindow *) wid];
+	[[MainWindowController instance] displayWindow:(NhWindow *) wid];
 }
 
 void cocoa_destroy_nhwindow(winid wid) {
@@ -251,28 +311,32 @@ void cocoa_putstr(winid wid, int attr, const char *text) {
 	if (wid == WIN_ERR || !wid) {
 		wid = BASE_WINDOW;
 	}
-	[(NhWindow *) wid print:text];
+	[(NhWindow *) wid print:text attr:attr];
 	if (wid == WIN_MESSAGE || wid == BASE_WINDOW) {
-		[[MainViewController instance] refreshMessages];
+		[[MainWindowController instance] refreshMessages];
 	}
 }
 
+
+
+
 void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
-	NSLog(@"display_file %s", filename);
-//	char path[FQN_MAX_FILENAME];
-//	[Wincocoa expandFilename:filename intoPath:path];
-//	NSError *error = nil;
-//	NSString *contents = [NSString stringWithContentsOfFile:
-//						  [NSString stringWithCString:path encoding:NSASCIIStringEncoding]
-//												   encoding:NSASCIIStringEncoding error:&error];
-//	if (must_exist && error) {
-//		char msg[512];
-//		sprintf(msg, "Could not display file %s", filename);
-//		cocoa_raw_print(msg);
-//	} else if (!error) {
-//		[[MainViewController instance] displayBlockingString:contents];
-//	}
+	char tmp[ PATH_MAX ];
+	[WinCocoa expandFilename:filename intoPath:tmp];
+
+	NSString * text = [NSString stringWithContentsOfFile:[NSString stringWithUTF8String:filename] encoding:NSUTF8StringEncoding error:NULL];
+	if ( text ) {
+		[[MainWindowController instance] displayMessageWindow:text];
+	} else {
+		if ( must_exist ) {
+			char msg[512];
+			sprintf(msg, "Could not display file %s", filename);
+			cocoa_raw_print(msg);
+		}
+	}
 }
+
+#pragma mark menu
 
 void cocoa_start_menu(winid wid) {
 	NSLog(@"start_menu %x", wid);
@@ -287,7 +351,7 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 	NSString *title = [[NSString stringWithFormat:@"%s", str] stringWithTrimmedWhitespaces];
 	if (identifier->a_void) {
 		NhItem *i = [[NhItem alloc] initWithTitle:title
-									   identifier:*identifier glyph:glyph selected:presel];
+									   identifier:*identifier accelerator:accelerator glyph:glyph selected:presel];
 		[w.currentItemGroup addItem:i];
 		[i release];
 	} else {
@@ -312,7 +376,7 @@ int cocoa_select_menu(winid wid, int how, menu_item **selected) {
 	NhMenuWindow *w = (NhMenuWindow *) wid;
 	w.how = how;
 	*selected = NULL;
-	[[MainViewController instance] showMenuWindow:w];
+	[[MainWindowController instance] showMenuWindow:w];
 	NhEvent *e = [[NhEventQueue instance] nextEvent];
 	if (e.key > 0) {
 		menu_item *pMenu = *selected = calloc(sizeof(menu_item), w.selected.count);
@@ -322,12 +386,12 @@ int cocoa_select_menu(winid wid, int how, menu_item **selected) {
 			pMenu++;
 		}
 	}
-	return e.key;
+	return w.selected.count;
 }
 
 void cocoa_update_inventory() {
 	//NSLog(@"update_inventory");
-	[[MainViewController instance] updateInventory];
+	[[MainWindowController instance] updateInventory];
 }
 
 void cocoa_mark_synch() {
@@ -347,7 +411,7 @@ void cocoa_cliparound(int x, int y) {
 void cocoa_cliparound_window(winid wid, int x, int y) {
 	NSLog(@"cliparound_window %x %d,%d", wid, x, y);
 	if (wid == NHW_MAP) {
-		[[MainViewController instance] clipAroundX:x y:y];
+		[[MainWindowController instance] clipAroundX:x y:y];
 	}
 }
 
@@ -373,7 +437,7 @@ int cocoa_nhgetch() {
 
 int cocoa_nh_poskey(int *x, int *y, int *mod) {
 	//NSLog(@"nh_poskey");
-	[[MainViewController instance] refreshAllViews];
+	[[MainWindowController instance] refreshAllViews];
 	NhEvent *e = [[NhEventQueue instance] nextEvent];
 	if (!e.isKeyEvent) {
 		*x = e.x;
@@ -392,13 +456,28 @@ int cocoa_doprev_message() {
 	return 0;
 }
 
+#pragma mark yn_function 
+
 char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 	NSLog(@"yn_function %s", question);
-	if (!strcmp("Really save?", question) || !strcmp("Overwrite the old file?", question)) {
-		return 'y';
+	static const char * AlwaysYes[] = {
+		"Really save?",
+		"Overwrite the old file?",
+		"Do you want to keep the save file?",
+	};
+	for ( int i = 0; i < sizeof AlwaysYes/sizeof AlwaysYes[0]; ++i ) {
+		if ( !strcmp(AlwaysYes[i], question) ) {
+			return 'y';
+		}
 	}
-	cocoa_putstr(WIN_MESSAGE, 0, question);
+	cocoa_putstr(WIN_MESSAGE, ATR_BOLD, question);
 	NhEvent *e = nil;
+#if 1
+	do {
+		e = [[NhEventQueue instance] nextEvent];
+	} while ( !e.isKeyEvent ); 
+#else	
+	// BHC need a better solution here	
 	if ([[NhEventQueue instance] peek]) {
 		e = [[NhEventQueue instance] nextEvent];
 	} else {
@@ -407,16 +486,17 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 		e = [[NhEventQueue instance] nextEvent];
 		[q release];
 	}
+#endif
 	return e.key;
 }
 
 void cocoa_getlin(const char *prompt, char *line) {
 	NSLog(@"getlin %s", prompt);
 	cocoa_putstr(WIN_MESSAGE, 0, prompt);
-	[[MainViewController instance] refreshAllViews];
-	[[MainViewController instance] getLine];
+	[[MainWindowController instance] refreshAllViews];
+	[[MainWindowController instance] getLine];
 	NhTextInputEvent *e = (NhTextInputEvent *) [[NhEventQueue instance] nextEvent];
-	if (e.text && e.text.length > 0) {
+	if ( [e class] == [NhTextInputEvent class]  &&  e.text ) {
 		[e.text getCString:line maxLength:BUFSZ encoding:NSASCIIStringEncoding];
 	} else {
 		// cancel
@@ -426,12 +506,23 @@ void cocoa_getlin(const char *prompt, char *line) {
 
 int cocoa_get_ext_cmd() {
 	NSLog(@"get_ext_cmd");
-//	if (![[NhEventQueue instance] peek]) { // only show menu if not something already in the queue
-//		[[MainViewController instance] showExtendedCommands];
-//	}
-//	NhEvent *e = [[NhEventQueue instance] nextEvent];
-//	return e.key;
-	return 0;
+	if ([[NhEventQueue instance] peek]) {
+		// already have extended command in queue
+	} else {
+		// get command event
+		[[MainWindowController instance] showExtendedCommands];
+	}
+	NhTextInputEvent *e = (NhTextInputEvent *) [[NhEventQueue instance] nextEvent];
+	assert( [e class] == [NhTextInputEvent class] );
+	const char * cmd = [e.text UTF8String];
+		
+	// return index of command, not its key
+	for ( int i = 0; extcmdlist[i].ef_txt; ++i ) {
+		if ( strcmp( extcmdlist[i].ef_txt, cmd ) == 0 ) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 void cocoa_number_pad(int num) {
@@ -440,7 +531,7 @@ void cocoa_number_pad(int num) {
 
 void cocoa_delay_output() {
 	NSLog(@"delay_output");
-	//usleep(500000);
+	usleep(100000);
 }
 
 void cocoa_start_screen() {
@@ -456,6 +547,7 @@ void cocoa_outrip(winid wid, int how) {
 }
 
 #pragma mark window API player_selection()
+
 // from tty port
 /* clean up and quit */
 static void bail(const char *mesg) {

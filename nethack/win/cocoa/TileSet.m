@@ -29,6 +29,7 @@ static TileSet *s_instance = nil;
 @implementation TileSet
 
 @synthesize image;
+@synthesize	tileSize;
 
 + (TileSet *)instance {
 	return s_instance;
@@ -55,7 +56,7 @@ static TileSet *s_instance = nil;
 }
 
 - (NSRect)sourceRectForTile:(int)tile {
-	int row = tile/columns;
+	int row = rows - 1 - tile/columns;
 	int col = row ? tile % columns : tile;
 	NSRect r = { col * tileSize.width, row * tileSize.height };
 	r.size = tileSize;

@@ -39,11 +39,11 @@
 	[self unlock];
 }
 
-- (void) print:(const char *)str {
+- (void) print:(const char *)str attr:(int)attr {
 	if (lines.count == 2) {
 		[self clear];
 	}
-	[super print:str];
+	[super print:str attr:attr];
 }
 
 @end
