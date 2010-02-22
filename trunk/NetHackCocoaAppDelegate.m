@@ -42,7 +42,6 @@ extern int unixmain(int argc, char **argv);
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	char *argv[] = {
 		"NetHack",
-		"-D",
 	};
 	
 	// create necessary directories

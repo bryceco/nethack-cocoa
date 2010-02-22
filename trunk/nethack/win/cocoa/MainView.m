@@ -35,38 +35,56 @@
 
 @implementation MainView
 
-- (id)initWithFrame:(NSRect)frame {
-	// ignore requested frame, and scale to match size of tiles we're using
-	NSString * tileSetName = @"kins32.bmp";
+-(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
+{
 	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
-	
-	// a tile set is composed of 1200 tiles, so do the math to decide what we're using
-	int tileCount = (1280*960)/(32*32);
-	NSSize totalSize = [tilesetImage size];
-	CGFloat tileWidth = sqrt( (totalSize.width * totalSize.height) / tileCount );
-	tileWidth = floor( tileWidth + 0.5 );
-	
-	tileSize.width = tileSize.height = tileWidth;
-	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
-
-	if (self = [super initWithFrame:frame]) {
-		TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:tileSize];
-		[TileSet setInstance:tileSet];
-		petMark = [NSImage imageNamed:@"petmark.png"];
+	if ( tilesetImage == nil ) {
+		NSURL * url = [NSURL URLWithString:tileSetName];
+		tilesetImage = [[[NSImage alloc] initByReferencingURL:url] autorelease];
+		if ( tilesetImage == nil ) {
+			return NO;
+		}
 	}
 	
+	// make sure dimensions work
+	NSSize imageSize = [tilesetImage size];
+	if ( (imageSize.width / size.width) * (imageSize.height / size.height) < 1014 ) {
+		// not enough images
+		return NO;
+	}
 	
-	// we need to know when we scroll
-	NSClipView * clipView = [[self enclosingScrollView] contentView];
-	[clipView setPostsBoundsChangedNotifications: YES];
-	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
-												 name:NSViewBoundsDidChangeNotification object:clipView];
+	tileSize = size;
+
+	// update our bounds
+	NSRect frame = [self frame];
+	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
+	[self setFrame:frame];
+
+	TileSet *tileSet = [[[TileSet alloc] initWithImage:tilesetImage tileSize:tileSize] autorelease];
+	[TileSet setInstance:tileSet];
 	
-	return self;
+	[self centerHero];
+	[self setNeedsDisplay:YES];
+	
+	return YES;
 }
 
-- (void)refreshMessages {
-	assert(false);
+- (id)initWithFrame:(NSRect)frame {
+
+	if (self = [super initWithFrame:frame]) {
+		
+		petMark = [NSImage imageNamed:@"petmark.png"];
+		[self setTileSet:@"kins32.bmp" size:NSMakeSize(32,32)];
+		
+		// we need to know when we scroll
+		NSClipView * clipView = [[self enclosingScrollView] contentView];
+		[clipView setPostsBoundsChangedNotifications: YES];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
+											name:NSViewBoundsDidChangeNotification object:clipView];
+		
+	}
+		
+	return self;
 }
 
 - (void)cliparoundX:(int)x y:(int)y {
@@ -96,6 +114,8 @@
 		NSPoint start = NSMakePoint(0.0f,
 									self.bounds.size.height-tileSize.height);
 		
+		NSImage * image = [[TileSet instance] image];
+		
 		for (int j = 0; j < ROWNO; ++j) {
 			for (int i = 0; i < COLNO; ++i) {
 				NSPoint p = NSMakePoint(start.x+i*tileSize.width,
@@ -108,7 +128,7 @@
 						unsigned int special;
 						mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 						NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
-						[[[TileSet instance] image] drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f];
+						[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f];
 #if 0
 						if (glyph_is_pet(glyph)) {
 							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0f];

@@ -30,6 +30,7 @@
 #import "TileSet.h"
 #import "NSString+Z.h"
 #import "NhEventQueue.h"
+#import "TileSet.h"
 
 @implementation MenuWindowController
 
@@ -166,13 +167,8 @@
 			if ( glyph == 5584 )
 				glyph = 0;
 			if ( glyph ) {
-				NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
-				NSSize size = [[TileSet instance] tileSize];
-				NSImage * image = [[NSImage alloc] initWithSize:size];
-				NSRect dstRect = NSMakeRect(0, 0, size.width, size.height);
-				[image lockFocus];
-				[[[TileSet instance] image] drawInRect:dstRect fromRect:srcRect operation:NSCompositeCopy fraction:1.0f];
-				[image unlockFocus];
+				// get glyph image
+				NSImage * image = [[TileSet instance] imageForGlyph:glyph];
 				
 				// create attributed string with glyph
 				NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
