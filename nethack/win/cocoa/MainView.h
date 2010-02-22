@@ -40,8 +40,8 @@
 	NSWindow *	tooltipWindow;
 }
 
-- (void)refreshMessages;
 - (void)cliparoundX:(int)x y:(int)y;
 - (void)centerHero;
+- (BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size;
 
 @end

@@ -39,6 +39,7 @@
 #import "YesNoWindowController.h"
 #import "InputWindowController.h"
 #import "ExtCommandWindowController.h"
+#import "PlayerSelectionWindowController.h"
 
 #import "wincocoa.h" // cocoa_getpos etc.
 
@@ -136,6 +137,82 @@ static const float popoverItemHeight = 44.0f;
 		}
 	}
 }
+- (void)addTileSet:(id)sender
+{
+	NSOpenPanel * panel = [NSOpenPanel openPanel];
+	[panel setCanChooseFiles:YES];
+	[panel setCanChooseDirectories:NO];
+	[panel setAllowsMultipleSelection:YES];
+	[panel runModal];
+	NSArray * result = [panel URLs];
+	for ( NSURL * url in result ) {
+		NSString * s = [url absoluteString];
+		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:s action:@selector(selectTileSet:) keyEquivalent:@""];
+		[item setTarget:self];
+		[tileSetMenu addItem:item];
+	}
+}
+- (void)selectTileSet:(id)sender
+{
+	NSMenuItem * item = sender;
+	NSString * name = [item title];
+	int dx, dy;
+	if ( sscanf([name UTF8String], "%*[^0-9]%dx%d.%*s", &dx, &dy ) == 2 ) {
+		// fully described
+	} else if ( sscanf([name UTF8String], "%*[^0-9]%d.%*s", &dx ) == 1 ) {
+		dy = dx;
+	} else {
+		dx = dy = 16;
+	}
+	
+	NSSize size = NSMakeSize( dx, dy );
+	BOOL ok = [mainView setTileSet:name size:size];
+	if ( !ok ) {
+		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
+		[alert runModal];
+	}
+}
+- (void)createTileSetListInMenu:(NSMenu *)menu {
+	int count = [[menu itemArray] count];
+	if ( count > 3 ) {
+		// already initialized
+		return;
+	}
+
+	NSMutableArray * files = [NSMutableArray array];
+	// add user defined tile file
+	if (iflags.wc_tile_file) {
+		[files addObject:[NSString stringWithUTF8String:iflags.wc_tile_file]];
+	}	
+	
+	// get list of builtin tiles
+	NSString * tileFolder = [[NSBundle mainBundle] resourcePath];
+	for ( NSString * name in [[NSFileManager defaultManager] contentsOfDirectoryAtPath:tileFolder error:NULL] ) {
+		NSString * ext = [name pathExtension];
+		if ( [ext isEqualToString:@"png"] || [ext isEqualToString:@"bmp"] ) {
+			// we have an image file, just make sure it is larger than a single image (petmark)
+			NSString * path = [tileFolder stringByAppendingPathComponent:name];
+			NSDictionary * attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:NULL];
+			if ( attr && [attr fileSize] >= 10000 ) {
+				[files addObject:name];
+			}				
+		}
+	}
+	
+	// add files
+	for ( NSString * name in files ) {
+		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectTileSet:) keyEquivalent:@""];
+		[item setTarget:self];
+		[menu addItem:item];
+	}
+}
+- (void)menuWillOpen:(NSMenu *)menu
+{
+	if ( menu == tileSetMenu ) {
+		[self createTileSetListInMenu:menu];
+	}
+}
+
 
 - (IBAction)terminateApplication:(id)sender
 {
@@ -175,6 +252,14 @@ static const float popoverItemHeight = 44.0f;
 	}
 }
 
+- (void)showPlayerSelection
+{
+	if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:@selector(showPlayerSelection) withObject:nil waitUntilDone:YES];
+	} else {
+		[showPlayerSelection runModal];
+	}	
+}
 
 - (void)handleDirectionQuestion:(NhYnQuestion *)q {
 	isDirectionQuestion = YES;

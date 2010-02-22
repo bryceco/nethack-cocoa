@@ -34,22 +34,25 @@
 @class YesNoWindowController;
 @class InputWindowController;
 @class ExtCommandWindowController;
+@class PlayerSelectionWindowController;
 
-@interface MainWindowController : NSWindowController <NSWindowDelegate> {
+@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {
 
 	BOOL									isDirectionQuestion;
 	
-	IBOutlet MainView					*	mainView;
-	IBOutlet NSScrollView				*	scrollView;
-	IBOutlet NSTextView					*	messagesView;
-	IBOutlet NSTextField				*	statusView;
+	IBOutlet MainView						*	mainView;
+	IBOutlet NSScrollView					*	scrollView;
+	IBOutlet NSTextView						*	messagesView;
+	IBOutlet NSTextField					*	statusView;
+	IBOutlet NSMenu							*	tileSetMenu;
 	
-	IBOutlet MenuWindowController		*	menuWindow;
-	IBOutlet MessageWindowController	*	messageWindow;
-	IBOutlet DirectionWindowController	*	directionWindow;
-	IBOutlet YesNoWindowController		*	yesNoWindow;
-	IBOutlet InputWindowController		*	inputWindow;
-	IBOutlet ExtCommandWindowController	*	extCommandWindow;
+	IBOutlet MenuWindowController			*	menuWindow;
+	IBOutlet MessageWindowController		*	messageWindow;
+	IBOutlet DirectionWindowController		*	directionWindow;
+	IBOutlet YesNoWindowController			*	yesNoWindow;
+	IBOutlet InputWindowController			*	inputWindow;
+	IBOutlet ExtCommandWindowController		*	extCommandWindow;
+	IBOutlet PlayerSelectionWindowController*	showPlayerSelection;
 }
 
 + (MainWindowController *) instance;
@@ -58,6 +61,7 @@
 // menu
 - (IBAction)performMenuAction:(id)sender;
 - (IBAction)terminateApplication:(id)sender;
+- (IBAction)addTileSet:(id)sender;
 
 // window API
 - (void)handleDirectionQuestion:(NhYnQuestion *)q;
@@ -72,6 +76,7 @@
 - (void)getLine;
 - (void)displayMessageWindow:(NSString *)text;
 - (void)showExtendedCommands;
+- (void)showPlayerSelection;
 
 // touch handling
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(NSView *)view;

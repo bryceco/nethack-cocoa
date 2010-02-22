@@ -16,13 +16,17 @@
 		02879369112EFEED000A5F55 /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02879368112EFEED000A5F55 /* tiles32.png */; };
 		0287936B112EFEF8000A5F55 /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0287936A112EFEF8000A5F55 /* absurd128.png */; };
 		0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298DE23113136E800BC0614 /* TooltipWindow.m */; };
-		029A96BF112B164900225CC3 /* nhtiles.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96BE112B164900225CC3 /* nhtiles.bmp */; };
+		029A96BF112B164900225CC3 /* tiles16.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96BE112B164900225CC3 /* tiles16.bmp */; };
 		029A96C1112B178300225CC3 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96C0112B178300225CC3 /* kins32.bmp */; };
 		029A97CC112BC6DB00225CC3 /* MenuWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A97CB112BC6DB00225CC3 /* MenuWindowController.m */; };
 		029A9961112BEDEC00225CC3 /* FlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A9960112BEDEC00225CC3 /* FlippedView.m */; };
 		02E856CB112A54AB00E4ADE3 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E856CA112A54AB00E4ADE3 /* petmark.png */; };
 		02E859A4112B142300E4ADE3 /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 02E859A3112B142300E4ADE3 /* nethack.icns */; };
 		02F303B0112C7A4800CB64E4 /* MessageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F303AF112C7A4800CB64E4 /* MessageWindowController.m */; };
+		02FF3F2B1131C3C90096FBC6 /* tiles10x20.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02FF3F291131C3C90096FBC6 /* tiles10x20.bmp */; };
+		02FF3F2C1131C3C90096FBC6 /* tiles20x40.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02FF3F2A1131C3C90096FBC6 /* tiles20x40.bmp */; };
+		02FF404A11323AF90096FBC6 /* nh32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02FF404911323AF90096FBC6 /* nh32.png */; };
+		02FF4076113247830096FBC6 /* PlayerSelectionWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02FF4075113247830096FBC6 /* PlayerSelectionWindowController.m */; };
 		1DDD58160DA1D0A300B32029 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1DDD58140DA1D0A300B32029 /* MainMenu.xib */; };
 		256AC3DA0F4B6AC300CF3369 /* NetHackCocoaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 256AC3D90F4B6AC300CF3369 /* NetHackCocoaAppDelegate.m */; };
 		43F7AEA41129554300CF5B3C /* air.lev in Resources */ = {isa = PBXBuildFile; fileRef = 43F7AB341129553B00CF5B3C /* air.lev */; };
@@ -337,7 +341,7 @@
 		0287936A112EFEF8000A5F55 /* absurd128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd128.png; sourceTree = "<group>"; };
 		0298DE22113136E800BC0614 /* TooltipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipWindow.h; sourceTree = "<group>"; };
 		0298DE23113136E800BC0614 /* TooltipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TooltipWindow.m; sourceTree = "<group>"; };
-		029A96BE112B164900225CC3 /* nhtiles.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = nhtiles.bmp; sourceTree = "<group>"; };
+		029A96BE112B164900225CC3 /* tiles16.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles16.bmp; sourceTree = "<group>"; };
 		029A96C0112B178300225CC3 /* kins32.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kins32.bmp; sourceTree = "<group>"; };
 		029A97CA112BC6DB00225CC3 /* MenuWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuWindowController.h; sourceTree = "<group>"; };
 		029A97CB112BC6DB00225CC3 /* MenuWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuWindowController.m; sourceTree = "<group>"; };
@@ -348,6 +352,11 @@
 		02E859A3112B142300E4ADE3 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nethack.icns; sourceTree = "<group>"; };
 		02F303AE112C7A4800CB64E4 /* MessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageWindowController.h; sourceTree = "<group>"; };
 		02F303AF112C7A4800CB64E4 /* MessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageWindowController.m; sourceTree = "<group>"; };
+		02FF3F291131C3C90096FBC6 /* tiles10x20.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles10x20.bmp; sourceTree = "<group>"; };
+		02FF3F2A1131C3C90096FBC6 /* tiles20x40.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles20x40.bmp; sourceTree = "<group>"; };
+		02FF404911323AF90096FBC6 /* nh32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nh32.png; sourceTree = "<group>"; };
+		02FF4074113247830096FBC6 /* PlayerSelectionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSelectionWindowController.h; sourceTree = "<group>"; };
+		02FF4075113247830096FBC6 /* PlayerSelectionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSelectionWindowController.m; sourceTree = "<group>"; };
 		089C165DFE840E0CC02AAC07 /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
@@ -806,6 +815,8 @@
 				029A9960112BEDEC00225CC3 /* FlippedView.m */,
 				0298DE22113136E800BC0614 /* TooltipWindow.h */,
 				0298DE23113136E800BC0614 /* TooltipWindow.m */,
+				02FF4074113247830096FBC6 /* PlayerSelectionWindowController.h */,
+				02FF4075113247830096FBC6 /* PlayerSelectionWindowController.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1373,12 +1384,15 @@
 		43F7AE2F1129554200CF5B3C /* tilesets */ = {
 			isa = PBXGroup;
 			children = (
+				02FF404911323AF90096FBC6 /* nh32.png */,
+				02FF3F291131C3C90096FBC6 /* tiles10x20.bmp */,
+				02FF3F2A1131C3C90096FBC6 /* tiles20x40.bmp */,
 				02879364112EFECE000A5F55 /* absurd32.png */,
 				0287936A112EFEF8000A5F55 /* absurd128.png */,
 				029A96C0112B178300225CC3 /* kins32.bmp */,
 				02E859A3112B142300E4ADE3 /* nethack.icns */,
 				02E856CA112A54AB00E4ADE3 /* petmark.png */,
-				029A96BE112B164900225CC3 /* nhtiles.bmp */,
+				029A96BE112B164900225CC3 /* tiles16.bmp */,
 				02879368112EFEED000A5F55 /* tiles32.png */,
 				02879366112EFEE1000A5F55 /* chozo32.png */,
 				43F7AE301129554200CF5B3C /* chozo32b.png */,
@@ -1593,12 +1607,15 @@
 				43F7B0D91129554300CF5B3C /* chozo32b.png in Resources */,
 				02E856CB112A54AB00E4ADE3 /* petmark.png in Resources */,
 				02E859A4112B142300E4ADE3 /* nethack.icns in Resources */,
-				029A96BF112B164900225CC3 /* nhtiles.bmp in Resources */,
+				029A96BF112B164900225CC3 /* tiles16.bmp in Resources */,
 				029A96C1112B178300225CC3 /* kins32.bmp in Resources */,
 				02879365112EFECE000A5F55 /* absurd32.png in Resources */,
 				02879367112EFEE1000A5F55 /* chozo32.png in Resources */,
 				02879369112EFEED000A5F55 /* tiles32.png in Resources */,
 				0287936B112EFEF8000A5F55 /* absurd128.png in Resources */,
+				02FF3F2B1131C3C90096FBC6 /* tiles10x20.bmp in Resources */,
+				02FF3F2C1131C3C90096FBC6 /* tiles20x40.bmp in Resources */,
+				02FF404A11323AF90096FBC6 /* nh32.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1752,6 +1769,7 @@
 				0270BB96112E6C3E000CC97D /* InputWindowController.m in Sources */,
 				028792E4112EEE55000A5F55 /* ExtCommandWindowController.m in Sources */,
 				0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */,
+				02FF4076113247830096FBC6 /* PlayerSelectionWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

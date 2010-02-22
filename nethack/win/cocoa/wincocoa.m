@@ -130,7 +130,7 @@ coord CoordMake(xchar i, xchar j) {
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
 #if 0
 	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								@"role:samurai,gender:male,time,autopickup,showexp,pickup_types:$!?+\"=/,norest_on_space,runmode:walk",
+								@"role:samurai,gender:male,time,autopickup,showexp,pickup_types:$!?+\"=/,norest_on_space,runmode:walk,tile_file:tiles40x20.bmp,tile_height:40,tile_width:20",
 								kNetHackOptions,
 								nil]];
 #endif
@@ -463,21 +463,36 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 	static const char * AlwaysYes[] = {
 		"Really save?",
 		"Overwrite the old file?",
-		"Do you want to keep the save file?",
+		//		"Do you want to keep the save file?",
 	};
 	for ( int i = 0; i < sizeof AlwaysYes/sizeof AlwaysYes[0]; ++i ) {
 		if ( !strcmp(AlwaysYes[i], question) ) {
 			return 'y';
 		}
 	}
-	cocoa_putstr(WIN_MESSAGE, ATR_BOLD, question);
-	NhEvent *e = nil;
+	NSString * text = [NSString stringWithFormat:@"%s", question];
+	if ( choices && choices[0] ) {
+		text = [text stringByAppendingFormat:@" [%s]", choices];
+	}
+	if ( def ) {
+		text = [text stringByAppendingFormat:@" (%c)", def];
+	}
+	cocoa_putstr(WIN_MESSAGE, ATR_BOLD, [text UTF8String] );
 #if 1
-	do {
+	for (;;) {
+		NhEvent *e = nil;
 		e = [[NhEventQueue instance] nextEvent];
-	} while ( !e.isKeyEvent ); 
+		if ( e.isKeyEvent ) {
+			if ( choices == NULL || strchr( choices, e.key ) != NULL ) {
+				return e.key;
+			}
+			if ( def && e.key == '\r' )
+				return def;
+		}
+	}
 #else	
 	// BHC need a better solution here	
+	NhEvent *e = nil;
 	if ([[NhEventQueue instance] peek]) {
 		e = [[NhEventQueue instance] nextEvent];
 	} else {
@@ -486,8 +501,8 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 		e = [[NhEventQueue instance] nextEvent];
 		[q release];
 	}
-#endif
 	return e.key;
+#endif
 }
 
 void cocoa_getlin(const char *prompt, char *line) {
@@ -690,6 +705,9 @@ static int cocoa_race_select(char * pbuf, char * plbuf) {
 
 // from tty port
 void cocoa_player_selection() {
+#if 1
+	[[MainWindowController instance] showPlayerSelection];
+#else
 	int i, k, n;
 	char pick4u = 'n';
 	char pbuf[QBUFSZ], plbuf[QBUFSZ];
@@ -903,4 +921,5 @@ void cocoa_player_selection() {
 	}
 	/* Success! */
 	cocoa_display_nhwindow(BASE_WINDOW, FALSE);
+#endif
 }
