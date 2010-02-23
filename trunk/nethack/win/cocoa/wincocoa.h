@@ -74,7 +74,10 @@ coord CoordMake(xchar i, xchar j);
 
 #ifdef __OBJC__
 
-@interface WinCocoa : NSObject {}
+@class NhEventQueue;
+
+@interface WinCocoa : NSObject {
+}
 
 + (const char *)baseFilePath;
 + (void)expandFilename:(const char *)filename intoPath:(char *)path;

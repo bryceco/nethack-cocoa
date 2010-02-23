@@ -168,7 +168,7 @@
 				glyph = 0;
 			if ( glyph ) {
 				// get glyph image
-				NSImage * image = [[TileSet instance] imageForGlyph:glyph];
+				NSImage * image = [[TileSet instance] imageForGlyph:glyph enabled:YES];
 				
 				// create attributed string with glyph
 				NSTextAttachment * attachment = [[NSTextAttachment alloc] init];

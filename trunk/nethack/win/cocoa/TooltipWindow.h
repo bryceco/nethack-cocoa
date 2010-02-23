@@ -25,7 +25,7 @@
 #import <Cocoa/Cocoa.h>
 
 
-@interface TooltipWindow : NSWindow {
+@interface TooltipWindow : NSWindow <NSWindowDelegate> {
 
 }
 

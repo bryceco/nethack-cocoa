@@ -3,8 +3,25 @@
 //  NetHackCocoa
 //
 //  Created by Bryce on 2/21/10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 Bryce Cogswell. All rights reserved.
 //
+
+/*
+ This program is free software; you can redistribute it and/or
+ modify it under the terms of the GNU General Public License
+ as published by the Free Software Foundation; either version 2
+ of the License, or (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ 
+ You should have received a copy of the GNU General Public License
+ along with this program; if not, write to the Free Software
+ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+ */
+
 
 #import "PlayerSelectionWindowController.h"
 #import "TileSet.h"
@@ -250,11 +267,25 @@
 	}
 }
 
+- (NSCell *)tableView:(NSTableView *)tableView dataCellForTableColumn:(NSTableColumn *)tableColumn row:(NSInteger)row
+{
+	NSCell * cell = [tableColumn dataCellForRow:row];
+	BOOL enabled;
+	if ( tableView == race ) {
+		enabled = raceEnabled[ row ];
+	} else {
+		enabled = roleEnabled[ row ];
+	}
+	[cell setEnabled:enabled];
+	return cell;
+}
+
+
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
 {
 	int glyph;
 	const char * text;
-	BOOL male = [sexMale state] == NSOnState;
+	BOOL male = flags.initgend != 1;	// [sexMale state] == NSOnState;
 	BOOL enabled;
 
 	if ( aTableView == race ) {
@@ -268,11 +299,8 @@
 	}
 	
 	// get image
-	NSImage * image = [[TileSet instance] imageForGlyph:glyph];
+	NSImage * image = [[TileSet instance] imageForGlyph:glyph enabled:enabled];
 	NSString * title = [NSString stringWithFormat:@" %s",text];
-	
-	if ( !enabled )
-		title = [NSString stringWithFormat:@"%@ (x)", title];
 	
 	// create attributed string with glyph
 	NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
@@ -311,7 +339,7 @@
 
 - (IBAction)buttonSelect:(id)sender
 {
-	NSButtonCell * button = sender;
+	NSButtonCell * button = [sender selectedCell];
 	if ( button == sexMale ) {
 		[self selectGender:0];		
 	} else if ( button == sexFemale ) {
@@ -323,6 +351,8 @@
 	} else {
 		[self selectAlignment:2];
 	}
+	// gender might have changed:
+	[role setNeedsDisplay];
 }
 
 -(void)doAccept:(id)sender

@@ -41,14 +41,27 @@
 	[view setRefusesFirstResponder:YES];
 	
 	if ( self = [super initWithContentRect:[view frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES] ) {
+		[self setDelegate:self];
 		[self setContentView:view];
 		[self setOpaque:YES];
 		[self setHasShadow:YES];
 		[self setReleasedWhenClosed:YES];
 		[self orderFront:self];
+		
+		NSLog(@"tooltip create\n");
 	}
 	return self;
 }
 
+-(void)windowWillClose
+{
+	
+}
+
+-(void)dealloc
+{
+	NSLog(@"tooltip destroy\n");
+	[super dealloc];
+}
 
 @end
