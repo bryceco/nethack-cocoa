@@ -199,6 +199,19 @@ coord CoordMake(xchar i, xchar j) {
 	}
 	return key;
 }
+
+NhEventQueue * s_WinCocoaInterceptedOutput;
++ (NhEventQueue *)interceptedOutput
+{
+	return s_WinCocoaInterceptedOutput;
+}
++ (void)setInterceptedOutput:(NhEventQueue *)output
+{
+	assert( (output == nil) != (s_WinCocoaInterceptedOutput == nil) );
+	s_WinCocoaInterceptedOutput = output;
+}
+
+
 @end
 
 FILE *cocoa_dlb_fopen(const char *filename, const char *mode) {
@@ -311,10 +324,11 @@ void cocoa_putstr(winid wid, int attr, const char *text) {
 	if (wid == WIN_ERR || !wid) {
 		wid = BASE_WINDOW;
 	}
+	// normal output to a window
 	[(NhWindow *) wid print:text attr:attr];
 	if (wid == WIN_MESSAGE || wid == BASE_WINDOW) {
 		[[MainWindowController instance] refreshMessages];
-	}
+	}		
 }
 
 
@@ -409,7 +423,7 @@ void cocoa_cliparound(int x, int y) {
 }
 
 void cocoa_cliparound_window(winid wid, int x, int y) {
-	NSLog(@"cliparound_window %x %d,%d", wid, x, y);
+	//	NSLog(@"cliparound_window %x %d,%d", wid, x, y);
 	if (wid == NHW_MAP) {
 		[[MainWindowController instance] clipAroundX:x y:y];
 	}
