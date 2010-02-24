@@ -306,7 +306,6 @@
 	NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
 	[(NSCell *)[attachment attachmentCell] setImage:image];
 	NSMutableAttributedString * aString = [[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy];
-	[image release];
 	[attachment release];
 	
 	// add text to string and adjust vertical baseline of text so it aligns with icon
@@ -346,7 +345,7 @@
 		[self selectGender:1];
 	} else if ( button == alignLawful ) {
 		[self selectAlignment:0];
-	} else if ( button = alignNeutral ) {
+	} else if ( button == alignNeutral ) {
 		[self selectAlignment:1];
 	} else {
 		[self selectAlignment:2];

@@ -35,20 +35,10 @@
 @implementation MenuWindowController
 
 
--(void)awakeFromNib
-{
-	itemDict = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
-}
--(void)dealloc
-{
-	[itemDict release];
-	[super dealloc];
-}
-
 -(void)buttonClick:(id)sender
 {
 	NSButton * button = sender;
-	switch ( [windowParams how] ) {
+	switch ( [menuParams how] ) {
 
 		case PICK_NONE:
 			break;
@@ -83,34 +73,72 @@
 			char key = [button tag];
 			NhItem * item = [itemDict objectForKey:[NSNumber numberWithInt:key]];
 			assert(item);
-			[windowParams.selected addObject:item];
+			[menuParams.selected addObject:item];
 			if ( firstSelection == 0 )
 				firstSelection = key;
 		}
 	}
 	
-	[[NhEventQueue instance] addKey:[windowParams how] == PICK_ANY ? windowParams.selected.count : firstSelection];
+	switch ( [menuParams how] ) {
+		case PICK_NONE:
+			break;
+		case PICK_ONE:
+			[[NhEventQueue instance] addKey:firstSelection];
+			break;
+		case PICK_ANY:
+			[[NhEventQueue instance] addKey:menuParams.selected.count];
+			break;
+	}
 	[[self window] close];
 }
 
 -(void)doCancel:(id)sender
 {
-	[[NhEventQueue instance] addKey:-1];
+	if ( [menuParams how] != PICK_NONE ) {
+		[[NhEventQueue instance] addKey:-1];
+	}
 	[[self window] close];	
 }
 
-
-- (void)runModalWithMenu:(NhMenuWindow *)menu
+-(BOOL)windowShouldClose:(id)sender
 {
-	windowParams = [menu retain];
-	
-	if ( minimumSize.width == 0 ) {
-		minimumSize = [[self window] frame].size;
-	}
+	[self doCancel:sender];
+	return YES;
+}
 
-	
+
+-(void)windowWillClose:(NSNotification *)notification
+{
+	if ( [menuParams how] != PICK_NONE ) {
+		[[NSApplication sharedApplication] stopModal];
+	}
+	[self autorelease];
+}
+
+
+
+- (id)initWithMenu:(NhMenuWindow *)menu
+{
+	if ( self = [super initWithWindowNibName:@"MenuWindow"] ) {
+		menuParams = [menu retain];
+		itemDict = [[NSMutableDictionary dictionaryWithCapacity:10] retain];
+	}
+	return self;
+}
+
+-(void)dealloc
+{
+	[menuParams release];
+	[itemDict release];
+	[super dealloc];
+}
+
+
+-(void)windowDidLoad
+{
+	NSSize		minimumSize = [[self window] frame].size;
 	NSFont	*	groupFont	= [NSFont labelFontOfSize:15];
-	int			how			= [menu how];
+	int			how			= [menuParams how];
 	char	*	nextKey		= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 	
 	// add new labels
@@ -119,7 +147,7 @@
 	NSRect  viewRect = [menuView bounds];
 
 	CGFloat yPos = 0.0;
-	for ( NhItemGroup * group in [windowParams itemGroups] ) {
+	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
 		NSRect rect = NSMakeRect(groupIndent, yPos, viewRect.size.width, 10 );
 		NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
@@ -130,8 +158,8 @@
 		[label setFont:groupFont];
 		[label sizeToFit];
 		[menuView addSubview:label];
-		rect = [label bounds];
-		yPos += rect.size.height;
+		yPos += [label bounds].size.height;
+		[label release];
 
 		for ( NhItem * item in [group items] ) {
 
@@ -174,7 +202,6 @@
 				NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
 				[(NSCell *)[attachment attachmentCell] setImage:image];
 				aString = [[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy];
-				[image release];
 				[attachment release];
 			} else {
 				NSAttributedString * s = [[NSAttributedString alloc] initWithString:@" "];
@@ -189,17 +216,11 @@
 
 			// add identifier
 			NSString * identString = [NSString stringWithFormat:@" (%c) ",keyEquiv];
-#if 0
-			// key/icon/description
-			[[aString mutableString] insertString:identString atIndex:0];
-			if ( glyph )
-				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(0, [identString length])];
-#else
+
 			// icon/key/description
 			[[aString mutableString] insertString:identString atIndex:1];
 			if ( glyph )
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [identString length])];
-#endif
 			
 			// set button title
 			[button setAttributedTitle:aString];
@@ -215,8 +236,9 @@
 			[button sizeToFit];
 			[menuView addSubview:button];
 
-			rect = [button bounds];
-			yPos += rect.size.height + 3;
+			yPos += [button bounds].size.height + 3;
+			
+			[button release];
 		}
 	}
 	
@@ -253,21 +275,23 @@
 		rc.size.height = minimumSize.height;
 	if ( rc.size.width < minimumSize.width )
 		rc.size.width = minimumSize.width;
-	[[self window] setFrame:rc display:YES];
 	
-	[[NSApplication sharedApplication] runModalForWindow:[self window]];
+	[[self window] setFrame:rc display:YES];
 }
 
--(void)windowWillClose:(NSNotification *)notification
++ (void)menuWindowWithMenu:(NhMenuWindow *)menu
 {
-	// remove existing labels
-	[menuView setSubviews:[NSArray array]];
-	[itemDict removeAllObjects];
+	MenuWindowController * win = [[MenuWindowController alloc] initWithMenu:menu];
+	[win showWindow:win];
+	[win->menuView scrollPoint:NSMakePoint(0,0)];
+
+	if ( [win->menuParams how] == PICK_NONE ) {
+		// we can run detached
+	} else {
+		// need to run modal
+		[[NSApplication sharedApplication] runModalForWindow:[win window]];
+	}
 	
-	// release window data
-	[windowParams release];
-	
-	[[NSApplication sharedApplication] stopModal];
 }
 
 @end

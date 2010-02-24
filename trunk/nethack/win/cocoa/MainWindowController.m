@@ -150,6 +150,7 @@ static const float popoverItemHeight = 44.0f;
 		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:s action:@selector(selectTileSet:) keyEquivalent:@""];
 		[item setTarget:self];
 		[tileSetMenu addItem:item];
+		[item release];
 	}
 }
 - (void)selectTileSet:(id)sender
@@ -167,7 +168,9 @@ static const float popoverItemHeight = 44.0f;
 	
 	NSSize size = NSMakeSize( dx, dy );
 	BOOL ok = [mainView setTileSet:name size:size];
-	if ( !ok ) {
+	if ( ok ) {
+		// ok
+	} else {
 		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
 		[alert runModal];
 	}
@@ -204,6 +207,7 @@ static const float popoverItemHeight = 44.0f;
 		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectTileSet:) keyEquivalent:@""];
 		[item setTarget:self];
 		[menu addItem:item];
+		[item release];
 	}
 }
 - (void)menuWillOpen:(NSMenu *)menu
@@ -263,7 +267,7 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)handleDirectionQuestion:(NhYnQuestion *)q {
 	isDirectionQuestion = YES;
-	[directionWindow runModal];
+	[directionWindow runModalWithPrompt:q.question];
 }
 
 // Parses the stuff in [] and returns the special characters like $-?* etc.
@@ -335,6 +339,15 @@ static const float popoverItemHeight = 44.0f;
 	*items = [NSString stringWithCString:cItems encoding:NSASCIIStringEncoding];
 }
 
+- (void)showDirectionWithPrompt:(NSString *)prompt
+{
+	if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:@selector(showDirectionWithPrompt:) withObject:prompt waitUntilDone:NO];
+	} else {
+		[directionWindow runModalWithPrompt:prompt];
+	}			
+}
+
 - (void)showYnQuestion:(NhYnQuestion *)q {
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(showYnQuestion:) withObject:q waitUntilDone:NO];
@@ -400,7 +413,7 @@ static const float popoverItemHeight = 44.0f;
 	} else if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(displayMessageWindow:) withObject:text waitUntilDone:NO];
 	} else {
-		[messageWindow runModalWithMessage:text];
+		[MessageWindowController messageWindowWithText:text];
 	}
 }
 
@@ -422,7 +435,7 @@ static const float popoverItemHeight = 44.0f;
 		} else {
 			NSString * text = [w text];
 			if ( [text length] ) {
-				[messageWindow runModalWithMessage:text];
+				[MessageWindowController messageWindowWithText:text];
 			}
 		}
 	}
@@ -432,7 +445,7 @@ static const float popoverItemHeight = 44.0f;
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(showMenuWindow:) withObject:w waitUntilDone:NO];
 	} else {
-		[menuWindow runModalWithMenu:w];
+		[MenuWindowController menuWindowWithMenu:w];
 	}
 }
 
@@ -461,7 +474,9 @@ static const float popoverItemHeight = 44.0f;
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(getLine) withObject:nil waitUntilDone:NO];
 	} else {
-		[inputWindow runModal];
+		NSAttributedString * attrPrompt = [[[NhWindow messageWindow] messages] lastObject];
+		NSString * prompt = [attrPrompt string];
+		[inputWindow runModalWithPrompt:prompt];
 	}
 }
 

@@ -64,6 +64,7 @@
 			
 			rect = [button bounds];
 			yPos += rect.size.height + 3;
+			[button release];
 		}
 				
 		// get max item width
@@ -122,6 +123,7 @@
 			NSString * cmd = [NSString stringWithUTF8String:extcmdlist[tag].ef_txt];
 			NhTextInputEvent * e = [[NhTextInputEvent alloc] initWithText:cmd];
 			[[NhEventQueue instance] addEvent:e];
+			[e release];
 			break;
 		}
 	}
@@ -132,7 +134,8 @@
 {
 	NhTextInputEvent * e = [[NhTextInputEvent alloc] initWithText:@""];
 	[[NhEventQueue instance] addEvent:e];
-	[[self window] close];	
+	[e release];
+	[[self window] close];
 }
 
 -(BOOL)windowShouldClose:(id)sender

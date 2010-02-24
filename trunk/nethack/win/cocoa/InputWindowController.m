@@ -28,8 +28,9 @@
 
 @implementation InputWindowController
 
--(void)runModal
+-(void)runModalWithPrompt:(NSString *)prompt
 {
+	[promptField setStringValue:prompt];
 	[inputField setStringValue:@""];
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];
 }
