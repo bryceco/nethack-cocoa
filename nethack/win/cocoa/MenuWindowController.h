@@ -28,8 +28,7 @@
 
 @interface MenuWindowController : NSWindowController <NSWindowDelegate> {
 	
-	NSSize				  minimumSize;
-	NhMenuWindow		* windowParams;
+	NhMenuWindow		* menuParams;
 	
 	NSMutableDictionary	* itemDict;
 	
@@ -38,7 +37,7 @@
 	IBOutlet NSButton	* acceptButton;
 }
 
-- (void)runModalWithMenu:(NhMenuWindow *)menu;
++ (void)menuWindowWithMenu:(NhMenuWindow *)menu;
 
 -(IBAction)doAccept:(id)sender;
 -(IBAction)doCancel:(id)sender;

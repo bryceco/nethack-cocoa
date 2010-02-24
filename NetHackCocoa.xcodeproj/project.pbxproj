@@ -15,6 +15,17 @@
 		02879367112EFEE1000A5F55 /* chozo32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02879366112EFEE1000A5F55 /* chozo32.png */; };
 		02879369112EFEED000A5F55 /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02879368112EFEED000A5F55 /* tiles32.png */; };
 		0287936B112EFEF8000A5F55 /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0287936A112EFEF8000A5F55 /* absurd128.png */; };
+		029222C011344C6B00A96147 /* Arrow-W.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222BF11344C6B00A96147 /* Arrow-W.png */; };
+		029222CA11344EE200A96147 /* Arrow-E.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C311344EE100A96147 /* Arrow-E.png */; };
+		029222CB11344EE200A96147 /* Arrow-N.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C411344EE100A96147 /* Arrow-N.png */; };
+		029222CC11344EE200A96147 /* Arrow-NE.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C511344EE100A96147 /* Arrow-NE.png */; };
+		029222CD11344EE200A96147 /* Arrow-NW.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C611344EE100A96147 /* Arrow-NW.png */; };
+		029222CE11344EE200A96147 /* Arrow-S.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C711344EE100A96147 /* Arrow-S.png */; };
+		029222CF11344EE200A96147 /* Arrow-SE.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C811344EE100A96147 /* Arrow-SE.png */; };
+		029222D011344EE200A96147 /* Arrow-SW.png in Resources */ = {isa = PBXBuildFile; fileRef = 029222C911344EE200A96147 /* Arrow-SW.png */; };
+		0292233411345E0D00A96147 /* MessageWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0292233311345E0D00A96147 /* MessageWindow.xib */; };
+		0292248C1134F5CC00A96147 /* MenuWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0292248B1134F5CC00A96147 /* MenuWindow.xib */; };
+		02922600113517D200A96147 /* Inventory.c in Sources */ = {isa = PBXBuildFile; fileRef = 029225FF113517D200A96147 /* Inventory.c */; };
 		0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0298DE23113136E800BC0614 /* TooltipWindow.m */; };
 		029A96BF112B164900225CC3 /* tiles16.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96BE112B164900225CC3 /* tiles16.bmp */; };
 		029A96C1112B178300225CC3 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96C0112B178300225CC3 /* kins32.bmp */; };
@@ -339,6 +350,18 @@
 		02879366112EFEE1000A5F55 /* chozo32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chozo32.png; sourceTree = "<group>"; };
 		02879368112EFEED000A5F55 /* tiles32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles32.png; sourceTree = "<group>"; };
 		0287936A112EFEF8000A5F55 /* absurd128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd128.png; sourceTree = "<group>"; };
+		029222BF11344C6B00A96147 /* Arrow-W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-W.png"; sourceTree = "<group>"; };
+		029222C311344EE100A96147 /* Arrow-E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-E.png"; sourceTree = "<group>"; };
+		029222C411344EE100A96147 /* Arrow-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-N.png"; sourceTree = "<group>"; };
+		029222C511344EE100A96147 /* Arrow-NE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-NE.png"; sourceTree = "<group>"; };
+		029222C611344EE100A96147 /* Arrow-NW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-NW.png"; sourceTree = "<group>"; };
+		029222C711344EE100A96147 /* Arrow-S.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-S.png"; sourceTree = "<group>"; };
+		029222C811344EE100A96147 /* Arrow-SE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SE.png"; sourceTree = "<group>"; };
+		029222C911344EE200A96147 /* Arrow-SW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SW.png"; sourceTree = "<group>"; };
+		0292233311345E0D00A96147 /* MessageWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MessageWindow.xib; sourceTree = "<group>"; };
+		0292248B1134F5CC00A96147 /* MenuWindow.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MenuWindow.xib; sourceTree = "<group>"; };
+		029225FE113517D200A96147 /* Inventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inventory.h; sourceTree = "<group>"; };
+		029225FF113517D200A96147 /* Inventory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Inventory.c; sourceTree = "<group>"; };
 		0298DE22113136E800BC0614 /* TooltipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipWindow.h; sourceTree = "<group>"; };
 		0298DE23113136E800BC0614 /* TooltipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TooltipWindow.m; sourceTree = "<group>"; };
 		029A96BE112B164900225CC3 /* tiles16.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles16.bmp; sourceTree = "<group>"; };
@@ -817,6 +840,8 @@
 				0298DE23113136E800BC0614 /* TooltipWindow.m */,
 				02FF4074113247830096FBC6 /* PlayerSelectionWindowController.h */,
 				02FF4075113247830096FBC6 /* PlayerSelectionWindowController.m */,
+				029225FE113517D200A96147 /* Inventory.h */,
+				029225FF113517D200A96147 /* Inventory.c */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -864,6 +889,21 @@
 				43F7B1DD11296B2E00CF5B3C /* NSIndexPath+Z.m */,
 			);
 			name = Framework;
+			sourceTree = "<group>";
+		};
+		029225EC1135173C00A96147 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				029222C311344EE100A96147 /* Arrow-E.png */,
+				029222C411344EE100A96147 /* Arrow-N.png */,
+				029222C511344EE100A96147 /* Arrow-NE.png */,
+				029222C611344EE100A96147 /* Arrow-NW.png */,
+				029222C711344EE100A96147 /* Arrow-S.png */,
+				029222C811344EE100A96147 /* Arrow-SE.png */,
+				029222C911344EE200A96147 /* Arrow-SW.png */,
+				029222BF11344C6B00A96147 /* Arrow-W.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -927,11 +967,14 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				029225EC1135173C00A96147 /* Images */,
 				43F7AB331129553B00CF5B3C /* dat */,
 				43F7AE2F1129554200CF5B3C /* tilesets */,
 				8D1107310486CEB800E47090 /* NetHackCocoa-Info.plist */,
 				089C165CFE840E0CC02AAC07 /* InfoPlist.strings */,
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
+				0292233311345E0D00A96147 /* MessageWindow.xib */,
+				0292248B1134F5CC00A96147 /* MenuWindow.xib */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1616,6 +1659,16 @@
 				02FF3F2B1131C3C90096FBC6 /* tiles10x20.bmp in Resources */,
 				02FF3F2C1131C3C90096FBC6 /* tiles20x40.bmp in Resources */,
 				02FF404A11323AF90096FBC6 /* nh32.png in Resources */,
+				029222C011344C6B00A96147 /* Arrow-W.png in Resources */,
+				029222CA11344EE200A96147 /* Arrow-E.png in Resources */,
+				029222CB11344EE200A96147 /* Arrow-N.png in Resources */,
+				029222CC11344EE200A96147 /* Arrow-NE.png in Resources */,
+				029222CD11344EE200A96147 /* Arrow-NW.png in Resources */,
+				029222CE11344EE200A96147 /* Arrow-S.png in Resources */,
+				029222CF11344EE200A96147 /* Arrow-SE.png in Resources */,
+				029222D011344EE200A96147 /* Arrow-SW.png in Resources */,
+				0292233411345E0D00A96147 /* MessageWindow.xib in Resources */,
+				0292248C1134F5CC00A96147 /* MenuWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1770,6 +1823,7 @@
 				028792E4112EEE55000A5F55 /* ExtCommandWindowController.m in Sources */,
 				0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */,
 				02FF4076113247830096FBC6 /* PlayerSelectionWindowController.m in Sources */,
+				02922600113517D200A96147 /* Inventory.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

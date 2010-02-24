@@ -29,7 +29,7 @@
 
 }
 
--(void)runModal;
+-(void)runModalWithPrompt:(NSString *)prompt;
 -(IBAction)chooseDirection:(id)sender;
 
 @end

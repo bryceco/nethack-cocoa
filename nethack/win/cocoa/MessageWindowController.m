@@ -28,29 +28,66 @@
 
 @implementation MessageWindowController
 
--(void)runModalWithMessage:(NSString *)text
+-(id)initWithMessage:(NSString *)message
+{
+	if ( self = [super initWithWindowNibName:@"MessageWindow"] ) {
+		
+		text = [message retain];
+
+	}
+	return self;
+}
+
+-(void)windowDidLoad
 {
 	// convert leading space to tab
-	NSMutableString * mutable = [text mutableCopyWithZone:NULL];
+	NSMutableString * mutable = [[text mutableCopyWithZone:NULL] autorelease];
 	[mutable replaceOccurrencesOfString:@"\n " withString:@"\n\t" options:0 range:NSMakeRange(0,[mutable length])];
-
-	NSRect origRect = [textField frame];
+	
+	[textField setEditable:YES];
 	[textField setStringValue:mutable];
+	[textField setEditable:NO];
+	[textField setDrawsBackground:NO];
+	[textField setBordered:NO];
+	
+	NSSize minimumSize = [[self window] frame].size;
+	
+	// size view  
+	NSSize textSizeOrig = [textField frame].size;
 	[textField sizeToFit];
-	NSRect newRect = [textField frame];
+	NSRect  textRect = [textField bounds];
+	
+	[textField setFrame:textRect];
+	[textField setNeedsDisplay:YES];	
+	
+	// size containing window
+	NSRect rc = [[self window] frame];
+	rc.size.height += textRect.size.height - textSizeOrig.height;
+	rc.size.width  += textRect.size.width  - textSizeOrig.width;
+	if ( rc.size.height < minimumSize.height )
+		rc.size.height = minimumSize.height;
+	if ( rc.size.width < minimumSize.width )
+		rc.size.width = minimumSize.width;
+	
+	[[self window] setFrame:rc display:NO];
+}
 
-	NSRect f = [[self window] frame];
-	f.size.width  += newRect.size.width - origRect.size.width;
-	f.size.height += newRect.size.height - origRect.size.height;
-	[[self window] setFrame:f display:NO];
-	[textField setFrame:newRect];
-
-	[[NSApplication sharedApplication] runModalForWindow:[self window]];
++(void)messageWindowWithText:(NSString *)text
+{
+	MessageWindowController * win = [[MessageWindowController alloc] initWithMessage:text];
+	[win showWindow:win];
+	[win->textField scrollPoint:NSMakePoint(0,0)];
 }
 
 -(void)windowWillClose:(NSNotification *)notification
 {
-	[[NSApplication sharedApplication] stopModal];	
+	[self autorelease];
+}
+
+-(void)dealloc
+{
+	[text release];
+	[super dealloc];
 }
 
 @end

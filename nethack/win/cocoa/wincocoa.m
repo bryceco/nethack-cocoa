@@ -391,16 +391,21 @@ int cocoa_select_menu(winid wid, int how, menu_item **selected) {
 	w.how = how;
 	*selected = NULL;
 	[[MainWindowController instance] showMenuWindow:w];
-	NhEvent *e = [[NhEventQueue instance] nextEvent];
-	if (e.key > 0) {
-		menu_item *pMenu = *selected = calloc(sizeof(menu_item), w.selected.count);
-		for (NhItem *item in w.selected) {
-			pMenu->count = item.amount;
-			pMenu->item = item.identifier;
-			pMenu++;
+	
+	if ( how != PICK_NONE ) {
+		NhEvent *e = [[NhEventQueue instance] nextEvent];
+		if (e.key > 0) {
+			menu_item *pMenu = *selected = calloc(sizeof(menu_item), w.selected.count);
+			for (NhItem *item in w.selected) {
+				pMenu->count = item.amount;
+				pMenu->item = item.identifier;
+				pMenu++;
+			}
 		}
+		return w.selected.count;		
+	} else {
+		return 0;
 	}
-	return w.selected.count;
 }
 
 void cocoa_update_inventory() {
@@ -484,6 +489,7 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 			return 'y';
 		}
 	}
+	
 	NSString * text = [NSString stringWithFormat:@"%s", question];
 	if ( choices && choices[0] ) {
 		text = [text stringByAppendingFormat:@" [%s]", choices];
@@ -491,8 +497,14 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 	if ( def ) {
 		text = [text stringByAppendingFormat:@" (%c)", def];
 	}
+	
+	if ( [text containsString:@"direction"] ) {
+		[[MainWindowController instance] showDirectionWithPrompt:text];
+		NhEvent * e = [[NhEventQueue instance] nextEvent];
+		return e.key;
+	} 
+	
 	cocoa_putstr(WIN_MESSAGE, ATR_BOLD, [text UTF8String] );
-#if 1
 	for (;;) {
 		NhEvent *e = nil;
 		e = [[NhEventQueue instance] nextEvent];
@@ -504,19 +516,6 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 				return def;
 		}
 	}
-#else	
-	// BHC need a better solution here	
-	NhEvent *e = nil;
-	if ([[NhEventQueue instance] peek]) {
-		e = [[NhEventQueue instance] nextEvent];
-	} else {
-		NhYnQuestion *q = [[NhYnQuestion alloc] initWithQuestion:question choices:choices default:def];
-		[[MainViewController instance] showYnQuestion:q];
-		e = [[NhEventQueue instance] nextEvent];
-		[q release];
-	}
-	return e.key;
-#endif
 }
 
 void cocoa_getlin(const char *prompt, char *line) {

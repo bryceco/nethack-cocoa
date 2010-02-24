@@ -26,9 +26,17 @@
 
 
 @implementation FlippedView
-
 - (BOOL)isFlipped
 {
 	return YES;
 }
 @end
+
+
+@implementation FlippedTextField
+- (BOOL)isFlipped
+{
+	return YES;
+}
+@end
+

@@ -28,8 +28,9 @@
 
 @implementation DirectionWindowController
 
--(void)runModal
+-(void)runModalWithPrompt:(NSString *)prompt
 {
+	[[self window] setTitle:prompt];
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];
 }
 

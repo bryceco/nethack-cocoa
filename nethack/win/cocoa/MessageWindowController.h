@@ -25,11 +25,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+@class FlippedTextField;
 
 @interface MessageWindowController : NSWindowController <NSWindowDelegate> {
-	IBOutlet NSTextField * textField;
+	
+	NSString				*	text;
+	IBOutlet NSTextField	*	textField;
+	
 }
 
--(void)runModalWithMessage:(NSString *)text;
++(void)messageWindowWithText:(NSString *)text;
 
 @end

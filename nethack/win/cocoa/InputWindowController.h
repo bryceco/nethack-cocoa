@@ -26,10 +26,11 @@
 
 
 @interface InputWindowController : NSWindowController <NSWindowDelegate> {
+	IBOutlet NSTextField *	promptField;
 	IBOutlet NSTextField *	inputField;
 }
 
--(void)runModal;
+-(void)runModalWithPrompt:(NSString *)prompt;
 -(IBAction)doAccept:(id)sender;
 -(IBAction)doCancel:(id)sender;
 

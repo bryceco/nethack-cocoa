@@ -46,8 +46,6 @@
 	IBOutlet NSTextField					*	statusView;
 	IBOutlet NSMenu							*	tileSetMenu;
 	
-	IBOutlet MenuWindowController			*	menuWindow;
-	IBOutlet MessageWindowController		*	messageWindow;
 	IBOutlet DirectionWindowController		*	directionWindow;
 	IBOutlet YesNoWindowController			*	yesNoWindow;
 	IBOutlet InputWindowController			*	inputWindow;
@@ -77,6 +75,8 @@
 - (void)displayMessageWindow:(NSString *)text;
 - (void)showExtendedCommands;
 - (void)showPlayerSelection;
+- (void)showDirectionWithPrompt:(NSString *)prompt;
+
 
 // touch handling
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(NSView *)view;
