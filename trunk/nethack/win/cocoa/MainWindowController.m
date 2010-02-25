@@ -106,6 +106,14 @@ static const float popoverItemHeight = 44.0f;
 
 #pragma mark menu actions
 
+-(BOOL)windowShouldClose:(id)sender
+{
+	return NO;
+}
+-(void)performClose:(id)sender
+{
+}
+
 - (void)performMenuAction:(id)sender
 {
 	NSMenuItem * menuItem = sender;
