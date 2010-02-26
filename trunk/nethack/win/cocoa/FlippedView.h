@@ -28,7 +28,3 @@
 @interface FlippedView : NSView {
 }
 @end
-
-@interface FlippedTextField : NSTextField {
-}
-@end

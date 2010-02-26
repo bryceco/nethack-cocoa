@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020CD2D71137089D00297C4C /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020CD2D61137089D00297C4C /* StatsView.m */; };
 		0259AE7C1135AD53002AEFA1 /* Arrow-E.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE741135AD53002AEFA1 /* Arrow-E.png */; };
 		0259AE7D1135AD53002AEFA1 /* Arrow-N.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE751135AD53002AEFA1 /* Arrow-N.png */; };
 		0259AE7E1135AD53002AEFA1 /* Arrow-NE.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE761135AD53002AEFA1 /* Arrow-NE.png */; };
@@ -31,6 +32,7 @@
 		029A96C1112B178300225CC3 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96C0112B178300225CC3 /* kins32.bmp */; };
 		029A97CC112BC6DB00225CC3 /* MenuWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A97CB112BC6DB00225CC3 /* MenuWindowController.m */; };
 		029A9961112BEDEC00225CC3 /* FlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A9960112BEDEC00225CC3 /* FlippedView.m */; };
+		02D00718113654A200F57754 /* NotesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D00717113654A200F57754 /* NotesWindowController.m */; };
 		02E856CB112A54AB00E4ADE3 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E856CA112A54AB00E4ADE3 /* petmark.png */; };
 		02E859A4112B142300E4ADE3 /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 02E859A3112B142300E4ADE3 /* nethack.icns */; };
 		02F303B0112C7A4800CB64E4 /* MessageWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02F303AF112C7A4800CB64E4 /* MessageWindowController.m */; };
@@ -338,6 +340,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		020CD2D51137089D00297C4C /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
+		020CD2D61137089D00297C4C /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
 		0259AE741135AD53002AEFA1 /* Arrow-E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-E.png"; path = "nethack/win/cocoa/images/Arrow-E.png"; sourceTree = "<group>"; };
 		0259AE751135AD53002AEFA1 /* Arrow-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-N.png"; path = "nethack/win/cocoa/images/Arrow-N.png"; sourceTree = "<group>"; };
 		0259AE761135AD53002AEFA1 /* Arrow-NE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-NE.png"; path = "nethack/win/cocoa/images/Arrow-NE.png"; sourceTree = "<group>"; };
@@ -371,6 +375,8 @@
 		029A97D5112BC79600225CC3 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		029A995F112BEDEC00225CC3 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlippedView.h; sourceTree = "<group>"; };
 		029A9960112BEDEC00225CC3 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
+		02D00716113654A200F57754 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesWindowController.h; sourceTree = "<group>"; };
+		02D00717113654A200F57754 /* NotesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesWindowController.m; sourceTree = "<group>"; };
 		02E856CA112A54AB00E4ADE3 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = petmark.png; sourceTree = "<group>"; };
 		02E859A3112B142300E4ADE3 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nethack.icns; sourceTree = "<group>"; };
 		02F303AE112C7A4800CB64E4 /* MessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageWindowController.h; sourceTree = "<group>"; };
@@ -842,6 +848,10 @@
 				02FF4075113247830096FBC6 /* PlayerSelectionWindowController.m */,
 				029225FE113517D200A96147 /* Inventory.h */,
 				029225FF113517D200A96147 /* Inventory.c */,
+				02D00716113654A200F57754 /* NotesWindowController.h */,
+				02D00717113654A200F57754 /* NotesWindowController.m */,
+				020CD2D51137089D00297C4C /* StatsView.h */,
+				020CD2D61137089D00297C4C /* StatsView.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1824,6 +1834,8 @@
 				0298DE24113136E800BC0614 /* TooltipWindow.m in Sources */,
 				02FF4076113247830096FBC6 /* PlayerSelectionWindowController.m in Sources */,
 				02922600113517D200A96147 /* Inventory.c in Sources */,
+				02D00718113654A200F57754 /* NotesWindowController.m in Sources */,
+				020CD2D71137089D00297C4C /* StatsView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
