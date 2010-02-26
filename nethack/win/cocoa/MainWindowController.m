@@ -40,6 +40,7 @@
 #import "InputWindowController.h"
 #import "ExtCommandWindowController.h"
 #import "PlayerSelectionWindowController.h"
+#import "StatsView.h"
 
 #import "wincocoa.h" // cocoa_getpos etc.
 
@@ -54,6 +55,9 @@ static const float popoverItemHeight = 44.0f;
 	return instance;
 }
 
+// Convert keyEquivs in menu items to use their shifted equivalent
+// This makes them display with their more conventional character
+// bindings and lets us work internationally.
 - (void)fixMenuKeyEquivalents:(NSMenu *)menu
 {
 	for ( NSMenuItem * item in [menu itemArray] ) {
@@ -61,7 +65,8 @@ static const float popoverItemHeight = 44.0f;
 			NSMenu * submenu = [item submenu];
 			[self fixMenuKeyEquivalents:submenu];
 		} else {
-			if ( [item keyEquivalentModifierMask] & NSShiftKeyMask ) {
+			NSUInteger mask = [item keyEquivalentModifierMask];
+			if ( mask & NSShiftKeyMask ) {
 				NSString * key = [item keyEquivalent];
 				switch ( [key characterAtIndex:0] ) {
 					case '1':		key = @"!";		break;
@@ -86,8 +91,9 @@ static const float popoverItemHeight = 44.0f;
 					default:		key = nil;		break;
 				}
 				if ( key ) {
+					mask &= ~NSShiftKeyMask;
 					[item setKeyEquivalent:key];
-					[item setKeyEquivalentModifierMask:0];
+					[item setKeyEquivalentModifierMask:mask];
 				}				
 			}
 		}
@@ -250,7 +256,9 @@ static const float popoverItemHeight = 44.0f;
 		if (text && text.length > 0) {
 			[statusView setStringValue:text];
 		}
-		//		[mainView refreshMessages];
+		for ( NSString * text in [[NhWindow statusWindow] messages] ) {
+			[statsView setItems:text];
+		}
 	}
 }
 
@@ -427,9 +435,12 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)displayWindow:(NhWindow *)w {
 	if (![NSThread isMainThread]) {
+
 		BOOL blocking = w.blocking;
 		[self performSelectorOnMainThread:@selector(displayWindow:) withObject:w waitUntilDone:blocking];
+
 	} else {
+		
 		if (w == [NhWindow messageWindow]) {
 			[self refreshMessages];
 		} else if (w.type == NHW_MAP) {
@@ -439,6 +450,9 @@ static const float popoverItemHeight = 44.0f;
 			NSString * text = [w text];
 			if ( [text length] ) {
 				[statusView setStringValue:text];
+			}
+			for ( NSString * text in [w messages] ) {
+				[statsView setItems:text];
 			}
 		} else {
 			NSString * text = [w text];

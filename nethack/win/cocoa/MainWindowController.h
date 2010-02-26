@@ -35,6 +35,8 @@
 @class InputWindowController;
 @class ExtCommandWindowController;
 @class PlayerSelectionWindowController;
+@class NotesWindowController;
+@class StatsView;
 
 @interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {
 
@@ -45,12 +47,14 @@
 	IBOutlet NSTextView						*	messagesView;
 	IBOutlet NSTextField					*	statusView;
 	IBOutlet NSMenu							*	tileSetMenu;
+	IBOutlet StatsView						*	statsView;
 	
 	IBOutlet DirectionWindowController		*	directionWindow;
 	IBOutlet YesNoWindowController			*	yesNoWindow;
 	IBOutlet InputWindowController			*	inputWindow;
 	IBOutlet ExtCommandWindowController		*	extCommandWindow;
 	IBOutlet PlayerSelectionWindowController*	showPlayerSelection;
+	IBOutlet NotesWindowController			*	notesWindow;
 }
 
 + (MainWindowController *) instance;

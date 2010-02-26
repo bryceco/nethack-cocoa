@@ -502,7 +502,17 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 		[[MainWindowController instance] showDirectionWithPrompt:text];
 		NhEvent * e = [[NhEventQueue instance] nextEvent];
 		return e.key;
-	} 
+	}
+	
+	if ( choices ) {
+		if ( strcmp( choices, "yn" )==0 || strcmp( choices, "ynq" )==0 ) {
+			NhYnQuestion * q = [[NhYnQuestion alloc] initWithQuestion:question choices:choices default:def];
+			[[MainWindowController instance] showYnQuestion:q];
+			NhEvent * e = [[NhEventQueue instance] nextEvent];
+			[q release];
+			return e.key;
+		}
+	}
 	
 	cocoa_putstr(WIN_MESSAGE, ATR_BOLD, [text UTF8String] );
 	for (;;) {

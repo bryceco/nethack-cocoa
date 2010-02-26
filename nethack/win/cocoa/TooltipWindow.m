@@ -55,7 +55,6 @@
 
 -(void)windowWillClose
 {
-	
 }
 
 -(void)dealloc

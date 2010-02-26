@@ -129,7 +129,7 @@
 				NSRect r = NSMakeRect(p.x, p.y, tileSize.width, tileSize.height);
 				if (NSIntersectsRect(r, rect)) {
 					int glyph = [map glyphAtX:i y:j];
-					if (glyph) {
+					if (glyph >= 0) {
 						int ochar, ocolor;
 						unsigned int special;
 						mapglyph(glyph, &ochar, &ocolor, &special, i, j);
