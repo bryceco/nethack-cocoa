@@ -191,7 +191,35 @@ NSString * DescriptionForTile( int x, int y )
 {
 	char    out_str[BUFSZ];
 	InventoryOfTile(x, y, out_str);
-	return [NSString stringWithUTF8String:out_str];
+
+	NSString * text = [NSString stringWithUTF8String:out_str];
+	
+	NSScanner * scanner = [NSScanner scannerWithString:text];
+	[scanner setScanLocation:1];
+	[scanner setCharactersToBeSkipped:nil];
+	if ( [scanner scanString:@"      " intoString:NULL] ) {
+		// skipped leading character
+	} else {
+		[scanner setScanLocation:0];
+	}
+	// scan to opening paren, if any
+	int pos = [scanner scanLocation];
+	if ( [scanner scanUpToString:@"(" intoString:NULL] && [scanner isAtEnd] ) {
+		// no paren, so take the rest of the string
+		return [[scanner string] substringFromIndex:pos];		
+	}
+	// look for additional opening paren
+	do {
+		[scanner scanString:@"(" intoString:NULL];
+		pos = [scanner scanLocation];
+	} while ( [scanner scanUpToString:@"(" intoString:NULL] && ![scanner isAtEnd] );
+	[scanner setScanLocation:pos];
+	// remove paren and matching closing paren
+	[scanner scanUpToString:@")" intoString:&text];
+	[scanner scanString:@")" intoString:NULL];
+	NSString * rest = [[scanner string] substringFromIndex:[scanner scanLocation]];
+	text = [text stringByAppendingString:rest];
+	return text;
 }
 
 - (void)tooltipFired

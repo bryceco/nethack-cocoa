@@ -379,7 +379,7 @@ void cocoa_end_menu(winid wid, const char *prompt) {
 	NSLog(@"end_menu %x, %s", wid, prompt);
 	if (prompt) {
 		((NhMenuWindow *) wid).prompt = [NSString stringWithFormat:@"%s", prompt];
-		cocoa_putstr(WIN_MESSAGE, 0, prompt);
+		//cocoa_putstr(WIN_MESSAGE, 0, prompt);
 	} else {
 		((NhMenuWindow *) wid).prompt = nil;
 	}
@@ -401,8 +401,11 @@ int cocoa_select_menu(winid wid, int how, menu_item **selected) {
 				pMenu->item = item.identifier;
 				pMenu++;
 			}
+			return w.selected.count;		
+		} else {
+			// cancelled
+			return -1;
 		}
-		return w.selected.count;		
 	} else {
 		return 0;
 	}

@@ -29,7 +29,6 @@
 	[role	setStringValue:clear];
 	[dlvl	setStringValue:clear];
 	[hp		setStringValue:clear];
-	[hd		setStringValue:clear];
 	[pw		setStringValue:clear];
 	[level	setStringValue:clear];
 	[ac		setStringValue:clear];
@@ -90,17 +89,27 @@
 		[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
 		[ac setStringValue:value];
 		
-		if ( [scanner scanString:@"Xp:" intoString:NULL] ||
-			 [scanner scanString:@"Exp:" intoString:NULL] ) 
-		{
+		if ( [scanner scanString:@"Xp:" intoString:&value] ) {
+			// 10/9999
+			[xpLabel setStringValue:value];
+			[scanner scanUpToString:@"/" intoString:&value];
+			[level setStringValue:value];
+			[scanner scanString:@"/" intoString:NULL];
 			[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
 			[xp setStringValue:value];
-			[hd setStringValue:@""];
-		} else {
-			// optional polymorphed HD
-			[scanner scanString:@"HD:" intoString:NULL];
+		} else if ( [scanner scanString:@"Exp:" intoString:&value] ) {
+			[xpLabel setStringValue:value];
 			[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
-			[hd setStringValue:value];
+			[level setStringValue:value];
+			[xp setStringValue:@""];
+		} else if ( [scanner scanString:@"HD:" intoString:&value] ) {
+			// polymorphed HD
+			[xpLabel setStringValue:value];
+			[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
+			[xp setStringValue:value];
+			[level setStringValue:@""];
+		} else {
+			assert(NO);
 		}
 
 		[scanner scanString:@"T:" intoString:NULL];

@@ -28,18 +28,22 @@
 
 @interface MenuWindowController : NSWindowController <NSWindowDelegate> {
 	
-	NhMenuWindow		* menuParams;
+	NhMenuWindow		*	menuParams;
 	
-	NSMutableDictionary	* itemDict;
+	NSMutableDictionary	*	itemDict;
 	
-	IBOutlet NSView		* menuView;
-	IBOutlet NSButton	* cancelButton;
-	IBOutlet NSButton	* acceptButton;
+	IBOutlet NSView		*	menuView;
+	IBOutlet NSButton	*	cancelButton;
+	IBOutlet NSButton	*	acceptButton;
+
+	IBOutlet NSButton	*	selectAll;
 }
 
 + (void)menuWindowWithMenu:(NhMenuWindow *)menu;
 
 -(IBAction)doAccept:(id)sender;
 -(IBAction)doCancel:(id)sender;
-	
+-(IBAction)selectAll:(id)sender;
+-(IBAction)selectUnknownBUC:(id)sender;
+
 @end
