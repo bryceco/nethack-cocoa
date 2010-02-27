@@ -63,6 +63,35 @@
 	[acceptButton setEnabled:YES];
 }
 
+-(IBAction)selectAll:(id)sender
+{
+	for ( NSButton * item in [menuView subviews] ) {
+		if ( [item class] == [NSButton class] )  {
+			[item setState:NSOnState];
+		}
+	}
+	[acceptButton setEnabled:YES];
+}
+
+-(IBAction)selectUnknownBUC:(id)sender
+{
+	for ( NSButton * item in [menuView subviews] ) {
+		if ( [item class] == [NSButton class] )  {
+			BOOL known = NO;
+			NSString * text = [[item attributedTitle] string];
+			if ( [text rangeOfString:@"blessed"].location != NSNotFound ||
+				 [text rangeOfString:@"cursed"].location != NSNotFound ||
+				 [text rangeOfString:@"uncursed"].location != NSNotFound )
+			{
+				known = YES;
+			}
+			[item setState:known ? NSOffState : NSOnState];
+		}
+	}	
+	[acceptButton setEnabled:YES];
+}
+
+
 -(void)doAccept:(id)sender
 {
 	char firstSelection = '\0';
@@ -106,7 +135,6 @@
 	return YES;
 }
 
-
 -(void)windowWillClose:(NSNotification *)notification
 {
 	if ( [menuParams how] != PICK_NONE ) {
@@ -140,6 +168,10 @@
 	NSFont	*	groupFont	= [NSFont labelFontOfSize:15];
 	int			how			= [menuParams how];
 	char	*	nextKey		= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+	BOOL showShortcuts = how == PICK_ANY 
+					&& ([[menuParams itemGroups] count] != 1
+						||  ![[[[menuParams itemGroups] objectAtIndex:0] title] isEqualToString:@"All"]);
 	
 	// add new labels
 	CGFloat groupIndent	= 25.0;
@@ -162,7 +194,7 @@
 		[label release];
 
 		for ( NhItem * item in [group items] ) {
-
+			
 			// get keyboard shortcut for item
 			int keyEquiv = [item inventoryLetter];
 			if ( keyEquiv == 0 )
@@ -192,9 +224,9 @@
 			
 			// get image
 			int glyph = [item glyph];
-			if ( glyph == 5584 )
-				glyph = 0;
-			if ( glyph ) {
+			if ( glyph == NO_GLYPH )
+				glyph = -1;
+			if ( glyph >= 0 ) {
 				// get glyph image
 				NSImage * image = [[TileSet instance] imageForGlyph:glyph enabled:YES];
 				
@@ -211,7 +243,7 @@
 			
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
-			if ( glyph )
+			if ( glyph >= 0 )
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [title length])];
 
 			// add identifier
@@ -219,7 +251,7 @@
 
 			// icon/key/description
 			[[aString mutableString] insertString:identString atIndex:1];
-			if ( glyph )
+			if ( glyph >= 0 )
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [identString length])];
 			
 			// set button title
@@ -242,12 +274,17 @@
 		}
 	}
 	
+	if ( !showShortcuts ) {
+		[selectAll setHidden:YES];
+	}
+
+
 	if ( how == PICK_NONE ) {
 		[acceptButton setEnabled:YES];
-		[cancelButton setHidden:YES];
+		//		[cancelButton setHidden:YES];
 	} else {
 		[acceptButton setEnabled:NO];
-		[cancelButton setHidden:NO];
+		//		[cancelButton setHidden:NO];
 	}
 	
 	// get max item width
@@ -282,6 +319,10 @@
 + (void)menuWindowWithMenu:(NhMenuWindow *)menu
 {
 	MenuWindowController * win = [[MenuWindowController alloc] initWithMenu:menu];
+	NSString * prompt = [menu prompt];
+	if ( prompt ) {
+		[[win window] setTitle:prompt];
+	}
 	[win showWindow:win];
 	[win->menuView scrollPoint:NSMakePoint(0,0)];
 

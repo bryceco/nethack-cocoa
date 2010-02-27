@@ -13,14 +13,14 @@
 	IBOutlet NSTextField		*	name;
 	IBOutlet NSTextField		*	role;
 	IBOutlet NSTextField		*	dlvl;
+	IBOutlet NSTextField		*	xpLabel;
+	IBOutlet NSTextField		*	xp;
 	IBOutlet NSTextField		*	hp;
-	IBOutlet NSTextField		*	hd;
 	IBOutlet NSTextField		*	pw;
 	IBOutlet NSLevelIndicator	*	hpMeter;
 	IBOutlet NSLevelIndicator	*	pwMeter;
 	IBOutlet NSTextField		*	level;
 	IBOutlet NSTextField		*	ac;
-	IBOutlet NSTextField		*	xp;
 	IBOutlet NSTextField		*	gold;
 	IBOutlet NSTextField		*	str;
 	IBOutlet NSTextField		*	iq;

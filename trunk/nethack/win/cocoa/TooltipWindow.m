@@ -40,6 +40,14 @@
 	[view sizeToFit];
 	[view setRefusesFirstResponder:YES];
 	
+	// make sure it doesn't go off the screen
+	NSRect viewRect = [view frame];
+	NSRect screenRect = [[NSScreen mainScreen] visibleFrame];
+	if ( viewRect.origin.x + viewRect.size.width > screenRect.origin.x + screenRect.size.width ) {
+		viewRect.origin.x = screenRect.origin.x + screenRect.size.width - viewRect.size.width;
+		[view setFrame:viewRect];
+	}
+	
 	if ( self = [super initWithContentRect:[view frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES] ) {
 		[self setDelegate:self];
 		[self setContentView:view];
@@ -47,8 +55,6 @@
 		[self setHasShadow:YES];
 		[self setReleasedWhenClosed:YES];
 		[self orderFront:self];
-		
-		NSLog(@"tooltip create\n");
 	}
 	return self;
 }
