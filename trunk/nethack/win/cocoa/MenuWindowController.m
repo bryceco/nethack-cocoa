@@ -174,6 +174,15 @@
 }
 
 
+-(int)leadingSpaces:(NSString *)text
+{
+	int i = 0;
+	while ( i < [text length] && [text characterAtIndex:i] == ' ' )
+		++i;
+	return i;
+}
+
+
 -(void)convertFakeGroupsToRealGroups
 {
 	NhItemGroup * currentRealGroup = nil;
@@ -183,10 +192,11 @@
 	
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
-		if ( [group.title hasPrefix:@"      "] ) {
+		int leadingSpaces = [self leadingSpaces:group.title];
+		if ( leadingSpaces >= 4 ) {
 			
-			// Its not a real group. Convert it to a disabled button under the last real group
-			NSString * title = [group.title substringFromIndex:6];
+			// It's not a real group. Convert it to a disabled button under the last real group
+			NSString * title = [group.title substringFromIndex:leadingSpaces];
 			ANY_P ident = { 0 };
 			ident.a_int = -1;
 			NhItem * item = [[NhItem alloc] initWithTitle:title identifier:ident accelerator:0 glyph:NO_GLYPH selected:NO];
@@ -198,10 +208,7 @@
 			for ( NhItem * item in [group items] ) {
 				
 				// trim leading spaces
-				int i;
-				for ( i = 0; [item.title characterAtIndex:i] == ' '; ++i )
-					continue;
-				[item setTitle:[item.title substringFromIndex:i]];
+				[item setTitle:[item.title substringFromIndex:[self leadingSpaces:item.title]]];
 				[currentRealGroup addItem:item];
 			}
 			
