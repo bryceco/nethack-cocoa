@@ -65,7 +65,6 @@
 
 -(void)dealloc
 {
-	NSLog(@"tooltip destroy\n");
 	[super dealloc];
 }
 
