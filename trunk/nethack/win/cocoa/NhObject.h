@@ -46,5 +46,6 @@
 
 - (id)initWithTitle:(NSString *)t inventoryLetter:(char)invLet;
 - (id)initWithObject:(struct obj *)obj;
+- (void)setTitle:(NSString *)title;
 
 @end

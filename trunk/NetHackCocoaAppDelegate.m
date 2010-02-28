@@ -45,17 +45,17 @@ extern int unixmain(int argc, char **argv);
 	};
 	
 	// create necessary directories
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
 	NSString *baseDirectory = [paths objectAtIndex:0];
 	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"NetHackCocoa"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:baseDirectory]) {
-		mkdir([baseDirectory UTF8String], 0770);
+		[[NSFileManager defaultManager] createDirectoryAtPath:baseDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 	NSLog(@"baseDir %@", baseDirectory);
 	setenv("NETHACKDIR", [baseDirectory UTF8String], 1);
 	NSString *saveDirectory = [baseDirectory stringByAppendingPathComponent:@"save"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:saveDirectory]) {
-		mkdir([saveDirectory UTF8String], 0770);
+		[[NSFileManager defaultManager] createDirectoryAtPath:saveDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
 		
 	// set plname (very important for save files and getlock)

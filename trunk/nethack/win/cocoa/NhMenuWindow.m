@@ -61,8 +61,14 @@
 }
 
 - (void)removeItemAtIndexPath:(NSIndexPath *)indexPath {
-	NhItemGroup *g = [itemGroups objectAtIndex:[indexPath section]];
-	[g removeItemAtIndex:[indexPath row]];
+	if ( [indexPath length] == 1 ) {
+		// remove a group
+		[itemGroups removeObjectAtIndex:[indexPath section]];
+	} else {
+		// remove an item in a group
+		NhItemGroup *g = [itemGroups objectAtIndex:[indexPath section]];
+		[g removeItemAtIndex:[indexPath row]];
+	}
 }
 
 - (void)startMenu {

@@ -362,7 +362,7 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 					 const char *str, BOOLEAN_P presel) {
 	NSLog(@"add_menu %x %s", wid, str);
 	NhMenuWindow *w = (NhMenuWindow *) wid;
-	NSString *title = [[NSString stringWithFormat:@"%s", str] stringWithTrimmedWhitespaces];
+	NSString *title = [NSString stringWithFormat:@"%s", str];
 	if (identifier->a_void) {
 		NhItem *i = [[NhItem alloc] initWithTitle:title
 									   identifier:*identifier accelerator:accelerator glyph:glyph selected:presel];
