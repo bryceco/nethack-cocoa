@@ -161,6 +161,63 @@
 	[super dealloc];
 }
 
+-(NSString *)stringWithReplacedLeadingSpaces:(NSString *)text
+{
+	int i;
+	for ( i = 0; [text characterAtIndex:i] == ' '; ++i )
+		continue;
+	if ( i ) {
+		NSString * dots = @"...............";
+		text = [[dots substringToIndex:i] stringByAppendingString:[text substringFromIndex:i]];
+	}
+	return text;
+}
+
+
+-(void)convertFakeGroupsToRealGroups
+{
+	NhItemGroup * currentRealGroup = nil;
+	
+	NSMutableArray * remove = [NSMutableArray arrayWithCapacity:0];
+	int				index = 0;
+	
+	for ( NhItemGroup * group in [menuParams itemGroups] ) {
+		
+		if ( [group.title hasPrefix:@"      "] ) {
+			
+			// Its not a real group. Convert it to a disabled button under the last real group
+			NSString * title = [group.title substringFromIndex:6];
+			ANY_P ident = { 0 };
+			ident.a_int = -1;
+			NhItem * item = [[NhItem alloc] initWithTitle:title identifier:ident accelerator:0 glyph:NO_GLYPH selected:NO];
+			[currentRealGroup addItem:item];
+			[remove addObject:[NSNumber numberWithInt:index]];
+			--index;
+			
+			// add its items to last real group
+			for ( NhItem * item in [group items] ) {
+				
+				// trim leading spaces
+				int i;
+				for ( i = 0; [item.title characterAtIndex:i] == ' '; ++i )
+					continue;
+				[item setTitle:[item.title substringFromIndex:i]];
+				[currentRealGroup addItem:item];
+			}
+			
+		} else {
+			currentRealGroup = group;
+		}
+		++index;
+	}
+	
+	for ( NSNumber * idx in remove ) {
+		index = [idx intValue];
+		NSIndexPath * indexPath = [NSIndexPath indexPathWithIndex:index];
+		[menuParams removeItemAtIndexPath:indexPath];
+	}
+}
+
 
 -(void)windowDidLoad
 {
@@ -177,13 +234,18 @@
 	CGFloat groupIndent	= 25.0;
 	CGFloat itemIndent	= 40.0;
 	NSRect  viewRect = [menuView bounds];
+	
+	// fix up the weirdness associated with #enhance menu
+	[self convertFakeGroupsToRealGroups];
 
 	CGFloat yPos = 0.0;
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
 		NSRect rect = NSMakeRect(groupIndent, yPos, viewRect.size.width, 10 );
 		NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
-		[label setStringValue:[group title]];
+		NSString * title = [group title];
+		
+		[label setStringValue:title];
 		[label setEditable:NO];
 		[label setDrawsBackground:NO];
 		[label setBordered:NO];
@@ -192,7 +254,7 @@
 		[menuView addSubview:label];
 		yPos += [label bounds].size.height;
 		[label release];
-
+		
 		for ( NhItem * item in [group items] ) {
 			
 			// get keyboard shortcut for item
@@ -211,6 +273,8 @@
 			[button setKeyEquivalent:[NSString stringWithFormat:@"%c", keyEquiv]];
 			[button setTarget:self];
 			[button setAction:@selector(buttonClick:)];
+			// button is disabled if identifier is -1 (which we set zero in convertFakeGroupsToRealGroups)
+			[button setEnabled:item.identifier.a_int != -1];
 
 			NSString * title = [item title];
 			NSString * detail = [item detail];
