@@ -31,7 +31,7 @@
 	IBOutlet NSButton * button2;
 }
 
--(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2;
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 canCancel:(BOOL)canCancel;
 -(IBAction)performButton:(id)sender;
 
 @end

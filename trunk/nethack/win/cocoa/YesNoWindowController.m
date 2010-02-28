@@ -27,13 +27,22 @@
 
 @implementation YesNoWindowController
 
--(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 canCancel:(BOOL)canCancel
 {
 	[question setStringValue:prompt];
 	[button1 setTitle:choice1];
 	[button2 setTitle:choice2];
 	[button1 setKeyEquivalent:[[choice1 substringToIndex:1] lowercaseString]];
 	[button2 setKeyEquivalent:[[choice2 substringToIndex:1] lowercaseString]];
+	
+	// add/remove close button so ESC will/won't work
+	NSUInteger style = [[self window] styleMask];
+	if ( canCancel ) {
+		style |= NSClosableWindowMask;
+	} else {
+		style &= ~NSClosableWindowMask;
+	}
+	[[self window] setStyleMask:style];
 	
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];	
 }
