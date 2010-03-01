@@ -27,13 +27,11 @@
 
 @implementation YesNoWindowController
 
--(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 canCancel:(BOOL)canCancel
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 defaultAnswer:(char)def canCancel:(BOOL)canCancel
 {
 	[question setStringValue:prompt];
 	[button1 setTitle:choice1];
 	[button2 setTitle:choice2];
-	[button1 setKeyEquivalent:[[choice1 substringToIndex:1] lowercaseString]];
-	[button2 setKeyEquivalent:[[choice2 substringToIndex:1] lowercaseString]];
 	
 	// add/remove close button so ESC will/won't work
 	NSUInteger style = [[self window] styleMask];
@@ -43,20 +41,52 @@
 		style &= ~NSClosableWindowMask;
 	}
 	[[self window] setStyleMask:style];
+
+	// disable default button
+	[[self window] setDefaultButtonCell:nil];
+	defaultAnswer = 0;		
+	
+	if ( def ) {
+		// if default value is present then set a button as using default
+		if ( tolower( [choice1 characterAtIndex:0] ) == def ) {
+			[[self window] setDefaultButtonCell:[button1 cell]];
+		} 
+		if ( tolower( [choice2 characterAtIndex:0] ) == def ) {
+			[[self window] setDefaultButtonCell:[button2 cell]];
+		}
+	}
 	
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];	
 }
 
+- (void)keyDown:(NSEvent *)theEvent
+{
+	if ( [theEvent type] == NSKeyDown ) {
+		NSString * text = [theEvent charactersIgnoringModifiers];
+		if ( [text isEqualToString:[[[button1 title] substringToIndex:1] lowercaseString]] ) {
+			[self performButton:button1];
+			return;
+		}
+		if ( [text isEqualToString:[[[button2 title] substringToIndex:1] lowercaseString]] ) {
+			[self performButton:button2];
+			return;
+		}
+		if ( defaultAnswer && [text isEqualToString:@"\r"] ) {
+			[[NhEventQueue instance] addKey:defaultAnswer];
+			[[self window] close];
+			return;
+		}
+	}
+	[super keyDown:theEvent];
+}
+
+
 -(IBAction)performButton:(id)sender
 {
 	NSButton * button = sender;
-	NSString * keyEquiv = [button keyEquivalent];
-	if ( keyEquiv && [keyEquiv length] ) {
-		char key = [keyEquiv characterAtIndex:0];
-		[[NhEventQueue instance] addKey:key];
-	} else {
-		[[NhEventQueue instance] addKey:'\033'];
-	}
+	
+	char key = tolower( [[button title] characterAtIndex:0] );
+	[[NhEventQueue instance] addKey:key];
 	[[self window] close];
 }
 

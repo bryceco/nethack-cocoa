@@ -26,12 +26,13 @@
 
 @implementation NhYnQuestion
 
-@synthesize question, choices;
+@synthesize question, choices, def;
 
-- (id) initWithQuestion:(const char *)q choices:(const char *)ch default:(int)def {
+- (id) initWithQuestion:(const char *)q choices:(const char *)ch default:(int)d {
 	if (self = [super init]) {
 		question = [[NSString alloc] initWithCString:q encoding:NSASCIIStringEncoding];
 		choices = ch;
+		def = d;
 	}
 	return self;
 }
