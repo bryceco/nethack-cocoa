@@ -61,6 +61,9 @@
 		int current, maximum;
 
 		[scanner scanUpToString:@"$:" intoString:&value];
+		if ( [value hasPrefix:@"Dlvl:"] ) {
+			value = [NSString stringWithFormat:@"Dungeon Level %@", [value substringFromIndex:5]];
+		}
 		[dlvl setStringValue:value];
 		
 		[scanner scanString:@"$:" intoString:NULL];

@@ -385,9 +385,9 @@ static const float popoverItemHeight = 44.0f;
 				}
 				
 				if ( strcmp( q.choices, "yn" ) == 0 || strcmp( q.choices, "ynq" ) == 0 ) {					
-					[yesNoWindow runModalWithQuestion:text choice1:@"Yes" choice2:@"No" canCancel:strlen(q.choices)==3];
+					[yesNoWindow runModalWithQuestion:text choice1:@"Yes" choice2:@"No" defaultAnswer:q.def canCancel:strlen(q.choices)==3];
 				} else if ( strcmp( q.choices, "rl" ) == 0 ) {
-					[yesNoWindow runModalWithQuestion:text choice1:@"Right" choice2:@"Left" canCancel:NO];
+					[yesNoWindow runModalWithQuestion:text choice1:@"Right" choice2:@"Left" defaultAnswer:q.def canCancel:NO];
 				} else {
 					assert(NO);
 				}
