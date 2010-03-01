@@ -27,11 +27,12 @@
 
 @interface YesNoWindowController : NSWindowController <NSWindowDelegate> {
 	IBOutlet NSTextField *	question;
-	IBOutlet NSButton * button1;
-	IBOutlet NSButton * button2;
+	IBOutlet NSButton	*	button1;
+	IBOutlet NSButton	*	button2;
+	char					defaultAnswer;
 }
 
--(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 canCancel:(BOOL)canCancel;
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 defaultAnswer:(char)def canCancel:(BOOL)canCancel;
 -(IBAction)performButton:(id)sender;
 
 @end

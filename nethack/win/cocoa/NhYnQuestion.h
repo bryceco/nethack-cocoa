@@ -28,11 +28,13 @@
 	
 	NSString *question;
 	const char *choices;
+	char def;
 
 }
 
 @property (nonatomic, readonly) NSString *question;
 @property (nonatomic, readonly) const char *choices;
+@property (nonatomic, readonly) char def;
 
 - (id) initWithQuestion:(const char *)q choices:(const char *)ch default:(int)def;
 
