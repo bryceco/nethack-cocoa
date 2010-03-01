@@ -99,12 +99,12 @@
 	for ( NSButton * button in [menuView subviews] ) {
 		if ( [button class] == [NSButton class]  &&  [button state] == NSOnState )  {
 			// add selected item
-			char key = [button tag];
+			NSInteger key = [button tag];
 			NhItem * item = [itemDict objectForKey:[NSNumber numberWithInt:key]];
 			assert(item);
 			[menuParams.selected addObject:item];
 			if ( firstSelection == 0 )
-				firstSelection = key;
+				firstSelection = item.inventoryLetter;
 		}
 	}
 	
@@ -193,6 +193,11 @@
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
 		int leadingSpaces = [self leadingSpaces:group.title];
+		
+		if ( [group.title isEqualToString:@"    Name                 Level  Category     Fail"] ) {
+			leadingSpaces = 0;
+		}
+		
 		if ( leadingSpaces >= 4 ) {
 			
 			// It's not a real group. Convert it to a disabled button under the last real group
@@ -231,7 +236,8 @@
 	NSSize		minimumSize = [[self window] frame].size;
 	NSFont	*	groupFont	= [NSFont labelFontOfSize:15];
 	int			how			= [menuParams how];
-	char	*	nextKey		= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890";
+	char	*	nextKey		= "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	NSInteger	itemTag		= 0;
 
 	BOOL showShortcuts = how == PICK_ANY 
 					&& ([[menuParams itemGroups] count] != 1
@@ -267,8 +273,8 @@
 			// button is disabled if identifier is -1 (which we set zero in convertFakeGroupsToRealGroups)
 			BOOL isEnabled = item.identifier.a_int != -1;
 			int keyEquiv = [item inventoryLetter];
-
-			if ( keyEquiv == 0 && isEnabled )
+			
+			if ( keyEquiv == 0 && isEnabled && *nextKey )
 				keyEquiv = *nextKey++;
 
 			NSRect rect = NSMakeRect(itemIndent, yPos, viewRect.size.width, 10 );
@@ -277,15 +283,16 @@
 								 : how == PICK_ONE ? NSRadioButton
 								 : NSMomentaryChangeButton];
 			[button setBordered:NO];
+			[button setTarget:self];
+			[button setAction:@selector(buttonClick:)];
 
-			if ( isEnabled ) {
-				// get keyboard shortcut for item
-				[itemDict setObject:item forKey:[NSNumber numberWithInt:keyEquiv]];
-				
-				[button setTag:keyEquiv];
+			// set a unique ID for button to map it to item
+			[button setTag:itemTag];
+			[itemDict setObject:item forKey:[NSNumber numberWithInt:itemTag]];
+			++itemTag;
+						
+			if ( isEnabled && keyEquiv ) {
 				[button setKeyEquivalent:[NSString stringWithFormat:@"%c", keyEquiv]];
-				[button setTarget:self];
-				[button setAction:@selector(buttonClick:)];
 			}
 			[button setEnabled:isEnabled];
 
@@ -324,7 +331,7 @@
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [title length])];
 
 			// add identifier
-			NSString * identString = isEnabled ? [NSString stringWithFormat:@" (%c)\t",keyEquiv] : @"\t";
+			NSString * identString = isEnabled ? [NSString stringWithFormat:@" (%c)\t",keyEquiv ? keyEquiv : ' '] : @"\t";
 
 			// icon/key/description
 			[[aString mutableString] insertString:identString atIndex:1];
