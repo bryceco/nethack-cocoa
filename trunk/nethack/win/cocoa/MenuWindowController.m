@@ -161,18 +161,6 @@
 	[super dealloc];
 }
 
--(NSString *)stringWithReplacedLeadingSpaces:(NSString *)text
-{
-	int i;
-	for ( i = 0; [text characterAtIndex:i] == ' '; ++i )
-		continue;
-	if ( i ) {
-		NSString * dots = @"...............";
-		text = [[dots substringToIndex:i] stringByAppendingString:[text substringFromIndex:i]];
-	}
-	return text;
-}
-
 
 -(int)leadingSpaces:(NSString *)text
 {
@@ -183,22 +171,45 @@
 }
 
 
--(void)convertFakeGroupsToRealGroups
+-(NSString *)stringWithSpacesReplacedByTabs:(NSString *)text
+{
+	NSMutableString * result = [NSMutableString stringWithString:text];
+	for ( int pos = 0; pos+1 < [result length]; ++pos ) {
+		if ( [result characterAtIndex:pos] == ' ' && [result characterAtIndex:pos+1] == ' ' ) {
+			int end = pos+2;
+			while ( end < [result length] && [result characterAtIndex:end] == ' ' )
+				++end;
+			[result replaceCharactersInRange:NSMakeRange(pos, end-pos) withString:@"\t"];
+		}
+	}
+	return result;
+}
+
+-(NSArray *)convertFakeGroupsToRealGroups
 {
 	NhItemGroup * currentRealGroup = nil;
 	
-	NSMutableArray * remove = [NSMutableArray arrayWithCapacity:0];
-	int				index = 0;
+	NSMutableArray	*	remove = [NSMutableArray arrayWithCapacity:0];
+	int					index = 0;
+	NSMutableArray	*	tabs = nil;
 	
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
+
+		// special check for spell menu
+		if ( [group.title isEqualToString:@"    Name                 Level  Category     Fail"] ) {
+			NSString * title = [self stringWithSpacesReplacedByTabs:group.title];
+			[group setTitle:title];
+			tabs = [NSMutableArray arrayWithCapacity:5];
+			[tabs addObject:[[[NSTextTab alloc] initWithType:NSLeftTabStopType location:50] autorelease]];		// keyEquiv
+			[tabs addObject:[[[NSTextTab alloc] initWithType:NSLeftTabStopType location:200] autorelease]];		// spell name
+			[tabs addObject:[[[NSTextTab alloc] initWithType:NSLeftTabStopType location:300] autorelease]];		// spell level
+			[tabs addObject:[[[NSTextTab alloc] initWithType:NSLeftTabStopType location:400] autorelease]];		// spell type
+			[tabs addObject:[[[NSTextTab alloc] initWithType:NSLeftTabStopType location:500] autorelease]];		// fail %
+		}
 		
 		int leadingSpaces = [self leadingSpaces:group.title];
 		
-		if ( [group.title isEqualToString:@"    Name                 Level  Category     Fail"] ) {
-			leadingSpaces = 0;
-		}
-		
-		if ( leadingSpaces >= 4 ) {
+		if ( leadingSpaces >= 4 && currentRealGroup ) {
 			
 			// It's not a real group. Convert it to a disabled button under the last real group
 			NSString * title = [group.title substringFromIndex:leadingSpaces];
@@ -206,6 +217,7 @@
 			ident.a_int = -1;
 			NhItem * item = [[NhItem alloc] initWithTitle:title identifier:ident accelerator:0 glyph:NO_GLYPH selected:NO];
 			[currentRealGroup addItem:item];
+			[item release];
 			[remove addObject:[NSNumber numberWithInt:index]];
 			--index;
 			
@@ -228,6 +240,7 @@
 		NSIndexPath * indexPath = [NSIndexPath indexPathWithIndex:index];
 		[menuParams removeItemAtIndexPath:indexPath];
 	}
+	return tabs;
 }
 
 
@@ -249,16 +262,34 @@
 	NSRect  viewRect = [menuView bounds];
 		
 	// fix up the weirdness associated with #enhance menu
-	[self convertFakeGroupsToRealGroups];
+	NSArray * tabs = [self convertFakeGroupsToRealGroups];
+	NSMutableParagraphStyle * paragraphStyle = nil;
+	CGFloat checkboxWidth = 32.0;	// depends on NSButtonCell implementation
+	
+	if ( tabs ) {
+		paragraphStyle = [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil];
+		[paragraphStyle setTabStops:tabs];
+	}
 
+	// loop through menu items and create labels/button for everything
 	CGFloat yPos = 0.0;
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
 		NSRect rect = NSMakeRect(groupIndent, yPos, viewRect.size.width, 10 );
+		if ( paragraphStyle && [group.title characterAtIndex:0] == '\t' ) {
+			// group is indented, so compensate for button image size
+			rect.origin.x += checkboxWidth;
+		}
 		NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
 		NSString * title = [group title];
 		
-		[label setStringValue:title];
+		if ( paragraphStyle ) {
+			NSAttributedString * aTitle = [[NSAttributedString alloc] initWithString:title attributes:[NSDictionary dictionaryWithObject:paragraphStyle forKey:NSParagraphStyleAttributeName]];
+			[label setObjectValue:aTitle];
+			[aTitle release];
+		} else {
+			[label setStringValue:title];
+		}
 		[label setEditable:NO];
 		[label setDrawsBackground:NO];
 		[label setBordered:NO];
@@ -296,17 +327,8 @@
 			}
 			[button setEnabled:isEnabled];
 
-			NSString * title = [item title];
-			NSString * detail = [item detail];
-			if ( detail ) {
-				title = [NSString stringWithFormat:@"  %@ (%@)", title, detail];
-			} else {
-				title = [NSString stringWithFormat:@"  %@", title];				
-			}
-
+			// create attribute string containing just the image (or space if none)
 			NSMutableAttributedString * aString;
-			
-			// get image
 			int glyph = [item glyph];
 			if ( glyph == NO_GLYPH )
 				glyph = -1;
@@ -324,28 +346,37 @@
 				aString = [s mutableCopy];
 				[s release];
 			}
+
+			// get identifier
+			NSString * title = isEnabled ? [NSString stringWithFormat:@" (%c)",keyEquiv ? keyEquiv : ' '] : @"";
+			// add title
+			title = [title stringByAppendingFormat:@"\t%@", [item title]];
+			// add detail
+			if ( [item detail] ) {
+				title = [title stringByAppendingFormat:@" (%@)", [item detail]];
+			}
+		
+			// convert multiple spaces to tabs
+			if ( paragraphStyle ) {
+				title = [self stringWithSpacesReplacedByTabs:title];
+			}
 			
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
-			if ( glyph >= 0 )
+			if ( glyph >= 0 ) {
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [title length])];
-
-			// add identifier
-			NSString * identString = isEnabled ? [NSString stringWithFormat:@" (%c)\t",keyEquiv ? keyEquiv : ' '] : @"\t";
-
-			// icon/key/description
-			[[aString mutableString] insertString:identString atIndex:1];
-			if ( glyph >= 0 )
-				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [identString length])];
+			}
 			
+			// set paragraph style if any, so we get tabs as we like
+			if ( paragraphStyle ) {
+				[aString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0,[[aString mutableString] length])];
+			}
+						
 			// set button title
 			[button setAttributedTitle:aString];
 			
 			[aString release];
 
-			if ( [item selected] ) {
-				[button setState:NSOnState];
-			}
 #if 0
 			int maxAmt = [item maxAmount];
 #endif
@@ -398,6 +429,8 @@
 		rc.size.width = minimumSize.width;
 	
 	[[self window] setFrame:rc display:YES];
+	
+	[paragraphStyle release];
 }
 
 + (void)menuWindowWithMenu:(NhMenuWindow *)menu

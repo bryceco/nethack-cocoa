@@ -42,5 +42,6 @@
 - (id) initWithTitle:(NSString *)t;
 - (void) addItem:(NhItem *)i;
 - (void)removeItemAtIndex:(NSUInteger)row;
+- (void)setTitle:(NSString *)t;
 
 @end
