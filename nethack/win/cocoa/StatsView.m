@@ -53,20 +53,26 @@
 {
 	NSCharacterSet * whitespace = [NSCharacterSet whitespaceCharacterSet];
 	
-	if ( [text rangeOfString:@"$:"].location != NSNotFound ) {
+	
+	//	Home 1 $:218 HP:173(173) Pw:36(36) AC:-7 Xp:16/366949 T:45071 Hungry   Blind Burdened
+	//	Dlvl:17 *:143 HP:199(199) Pw:57(57) AC:-9 Xp:20/5124335 T:52985 Fainting
+
+	NSString * Gold = [NSString stringWithFormat:@"%c:", oc_syms[COIN_CLASS]];
+	
+	if ( [text rangeOfString:Gold].location != NSNotFound ) {
 		
 		// Dlvl:2 $:1977 HP:99(99) Pw:17(17) AC:-2 Xp:9/3619 T:7830
 		NSScanner * scanner = [NSScanner scannerWithString:text];
 		NSString * value = nil;
 		int current, maximum;
 
-		[scanner scanUpToString:@"$:" intoString:&value];
+		[scanner scanUpToString:Gold intoString:&value];
 		if ( [value hasPrefix:@"Dlvl:"] ) {
 			value = [NSString stringWithFormat:@"Dungeon Level %@", [value substringFromIndex:5]];
 		}
 		[dlvl setStringValue:value];
 		
-		[scanner scanString:@"$:" intoString:NULL];
+		[scanner scanString:Gold intoString:NULL];
 		[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
 		[gold setStringValue:value];
 		
