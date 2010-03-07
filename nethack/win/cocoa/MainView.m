@@ -38,6 +38,12 @@
 
 @implementation MainView
 
+
+-(BOOL)isFlipped
+{
+	return YES;
+}
+
 -(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
 {
 	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
@@ -110,23 +116,13 @@
 
 - (void)drawRect:(NSRect)rect 
 {
-	[[NSColor blackColor] setFill];
-	[NSBezierPath fillRect:rect];
-	
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
-		// since this coordinate system is right-handed, each tile starts above left
-		// and draws the area below to the right, so we have to be one tile height off
-		NSPoint start = NSMakePoint(0.0f,
-									self.bounds.size.height-tileSize.height);
-		
 		NSImage * image = [[TileSet instance] image];
 		
 		for (int j = 0; j < ROWNO; ++j) {
 			for (int i = 0; i < COLNO; ++i) {
-				NSPoint p = NSMakePoint(start.x+i*tileSize.width,
-										start.y-j*tileSize.height);
-				NSRect r = NSMakeRect(p.x, p.y, tileSize.width, tileSize.height);
+				NSRect r = NSMakeRect( i*tileSize.width, j*tileSize.height, tileSize.width, tileSize.height);
 				if (NSIntersectsRect(r, rect)) {
 					int glyph = [map glyphAtX:i y:j];
 					if (glyph >= 0) {
@@ -134,12 +130,10 @@
 						unsigned int special;
 						mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 						NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
-						[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f];
-#if 0
-						if (glyph_is_pet(glyph)) {
-							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeCopy fraction:1.0f];
-						}
-#endif
+						[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
+					} else {
+						[[NSColor blackColor] setFill];
+						[NSBezierPath fillRect:r];
 					}
 				}
 			}
@@ -167,7 +161,7 @@
 	NSPoint mouseLoc = [self convertPoint:[theEvent locationInWindow] fromView:nil];
 	mouseLoc.x = (int)(mouseLoc.x / tileSize.width);
 	mouseLoc.y = (int)(mouseLoc.y / tileSize.height);
-	mouseLoc.y = ROWNO - 1 - mouseLoc.y;
+	mouseLoc.y = mouseLoc.y;
 	
 	NhEvent * e = [NhEvent eventWithX:mouseLoc.x y:mouseLoc.y];
 	[[NhEventQueue instance] addEvent:e];
