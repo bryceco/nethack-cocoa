@@ -3,7 +3,7 @@
 //  NetHackCocoa
 //
 //  Created by Bryce on 2/24/10.
-//  Copyright 2010 Apple Inc. All rights reserved.
+//  Copyright 2010 Bryce Cogswell. All rights reserved.
 //
 
 #import <Cocoa/Cocoa.h>
