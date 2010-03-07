@@ -151,12 +151,12 @@ coord CoordMake(xchar i, xchar j) {
 	sprintf(path, "%s/%s", [self baseFilePath], filename);
 }
 
-+ (char)keyWithKeyEvent:(NSEvent *)keyEvent
++ (int)keyWithKeyEvent:(NSEvent *)keyEvent
 {
 	if ( [keyEvent type] != NSKeyDown )
 		return 0;
 		
-	char key = 0;
+	int key = 0;
 	switch ( [keyEvent keyCode] ) {
 			// arrows
 		case kVK_LeftArrow:				key = 'h';				break;
@@ -665,7 +665,7 @@ static int cocoa_role_select(char *pbuf, char *plbuf) {
 // from tty port
 static int cocoa_race_select(char * pbuf, char * plbuf) {
 	int i, k, n;
-	char thisch, lastch;
+	char thisch, lastch = -1;
 	winid win;
 	anything any;
 	menu_item *selected = 0;

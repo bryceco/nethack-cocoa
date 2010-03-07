@@ -149,6 +149,7 @@ static NhWindow *s_mapWindow = nil;
 		if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
 			NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
 			[lines addObject:text];
+			[text release];
 		}		
 	}
 }

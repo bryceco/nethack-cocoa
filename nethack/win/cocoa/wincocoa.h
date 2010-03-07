@@ -81,7 +81,7 @@ coord CoordMake(xchar i, xchar j);
 
 + (const char *)baseFilePath;
 + (void)expandFilename:(const char *)filename intoPath:(char *)path;
-+ (char)keyWithKeyEvent:(NSEvent *)keyEvent;
++ (int)keyWithKeyEvent:(NSEvent *)keyEvent;
 
 @end
 
