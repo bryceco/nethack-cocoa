@@ -563,6 +563,11 @@
 	NSRect rc = [[self window] frame];
 	rc.size.height += viewRect.size.height - viewSizeOrig.height;
 	rc.size.width  += viewRect.size.width  - viewSizeOrig.width;
+	
+	// widen by size of scroll bar in case there is a vertical scrollbar
+	rc.size.width += [NSScroller scrollerWidth];
+	rc.size.width += 5; // for aesthetics
+	
 	if ( rc.size.height < minimumSize.height )
 		rc.size.height = minimumSize.height;
 	if ( rc.size.width < minimumSize.width )
