@@ -412,14 +412,14 @@
 	NSMutableArray * tabStops = [self computeTabStopsWithGroupAttr:groupAttr itemAttr:itemAttr];
 
 	// add tab stops to group attributes
-	NSMutableParagraphStyle *	groupPara	= [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil];
+	NSMutableParagraphStyle *	groupPara	= [[[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil] autorelease];
 	[groupPara setTabStops:tabStops];
 	[groupAttr setObject:groupPara forKey:NSParagraphStyleAttributeName];
 	
 	// add tab stops to item attributes
-	NSMutableParagraphStyle *	itemPara	= [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil];
+	NSMutableParagraphStyle *	itemPara	= [[[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil] autorelease];
 	[itemPara setTabStops:tabStops];
-	[itemAttr	setObject:itemPara forKey:NSParagraphStyleAttributeName];
+	[itemAttr setObject:itemPara forKey:NSParagraphStyleAttributeName];
 	
 	CGFloat checkboxWidth = 32.0;	// depends on NSButtonCell implementation
 	
