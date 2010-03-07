@@ -139,12 +139,18 @@ static NhWindow *s_mapWindow = nil;
 - (void)clear {
 	// message window
 	[self lock];
-	if (lines.count > 20) {
-		while (lines.count > 20) {
-			[lines removeObjectAtIndex:0];
-		}
+	while (lines.count > 200) {
+		[lines removeObjectAtIndex:0];
 	}
 	[self unlock];
+
+	if ( [self useAttributedStrings] ) {
+		NSString * turn = @"------------";
+		if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
+			NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
+			[lines addObject:text];
+		}		
+	}
 }
 
 

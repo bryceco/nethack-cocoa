@@ -69,6 +69,10 @@
 	title = [t copy];
 }
 
+- (void)setInventoryLetter:(char)ch
+{
+	inventoryLetter = ch;
+}
 
 - (void)dealloc {
 	[title release];
