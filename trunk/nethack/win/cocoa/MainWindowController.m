@@ -108,6 +108,9 @@ static const float popoverItemHeight = 44.0f;
 	[self fixMenuKeyEquivalents:menu];
 	
 	[[self window] setAcceptsMouseMovedEvents:YES];
+	
+	// force load of initial tile set
+	[mainView enableAsciiMode:NO];
 }
 
 #pragma mark menu actions
@@ -151,7 +154,28 @@ static const float popoverItemHeight = 44.0f;
 		}
 	}
 }
-- (void)addTileSet:(id)sender
+
+- (IBAction)enableAsciiMode:(id)sender
+{
+	NSMenuItem * menuItem = sender;
+	bool enable = [menuItem state] == NSOffState;
+	[menuItem setState:enable ? NSOnState : NSOffState];
+	
+	[mainView enableAsciiMode:enable];
+}
+
+- (IBAction)changeFont:(id)sender
+{
+	// update font
+	NSFont *oldFont = [mainView asciiFont];
+	NSFont *newFont = [sender convertFont:oldFont];
+	[mainView setAsciiFont:newFont];
+	// put us in ascii mode
+	[mainView enableAsciiMode:YES];
+	[asciiModeMenuItem setState:NSOnState];
+}
+
+- (IBAction)addTileSet:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
 	[panel setCanChooseFiles:YES];
@@ -184,6 +208,7 @@ static const float popoverItemHeight = 44.0f;
 	BOOL ok = [mainView setTileSet:name size:size];
 	if ( ok ) {
 		// ok
+		[mainView enableAsciiMode:NO];
 	} else {
 		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
 		[alert runModal];

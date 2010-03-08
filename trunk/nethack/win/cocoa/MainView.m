@@ -44,6 +44,66 @@
 	return YES;
 }
 
+-(void)enableAsciiMode:(BOOL)enable
+{
+	useAsciiMode = enable;
+	
+	if ( useAsciiMode ) {
+
+		// compute required size for selected font
+		NSSize total = { 0, 0 };
+		NSCell * cell = [[[NSCell alloc] initTextCell:@""] autorelease];
+		[cell setFont:asciiFont];
+		[cell setEditable:NO];
+		[cell setSelectable:NO];
+		for ( int ch = 32; ch < 127; ++ch ) {
+			NSString * text = [[NSString alloc] initWithFormat:@"%c", ch];
+			[cell setTitle:text];
+			[text release];
+			
+			NSSize size = [cell cellSize];
+			
+			if ( size.width > total.width )
+				total.width = size.width;
+			if ( size.height > total.height )
+				total.height = size.height;
+
+		}
+
+		tileSize.width = total.width;
+		tileSize.height = total.height;
+		
+	} else {
+
+		tileSize = [TileSet instance].tileSize;
+
+	}
+
+	// update our bounds
+	NSRect frame = [self frame];
+	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
+	[self setFrame:frame];
+	
+	[self centerHero];
+	[self setNeedsDisplay:YES];
+	
+}
+
+-(BOOL)setAsciiFont:(NSFont *)font
+{
+	if ( font != asciiFont ) {
+		[asciiFont release];
+		asciiFont = [font retain];
+	}
+	return YES;
+}
+
+- (NSFont *)asciiFont
+{
+	return asciiFont;
+}
+
+
 -(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
 {
 	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
@@ -62,18 +122,8 @@
 		return NO;
 	}
 	
-	tileSize = size;
-
-	// update our bounds
-	NSRect frame = [self frame];
-	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
-	[self setFrame:frame];
-
-	TileSet *tileSet = [[[TileSet alloc] initWithImage:tilesetImage tileSize:tileSize] autorelease];
+	TileSet *tileSet = [[[TileSet alloc] initWithImage:tilesetImage tileSize:size] autorelease];
 	[TileSet setInstance:tileSet];
-	
-	[self centerHero];
-	[self setNeedsDisplay:YES];
 	
 	return YES;
 }
@@ -87,13 +137,33 @@
 		[self setTileSet:@"absurd128.png" size:NSMakeSize(128,128)];
 #else
 		[self setTileSet:@"kins32.bmp" size:NSMakeSize(32,32)];
-#endif		
+#endif
+		
 		// we need to know when we scroll
 		NSClipView * clipView = [[self enclosingScrollView] contentView];
 		[clipView setPostsBoundsChangedNotifications: YES];
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
 											name:NSViewBoundsDidChangeNotification object:clipView];
-		
+
+		asciiColors = [[NSArray arrayWithObjects:
+			/* CLR_BLACK			*/	[NSColor colorWithDeviceRed:0.333 green:0.333 blue:0.333 alpha:1.0],
+			/* CLR_RED				*/	[NSColor redColor],
+			/* CLR_GREEN			*/	[NSColor colorWithDeviceRed:0.0 green:0.5 blue:0.0 alpha:1.0],
+			/* CLR_BROWN			*/	[NSColor colorWithDeviceRed:0.666 green:0.166 blue:0.166 alpha:1.0],
+			/* CLR_BLUE				*/	[NSColor blueColor],
+			/* CLR_MAGENTA			*/	[NSColor magentaColor],
+			/* CLR_CYAN				*/	[NSColor cyanColor],
+			/* CLR_GRAY				*/	[NSColor colorWithDeviceWhite:0.75 alpha:1.0],
+			/* NO_COLOR				*/	[NSColor blackColor],
+			/* CLR_ORANGE			*/	[NSColor colorWithDeviceRed:1.0 green:0.666 blue:0.0 alpha:1.0],
+			/* CLR_BRIGHT_GREEN		*/	[NSColor greenColor],
+			/* CLR_YELLOW			*/	[NSColor yellowColor],
+			/* CLR_BRIGHT_BLUE		*/	[NSColor colorWithDeviceRed:0.0 green:0.75 blue:1.0 alpha:1.0],
+			/* CLR_BRIGHT_MAGENTA	*/	[NSColor colorWithDeviceRed:1.0 green:0.50 blue:1.0 alpha:1.0],
+			/* CLR_BRIGHT_CYAN		*/	[NSColor colorWithDeviceRed:0.5 green:1.00 blue:1.0 alpha:1.0],
+			/* CLR_WHITE			*/	[NSColor whiteColor],
+						nil] retain];
+		asciiFont = [[NSFont boldSystemFontOfSize:24.0] retain];
 	}
 		
 	return self;
@@ -126,12 +196,44 @@
 				if (NSIntersectsRect(r, rect)) {
 					int glyph = [map glyphAtX:i y:j];
 					if (glyph >= 0) {
-						int ochar, ocolor;
-						unsigned int special;
-						mapglyph(glyph, &ochar, &ocolor, &special, i, j);
-						NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
-						[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
+						
+						if ( useAsciiMode ) {
+							
+							// use ASCII text
+							int ochar, ocolor;
+							unsigned int special;
+							mapglyph(glyph, &ochar, &ocolor, &special, i, j);
+							
+							NSString * ch = [[NSString alloc] initWithFormat:@"%c", ochar];
+							NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:ch];
+							[ch release];
+														 
+							NSColor * color = [asciiColors objectAtIndex:ocolor];
+							
+							NSRange rangeAll = NSMakeRange(0,[text length]);
+							[text setAlignment:NSCenterTextAlignment range:rangeAll];
+							[text addAttribute:NSForegroundColorAttributeName value:color range:rangeAll];
+							[text addAttribute:NSFontAttributeName value:asciiFont range:rangeAll];
+
+							// background is black
+							[[NSColor blackColor] setFill];
+							[NSBezierPath fillRect:r];
+							
+							// draw glyph
+							[text drawInRect:r];
+							
+							[text release];
+
+						} else {
+							
+							// draw tile
+							NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
+							[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
+							
+						}
+						
 					} else {
+						// no glyph at this location
 						[[NSColor blackColor] setFill];
 						[NSBezierPath fillRect:r];
 					}
@@ -226,7 +328,6 @@ NSString * DescriptionForTile( int x, int y )
 		
 	int tileX = (int)(point.x / tileSize.width);
 	int tileY = (int)(point.y / tileSize.height);
-	tileY = ROWNO - 1 - tileY;
 	
 #if 0
 	char buf[ 100 ];
