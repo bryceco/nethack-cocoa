@@ -154,7 +154,7 @@
 			/* CLR_MAGENTA			*/	[NSColor magentaColor],
 			/* CLR_CYAN				*/	[NSColor cyanColor],
 			/* CLR_GRAY				*/	[NSColor colorWithDeviceWhite:0.75 alpha:1.0],
-			/* NO_COLOR				*/	[NSColor blackColor],
+			/* NO_COLOR				*/	[NSColor whiteColor],	// rogue level
 			/* CLR_ORANGE			*/	[NSColor colorWithDeviceRed:1.0 green:0.666 blue:0.0 alpha:1.0],
 			/* CLR_BRIGHT_GREEN		*/	[NSColor greenColor],
 			/* CLR_YELLOW			*/	[NSColor yellowColor],
@@ -197,7 +197,7 @@
 					int glyph = [map glyphAtX:i y:j];
 					if (glyph >= 0) {
 						
-						if ( useAsciiMode ) {
+						if ( useAsciiMode || Is_rogue_level(&u.uz) ) {
 							
 							// use ASCII text
 							int ochar, ocolor;
@@ -207,7 +207,8 @@
 							NSString * ch = [[NSString alloc] initWithFormat:@"%c", ochar];
 							NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:ch];
 							[ch release];
-														 
+
+							
 							NSColor * color = [asciiColors objectAtIndex:ocolor];
 							
 							NSRange rangeAll = NSMakeRange(0,[text length]);
