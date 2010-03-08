@@ -38,10 +38,18 @@
 	NSTimer *	tooltipTimer;
 	NSPoint		tooltipPoint;
 	NSWindow *	tooltipWindow;
+	
+	BOOL		useAsciiMode;
+	
+	NSArray	*	asciiColors;
+	NSFont	*	asciiFont;
 }
 
 - (void)cliparoundX:(int)x y:(int)y;
 - (void)centerHero;
 - (BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size;
+- (NSFont *)asciiFont;
+- (BOOL)setAsciiFont:(NSFont *)font;
+- (void)enableAsciiMode:(BOOL)enable;
 
 @end

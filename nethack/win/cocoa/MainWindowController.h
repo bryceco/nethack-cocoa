@@ -47,6 +47,7 @@
 	IBOutlet NSTextView						*	messagesView;
 	IBOutlet NSTextField					*	statusView;
 	IBOutlet NSMenu							*	tileSetMenu;
+	IBOutlet NSMenuItem						*	asciiModeMenuItem;
 	IBOutlet StatsView						*	statsView;
 	
 	IBOutlet DirectionWindowController		*	directionWindow;
@@ -63,6 +64,7 @@
 // menu
 - (IBAction)performMenuAction:(id)sender;
 - (IBAction)terminateApplication:(id)sender;
+- (IBAction)enableAsciiMode:(id)sender;
 - (IBAction)addTileSet:(id)sender;
 
 // window API
