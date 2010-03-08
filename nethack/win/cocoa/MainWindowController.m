@@ -207,8 +207,11 @@ static const float popoverItemHeight = 44.0f;
 	NSSize size = NSMakeSize( dx, dy );
 	BOOL ok = [mainView setTileSet:name size:size];
 	if ( ok ) {
-		// ok
+
+		// put us in tile mode
 		[mainView enableAsciiMode:NO];
+		[asciiModeMenuItem setState:NSOnState];
+		
 	} else {
 		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
 		[alert runModal];

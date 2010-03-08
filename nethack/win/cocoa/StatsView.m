@@ -84,7 +84,11 @@
 
 		[scanner scanUpToString:Gold intoString:&value];
 		if ( [value hasPrefix:@"Dlvl:"] ) {
-			value = [NSString stringWithFormat:@"Dungeon Level %@", [value substringFromIndex:5]];
+			NSString * nm = [NSString stringWithUTF8String:dungeons[u.uz.dnum].dname];
+			value = [NSString stringWithFormat:@"%@: level %@", nm, [value substringFromIndex:5]];
+		} else {
+			NSString * nm = [NSString stringWithUTF8String:dungeons[u.uz.dnum].dname];
+			value = [NSString stringWithFormat:@"%@: %@", nm, value];			
 		}
 		[dlvl setStringValue:value];
 		
