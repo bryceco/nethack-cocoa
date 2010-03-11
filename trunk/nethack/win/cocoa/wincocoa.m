@@ -182,7 +182,7 @@ coord CoordMake(xchar i, xchar j) {
 			key = toupper(key);
 		}
 	} else {
-		// letters
+		// "real" keys
 		NSString * chars = [keyEvent charactersIgnoringModifiers];
 		NSUInteger modifier = [keyEvent modifierFlags];
 		key = [chars characterAtIndex:0];
@@ -573,7 +573,7 @@ void cocoa_number_pad(int num) {
 
 void cocoa_delay_output() {
 	NSLog(@"delay_output");
-	usleep(100000);
+	usleep(50000);
 }
 
 void cocoa_start_screen() {

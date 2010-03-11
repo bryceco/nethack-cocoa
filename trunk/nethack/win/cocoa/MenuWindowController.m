@@ -32,12 +32,17 @@
 #import "NhEventQueue.h"
 #import "TileSet.h"
 
+#define RUN_MODAL	1
+#define QUICK_PICK	1
+
+
 @implementation MenuWindowController
 
 
 -(void)buttonClick:(id)sender
 {
-	NSButton * button = sender;
+	[acceptButton setEnabled:YES];
+	
 	switch ( [menuParams how] ) {
 
 		case PICK_NONE:
@@ -45,12 +50,17 @@
 			
 		case PICK_ONE:
 			{
+#if QUICK_PICK
+				[self doAccept:nil];
+#else
 				// unselect any other items
+				NSButton * button = sender;				
 				for ( NSButton * item in [menuView subviews] ) {
 					if ( [item class] == [button class]  &&  item != button )  {
 						[item setState:NSOffState];
 					}
 				}
+#endif
 			}
 			break;
 	
@@ -60,7 +70,6 @@
 		default:
 			break;
 	}
-	[acceptButton setEnabled:YES];
 }
 
 -(IBAction)selectAll:(id)sender
@@ -132,9 +141,10 @@
 
 -(void)windowWillClose:(NSNotification *)notification
 {
-	if ( [menuParams how] != PICK_NONE ) {
+	if ( RUN_MODAL || [menuParams how] != PICK_NONE ) {
 		[[NSApplication sharedApplication] stopModal];
 	}
+
 	[self autorelease];
 }
 
@@ -586,7 +596,7 @@
 	[win showWindow:win];
 	[win->menuView scrollPoint:NSMakePoint(0,0)];
 
-	if ( [win->menuParams how] == PICK_NONE ) {
+	if ( RUN_MODAL || [win->menuParams how] == PICK_NONE ) {
 		// we can run detached
 	} else {
 		// need to run modal
