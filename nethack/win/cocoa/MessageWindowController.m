@@ -24,6 +24,11 @@
 
 
 #import "MessageWindowController.h"
+#import "NhEventQueue.h"
+#import "wincocoa.h"
+
+
+#define RUN_MODAL	1
 
 
 @implementation MessageWindowController
@@ -72,15 +77,38 @@
 	[[self window] setFrame:rc display:NO];
 }
 
+// automatically dismiss if move key pressed
+-(void)keyDown:(NSEvent *)theEvent
+{
+	if ( [theEvent type] == NSKeyDown ) {
+		int key = [WinCocoa keyWithKeyEvent:theEvent];
+		if ( key ) {
+			[[NhEventQueue instance] addKey:key];
+			[[self window] close];
+			return;
+		}
+	}
+	[super keyDown:theEvent];
+}
+
+
 +(void)messageWindowWithText:(NSString *)text
 {
 	MessageWindowController * win = [[MessageWindowController alloc] initWithMessage:text];
 	[win showWindow:win];
 	[win->textField scrollPoint:NSMakePoint(0,0)];
+	
+#if RUN_MODAL
+	[[NSApplication sharedApplication] runModalForWindow:[win window]];
+#endif
 }
 
 -(void)windowWillClose:(NSNotification *)notification
 {
+#if RUN_MODAL
+	[[NSApplication sharedApplication] stopModal];
+#endif
+	
 	[self autorelease];
 }
 
