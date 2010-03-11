@@ -84,12 +84,20 @@
 
 		[scanner scanUpToString:Gold intoString:&value];
 		if ( [value hasPrefix:@"Dlvl:"] ) {
+			value = [value substringFromIndex:5];
+			value = [value stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
 			NSString * nm = [NSString stringWithUTF8String:dungeons[u.uz.dnum].dname];
-			value = [NSString stringWithFormat:@"%@: level %@", nm, [value substringFromIndex:5]];
+			int lvl = dunlev( &u.uz );
+			if ( lvl == [value integerValue] ) {
+				value = [NSString stringWithFormat:@"%@: level %@", nm, value];
+			} else {
+				value = [NSString stringWithFormat:@"%@ %d: level %@", nm, lvl, value];
+			}
 		} else {
 			NSString * nm = [NSString stringWithUTF8String:dungeons[u.uz.dnum].dname];
 			value = [NSString stringWithFormat:@"%@: %@", nm, value];			
 		}
+		
 		[dlvl setStringValue:value];
 		
 		[scanner scanString:Gold intoString:NULL];
@@ -188,6 +196,31 @@
 		[role setStringValue:value];
 	}
 	return YES;
+}
+
+
+-(void)updateEquipment
+{
+	// doprinuse
+	// worn.c - struct worn
+#if 0
+	*uwep // weapon 
+	*uarm // armor
+	*uswapwep // secondary weapon
+	*uquiver // quiver 
+	*uarmu // t-shirt
+	*uarmc // cloak
+	*uarmh // helmet
+	*uarms // shield
+	*uarmg // gauntlets
+	*uarmf // // boots
+	*uamul // amulet
+	*uright // ring
+	*uleft // ring
+	*ublindf // blindfold/lenses/towel
+	*uchain // chain
+	*uball // ball
+#endif
 }
 
 @end
