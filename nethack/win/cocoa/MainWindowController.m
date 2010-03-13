@@ -412,10 +412,11 @@ static const float popoverItemHeight = 44.0f;
 					text = [text stringByReplacingOccurrencesOfString:response withString:@""];
 				}
 				
-				if ( strcmp( q.choices, "yn" ) == 0 || strcmp( q.choices, "ynq" ) == 0 ) {					
-					[yesNoWindow runModalWithQuestion:text choice1:@"Yes" choice2:@"No" defaultAnswer:q.def canCancel:strlen(q.choices)==3];
+				if ( strcmp( q.choices, "yn" ) == 0 || strcmp( q.choices, "ynq" ) == 0 ) {
+					char cancelChar = q.choices[2];
+					[yesNoWindow runModalWithQuestion:text choice1:@"Yes" choice2:@"No" defaultAnswer:q.def onCancelSend:cancelChar];
 				} else if ( strcmp( q.choices, "rl" ) == 0 ) {
-					[yesNoWindow runModalWithQuestion:text choice1:@"Right" choice2:@"Left" defaultAnswer:q.def canCancel:NO];
+					[yesNoWindow runModalWithQuestion:text choice1:@"Right" choice2:@"Left" defaultAnswer:q.def onCancelSend:0];
 				} else {
 					assert(NO);
 				}
