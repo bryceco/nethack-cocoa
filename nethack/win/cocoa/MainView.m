@@ -195,7 +195,7 @@
 				NSRect r = NSMakeRect( i*tileSize.width, j*tileSize.height, tileSize.width, tileSize.height);
 				if (NSIntersectsRect(r, rect)) {
 					int glyph = [map glyphAtX:i y:j];
-					if (glyph != kNoGlyph) { // giant ants have glyph 0
+					if (glyph != kNoGlyph) {
 						
 						if ( useAsciiMode || Is_rogue_level(&u.uz) ) {
 							
