@@ -27,15 +27,17 @@
 
 @implementation YesNoWindowController
 
--(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 defaultAnswer:(char)def canCancel:(BOOL)canCancel
+-(void)runModalWithQuestion:(NSString *)prompt choice1:(NSString *)choice1 choice2:(NSString *)choice2 defaultAnswer:(char)def onCancelSend:(char)cancelChar
 {
 	[question setStringValue:prompt];
 	[button1 setTitle:choice1];
 	[button2 setTitle:choice2];
+	defaultAnswer = def;
+	onCancelChar = cancelChar;
 	
 	// add/remove close button so ESC will/won't work
 	NSUInteger style = [[self window] styleMask];
-	if ( canCancel ) {
+	if ( cancelChar ) {
 		style |= NSClosableWindowMask;
 	} else {
 		style &= ~NSClosableWindowMask;
@@ -44,7 +46,6 @@
 
 	// disable default button
 	[[self window] setDefaultButtonCell:nil];
-	defaultAnswer = 0;		
 	
 	if ( def ) {
 		// if default value is present then set a button as using default
@@ -92,7 +93,8 @@
 
 -(BOOL)windowShouldClose:(id)sender
 {
-	[[NhEventQueue instance] addKey:'\033'];
+	assert(onCancelChar);
+	[[NhEventQueue instance] addKey:onCancelChar];
 	return YES;
 }
 
