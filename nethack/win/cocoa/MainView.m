@@ -141,9 +141,13 @@
 		// we need to know when we scroll
 		NSClipView * clipView = [[self enclosingScrollView] contentView];
 		[clipView setPostsBoundsChangedNotifications: YES];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(scrollClipviewBoundsDidChangeNotification:) 
 											name:NSViewBoundsDidChangeNotification object:clipView];
 
+		// we need to know when we resize so we can re-center on hero
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
+													 name:NSViewFrameDidChangeNotification object:self];
+		
 		asciiColors = [[NSArray arrayWithObjects:
 			/* CLR_BLACK			*/	[NSColor colorWithDeviceRed:0.333 green:0.333 blue:0.333 alpha:1.0],
 			/* CLR_RED				*/	[NSColor redColor],
@@ -182,6 +186,7 @@
 	NSRect rect = NSMakeRect( center.x-tileSize.width*border, center.y-tileSize.height*border, tileSize.width*2*border, tileSize.height*2*border );
 	[self scrollRectToVisible:rect];	 	 
 }
+
 
 - (void)drawRect:(NSRect)rect 
 {
@@ -248,7 +253,7 @@
 		// draw cursor rectangle
 		XCHAR_P	cursorX, cursorY;
 		[map cursX:&cursorX	y:&cursorY];		
-		NSRect r = NSMakeRect( cursorX*tileSize.width, cursorY*tileSize.height, tileSize.width-1, tileSize.height-1);
+		NSRect r = NSMakeRect( cursorX*tileSize.width, cursorY*tileSize.height, tileSize.width, tileSize.height);
 		// hp100 calculation from qt_win.cpp
 		int hp100;
 		if (u.mtimedone) {
@@ -379,7 +384,7 @@ NSString * DescriptionForTile( int x, int y )
 #endif
 }
 
-- (void) boundsDidChangeNotification:(NSNotification *)notification
+- (void) scrollClipviewBoundsDidChangeNotification:(NSNotification *)notification
 {
 	[self cancelTooltip];
 }
@@ -391,6 +396,11 @@ NSString * DescriptionForTile( int x, int y )
 	tooltipTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tooltipFired) userInfo:nil repeats:NO] retain];
 }
 
+- (void) boundsDidChangeNotification:(NSNotification *)notification
+{
+	// not sure if we can do this synchronously...
+	[self performSelector:@selector(centerHero) withObject:nil afterDelay:0.0];
+}
 
 
 - (void)keyDown:(NSEvent *)theEvent 
