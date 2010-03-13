@@ -86,7 +86,6 @@
 	
 	[self centerHero];
 	[self setNeedsDisplay:YES];
-	
 }
 
 -(BOOL)setAsciiFont:(NSFont *)font
@@ -179,7 +178,7 @@
 - (void)centerHero
 {
 	int border = 4;
-	NSPoint center = NSMakePoint( (u.ux+0.5)*tileSize.width, ((ROWNO-1-u.uy)+0.5)*tileSize.height );
+	NSPoint center = NSMakePoint( (u.ux+0.5)*tileSize.width, (u.uy+0.5)*tileSize.height );
 	NSRect rect = NSMakeRect( center.x-tileSize.width*border, center.y-tileSize.height*border, tileSize.width*2*border, tileSize.height*2*border );
 	[self scrollRectToVisible:rect];	 	 
 }
