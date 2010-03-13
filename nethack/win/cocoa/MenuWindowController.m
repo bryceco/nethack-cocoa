@@ -109,7 +109,6 @@
 			// add selected item
 			NSInteger key = [button tag];
 			NhItem * item = [itemDict objectForKey:[NSNumber numberWithInt:key]];
-			assert(item);
 			[menuParams.selected addObject:item];
 		}
 	}
@@ -148,6 +147,17 @@
 	[self autorelease];
 }
 
+
+-(void)keyDown:(NSEvent *)theEvent
+{
+	NSString * ch = [theEvent characters];
+	if ( [ch length] > 0 && [ch characterAtIndex:0] == '.' ) {
+		// make '.' a shortcut for select all
+		[self selectAll:self];
+	} else {
+		[super keyDown:theEvent];
+	}
+}
 
 
 - (id)initWithMenu:(NhMenuWindow *)menu
@@ -488,7 +498,7 @@
 			}
 			[button setEnabled:isEnabled];
 
-			// create attribute string containing just the image (or space if none)
+			// create attribute string containing just the image (if any)
 			NSMutableAttributedString * aString;
 			int glyph = [item glyph];
 			if ( glyph != NO_GLYPH ) {
@@ -507,7 +517,7 @@
 				[s release];
 			}
 			
-			// get identifier
+			// get title
 			NSString * title = [item title];
 
 			// add title to string and adjust vertical baseline of text so it aligns with icon
