@@ -42,6 +42,18 @@
 	glyphs[y * COLNO + x] = glyph;
 }
 
+- (void)setCursX:(XCHAR_P)x y:(XCHAR_P)y {
+	cursorX = x;
+	cursorY = y;	
+}
+
+- (void)cursX:(XCHAR_P *)px y:(XCHAR_P *)py {
+	*px = cursorX;
+	*py = cursorY;
+}
+
+
+
 - (int) glyphAtX:(XCHAR_P)x y:(XCHAR_P)y {
 	return glyphs[y * COLNO + x];
 }
