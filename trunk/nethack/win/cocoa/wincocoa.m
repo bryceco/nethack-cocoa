@@ -186,6 +186,15 @@ coord CoordMake(xchar i, xchar j) {
 		NSString * chars = [keyEvent charactersIgnoringModifiers];
 		NSUInteger modifier = [keyEvent modifierFlags];
 		key = [chars characterAtIndex:0];
+		
+		if ( modifier & NSCommandKeyMask ) {
+			// map Cmd-x to Ctrl-x to match Qt port
+			if ( strchr( "ad", key ) != NULL ) {
+				modifier &= ~NSCommandKeyMask;
+				modifier |= NSControlKeyMask;
+			}
+		}		
+		
 		if ( modifier & NSShiftKeyMask  ) {
 			// system already upcases for us
 		}
@@ -200,18 +209,6 @@ coord CoordMake(xchar i, xchar j) {
 	}
 	return key;
 }
-
-NhEventQueue * s_WinCocoaInterceptedOutput;
-+ (NhEventQueue *)interceptedOutput
-{
-	return s_WinCocoaInterceptedOutput;
-}
-+ (void)setInterceptedOutput:(NhEventQueue *)output
-{
-	assert( (output == nil) != (s_WinCocoaInterceptedOutput == nil) );
-	s_WinCocoaInterceptedOutput = output;
-}
-
 
 @end
 
