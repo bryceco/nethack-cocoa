@@ -318,6 +318,10 @@ void cocoa_destroy_nhwindow(winid wid) {
 
 void cocoa_curs(winid wid, int x, int y) {
 	//NSLog(@"curs %x %d,%d", wid, x, y);
+
+	if (wid == WIN_MAP) {
+		[(NhMapWindow *) wid setCursX:x y:y];
+	}
 }
 
 void cocoa_putstr(winid wid, int attr, const char *text) {

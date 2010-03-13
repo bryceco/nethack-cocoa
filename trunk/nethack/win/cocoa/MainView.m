@@ -188,7 +188,7 @@
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
 		NSImage * image = [[TileSet instance] image];
-		
+
 		for (int j = 0; j < ROWNO; ++j) {
 			for (int i = 0; i < COLNO; ++i) {
 				NSRect r = NSMakeRect( i*tileSize.width, j*tileSize.height, tileSize.width, tileSize.height);
@@ -232,29 +232,7 @@
 							
 						}
 						
-						// draw player rectangle
-						if (u.ux == i && u.uy == j) {
-							// hp100 calculation from qt_win.cpp
-							int hp100;
-							if (u.mtimedone) {
-								hp100 = u.mhmax ? u.mh*100/u.mhmax : 100;
-							} else {
-								hp100 = u.uhpmax ? u.uhp*100/u.uhpmax : 100;
-							}
-							const static float colorValue = 0.7f;
-							float playerRectColor[] = {colorValue, 0, 0, 0.7f};
-							if (hp100 > 75) {
-								playerRectColor[0] = 0;
-								playerRectColor[1] = colorValue;
-							} else if (hp100 > 50) {
-								playerRectColor[2] = 0;
-								playerRectColor[0] = playerRectColor[1] = colorValue;
-							}
-							NSColor *color = [NSColor colorWithDeviceRed:playerRectColor[0] green:playerRectColor[1]
-																	blue:playerRectColor[2] alpha:playerRectColor[3]];
-							[color setStroke];
-							[NSBezierPath strokeRect:r];
-						} else if (glyph_is_pet(glyph)) {
+						if (glyph_is_pet(glyph)) {
 							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:nil];
 						}
 						
@@ -266,6 +244,31 @@
 				}
 			}
 		}
+
+		// draw cursor rectangle
+		XCHAR_P	cursorX, cursorY;
+		[map cursX:&cursorX	y:&cursorY];		
+		NSRect r = NSMakeRect( cursorX*tileSize.width, cursorY*tileSize.height, tileSize.width-1, tileSize.height-1);
+		// hp100 calculation from qt_win.cpp
+		int hp100;
+		if (u.mtimedone) {
+			hp100 = u.mhmax ? u.mh*100/u.mhmax : 100;
+		} else {
+			hp100 = u.uhpmax ? u.uhp*100/u.uhpmax : 100;
+		}
+		const static float colorValue = 0.7f;
+		float playerRectColor[] = {colorValue, 0, 0, 0.7f};
+		if (hp100 > 75) {
+			playerRectColor[0] = 0;
+			playerRectColor[1] = colorValue;
+		} else if (hp100 > 50) {
+			playerRectColor[2] = 0;
+			playerRectColor[0] = playerRectColor[1] = colorValue;
+		}
+		NSColor *color = [NSColor colorWithDeviceRed:playerRectColor[0] green:playerRectColor[1]
+												blue:playerRectColor[2] alpha:playerRectColor[3]];
+		[color setStroke];
+		[NSBezierPath strokeRect:r];
 	}
 }
 
