@@ -28,6 +28,8 @@
 
 #include "hack.h"
 
+#define kNoGlyph (-1)
+
 @interface NhMapWindow : NhWindow {
 	
 	int *glyphs;
