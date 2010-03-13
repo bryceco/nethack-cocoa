@@ -195,7 +195,7 @@
 				NSRect r = NSMakeRect( i*tileSize.width, j*tileSize.height, tileSize.width, tileSize.height);
 				if (NSIntersectsRect(r, rect)) {
 					int glyph = [map glyphAtX:i y:j];
-					if (glyph >= 0) {
+					if (glyph != kNoGlyph) { // giant ants have glyph 0
 						
 						if ( useAsciiMode || Is_rogue_level(&u.uz) ) {
 							
@@ -231,6 +231,30 @@
 							NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
 							[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
 							
+						}
+						
+						// draw player rectangle
+						if (u.ux == i && u.uy == j) {
+							// hp100 calculation from qt_win.cpp
+							int hp100;
+							if (u.mtimedone) {
+								hp100 = u.mhmax ? u.mh*100/u.mhmax : 100;
+							} else {
+								hp100 = u.uhpmax ? u.uhp*100/u.uhpmax : 100;
+							}
+							const static float colorValue = 0.7f;
+							float playerRectColor[] = {colorValue, 0, 0, 0.7f};
+							if (hp100 > 75) {
+								playerRectColor[0] = 0;
+								playerRectColor[1] = colorValue;
+							} else if (hp100 > 50) {
+								playerRectColor[2] = 0;
+								playerRectColor[0] = playerRectColor[1] = colorValue;
+							}
+							NSColor *color = [NSColor colorWithDeviceRed:playerRectColor[0] green:playerRectColor[1]
+																	blue:playerRectColor[2] alpha:playerRectColor[3]];
+							[color setStroke];
+							[NSBezierPath strokeRect:r];
 						}
 						
 					} else {
