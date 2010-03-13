@@ -545,6 +545,7 @@
 
 
 	if ( how == PICK_NONE ) {
+		[acceptButton setTitle:@"Close"];
 		[acceptButton setEnabled:YES];
 		[cancelButton setHidden:YES];
 	} else {
@@ -596,7 +597,7 @@
 	[win showWindow:win];
 	[win->menuView scrollPoint:NSMakePoint(0,0)];
 
-	if ( RUN_MODAL || [win->menuParams how] == PICK_NONE ) {
+	if ( !RUN_MODAL && [win->menuParams how] == PICK_NONE ) {
 		// we can run detached
 	} else {
 		// need to run modal
