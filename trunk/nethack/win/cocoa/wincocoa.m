@@ -252,7 +252,7 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 }
 
 void cocoa_askname() {
-	NSLog(@"askname");
+	//NSLog(@"askname");
 	cocoa_getlin("Enter your name", plname);
 }
 
@@ -321,7 +321,7 @@ void cocoa_curs(winid wid, int x, int y) {
 }
 
 void cocoa_putstr(winid wid, int attr, const char *text) {
-	NSLog(@"putstr %x %s", wid, text);
+	//NSLog(@"putstr %x %s", wid, text);
 	if (wid == WIN_ERR || !wid) {
 		wid = BASE_WINDOW;
 	}
@@ -331,9 +331,6 @@ void cocoa_putstr(winid wid, int attr, const char *text) {
 		[[MainWindowController instance] refreshMessages];
 	}		
 }
-
-
-
 
 void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
 	char tmp[ PATH_MAX ];
@@ -354,14 +351,14 @@ void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
 #pragma mark menu
 
 void cocoa_start_menu(winid wid) {
-	NSLog(@"start_menu %x", wid);
+	//NSLog(@"start_menu %x", wid);
 	[(NhMenuWindow *) wid startMenu];
 }
 
 void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 					 CHAR_P accelerator, CHAR_P group_accel, int attr, 
 					 const char *str, BOOLEAN_P presel) {
-	NSLog(@"add_menu %x %s", wid, str);
+	//NSLog(@"add_menu %x %s", wid, str);
 	NhMenuWindow *w = (NhMenuWindow *) wid;
 	NSString *title = [NSString stringWithFormat:@"%s", str];
 	if (identifier->a_void) {
@@ -377,7 +374,7 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 }
 
 void cocoa_end_menu(winid wid, const char *prompt) {
-	NSLog(@"end_menu %x, %s", wid, prompt);
+	//NSLog(@"end_menu %x, %s", wid, prompt);
 	if (prompt) {
 		((NhMenuWindow *) wid).prompt = [NSString stringWithFormat:@"%s", prompt];
 		//cocoa_putstr(WIN_MESSAGE, 0, prompt);
@@ -387,7 +384,7 @@ void cocoa_end_menu(winid wid, const char *prompt) {
 }
 
 int cocoa_select_menu(winid wid, int how, menu_item **selected) {
-	NSLog(@"select_menu %x", wid);
+	//NSLog(@"select_menu %x", wid);
 	NhMenuWindow *w = (NhMenuWindow *) wid;
 	w.how = how;
 	*selected = NULL;
@@ -482,7 +479,7 @@ int cocoa_doprev_message() {
 #pragma mark yn_function 
 
 char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
-	NSLog(@"yn_function %s", question);
+	//NSLog(@"yn_function %s", question);
 	static const char * AlwaysYes[] = {
 		"Really save?",
 		"Overwrite the old file?",
@@ -533,7 +530,7 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 }
 
 void cocoa_getlin(const char *prompt, char *line) {
-	NSLog(@"getlin %s", prompt);
+	//NSLog(@"getlin %s", prompt);
 	cocoa_putstr(WIN_MESSAGE, 0, prompt);
 	[[MainWindowController instance] refreshAllViews];
 	[[MainWindowController instance] getLine];
@@ -547,7 +544,7 @@ void cocoa_getlin(const char *prompt, char *line) {
 }
 
 int cocoa_get_ext_cmd() {
-	NSLog(@"get_ext_cmd");
+	//NSLog(@"get_ext_cmd");
 	if ([[NhEventQueue instance] peek]) {
 		// already have extended command in queue
 	} else {
@@ -572,7 +569,7 @@ void cocoa_number_pad(int num) {
 }
 
 void cocoa_delay_output() {
-	NSLog(@"delay_output");
+	//NSLog(@"delay_output");
 	usleep(50000);
 }
 
