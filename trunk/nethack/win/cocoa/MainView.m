@@ -255,6 +255,8 @@
 																	blue:playerRectColor[2] alpha:playerRectColor[3]];
 							[color setStroke];
 							[NSBezierPath strokeRect:r];
+						} else if (glyph_is_pet(glyph)) {
+							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:nil];
 						}
 						
 					} else {
