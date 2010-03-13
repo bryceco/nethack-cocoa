@@ -40,7 +40,7 @@
 
 @interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {
 
-	BOOL									isDirectionQuestion;
+	BOOL										isDirectionQuestion;
 	
 	IBOutlet MainView						*	mainView;
 	IBOutlet NSScrollView					*	scrollView;
