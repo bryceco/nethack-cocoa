@@ -33,7 +33,7 @@
 		NSLog(@"map window %x", self);
 		size_t numBytes = COLNO * ROWNO * sizeof(int);
 		glyphs = malloc(numBytes);
-		memset(glyphs, -1, numBytes);
+		memset(glyphs, kNoGlyph, numBytes);
 	}
 	return self;
 }
@@ -61,7 +61,7 @@
 - (void) clear {
 	[super clear];
 	size_t numBytes = COLNO * ROWNO * sizeof(int);
-	memset(glyphs, -1, numBytes);
+	memset(glyphs, kNoGlyph, numBytes);
 }
 
 - (void) dealloc {
