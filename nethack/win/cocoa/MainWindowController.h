@@ -42,6 +42,8 @@
 
 	BOOL										isDirectionQuestion;
 	
+	NSMutableArray							*	userTiles;
+	
 	IBOutlet MainView						*	mainView;
 	IBOutlet NSScrollView					*	scrollView;
 	IBOutlet NSTextView						*	messagesView;

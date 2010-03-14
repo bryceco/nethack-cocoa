@@ -139,6 +139,11 @@ static const float popoverItemHeight = 44.0f;
 			[mainView setAsciiFont:font];
 		}
 	}
+	
+	// place check mark on ASCII menu item
+	[asciiModeMenuItem setState:useAscii ? NSOnState : NSOffState];
+	
+	// select ascii mode in map view
 	[mainView enableAsciiMode:useAscii];
 }
 
@@ -152,6 +157,8 @@ static const float popoverItemHeight = 44.0f;
 	[[NSUserDefaults standardUserDefaults] setFloat:[font pointSize] forKey:@"AsciiFontSize"];
 	BOOL	useAscii = [mainView asciiMode];
 	[[NSUserDefaults standardUserDefaults] setBool:useAscii forKey:@"UseAscii"];
+	// save user defined tile sets
+	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];		
 }
 
 -(void)closeAllWindows
@@ -241,14 +248,19 @@ static const float popoverItemHeight = 44.0f;
 	[panel runModal];
 	NSArray * result = [panel URLs];
 	for ( NSURL * url in result ) {
-		NSString * s = [url absoluteString];
-		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:s action:@selector(selectTileSet:) keyEquivalent:@""];
+		NSString * path = [url path];
+		path = [path stringByAbbreviatingWithTildeInPath];
+		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:path action:@selector(selectTileSet:) keyEquivalent:@""];
 		[item setTarget:self];
 		[tileSetMenu addItem:item];
+		if ( userTiles == nil ) {
+			userTiles = [[NSMutableArray alloc] initWithCapacity:1];
+		}
+		[userTiles addObject:path];
 		[item release];
 	}
 }
-- (void)selectTileSet:(id)sender
+- (IBAction)selectTileSet:(id)sender
 {
 	NSMenuItem * item = sender;
 	NSString * name = [item title];
@@ -266,7 +278,9 @@ static const float popoverItemHeight = 44.0f;
 		[alert runModal];
 	}
 }
-- (void)createTileSetListInMenu:(NSMenu *)menu {
+
+- (void)createTileSetListInMenu:(NSMenu *)menu 
+{
 	int count = [[menu itemArray] count];
 	if ( count > 3 ) {
 		// already initialized
@@ -274,10 +288,6 @@ static const float popoverItemHeight = 44.0f;
 	}
 
 	NSMutableArray * files = [NSMutableArray array];
-	// add user defined tile file
-	if (iflags.wc_tile_file) {
-		[files addObject:[NSString stringWithUTF8String:iflags.wc_tile_file]];
-	}	
 	
 	// get list of builtin tiles
 	NSString * tileFolder = [[NSBundle mainBundle] resourcePath];
@@ -290,6 +300,25 @@ static const float popoverItemHeight = 44.0f;
 			if ( attr && [attr fileSize] >= 10000 ) {
 				[files addObject:name];
 			}				
+		}
+	}
+
+	// add user defined tile file
+	if (iflags.wc_tile_file) {
+		[files addObject:[NSString stringWithUTF8String:iflags.wc_tile_file]];
+	}
+		
+	// get user defined tiles
+	userTiles = [[[NSUserDefaults standardUserDefaults] objectForKey:@"UserTileSets"] mutableCopy];
+	for ( int idx = 0; idx < [userTiles count]; ++idx ) {		
+		NSString * path = [userTiles objectAtIndex:idx];
+		NSString * fullPath = [path stringByExpandingTildeInPath];
+		NSDictionary * attr = [[NSFileManager defaultManager] attributesOfItemAtPath:fullPath error:NULL];
+		if ( attr ) {
+			[files addObject:path];
+		} else {
+			[userTiles removeObjectAtIndex:idx];
+			--idx;
 		}
 	}
 	
@@ -311,7 +340,7 @@ static const float popoverItemHeight = 44.0f;
 
 - (IBAction)terminateApplication:(id)sender
 {
-	// map to Cmd-Q to Shift-S
+	// map Cmd-Q to Shift-S
 	[[NhEventQueue instance] addKey:'S'];	
 }
 

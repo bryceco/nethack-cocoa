@@ -117,7 +117,8 @@
 {
 	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
 	if ( tilesetImage == nil ) {
-		NSURL * url = [NSURL URLWithString:tileSetName];
+		tileSetName = [tileSetName stringByExpandingTildeInPath];
+		NSURL * url = [NSURL fileURLWithPath:tileSetName isDirectory:NO];
 		tilesetImage = [[[NSImage alloc] initByReferencingURL:url] autorelease];
 		if ( tilesetImage == nil ) {
 			return NO;
