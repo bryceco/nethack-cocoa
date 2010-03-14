@@ -174,6 +174,8 @@ char *argv[];
 
 	process_options(argc, argv);	/* command line options */
 
+	/*wizard = TRUE;*/ /* debugging */
+
 #ifdef DEF_PAGER
 	if(!(catmore = nh_getenv("HACKPAGER")) && !(catmore = nh_getenv("PAGER")))
 		catmore = DEF_PAGER;
