@@ -192,8 +192,14 @@
 {
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
-		NSImage * image = [[TileSet instance] image];
-
+		NSImage					*	image = [[TileSet instance] image];
+		
+		// set stuff up for ascii drawing
+		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
+		NSRange rangeAll = NSMakeRange(0,[aString length]);
+		[aString setAlignment:NSCenterTextAlignment range:rangeAll];
+		[aString addAttribute:NSFontAttributeName value:asciiFont range:rangeAll];
+		
 		for (int j = 0; j < ROWNO; ++j) {
 			for (int i = 0; i < COLNO; ++i) {
 				NSRect r = NSMakeRect( i*tileSize.width, j*tileSize.height, tileSize.width, tileSize.height);
@@ -209,26 +215,21 @@
 							mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 							
 							NSString * ch = [[NSString alloc] initWithFormat:@"%c", ochar];
-							NSMutableAttributedString * text = [[NSMutableAttributedString alloc] initWithString:ch];
+							[[aString mutableString] setString:ch];
 							[ch release];
-
 							
 							NSColor * color = [asciiColors objectAtIndex:ocolor];
-							
-							NSRange rangeAll = NSMakeRange(0,[text length]);
-							[text setAlignment:NSCenterTextAlignment range:rangeAll];
-							[text addAttribute:NSForegroundColorAttributeName value:color range:rangeAll];
-							[text addAttribute:NSFontAttributeName value:asciiFont range:rangeAll];
 
+							// text color
+							[aString addAttribute:NSForegroundColorAttributeName value:color range:rangeAll];
+		
 							// background is black
 							[[NSColor blackColor] setFill];
 							[NSBezierPath fillRect:r];
 							
 							// draw glyph
-							[text drawInRect:r];
+							[aString drawInRect:r];
 							
-							[text release];
-
 						} else {
 							
 							// draw tile
