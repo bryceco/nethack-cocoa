@@ -32,6 +32,7 @@
 	int clipX;
 	int clipY;
 	
+	NSString * _tileSetName;
 	NSSize tileSize;
 	NSImage *petMark;
 
@@ -48,8 +49,10 @@
 - (void)cliparoundX:(int)x y:(int)y;
 - (void)centerHero;
 - (BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size;
+- (NSString *)tileSet;
 - (NSFont *)asciiFont;
 - (BOOL)setAsciiFont:(NSFont *)font;
 - (void)enableAsciiMode:(BOOL)enable;
+- (BOOL)asciiMode;
 
 @end

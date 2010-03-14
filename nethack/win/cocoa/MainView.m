@@ -102,6 +102,16 @@
 	return asciiFont;
 }
 
+- (NSString *)tileSet
+{
+	return _tileSetName;
+}
+
+-(BOOL)asciiMode
+{
+	return useAsciiMode;
+}
+
 
 -(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
 {
@@ -124,6 +134,9 @@
 	TileSet *tileSet = [[[TileSet alloc] initWithImage:tilesetImage tileSize:size] autorelease];
 	[TileSet setInstance:tileSet];
 	
+	[_tileSetName release];
+	_tileSetName = [tileSetName copy];
+
 	return YES;
 }
 

@@ -100,6 +100,20 @@ static const float popoverItemHeight = 44.0f;
 	}
 }
 
+-(NSSize)tileSetSizeFromName:(NSString *)name
+{
+	int dx, dy;
+	if ( sscanf([name UTF8String], "%*[^0-9]%dx%d.%*s", &dx, &dy ) == 2 ) {
+		// fully described
+	} else if ( sscanf([name UTF8String], "%*[^0-9]%d.%*s", &dx ) == 1 ) {
+		dy = dx;
+	} else {
+		dx = dy = 16;
+	}
+	NSSize size = NSMakeSize( dx, dy );
+	return size;
+}
+
 - (void)awakeFromNib {
 	[super awakeFromNib];
 	instance = self;
@@ -109,9 +123,52 @@ static const float popoverItemHeight = 44.0f;
 	
 	[[self window] setAcceptsMouseMovedEvents:YES];
 	
-	// force load of initial tile set
-	[mainView enableAsciiMode:NO];
+	// read tile set preferences
+	NSString *	tileSetName = [[NSUserDefaults standardUserDefaults] objectForKey:@"TileSetName"];
+	NSString *	asciiFontName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AsciiFontName"];
+	CGFloat		asciiFontSize = [[NSUserDefaults standardUserDefaults] floatForKey:@"AsciiFontSize"];
+	BOOL		useAscii = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAscii"];
+
+	if ( tileSetName ) {
+		NSSize size = [self tileSetSizeFromName:tileSetName];
+		[mainView setTileSet:tileSetName size:size];
+	}
+	if ( asciiFontName && asciiFontSize ) {
+		NSFont * font = [NSFont fontWithName:asciiFontName size:asciiFontSize];
+		if ( font ) {
+			[mainView setAsciiFont:font];
+		}
+	}
+	[mainView enableAsciiMode:useAscii];
 }
+
+-(void)windowWillClose:(NSNotification *)notification
+{
+	// save tile set preferences
+	NSString * tileSetName = [mainView tileSet];
+	[[NSUserDefaults standardUserDefaults] setObject:tileSetName forKey:@"TileSetName"];
+	NSFont * font = [mainView asciiFont];
+	[[NSUserDefaults standardUserDefaults] setObject:[font fontName] forKey:@"AsciiFontName"];
+	[[NSUserDefaults standardUserDefaults] setFloat:[font pointSize] forKey:@"AsciiFontSize"];
+	BOOL	useAscii = [mainView asciiMode];
+	[[NSUserDefaults standardUserDefaults] setBool:useAscii forKey:@"UseAscii"];
+}
+
+-(void)closeAllWindows
+{
+	if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:@selector(closeAllWindows) withObject:nil waitUntilDone:YES];
+	} else {
+		// close all windows and prepare for termination
+		NSArray * windows = [[NSApplication sharedApplication] windows];
+		for ( NSWindow * win in windows ) {
+			[win close];
+		}
+		// flush defaults, because we are exiting via nethack thread and it may not be clean
+		[[NSUserDefaults standardUserDefaults] synchronize];
+	}	
+}
+
 
 #pragma mark menu actions
 
@@ -195,16 +252,8 @@ static const float popoverItemHeight = 44.0f;
 {
 	NSMenuItem * item = sender;
 	NSString * name = [item title];
-	int dx, dy;
-	if ( sscanf([name UTF8String], "%*[^0-9]%dx%d.%*s", &dx, &dy ) == 2 ) {
-		// fully described
-	} else if ( sscanf([name UTF8String], "%*[^0-9]%d.%*s", &dx ) == 1 ) {
-		dy = dx;
-	} else {
-		dx = dy = 16;
-	}
-	
-	NSSize size = NSMakeSize( dx, dy );
+	NSSize size = [self tileSetSizeFromName:name];
+
 	BOOL ok = [mainView setTileSet:name size:size];
 	if ( ok ) {
 
