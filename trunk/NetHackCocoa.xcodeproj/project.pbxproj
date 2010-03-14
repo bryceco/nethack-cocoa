@@ -377,8 +377,8 @@
 		029A9960112BEDEC00225CC3 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
 		02D00716113654A200F57754 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesWindowController.h; sourceTree = "<group>"; };
 		02D00717113654A200F57754 /* NotesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesWindowController.m; sourceTree = "<group>"; };
-		02E856CA112A54AB00E4ADE3 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = petmark.png; sourceTree = "<group>"; };
-		02E859A3112B142300E4ADE3 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nethack.icns; sourceTree = "<group>"; };
+		02E856CA112A54AB00E4ADE3 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petmark.png; path = nethack/win/cocoa/images/petmark.png; sourceTree = "<group>"; };
+		02E859A3112B142300E4ADE3 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nethack.icns; path = nethack/win/cocoa/images/nethack.icns; sourceTree = "<group>"; };
 		02F303AE112C7A4800CB64E4 /* MessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageWindowController.h; sourceTree = "<group>"; };
 		02F303AF112C7A4800CB64E4 /* MessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageWindowController.m; sourceTree = "<group>"; };
 		02FF3F291131C3C90096FBC6 /* tiles10x20.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles10x20.bmp; sourceTree = "<group>"; };
@@ -867,6 +867,8 @@
 				0259AE791135AD53002AEFA1 /* Arrow-SE.png */,
 				0259AE7A1135AD53002AEFA1 /* Arrow-SW.png */,
 				0259AE7B1135AD53002AEFA1 /* Arrow-W.png */,
+				02E859A3112B142300E4ADE3 /* nethack.icns */,
+				02E856CA112A54AB00E4ADE3 /* petmark.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -1443,8 +1445,6 @@
 				02879364112EFECE000A5F55 /* absurd32.png */,
 				0287936A112EFEF8000A5F55 /* absurd128.png */,
 				029A96C0112B178300225CC3 /* kins32.bmp */,
-				02E859A3112B142300E4ADE3 /* nethack.icns */,
-				02E856CA112A54AB00E4ADE3 /* petmark.png */,
 				029A96BE112B164900225CC3 /* tiles16.bmp */,
 				02879368112EFEED000A5F55 /* tiles32.png */,
 				02879366112EFEE1000A5F55 /* chozo32.png */,

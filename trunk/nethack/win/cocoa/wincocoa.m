@@ -259,6 +259,8 @@ void cocoa_get_nh_event() {
 
 void cocoa_exit_nhwindows(const char *str) {
 	NSLog(@"exit_nhwindows %s", str);
+	// close all our windows so state gets saved cleanly
+	[[MainWindowController instance] closeAllWindows];
 }
 
 void cocoa_suspend_nhwindows(const char *str) {

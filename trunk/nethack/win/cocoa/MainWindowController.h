@@ -82,7 +82,7 @@
 - (void)showExtendedCommands;
 - (void)showPlayerSelection;
 - (void)showDirectionWithPrompt:(NSString *)prompt;
-
+- (void)closeAllWindows;
 
 // touch handling
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(NSView *)view;
