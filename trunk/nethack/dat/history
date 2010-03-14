@@ -150,6 +150,8 @@ Amiga port of 3.4 after Janne Salmijarvi resurrected it for 3.3.1.
 Christian `Marvin' Bressler maintained 3.4 for the Atari after he
 resurrected it for 3.3.1.
 
+3.4.3 was ported to Mac OS X (cocoa) by Bryce Cogswell and Dirk Zimmermann.
+
 There is a NetHack web site maintained by Ken Lorber at http://www.nethack.org/.
 
 			   - - - - - - - - - -
