@@ -339,7 +339,7 @@ void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
 	char tmp[ PATH_MAX ];
 	[WinCocoa expandFilename:filename intoPath:tmp];
 
-	NSString * text = [NSString stringWithContentsOfFile:[NSString stringWithUTF8String:filename] encoding:NSUTF8StringEncoding error:NULL];
+	NSString * text = [NSString stringWithContentsOfFile:[NSString stringWithUTF8String:tmp] encoding:NSUTF8StringEncoding error:NULL];
 	if ( text ) {
 		[[MainWindowController instance] displayMessageWindow:text];
 	} else {
