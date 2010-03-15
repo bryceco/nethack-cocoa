@@ -67,8 +67,8 @@
 	[self updateSlot:helmet			item:uarmh		text:@"helmet"];
 	[self updateSlot:gloves			item:uarmg		text:@"gloves"];
 	[self updateSlot:boots			item:uarmf		text:@"boots"];
-	[self updateSlot:ringRight		item:uright		text:@"left ring"];
-	[self updateSlot:ringLeft		item:uleft		text:@"right ring"];
+	[self updateSlot:ringRight		item:uright		text:@"right ring"];
+	[self updateSlot:ringLeft		item:uleft		text:@"left ring"];
 	[self updateSlot:blindfold		item:ublindf	text:@"blindfold/lenses"];
 	[self updateSlot:amulet			item:uamul		text:@"amulet"];
 	[self updateSlot:armor			item:uarm		text:@"armor"];

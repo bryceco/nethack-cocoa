@@ -829,6 +829,8 @@
 			children = (
 				0270B964112E20A8000CC97D /* DirectionWindowController.h */,
 				0270B965112E20A8000CC97D /* DirectionWindowController.m */,
+				020ECFF1114CD9AA00CC6076 /* EquipmentView.h */,
+				020ECFF2114CD9AA00CC6076 /* EquipmentView.m */,
 				028792E2112EEE55000A5F55 /* ExtCommandWindowController.h */,
 				028792E3112EEE55000A5F55 /* ExtCommandWindowController.m */,
 				029A995F112BEDEC00225CC3 /* FlippedView.h */,
@@ -855,8 +857,6 @@
 				0298DE23113136E800BC0614 /* TooltipWindow.m */,
 				0270BA60112E417E000CC97D /* YesNoWindowController.h */,
 				0270BA61112E417E000CC97D /* YesNoWindowController.m */,
-				020ECFF1114CD9AA00CC6076 /* EquipmentView.h */,
-				020ECFF2114CD9AA00CC6076 /* EquipmentView.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
