@@ -32,9 +32,9 @@
 	int clipX;
 	int clipY;
 	
-	NSString * _tileSetName;
-	NSSize tileSize;
-	NSImage *petMark;
+	NSString *	_tileSetName;
+	NSSize		tileSize;
+	NSImage	*	petMark;
 
 	NSTimer *	tooltipTimer;
 	NSPoint		tooltipPoint;
