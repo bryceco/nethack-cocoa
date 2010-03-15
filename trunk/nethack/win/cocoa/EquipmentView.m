@@ -47,8 +47,11 @@
 		int glyph = obj_to_glyph(item);
 		if ( glyph != NO_GLYPH ) {
 			image = [[TileSet instance] imageForGlyph:glyph enabled:YES];
-			char * s = doname(item);
-			text = [NSString stringWithUTF8String:s];
+			char * description = doname(item);
+			char invent = item->invlet;
+			text = [NSString stringWithFormat:@"(%c) %s", invent, description];
+			if ( [text hasSuffix:@" (being worn)"] )
+				text = [text substringToIndex:[text length] - 13];
 		}
 	}
 	[slot setImage:image];
