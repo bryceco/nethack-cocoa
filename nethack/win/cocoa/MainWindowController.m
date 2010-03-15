@@ -272,6 +272,7 @@ static const float popoverItemHeight = 44.0f;
 		// put us in tile mode
 		[mainView enableAsciiMode:NO];
 		[asciiModeMenuItem setState:NSOffState];
+		[equipmentView updateInventory];
 		
 	} else {
 		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
@@ -597,6 +598,7 @@ static const float popoverItemHeight = 44.0f;
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(updateInventory) withObject:nil waitUntilDone:NO];
 	} else {
+		[equipmentView updateInventory];
 	}
 }
 

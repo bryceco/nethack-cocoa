@@ -37,6 +37,7 @@
 @class PlayerSelectionWindowController;
 @class NotesWindowController;
 @class StatsView;
+@class EquipmentView;
 
 @interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {
 
@@ -51,6 +52,7 @@
 	IBOutlet NSMenu							*	tileSetMenu;
 	IBOutlet NSMenuItem						*	asciiModeMenuItem;
 	IBOutlet StatsView						*	statsView;
+	IBOutlet EquipmentView					*	equipmentView;
 	
 	IBOutlet DirectionWindowController		*	directionWindow;
 	IBOutlet YesNoWindowController			*	yesNoWindow;
