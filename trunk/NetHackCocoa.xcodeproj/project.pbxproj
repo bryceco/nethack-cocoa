@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		020CD2D71137089D00297C4C /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020CD2D61137089D00297C4C /* StatsView.m */; };
+		020ECFF3114CD9AA00CC6076 /* EquipmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020ECFF2114CD9AA00CC6076 /* EquipmentView.m */; };
 		0259AE7C1135AD53002AEFA1 /* Arrow-E.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE741135AD53002AEFA1 /* Arrow-E.png */; };
 		0259AE7D1135AD53002AEFA1 /* Arrow-N.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE751135AD53002AEFA1 /* Arrow-N.png */; };
 		0259AE7E1135AD53002AEFA1 /* Arrow-NE.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE761135AD53002AEFA1 /* Arrow-NE.png */; };
@@ -342,6 +343,8 @@
 /* Begin PBXFileReference section */
 		020CD2D51137089D00297C4C /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
 		020CD2D61137089D00297C4C /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
+		020ECFF1114CD9AA00CC6076 /* EquipmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentView.h; sourceTree = "<group>"; };
+		020ECFF2114CD9AA00CC6076 /* EquipmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentView.m; sourceTree = "<group>"; };
 		0259AE741135AD53002AEFA1 /* Arrow-E.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-E.png"; path = "nethack/win/cocoa/images/Arrow-E.png"; sourceTree = "<group>"; };
 		0259AE751135AD53002AEFA1 /* Arrow-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-N.png"; path = "nethack/win/cocoa/images/Arrow-N.png"; sourceTree = "<group>"; };
 		0259AE761135AD53002AEFA1 /* Arrow-NE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-NE.png"; path = "nethack/win/cocoa/images/Arrow-NE.png"; sourceTree = "<group>"; };
@@ -852,6 +855,8 @@
 				0298DE23113136E800BC0614 /* TooltipWindow.m */,
 				0270BA60112E417E000CC97D /* YesNoWindowController.h */,
 				0270BA61112E417E000CC97D /* YesNoWindowController.m */,
+				020ECFF1114CD9AA00CC6076 /* EquipmentView.h */,
+				020ECFF2114CD9AA00CC6076 /* EquipmentView.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1836,6 +1841,7 @@
 				43154035114ABAFC003E9BF4 /* NSString+Z.m in Sources */,
 				43154036114ABAFC003E9BF4 /* TileSet.m in Sources */,
 				43154037114ABAFC003E9BF4 /* ZDirection.m in Sources */,
+				020ECFF3114CD9AA00CC6076 /* EquipmentView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

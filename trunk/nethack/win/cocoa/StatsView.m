@@ -198,29 +198,4 @@
 	return YES;
 }
 
-
--(void)updateEquipment
-{
-	// doprinuse
-	// worn.c - struct worn
-#if 0
-	*uwep // weapon 
-	*uarm // armor
-	*uswapwep // secondary weapon
-	*uquiver // quiver 
-	*uarmu // t-shirt
-	*uarmc // cloak
-	*uarmh // helmet
-	*uarms // shield
-	*uarmg // gauntlets
-	*uarmf // // boots
-	*uamul // amulet
-	*uright // ring
-	*uleft // ring
-	*ublindf // blindfold/lenses/towel
-	*uchain // chain
-	*uball // ball
-#endif
-}
-
 @end
