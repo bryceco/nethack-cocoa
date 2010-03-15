@@ -105,11 +105,17 @@
 {
 	// get list of selected tags
 	for ( NSButton * button in [menuView subviews] ) {
-		if ( [button class] == [NSButton class]  &&  [button state] == NSOnState )  {
+		if ( [button class] == [NSButton class] ) {
 			// add selected item
 			NSInteger key = [button tag];
 			NhItem * item = [itemDict objectForKey:[NSNumber numberWithInt:key]];
-			[menuParams.selected addObject:item];
+			// check if button state was changed from original value
+			if ( ([button state] == NSOnState) != item.selected )  {
+				[item setSelected:YES];
+				[menuParams.selected addObject:item];
+			} else {
+				[item setSelected:NO];				
+			}
 		}
 	}
 	
@@ -177,6 +183,26 @@
 }
 
 
+-(void)log:(NSString *)text
+{
+	NSMutableString * result = [NSMutableString stringWithCapacity:20];
+	for ( int i = 0; i < [text length]; ++i ) {
+		char ch = [text characterAtIndex:i];
+		switch ( ch ) {
+			case ' ':
+				[result appendString:@"."];
+				break;
+			case '\t':
+				[result appendString:@"\\t"];
+				break;
+			default:
+				[result appendFormat:@"%c", ch ];
+				break;
+		}
+	}
+	NSLog(@"%@\n", result );
+}
+
 -(int)leadingSpaces:(NSString *)text
 {
 	int i = 0;
@@ -185,25 +211,6 @@
 	return i;
 }
 
-
--(NSString *)stringWithSpacesReplacedByTabs:(NSString *)text
-{
-	NSMutableString * result = [NSMutableString stringWithString:text];
-	for ( int pos = 0; pos+1 < [result length]; ++pos ) {
-		if ( [result characterAtIndex:pos] == ' ' && [result characterAtIndex:pos+1] == ' ' ) {
-			// string of two or more spaces
-			int end = pos+2;
-			while ( end < [result length] && [result characterAtIndex:end] == ' ' )
-				++end;
-			[result replaceCharactersInRange:NSMakeRange(pos, end-pos) withString:@"\t"];
-
-		} else if ( [result characterAtIndex:pos] == ' ' && [result characterAtIndex:pos+1] == '[' ) {
-			// space followed by bracketed list
-			[result replaceCharactersInRange:NSMakeRange(pos,1) withString:@"\t"];
-		}
-	}
-	return result;
-}
 
 -(void)convertFakeGroupsToRealGroups
 {
@@ -264,6 +271,25 @@
 }
 
 
+-(NSString *)stringWithSpacesReplacedByTabs:(NSString *)text
+{
+	NSMutableString * result = [NSMutableString stringWithString:text];
+	for ( int pos = 0; pos+1 < [result length]; ++pos ) {
+		if ( [result characterAtIndex:pos] == ' ' && [result characterAtIndex:pos+1] == ' ' ) {
+			// string of two or more spaces
+			int end = pos+2;
+			while ( end < [result length] && [result characterAtIndex:end] == ' ' )
+				++end;
+			[result replaceCharactersInRange:NSMakeRange(pos, end-pos) withString:@"\t"];
+			
+		} else if ( [result characterAtIndex:pos] == ' ' && [result characterAtIndex:pos+1] == '[' ) {
+			// space followed by bracketed list
+			[result replaceCharactersInRange:NSMakeRange(pos,1) withString:@"\t"];
+		}
+	}
+	return result;
+}
+
 -(void)convertSpacesToTabs
 {
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
@@ -280,25 +306,27 @@
 }
 
 
--(void)log:(NSString *)text
+-(void)convertTrueFalseTags
 {
-	NSMutableString * result = [NSMutableString stringWithCapacity:20];
-	for ( int i = 0; i < [text length]; ++i ) {
-		char ch = [text characterAtIndex:i];
-		switch ( ch ) {
-			case ' ':
-				[result appendString:@"."];
-				break;
-			case '\t':
-				[result appendString:@"\\t"];
-				break;
-			default:
-				[result appendFormat:@"%c", ch ];
-				break;
+	for ( NhItemGroup * group in [menuParams itemGroups] ) {
+		
+		for ( NhItem * item in group.items ) {
+			
+			NSString * title = item.title;
+			
+			if ( [title hasSuffix:@"\t[true]"] ) {
+				title = [title substringToIndex:[title length] - 7];
+				[item setTitle:title];
+				[item setSelected:YES];
+			} else if ( [title hasSuffix:@"\t[false]"] ) {
+			   title = [title substringToIndex:[title length] - 8];
+			   [item setTitle:title];
+			   [item setSelected:NO];
+		   }
 		}
 	}
-	NSLog(@"%@\n", result );
 }
+
 
 -(void)expandTitleTextWithKeysAndDescriptions
 {
@@ -309,7 +337,7 @@
 		for ( NhItem * item in [group items] ) {			
 			
 			BOOL isEnabled = item.identifier.a_int != -1;
-			int keyEquiv = [item inventoryLetter];			
+			int keyEquiv = item.inventoryLetter;			
 			if ( keyEquiv == 0 && isEnabled && *nextKey ) {
 				keyEquiv = *nextKey++;
 				[item setInventoryLetter:keyEquiv];
@@ -318,10 +346,10 @@
 			// get key
 			NSString * title = isEnabled ? keyEquiv ? [NSString stringWithFormat:@" (%c)",keyEquiv] : @" ( )" : @"";
 			// add title
-			title = [title stringByAppendingFormat:@"\t%@", [item title]];
+			title = [title stringByAppendingFormat:@"\t%@", item.title];
 			// add detail
-			if ( [item detail] ) {
-				title = [title stringByAppendingFormat:@" (%@)", [item detail]];
+			if ( item.detail ) {
+				title = [title stringByAppendingFormat:@" (%@)", item.detail];
 			}
 			
 			// save expanded title
@@ -427,6 +455,9 @@
 		// convert runs of spaces to tabs, to we can generate tab stops for them
 		[self convertSpacesToTabs];
 	}
+	
+	// remove true/false column in options window
+	[self convertTrueFalseTags];
 	
 	// compute tab stops for items
 	NSMutableArray * tabStops = [self computeTabStopsWithGroupAttr:groupAttr itemAttr:itemAttr];
