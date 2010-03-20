@@ -61,10 +61,7 @@
 - (void)updateInventory
 {
 	[self updateSlot:weaponHand		item:uwep		text:@"weapon"];
-	if ( u.twoweap )
-		[self updateSlot:alternateHand	item:uswapwep	text:@"2nd weapon"];
-	else
-		[self updateSlot:alternateHand	item:uarms	text:@"shield"];
+	[self updateSlot:alternateHand	item:u.twoweap?uswapwep:uarms	text:@"shield"];
 	[self updateSlot:shirt			item:uarmu		text:@"shirt"];
 	[self updateSlot:cloak			item:uarmc		text:@"cloak"];
 	[self updateSlot:helmet			item:uarmh		text:@"helmet"];
