@@ -472,6 +472,7 @@ int cocoa_nh_poskey(int *x, int *y, int *mod) {
 
 void cocoa_nhbell() {
 	NSLog(@"nhbell");
+	NSBeep();
 }
 
 int cocoa_doprev_message() {
