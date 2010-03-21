@@ -40,8 +40,6 @@
 	NSPoint		tooltipPoint;
 	NSWindow *	tooltipWindow;
 	
-	BOOL		useAsciiMode;
-	
 	NSArray	*	asciiColors;
 	NSFont	*	asciiFont;
 }
@@ -53,6 +51,5 @@
 - (NSFont *)asciiFont;
 - (BOOL)setAsciiFont:(NSFont *)font;
 - (void)enableAsciiMode:(BOOL)enable;
-- (BOOL)asciiMode;
 
 @end

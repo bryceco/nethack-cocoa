@@ -122,29 +122,41 @@ static const float popoverItemHeight = 44.0f;
 	[self fixMenuKeyEquivalents:menu];
 	
 	[[self window] setAcceptsMouseMovedEvents:YES];
-	
-	// read tile set preferences
-	NSString *	tileSetName = [[NSUserDefaults standardUserDefaults] objectForKey:@"TileSetName"];
-	NSString *	asciiFontName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AsciiFontName"];
-	CGFloat		asciiFontSize = [[NSUserDefaults standardUserDefaults] floatForKey:@"AsciiFontSize"];
-	BOOL		useAscii = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAscii"];
+}
 
-	if ( tileSetName ) {
+// called when user options have been read and engine wants windows to be created
+-(void)initWindows
+{
+	if ( ![NSThread isMainThread] ) {
+		[self performSelectorOnMainThread:@selector(initWindows) withObject:nil waitUntilDone:YES];
+	} else {
+		// read tile set preferences
+		NSString *	tileSetName = [[NSUserDefaults standardUserDefaults] objectForKey:@"TileSetName"];
+		NSString *	asciiFontName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AsciiFontName"];
+		CGFloat		asciiFontSize = [[NSUserDefaults standardUserDefaults] floatForKey:@"AsciiFontSize"];
+		
+		iflags.wc_ascii_map = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAscii"];
+		
+		// set defaults if no user preference
+		if ( tileSetName == nil ) {
+			tileSetName = @"kins32.bmp";
+		}
+		
 		NSSize size = [self tileSetSizeFromName:tileSetName];
 		[mainView setTileSet:tileSetName size:size];
-	}
-	if ( asciiFontName && asciiFontSize ) {
+		
 		NSFont * font = [NSFont fontWithName:asciiFontName size:asciiFontSize];
-		if ( font ) {
-			[mainView setAsciiFont:font];
+		if ( font == nil ) {
+			font = [NSFont systemFontOfSize:14.0];
 		}
+		[mainView setAsciiFont:font];
+		
+		// place check mark on ASCII menu item
+		[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
+		
+		// select ascii mode in map view
+		[mainView enableAsciiMode:iflags.wc_ascii_map];		
 	}
-	
-	// place check mark on ASCII menu item
-	[asciiModeMenuItem setState:useAscii ? NSOnState : NSOffState];
-	
-	// select ascii mode in map view
-	[mainView enableAsciiMode:useAscii];
 }
 
 -(void)windowWillClose:(NSNotification *)notification
@@ -155,7 +167,7 @@ static const float popoverItemHeight = 44.0f;
 	NSFont * font = [mainView asciiFont];
 	[[NSUserDefaults standardUserDefaults] setObject:[font fontName] forKey:@"AsciiFontName"];
 	[[NSUserDefaults standardUserDefaults] setFloat:[font pointSize] forKey:@"AsciiFontSize"];
-	BOOL	useAscii = [mainView asciiMode];
+	BOOL	useAscii = iflags.wc_ascii_map;
 	[[NSUserDefaults standardUserDefaults] setBool:useAscii forKey:@"UseAscii"];
 	// save user defined tile sets
 	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];		
@@ -337,6 +349,20 @@ static const float popoverItemHeight = 44.0f;
 		[self createTileSetListInMenu:menu];
 	}
 }
+
+
+- (void)preferenceUpdate:(NSString *)pref
+{
+	// user changed game options
+	if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:@selector(preferenceUpdate:) withObject:pref waitUntilDone:YES];
+	} else {
+		if ( [pref isEqualToString:@"ascii_map"] ) {
+			[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
+		}
+	}		
+}
+
 
 
 - (IBAction)terminateApplication:(id)sender

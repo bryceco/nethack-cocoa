@@ -109,9 +109,10 @@ donull,
 cocoa_start_screen,
 cocoa_end_screen,
 cocoa_outrip,
-genl_preference_update,
+cocoa_preference_update,
 };
 
+	
 boolean cocoa_getpos = 0;
 
 static char s_baseFilePath[FQN_MAX_FILENAME];
@@ -246,6 +247,8 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 	//NSLog(@"init_nhwindows");
 	iflags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
+	
+	[[MainWindowController instance] initWindows];
 }
 
 void cocoa_askname() {
@@ -587,6 +590,12 @@ void cocoa_end_screen() {
 
 void cocoa_outrip(winid wid, int how) {
 	NSLog(@"outrip %x", wid);
+}
+
+
+void cocoa_preference_update(const char * pref)
+{
+	[[MainWindowController instance] preferenceUpdate:[NSString stringWithUTF8String:pref]];
 }
 
 #pragma mark window API player_selection()

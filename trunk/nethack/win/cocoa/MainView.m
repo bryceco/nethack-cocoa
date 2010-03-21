@@ -46,9 +46,9 @@
 
 -(void)enableAsciiMode:(BOOL)enable
 {
-	useAsciiMode = enable;
+	iflags.wc_ascii_map = enable;
 	
-	if ( useAsciiMode ) {
+	if ( iflags.wc_ascii_map ) {
 
 		// compute required size for selected font
 		NSSize total = { 0, 0 };
@@ -107,11 +107,6 @@
 	return _tileSetName;
 }
 
--(BOOL)asciiMode
-{
-	return useAsciiMode;
-}
-
 
 -(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
 {
@@ -146,11 +141,6 @@
 	if (self = [super initWithFrame:frame]) {
 		
 		petMark = [NSImage imageNamed:@"petmark.png"];
-#if 0
-		[self setTileSet:@"absurd128.png" size:NSMakeSize(128,128)];
-#else
-		[self setTileSet:@"kins32.bmp" size:NSMakeSize(32,32)];
-#endif
 		
 		// we need to know when we scroll
 		NSClipView * clipView = [[self enclosingScrollView] contentView];
@@ -221,7 +211,7 @@
 					int glyph = [map glyphAtX:i y:j];
 					if (glyph != kNoGlyph) {
 						
-						if ( useAsciiMode || Is_rogue_level(&u.uz) ) {
+						if ( iflags.wc_ascii_map || Is_rogue_level(&u.uz) ) {
 							
 							// use ASCII text
 							int ochar, ocolor;

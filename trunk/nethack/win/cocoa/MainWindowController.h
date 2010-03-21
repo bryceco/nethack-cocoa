@@ -71,6 +71,9 @@
 - (IBAction)enableAsciiMode:(id)sender;
 - (IBAction)addTileSet:(id)sender;
 
+- (void)initWindows;
+- (void)preferenceUpdate:(NSString *)pref;
+
 // window API
 - (void)handleDirectionQuestion:(NhYnQuestion *)q;
 - (void)showYnQuestion:(NhYnQuestion *)q;
