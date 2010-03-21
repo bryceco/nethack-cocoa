@@ -197,7 +197,8 @@
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
 		NSImage					*	image = [[TileSet instance] image];
-		
+		NSStringEncoding			encoding = CFStringConvertEncodingToNSStringEncoding( kCFStringEncodingDOSLatinUS );
+
 		// set stuff up for ascii drawing
 		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
 		NSRange rangeAll = NSMakeRange(0,[aString length]);
@@ -218,13 +219,14 @@
 							unsigned int special;
 							mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 							
-							NSString * ch = [[NSString alloc] initWithFormat:@"%c", ochar];
-							[[aString mutableString] setString:ch];
-							[ch release];
+							// use CP437 which correctly maps when using ibm_graphics
+							char ch[] = { ochar, 0 };
+							NSString * string = [[NSString alloc] initWithCString:ch encoding:encoding];
+							[[aString mutableString] setString:string];
+							[string release];
 							
-							NSColor * color = [asciiColors objectAtIndex:ocolor];
-
 							// text color
+							NSColor * color = [asciiColors objectAtIndex:ocolor];
 							[aString addAttribute:NSForegroundColorAttributeName value:color range:rangeAll];
 		
 							// background is black
