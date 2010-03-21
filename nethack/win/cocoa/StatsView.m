@@ -126,7 +126,7 @@
 		[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
 		[ac setStringValue:value];
 		
-		if ( [scanner scanString:@"Xp:" intoString:&value] ) {
+		if ( [scanner scanString:@"Xp:" intoString:&value] ) {	// user can change this using the "showexp" option, or be being polymorphed
 			// 10/9999
 			[xpLabel setStringValue:value];
 			[scanner scanUpToString:@"/" intoString:&value];
@@ -149,9 +149,12 @@
 			assert(NO);
 		}
 
-		[scanner scanString:@"T:" intoString:NULL];
-		[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
-		[turn setStringValue:value];
+		if ( [scanner scanString:@"T:" intoString:NULL] ) {	// user can turn this off using the "time" option
+			[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
+			[turn setStringValue:value];
+		} else {
+			[turn setStringValue:@""];			
+		}
 		
 		value = [[scanner string] substringFromIndex:[scanner scanLocation]];
 		value = [value stringByTrimmingCharactersInSet:whitespace];
