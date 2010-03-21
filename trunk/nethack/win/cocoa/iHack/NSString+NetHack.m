@@ -32,7 +32,11 @@
 	NSString *ws = [self substringBetweenDelimiters:@"()"];
 	if (ws && ws.length > 1) {
 		NSRange r = [self rangeOfString:ws];
-		strings = [NSArray arrayWithObjects:[self substringToIndex:r.location-2], ws, nil];
+		if ( r.location >= 2 ) {
+			strings = [NSArray arrayWithObjects:[self substringToIndex:r.location-2], ws, nil];
+		} else {
+			strings = [NSArray arrayWithObjects:self, nil];
+		}
 	} else {
 		strings = [NSArray arrayWithObjects:self, nil];
 	}
