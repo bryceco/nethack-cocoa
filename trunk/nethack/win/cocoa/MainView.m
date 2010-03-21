@@ -38,6 +38,8 @@
 
 @implementation MainView
 
+NSStringEncoding	codepage437encoding;
+
 
 -(BOOL)isFlipped
 {
@@ -140,6 +142,8 @@
 
 	if (self = [super initWithFrame:frame]) {
 		
+		codepage437encoding = CFStringConvertEncodingToNSStringEncoding( kCFStringEncodingDOSLatinUS );
+
 		petMark = [NSImage imageNamed:@"petmark.png"];
 		
 		// we need to know when we scroll
@@ -197,7 +201,6 @@
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
 		NSImage					*	image = [[TileSet instance] image];
-		NSStringEncoding			encoding = CFStringConvertEncodingToNSStringEncoding( kCFStringEncodingDOSLatinUS );
 
 		// set stuff up for ascii drawing
 		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
@@ -221,7 +224,7 @@
 							
 							// use CP437 which correctly maps when using ibm_graphics
 							char ch[] = { ochar, 0 };
-							NSString * string = [[NSString alloc] initWithCString:ch encoding:encoding];
+							NSString * string = [[NSString alloc] initWithCString:ch encoding:codepage437encoding];
 							[[aString mutableString] setString:string];
 							[string release];
 							
@@ -268,17 +271,15 @@
 		} else {
 			hp100 = u.uhpmax ? u.uhp*100/u.uhpmax : 100;
 		}
-		const static float colorValue = 0.7f;
-		float playerRectColor[] = {colorValue, 0, 0, 0.7f};
+		
+		NSColor * color;
 		if (hp100 > 75) {
-			playerRectColor[0] = 0;
-			playerRectColor[1] = colorValue;
+			color = [NSColor colorWithDeviceRed:0.0 green:0.7 blue:0.0 alpha:0.7];
 		} else if (hp100 > 50) {
-			playerRectColor[2] = 0;
-			playerRectColor[0] = playerRectColor[1] = colorValue;
+			color = [NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.0 alpha:0.7];
+		} else {
+			color = [NSColor colorWithDeviceRed:0.7 green:0.0 blue:0.0 alpha:0.7];
 		}
-		NSColor *color = [NSColor colorWithDeviceRed:playerRectColor[0] green:playerRectColor[1]
-												blue:playerRectColor[2] alpha:playerRectColor[3]];
 		[color setStroke];
 		[NSBezierPath strokeRect:r];
 	}
@@ -320,7 +321,7 @@
 	if ( tooltipWindow ) {
 		[tooltipWindow close];	// automatically released when closed
 		tooltipWindow = nil;
-	}	
+	}
 }
 
 
@@ -329,7 +330,7 @@ NSString * DescriptionForTile( int x, int y )
 	char    out_str[BUFSZ];
 	InventoryOfTile(x, y, out_str);
 
-	NSString * text = [NSString stringWithUTF8String:out_str];
+	NSString * text = [NSString stringWithCString:out_str encoding:codepage437encoding];
 	
 	NSScanner * scanner = [NSScanner scannerWithString:text];
 	[scanner setScanLocation:1];
