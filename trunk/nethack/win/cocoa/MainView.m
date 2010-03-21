@@ -274,11 +274,11 @@ NSStringEncoding	codepage437encoding;
 		
 		NSColor * color;
 		if (hp100 > 75) {
-			color = [NSColor colorWithDeviceRed:0.0 green:0.7 blue:0.0 alpha:0.7];
+			color = [NSColor colorWithDeviceRed:0.0 green:0.8 blue:0.0 alpha:0.9];
 		} else if (hp100 > 50) {
-			color = [NSColor colorWithDeviceRed:0.7 green:0.7 blue:0.0 alpha:0.7];
+			color = [NSColor colorWithDeviceRed:0.8 green:0.8 blue:0.0 alpha:0.9];
 		} else {
-			color = [NSColor colorWithDeviceRed:0.7 green:0.0 blue:0.0 alpha:0.7];
+			color = [NSColor colorWithDeviceRed:0.8 green:0.0 blue:0.0 alpha:0.9];
 		}
 		[color setStroke];
 		[NSBezierPath strokeRect:r];
