@@ -24,6 +24,7 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "Protocols.h"
 #import "NhMenuWindow.h"
 
 @interface MenuWindowController : NSWindowController <NSWindowDelegate> {

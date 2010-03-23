@@ -23,6 +23,7 @@
  */
 
 #import "ZDirection.h"
+#import "Protocols.h"
 
 @class NhYnQuestion;
 @class MainView;
@@ -39,8 +40,7 @@
 @class StatsView;
 @class EquipmentView;
 
-@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {
-
+@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {	
 	BOOL										isDirectionQuestion;
 	
 	NSMutableArray							*	userTiles;

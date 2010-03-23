@@ -24,6 +24,8 @@
 
 
 #import <Cocoa/Cocoa.h>
+#import "Protocols.h"
+
 
 @class FlippedTextField;
 
