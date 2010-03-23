@@ -32,6 +32,7 @@
 #import "NhEvent.h"
 #import "wincocoa.h"
 #import "TooltipWindow.h"
+#import "NSImage+FlippedDrawing.h"
 
 #import "Inventory.h"
 
@@ -243,12 +244,20 @@ NSStringEncoding	codepage437encoding;
 							
 							// draw tile
 							NSRect srcRect = [[TileSet instance] sourceRectForGlyph:glyph];
+#if __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+							[image drawAdjustedInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0];
+#else
 							[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
 							
+#endif
 						}
 						
 						if (glyph_is_pet(glyph)) {
+#if __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+							[petMark drawAdjustedInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
+#else
 							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:nil];
+#endif
 						}
 						
 					} else {

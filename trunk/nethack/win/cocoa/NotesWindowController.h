@@ -23,6 +23,7 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "Protocols.h"
 
 
 @interface NotesWindowController : NSWindowController <NSWindowDelegate> {
