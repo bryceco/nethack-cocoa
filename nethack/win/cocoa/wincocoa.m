@@ -129,13 +129,6 @@ coord CoordMake(xchar i, xchar j) {
 	strcpy(s_baseFilePath, [[[NSBundle mainBundle] resourcePath] cStringUsingEncoding:NSASCIIStringEncoding]);
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-#if 0
-	[defaults registerDefaults:[NSDictionary dictionaryWithObjectsAndKeys:
-								@"role:samurai,gender:male,time,autopickup,showexp,pickup_types:$!?+\"=/,norest_on_space,runmode:walk,menu_tab_sep,tile_file:tiles40x20.bmp,tile_height:40,tile_width:20",
-								kNetHackOptions,
-								nil]];
-#else
-#endif
 	NSString *netHackOptions = [defaults stringForKey:kNetHackOptions];
 	if ( netHackOptions ) {
 		setenv("NETHACKOPTIONS", [netHackOptions cStringUsingEncoding:NSASCIIStringEncoding], 1);
