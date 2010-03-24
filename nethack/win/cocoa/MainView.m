@@ -201,8 +201,12 @@ NSStringEncoding	codepage437encoding;
 {
 	NhMapWindow *map = (NhMapWindow *) [NhWindow mapWindow];
 	if (map) {
-		NSImage					*	image = [[TileSet instance] image];
-
+		NSImage	*	image = [[TileSet instance] image];
+		
+		// cursor can update asynchronously behind us so gets its location upfront
+		XCHAR_P	cursorX, cursorY;
+		[map cursX:&cursorX	y:&cursorY];		
+	
 		// set stuff up for ascii drawing
 		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
 		NSRange rangeAll = NSMakeRange(0,[aString length]);
@@ -248,7 +252,6 @@ NSStringEncoding	codepage437encoding;
 							[image drawAdjustedInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0];
 #else
 							[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
-							
 #endif
 						}
 						
@@ -270,8 +273,6 @@ NSStringEncoding	codepage437encoding;
 		}
 
 		// draw cursor rectangle
-		XCHAR_P	cursorX, cursorY;
-		[map cursX:&cursorX	y:&cursorY];		
 		NSRect r = NSMakeRect( cursorX*tileSize.width, cursorY*tileSize.height, tileSize.width, tileSize.height);
 		// hp100 calculation from qt_win.cpp
 		int hp100;
