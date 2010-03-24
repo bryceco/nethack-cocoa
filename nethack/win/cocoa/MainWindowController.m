@@ -115,7 +115,6 @@ static const float popoverItemHeight = 44.0f;
 }
 
 - (void)awakeFromNib {
-	[super awakeFromNib];
 	instance = self;
 	
 	NSMenu * menu = [[NSApplication sharedApplication] mainMenu];
