@@ -87,7 +87,6 @@ NSStringEncoding	codepage437encoding;
 	frame.size = NSMakeSize( COLNO*tileSize.width, ROWNO*tileSize.height );
 	[self setFrame:frame];
 	
-	[self centerHero];
 	[self setNeedsDisplay:YES];
 }
 
@@ -182,18 +181,15 @@ NSStringEncoding	codepage437encoding;
 }
 
 - (void)cliparoundX:(int)x y:(int)y {
-	clipX = x;
-	clipY = y;
-}
-
-
-// if we're too close to edge of window then scroll us back
-- (void)centerHero
-{
+	// if we're too close to edge of window then scroll us back
 	int border = 4;
-	NSPoint center = NSMakePoint( (u.ux+0.5)*tileSize.width, (u.uy+0.5)*tileSize.height );
+	NSPoint center = NSMakePoint( (x+0.5)*tileSize.width, (y+0.5)*tileSize.height );
 	NSRect rect = NSMakeRect( center.x-tileSize.width*border, center.y-tileSize.height*border, tileSize.width*2*border, tileSize.height*2*border );
 	[self scrollRectToVisible:rect];	 	 
+}
+- (void)cliparoundHero
+{
+	[self cliparoundX:u.ux y:u.uy];
 }
 
 
@@ -417,7 +413,7 @@ NSString * DescriptionForTile( int x, int y )
 - (void) boundsDidChangeNotification:(NSNotification *)notification
 {
 	// not sure if we can do this synchronously...
-	[self performSelector:@selector(centerHero) withObject:nil afterDelay:0.0];
+	[self performSelector:@selector(cliparoundHero) withObject:nil afterDelay:0.0];
 }
 
 
