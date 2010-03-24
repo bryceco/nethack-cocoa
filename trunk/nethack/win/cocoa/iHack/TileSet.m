@@ -42,10 +42,19 @@ static TileSet *s_instance = nil;
 
 - (id)initWithImage:(NSImage *)img tileSize:(NSSize)ts {
 	if (self = [super init]) {
+
+#if 1
+		NSRect rect = NSMakeRect(0,0,img.size.width,img.size.height);
+		image = [[NSImage alloc] initWithSize:rect.size];
+		[image lockFocus];
+		[img drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:1.0];
+		[image unlockFocus];
+#else	
 		image = [img retain];
+#endif
 		tileSize = ts;
 		rows = image.size.height / tileSize.height;
-		columns = image.size.width / tileSize.width;
+		columns = image.size.width / tileSize.width;		
 	}
 	return self;
 }
