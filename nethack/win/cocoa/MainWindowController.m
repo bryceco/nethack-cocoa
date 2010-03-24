@@ -577,7 +577,6 @@ static const float popoverItemHeight = 44.0f;
 		if (w == [NhWindow messageWindow]) {
 			[self refreshMessages];
 		} else if (w.type == NHW_MAP) {
-			[mainView centerHero];
 			[mainView setNeedsDisplay:YES];
 		} else if ( w.type == NHW_STATUS ) {
 			NSString * text = [w text];
