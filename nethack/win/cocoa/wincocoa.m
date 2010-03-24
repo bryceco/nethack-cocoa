@@ -241,6 +241,8 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 	iflags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
 	
+	switch_graphics(IBM_GRAPHICS);
+
 	[[MainWindowController instance] initWindows];
 }
 
