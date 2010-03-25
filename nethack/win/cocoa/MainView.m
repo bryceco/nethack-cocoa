@@ -461,4 +461,9 @@ NSString * DescriptionForTile( int x, int y )
 {
 	NSLog(@"pageDown\n");
 }
+- (void)moveToBeginningOfDocument:(id)sender
+{
+	NSLog(@"moveToBeginningOfDocument\n");	
+}
+
 @end
