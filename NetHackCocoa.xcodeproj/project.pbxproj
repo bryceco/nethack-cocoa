@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		020CD2D71137089D00297C4C /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020CD2D61137089D00297C4C /* StatsView.m */; };
 		020ECFF3114CD9AA00CC6076 /* EquipmentView.m in Sources */ = {isa = PBXBuildFile; fileRef = 020ECFF2114CD9AA00CC6076 /* EquipmentView.m */; };
+		0220A088115B24AD0086662E /* MainWindow.m in Sources */ = {isa = PBXBuildFile; fileRef = 0220A087115B24AD0086662E /* MainWindow.m */; };
 		025194F611588C170085F9B3 /* NSImage+FlippedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 025194F511588C170085F9B3 /* NSImage+FlippedDrawing.m */; };
 		0259AE7C1135AD53002AEFA1 /* Arrow-E.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE741135AD53002AEFA1 /* Arrow-E.png */; };
 		0259AE7D1135AD53002AEFA1 /* Arrow-N.png in Resources */ = {isa = PBXBuildFile; fileRef = 0259AE751135AD53002AEFA1 /* Arrow-N.png */; };
@@ -346,6 +347,8 @@
 		020CD2D61137089D00297C4C /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
 		020ECFF1114CD9AA00CC6076 /* EquipmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentView.h; sourceTree = "<group>"; };
 		020ECFF2114CD9AA00CC6076 /* EquipmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentView.m; sourceTree = "<group>"; };
+		0220A086115B24AD0086662E /* MainWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindow.h; sourceTree = "<group>"; };
+		0220A087115B24AD0086662E /* MainWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindow.m; sourceTree = "<group>"; };
 		0251947611587A410085F9B3 /* Protocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocols.h; sourceTree = "<group>"; };
 		025194F411588C170085F9B3 /* NSImage+FlippedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+FlippedDrawing.h"; sourceTree = "<group>"; };
 		025194F511588C170085F9B3 /* NSImage+FlippedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+FlippedDrawing.m"; sourceTree = "<group>"; };
@@ -864,6 +867,8 @@
 				0270BA60112E417E000CC97D /* YesNoWindowController.h */,
 				0270BA61112E417E000CC97D /* YesNoWindowController.m */,
 				0251947611587A410085F9B3 /* Protocols.h */,
+				0220A086115B24AD0086662E /* MainWindow.h */,
+				0220A087115B24AD0086662E /* MainWindow.m */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
@@ -1850,6 +1855,7 @@
 				43154037114ABAFC003E9BF4 /* ZDirection.m in Sources */,
 				020ECFF3114CD9AA00CC6076 /* EquipmentView.m in Sources */,
 				025194F611588C170085F9B3 /* NSImage+FlippedDrawing.m in Sources */,
+				0220A088115B24AD0086662E /* MainWindow.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

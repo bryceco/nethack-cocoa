@@ -181,13 +181,25 @@ coord CoordMake(xchar i, xchar j) {
 		NSUInteger modifier = [keyEvent modifierFlags];
 		key = [chars characterAtIndex:0];
 		
+		switch (key) {
+			case NSUpArrowFunctionKey:
+			case NSDownArrowFunctionKey:
+			case NSLeftArrowFunctionKey:
+			case NSRightArrowFunctionKey:
+				NSLog(@"Arrow key: %@\n", keyEvent);
+				break;
+			default:
+				break;
+		}
+		
+		
 		if ( modifier & NSCommandKeyMask ) {
 			// map Cmd-x to Ctrl-x to match Qt port
 			if ( strchr( "ad", key ) != NULL ) {
 				modifier &= ~NSCommandKeyMask;
 				modifier |= NSControlKeyMask;
 			}
-		}		
+		}
 		
 		if ( modifier & NSShiftKeyMask  ) {
 			// system already upcases for us
