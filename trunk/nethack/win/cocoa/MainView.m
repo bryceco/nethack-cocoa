@@ -453,5 +453,12 @@ NSString * DescriptionForTile( int x, int y )
 {	
 	NSLog(@"moveRight\n");
 }
-
+- (void)pageUp:(id)sender
+{
+	NSLog(@"pageUp\n");
+}
+- (void)pageDown:(id)sender
+{
+	NSLog(@"pageDown\n");
+}
 @end
