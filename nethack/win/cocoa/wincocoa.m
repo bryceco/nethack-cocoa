@@ -234,6 +234,13 @@ void error(const char *s, ...) {
 	exit(0);
 }
 
+
+void cocoa_decgraphics_mode_callback()
+{
+	// user tried to switch to DECgraphics, so switch them to IBM instead
+	switch_graphics( IBM_GRAPHICS );	
+}
+
 #pragma mark nethack window API
 
 void cocoa_init_nhwindows(int* argc, char** argv) {
@@ -241,8 +248,14 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 	iflags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
 	
+	// default ASCII mode is to use IBM graphics with color
+	iflags.use_color = TRUE;
 	switch_graphics(IBM_GRAPHICS);
-
+	
+	// if user switches to DEC graphics don't let them
+	extern void NDECL((*decgraphics_mode_callback));
+	decgraphics_mode_callback = cocoa_decgraphics_mode_callback;
+	
 	[[MainWindowController instance] initWindows];
 }
 
