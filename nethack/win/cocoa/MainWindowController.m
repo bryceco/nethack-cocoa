@@ -154,8 +154,21 @@ static const float popoverItemHeight = 44.0f;
 		[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
 		
 		// select ascii mode in map view
-		[mainView enableAsciiMode:iflags.wc_ascii_map];		
+		[mainView enableAsciiMode:iflags.wc_ascii_map];
+		
+		
+		
+		// we need to know when we scroll
+		NSClipView * clipView = [[messagesView enclosingScrollView] contentView];
+		[clipView setPostsBoundsChangedNotifications: YES];
+		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagesScrollClipviewBoundsDidChangeNotification:) 
+													 name:NSViewBoundsDidChangeNotification object:clipView];
 	}
+}
+
+-(void)messagesScrollClipviewBoundsDidChangeNotification:(NSNotification *)notification
+{
+	// here only to diagnose issue #2
 }
 
 -(void)windowWillClose:(NSNotification *)notification
