@@ -186,7 +186,6 @@ coord CoordMake(xchar i, xchar j) {
 			case NSDownArrowFunctionKey:
 			case NSLeftArrowFunctionKey:
 			case NSRightArrowFunctionKey:
-				NSLog(@"Arrow key: %@\n", keyEvent);
 				break;
 			default:
 				break;

@@ -421,49 +421,11 @@ NSString * DescriptionForTile( int x, int y )
 {
 	if ( [theEvent type] == NSKeyDown ) {
 		
-		NSLog(@"MainView keyDown: %@, char = %x\n", theEvent, [[theEvent characters] characterAtIndex:0] );
-		
 		wchar_t key = [WinCocoa keyWithKeyEvent:theEvent];
 		if ( key ) {
 			[[NhEventQueue instance] addKey:key];			
 		}
 	}
-}
-
-- (BOOL)performKeyEquivalent:(NSEvent *)theEvent
-{
-	NSLog(@"MainView performKeyEquivalent: %@, char = %x\n", theEvent, [[theEvent characters] characterAtIndex:0] );
-	return [super performKeyEquivalent:theEvent];
-}
-
-// Here to diagnose issue #2. We should never hit these unless you do Ctrl-Arrow:
-- (void)moveUp:(id)sender
-{
-	NSLog(@"moveUp\n");
-}
-- (void)moveDown:(id)sender
-{
-	NSLog(@"moveDown\n");
-}
-- (void)moveLeft:(id)sender
-{	
-	NSLog(@"moveLeft\n");
-}
-- (void)moveRight:(id)sender
-{	
-	NSLog(@"moveRight\n");
-}
-- (void)pageUp:(id)sender
-{
-	NSLog(@"pageUp\n");
-}
-- (void)pageDown:(id)sender
-{
-	NSLog(@"pageDown\n");
-}
-- (void)moveToBeginningOfDocument:(id)sender
-{
-	NSLog(@"moveToBeginningOfDocument\n");	
 }
 
 @end
