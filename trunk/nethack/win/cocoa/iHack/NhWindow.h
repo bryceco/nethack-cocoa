@@ -48,4 +48,7 @@
 - (void)print:(const char *)str attr:(int)attr;
 - (void)clear;
 
+- (NSInteger)messageCount;
+- (id)messageAtRow:(NSInteger)row;
+
 @end
