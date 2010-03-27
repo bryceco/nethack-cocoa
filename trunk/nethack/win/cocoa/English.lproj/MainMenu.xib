@@ -12,8 +12,9 @@
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="1680"/>
 			<integer value="29"/>
+			<integer value="1143"/>
+			<integer value="1680"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
 			<bool key="EncodedWithXMLCoder">YES</bool>
@@ -1219,7 +1220,7 @@
 									<reference key="NSSuperview" ref="288784278"/>
 									<reference key="NSTarget" ref="288784278"/>
 									<string key="NSAction">_doScroller:</string>
-									<double key="NSPercent">0.98979591836734693</double>
+									<double key="NSPercent">0.90797546012269936</double>
 								</object>
 								<object class="NSScroller" id="824580950">
 									<reference key="NSNextResponder" ref="288784278"/>
@@ -3229,7 +3230,7 @@
 				<nil key="NSViewClass"/>
 				<string key="NSWindowContentMaxSize">{1.79769e+308, 1.79769e+308}</string>
 				<object class="NSView" key="NSWindowView" id="198113399">
-					<nil key="NSNextResponder"/>
+					<reference key="NSNextResponder"/>
 					<int key="NSvFlags">256</int>
 					<object class="NSMutableArray" key="NSSubviews">
 						<bool key="EncodedWithXMLCoder">YES</bool>
@@ -3476,7 +3477,7 @@
 											<double key="NSIntercellSpacingHeight">2</double>
 											<reference key="NSBackgroundColor" ref="266245"/>
 											<reference key="NSGridColor" ref="700235644"/>
-											<double key="NSRowHeight">17</double>
+											<double key="NSRowHeight">32</double>
 											<int key="NSTvFlags">306184192</int>
 											<reference key="NSDelegate"/>
 											<reference key="NSDataSource"/>
@@ -3539,7 +3540,7 @@
 							<reference key="NSContentView" ref="768249729"/>
 							<reference key="NSHeaderClipView" ref="231456318"/>
 							<reference key="NSCornerView" ref="714239521"/>
-							<bytes key="NSScrollAmts">QSAAAEEgAABBmAAAQZgAAA</bytes>
+							<bytes key="NSScrollAmts">QSAAAEEgAABCCAAAQggAAA</bytes>
 						</object>
 						<object class="NSButton" id="879546598">
 							<reference key="NSNextResponder" ref="198113399"/>
@@ -4055,6 +4056,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						</object>
 					</object>
 					<string key="NSFrameSize">{424, 536}</string>
+					<reference key="NSSuperview"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1440, 878}}</string>
 				<string key="NSMaxSize">{1.79769e+308, 1.79769e+308}</string>
@@ -9306,9 +9308,9 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<integer value="1"/>
 					<string>{74, 862}</string>
 					<string>{{6, 978}, {478, 20}}</string>
-					<string>{{113, 409}, {637, 376}}</string>
+					<string>{{145, 100}, {637, 376}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{113, 409}, {637, 376}}</string>
+					<string>{{145, 100}, {637, 376}}</string>
 					<integer value="1"/>
 					<string>{{33, 99}, {480, 360}}</string>
 					<boolean value="YES"/>
@@ -9667,7 +9669,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>mainView</string>
 							<string>messagesView</string>
 							<string>notesWindow</string>
-							<string>scrollView</string>
 							<string>showPlayerSelection</string>
 							<string>statsView</string>
 							<string>tileSetMenu</string>
@@ -9683,7 +9684,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<string>MainView</string>
 							<string>NSTableView</string>
 							<string>NotesWindowController</string>
-							<string>NSScrollView</string>
 							<string>PlayerSelectionWindowController</string>
 							<string>StatsView</string>
 							<string>NSMenu</string>
