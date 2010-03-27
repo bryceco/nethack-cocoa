@@ -305,12 +305,14 @@
 	// create attributed string with glyph
 	NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
 	[(NSCell *)[attachment attachmentCell] setImage:image];
-	NSMutableAttributedString * aString = [[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy];
+	NSMutableAttributedString * aString = [[[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy] autorelease];
 	[attachment release];
 	
 	// add text to string and adjust vertical baseline of text so it aligns with icon
 	[[aString mutableString] appendString:title];
-	[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:12.0] range:NSMakeRange(1, [title length])];
+	CGFloat offset = [[TileSet instance] tileSize].height;
+	offset = (offset - 16) * 10/16 + 2;
+	[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:offset] range:NSMakeRange(1, [title length])];
 
 	return aString;
 }
