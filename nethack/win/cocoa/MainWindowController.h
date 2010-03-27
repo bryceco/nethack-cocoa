@@ -40,15 +40,15 @@
 @class StatsView;
 @class EquipmentView;
 
-@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate> {	
+@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDataSource> {	
 	BOOL										isDirectionQuestion;
 	
 	NSMutableArray							*	userTiles;
 	
 	IBOutlet MainView						*	mainView;
+	IBOutlet NSTableView					*	messagesView;
 	IBOutlet NSScrollView					*	scrollView;
-	IBOutlet NSTextView						*	messagesView;
-	IBOutlet NSTextField					*	statusView;
+	//	IBOutlet NSTextField					*	statusView;
 	IBOutlet NSMenu							*	tileSetMenu;
 	IBOutlet NSMenuItem						*	asciiModeMenuItem;
 	IBOutlet StatsView						*	statsView;

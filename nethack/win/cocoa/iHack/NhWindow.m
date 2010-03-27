@@ -196,6 +196,28 @@ static NhWindow *s_mapWindow = nil;
 	}
 }
 
+
+- (NSInteger)messageCount
+{
+	NSInteger count;
+	[self lock];
+	count = [lines count];
+	[self unlock];
+	return count;
+}
+- (id)messageAtRow:(NSInteger)row
+{
+	id result = nil;
+	[self lock];
+	if ( row < [lines count] ) {
+		result = [lines objectAtIndex:row];
+		[[result retain] autorelease];
+	}
+	[self unlock];
+	return result;
+}
+
+
 - (void)lock {
 	[lock lock];
 }

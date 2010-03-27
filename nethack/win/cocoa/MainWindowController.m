@@ -156,19 +156,8 @@ static const float popoverItemHeight = 44.0f;
 		// select ascii mode in map view
 		[mainView enableAsciiMode:iflags.wc_ascii_map];
 		
-		
-		
-		// we need to know when we scroll
-		NSClipView * clipView = [[messagesView enclosingScrollView] contentView];
-		[clipView setPostsBoundsChangedNotifications: YES];
-		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(messagesScrollClipviewBoundsDidChangeNotification:) 
-													 name:NSViewBoundsDidChangeNotification object:clipView];
+		[messagesView setIntercellSpacing:NSMakeSize(0,0)];
 	}
-}
-
--(void)messagesScrollClipviewBoundsDidChangeNotification:(NSNotification *)notification
-{
-	// here only to diagnose issue #2
 }
 
 -(void)windowWillClose:(NSNotification *)notification
@@ -385,22 +374,33 @@ static const float popoverItemHeight = 44.0f;
 
 #pragma mark window API
 
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView
+{
+	if ( aTableView == messagesView ) {
+		return [[NhWindow messageWindow] messageCount];
+	}
+	return 0;
+}
+
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex
+{
+	if ( aTableView == messagesView ) {
+		return [[NhWindow messageWindow] messageAtRow:rowIndex];
+	}
+	return nil;
+}
+
 - (void)refreshMessages {
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(refreshMessages) withObject:nil waitUntilDone:NO];
 	} else {
-		NSAttributedString *attrText = [[NhWindow messageWindow] attributedText];
-		if (attrText && attrText.length > 0) {
-			[messagesView setEditable:YES];
-			[messagesView setString:@""];
-			[messagesView insertText:attrText];
-			[messagesView scrollRangeToVisible: NSMakeRange([[messagesView string] length], 0)];
-			[messagesView setEditable:NO];
+		// update message window
+		[messagesView reloadData];
+		NSInteger rows = [messagesView numberOfRows];		
+		if (rows > 0) {
+			[messagesView scrollRowToVisible:rows-1];
 		}
-		NSString * text = [[NhWindow statusWindow] text];
-		if (text && text.length > 0) {
-			[statusView setStringValue:text];
-		}
+		// update status window
 		for ( NSString * text in [[NhWindow statusWindow] messages] ) {
 			[statsView setItems:text];
 		}
@@ -592,10 +592,6 @@ static const float popoverItemHeight = 44.0f;
 		} else if (w.type == NHW_MAP) {
 			[mainView setNeedsDisplay:YES];
 		} else if ( w.type == NHW_STATUS ) {
-			NSString * text = [w text];
-			if ( [text length] ) {
-				[statusView setStringValue:text];
-			}
 			for ( NSString * text in [w messages] ) {
 				[statsView setItems:text];
 			}
