@@ -47,8 +47,6 @@
 	
 	IBOutlet MainView						*	mainView;
 	IBOutlet NSTableView					*	messagesView;
-	IBOutlet NSScrollView					*	scrollView;
-	//	IBOutlet NSTextField					*	statusView;
 	IBOutlet NSMenu							*	tileSetMenu;
 	IBOutlet NSMenuItem						*	asciiModeMenuItem;
 	IBOutlet StatsView						*	statsView;
