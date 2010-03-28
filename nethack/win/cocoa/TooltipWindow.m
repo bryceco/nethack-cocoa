@@ -44,9 +44,23 @@
 	NSRect viewRect = [view frame];
 	NSRect screenRect = [[NSScreen mainScreen] visibleFrame];
 	if ( viewRect.origin.x + viewRect.size.width > screenRect.origin.x + screenRect.size.width ) {
+		// falls off right side
 		viewRect.origin.x = screenRect.origin.x + screenRect.size.width - viewRect.size.width;
-		[view setFrame:viewRect];
 	}
+	if ( viewRect.origin.y + viewRect.size.height > screenRect.origin.y + screenRect.size.height ) {
+		// off top
+		viewRect.origin.y = screenRect.origin.y + screenRect.size.height - viewRect.size.height;
+	}
+	if ( viewRect.origin.y < screenRect.origin.y ) {
+		// off bottom
+		viewRect.origin.y = screenRect.origin.y;
+	}
+	if ( viewRect.origin.x < screenRect.origin.x ) {
+		// off left
+		viewRect.origin.x = screenRect.origin.x;
+	}
+	[view setFrame:viewRect];
+	
 	
 	if ( self = [super initWithContentRect:[view frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES] ) {
 		[self setDelegate:self];
