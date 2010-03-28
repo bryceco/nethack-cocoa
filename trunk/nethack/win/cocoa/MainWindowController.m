@@ -361,6 +361,7 @@ static const float popoverItemHeight = 44.0f;
 	} else {
 		if ( [pref isEqualToString:@"ascii_map"] ) {
 			[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
+			[mainView enableAsciiMode:iflags.wc_ascii_map];
 		}
 	}		
 }
