@@ -401,6 +401,8 @@
 			CGFloat glyphWidth = 0.0;
 			if ( [item glyph] != NO_GLYPH ) {
 				glyphWidth = [[TileSet instance] tileSize].width;
+				if ( glyphWidth > 32 )
+					glyphWidth = 32;
 			}
 			[self adjustColumnWidths:itemWidths forString:item.title attributes:itemAttributes glyphWidth:glyphWidth];
 		}

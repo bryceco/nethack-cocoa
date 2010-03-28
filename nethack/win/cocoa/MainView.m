@@ -180,13 +180,15 @@ NSStringEncoding	codepage437encoding;
 	return self;
 }
 
-- (void)cliparoundX:(int)x y:(int)y {
+- (void)cliparoundX:(int)x y:(int)y
+{
 	// if we're too close to edge of window then scroll us back
 	NSSize border = NSMakeSize(4*tileSize.width, 4*tileSize.height);
-	if ( border.width > 256 )
-		border.width = 256;
-	if ( border.height > 256 )
-		border.height = 256;
+	NSSize frame = [[self enclosingScrollView] frame].size;
+	if ( border.width > frame.width*0.4 )
+		border.width = frame.width*0.4;
+	if ( border.height > frame.height*0.4 )
+		border.height = frame.height*0.4;
 	NSPoint center = NSMakePoint( (x+0.5)*tileSize.width, (y+0.5)*tileSize.height );
 	NSRect rect = NSMakeRect( center.x-border.width, center.y-border.height, 2*border.width, 2*border.height );
 	[self scrollRectToVisible:rect];	 	 
