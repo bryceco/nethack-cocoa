@@ -384,14 +384,10 @@ NSString * DescriptionForTile( int x, int y )
 
 - (void)tooltipFired
 {
-	NSPoint point = [self convertPoint:tooltipPoint fromView:nil];
-	if ( !NSPointInRect( point, [self bounds] ) )
-		return;
-	
 	[self cancelTooltip];
 		
-	int tileX = (int)(point.x / tileSize.width);
-	int tileY = (int)(point.y / tileSize.height);
+	int tileX = (int)(tooltipPoint.x / tileSize.width);
+	int tileY = (int)(tooltipPoint.y / tileSize.height);
 	
 #if 0
 	char buf[ 100 ];
@@ -406,7 +402,7 @@ NSString * DescriptionForTile( int x, int y )
 	NSString * text = DescriptionForTile(tileX, tileY);
 	
 	if ( text && [text length] ) {
-		NSPoint pt = NSMakePoint( point.x + 2, point.y + 2 );
+		NSPoint pt = NSMakePoint( tooltipPoint.x + 2, tooltipPoint.y + 2 );
 		pt = [self convertPointToBase:pt];
 		pt = [[self window] convertBaseToScreen:pt];
 		tooltipWindow = [[TooltipWindow alloc] initWithText:text location:pt];
@@ -423,6 +419,12 @@ NSString * DescriptionForTile( int x, int y )
 	[self cancelTooltip];
 	
 	tooltipPoint = [theEvent locationInWindow];
+	tooltipPoint = [self convertPoint:tooltipPoint fromView:nil];
+
+	NSRect visrect = [self visibleRect];
+	if ( !NSPointInRect( tooltipPoint, visrect ) )
+		return;
+		
 	tooltipTimer = [[NSTimer scheduledTimerWithTimeInterval:1.0 target:self selector:@selector(tooltipFired) userInfo:nil repeats:NO] retain];
 }
 
