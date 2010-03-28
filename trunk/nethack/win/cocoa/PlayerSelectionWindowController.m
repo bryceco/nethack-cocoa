@@ -311,6 +311,8 @@
 	// add text to string and adjust vertical baseline of text so it aligns with icon
 	[[aString mutableString] appendString:title];
 	CGFloat offset = [[TileSet instance] tileSize].height;
+	if ( offset > 32 )
+		offset = 32;
 	offset = (offset - 16) * 10/16 + 2;
 	[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:offset] range:NSMakeRange(1, [title length])];
 

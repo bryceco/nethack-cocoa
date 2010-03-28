@@ -183,7 +183,7 @@ NSStringEncoding	codepage437encoding;
 - (void)cliparoundX:(int)x y:(int)y
 {
 	// if we're too close to edge of window then scroll us back
-	NSSize border = NSMakeSize(4*tileSize.width, 4*tileSize.height);
+	NSSize border = NSMakeSize(8*tileSize.width, 8*tileSize.height);
 	NSSize frame = [[self enclosingScrollView] frame].size;
 	if ( border.width > frame.width*0.4 )
 		border.width = frame.width*0.4;
