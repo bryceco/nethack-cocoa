@@ -395,14 +395,22 @@ NSString * DescriptionForTile( int x, int y )
 	const char * feature = dfeature_at( tileX, tileY, buf);	
 	if ( feature ) {
 		NSString * text = [NSString stringWithUTF8String:feature];
-		NSPoint pt = NSMakePoint( tooltipPoint.x + 2, tooltipPoint.y + 2 );
+		NSPoint pt = NSMakePoint( tooltipPoint.x + 2, tooltipPoint.y - 2 );
 		tooltipWindow = [[TooltipWindow alloc] initWithText:text location:pt];
 	}
 #else
 	NSString * text = DescriptionForTile(tileX, tileY);
 	
 	if ( text && [text length] ) {
-		NSPoint pt = NSMakePoint( tooltipPoint.x + 2, tooltipPoint.y + 2 );
+		NSPoint pt = tooltipPoint;
+		
+		NSCursor * cursor = [NSCursor currentCursor];
+		NSSize size = [[cursor image] size];
+		NSPoint hot = [cursor hotSpot];
+		pt.x += 2;
+		pt.y += size.height - hot.y;
+		pt.y += 20; // height of tooltip
+		
 		pt = [self convertPointToBase:pt];
 		pt = [[self window] convertBaseToScreen:pt];
 		tooltipWindow = [[TooltipWindow alloc] initWithText:text location:pt];
