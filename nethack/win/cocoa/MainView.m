@@ -201,7 +201,12 @@ NSStringEncoding	codepage437encoding;
 		
 		// cursor can update asynchronously behind us so gets its location upfront
 		XCHAR_P	cursorX, cursorY;
-		[map cursX:&cursorX	y:&cursorY];		
+		[map cursX:&cursorX	y:&cursorY];
+		
+		
+		if ( Is_rogue_level(&u.uz) && !iflags.wc_ascii_map ) {
+			// FIXME: we draw with the graphical tile dimensions instead of character dimensions in this case
+		}
 	
 		// set stuff up for ascii drawing
 		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
@@ -223,11 +228,16 @@ NSStringEncoding	codepage437encoding;
 							unsigned int special;
 							mapglyph(glyph, &ochar, &ocolor, &special, i, j);
 							
-							// use CP437 which correctly maps when using ibm_graphics
-							char ch[] = { ochar, 0 };
-							NSString * string = [[NSString alloc] initWithCString:ch encoding:codepage437encoding];
-							[[aString mutableString] setString:string];
-							[string release];
+							if ( ochar == 0x1 ) {
+								// smiley face in rogue level when using IBMgraphics
+								[[aString mutableString] setString:@"☺"];
+							} else {
+								// use CP437 which correctly maps when using ibm_graphics
+								char ch[] = { ochar, 0 };
+								NSString * string = [[NSString alloc] initWithCString:ch encoding:codepage437encoding];
+								[[aString mutableString] setString:string];
+								[string release];								
+							}
 							
 							// text color
 							NSColor * color = [asciiColors objectAtIndex:ocolor];
