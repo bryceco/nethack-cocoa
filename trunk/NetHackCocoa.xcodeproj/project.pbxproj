@@ -34,6 +34,7 @@
 		029A96C1112B178300225CC3 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 029A96C0112B178300225CC3 /* kins32.bmp */; };
 		029A97CC112BC6DB00225CC3 /* MenuWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A97CB112BC6DB00225CC3 /* MenuWindowController.m */; };
 		029A9961112BEDEC00225CC3 /* FlippedView.m in Sources */ = {isa = PBXBuildFile; fileRef = 029A9960112BEDEC00225CC3 /* FlippedView.m */; };
+		02B9E9731160191C00F3D5DA /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 02B9E9721160191C00F3D5DA /* Credits.rtf */; };
 		02D00718113654A200F57754 /* NotesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02D00717113654A200F57754 /* NotesWindowController.m */; };
 		02E856CB112A54AB00E4ADE3 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02E856CA112A54AB00E4ADE3 /* petmark.png */; };
 		02E859A4112B142300E4ADE3 /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 02E859A3112B142300E4ADE3 /* nethack.icns */; };
@@ -382,6 +383,7 @@
 		029A97D5112BC79600225CC3 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
 		029A995F112BEDEC00225CC3 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlippedView.h; sourceTree = "<group>"; };
 		029A9960112BEDEC00225CC3 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
+		02B9E9721160191C00F3D5DA /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = Credits.rtf; path = nethack/win/cocoa/Credits.rtf; sourceTree = "<group>"; };
 		02D00716113654A200F57754 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesWindowController.h; sourceTree = "<group>"; };
 		02D00717113654A200F57754 /* NotesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesWindowController.m; sourceTree = "<group>"; };
 		02E856CA112A54AB00E4ADE3 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petmark.png; path = nethack/win/cocoa/images/petmark.png; sourceTree = "<group>"; };
@@ -955,6 +957,7 @@
 				1DDD58140DA1D0A300B32029 /* MainMenu.xib */,
 				0292233311345E0D00A96147 /* MessageWindow.xib */,
 				0292248B1134F5CC00A96147 /* MenuWindow.xib */,
+				02B9E9721160191C00F3D5DA /* Credits.rtf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1691,6 +1694,7 @@
 				0259AE811135AD53002AEFA1 /* Arrow-SE.png in Resources */,
 				0259AE821135AD53002AEFA1 /* Arrow-SW.png in Resources */,
 				0259AE831135AD53002AEFA1 /* Arrow-W.png in Resources */,
+				02B9E9731160191C00F3D5DA /* Credits.rtf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
