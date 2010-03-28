@@ -182,9 +182,13 @@ NSStringEncoding	codepage437encoding;
 
 - (void)cliparoundX:(int)x y:(int)y {
 	// if we're too close to edge of window then scroll us back
-	int border = 4;
+	NSSize border = NSMakeSize(4*tileSize.width, 4*tileSize.height);
+	if ( border.width > 256 )
+		border.width = 256;
+	if ( border.height > 256 )
+		border.height = 256;
 	NSPoint center = NSMakePoint( (x+0.5)*tileSize.width, (y+0.5)*tileSize.height );
-	NSRect rect = NSMakeRect( center.x-tileSize.width*border, center.y-tileSize.height*border, tileSize.width*2*border, tileSize.height*2*border );
+	NSRect rect = NSMakeRect( center.x-border.width, center.y-border.height, 2*border.width, 2*border.height );
 	[self scrollRectToVisible:rect];	 	 
 }
 - (void)cliparoundHero
