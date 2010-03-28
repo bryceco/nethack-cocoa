@@ -156,6 +156,7 @@ static const float popoverItemHeight = 44.0f;
 		// select ascii mode in map view
 		[mainView enableAsciiMode:iflags.wc_ascii_map];
 		
+		// set table row spacing to zero in messages window
 		[messagesView setIntercellSpacing:NSMakeSize(0,0)];
 	}
 }

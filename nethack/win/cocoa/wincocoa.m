@@ -532,12 +532,19 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 	}
 	
 	if ( choices ) {
-		if ( strcmp( choices, "yn" )==0 || strcmp( choices, "ynq" )==0 ) {
-			NhYnQuestion * q = [[NhYnQuestion alloc] initWithQuestion:question choices:choices default:def];
-			[[MainWindowController instance] showYnQuestion:q];
-			NhEvent * e = [[NhEventQueue instance] nextEvent];
-			[q release];
-			return e.key;
+		static const char * yesNo[] = {
+			"yn",
+			"ynq",
+			"rl",
+		};
+		for ( int i = 0; i < sizeof yesNo/sizeof yesNo[0]; ++i ) {
+			if ( strcmp( choices, yesNo[i] ) == 0 ) {
+				NhYnQuestion * q = [[NhYnQuestion alloc] initWithQuestion:question choices:choices default:def];
+				[[MainWindowController instance] showYnQuestion:q];
+				NhEvent * e = [[NhEventQueue instance] nextEvent];
+				[q release];
+				return e.key;
+			}
 		}
 	}
 	
