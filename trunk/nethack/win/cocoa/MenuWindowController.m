@@ -559,7 +559,10 @@
 
 			// adjust baseline of text so it is vertically centered with tile
 			if ( glyph != NO_GLYPH ) {
-				int offset = ([[TileSet instance] tileSize].height - 8) / 2;
+				CGFloat offset = [[TileSet instance] tileSize].height;
+				if ( offset > 32 )
+					offset = 32;
+				offset = (offset - 8) / 2;
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:offset] range:NSMakeRange(1,[[aString string] length]-1)];
 			}
 			
