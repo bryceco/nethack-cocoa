@@ -184,9 +184,7 @@
 	
 
 	// set table row height based on tiles
-	CGFloat rowHeight = [[TileSet instance] tileSize].height;
-	if ( rowHeight > 32 )
-		rowHeight = 32;
+	CGFloat rowHeight = [[TileSet instance] imageSize].height;
 	[role setRowHeight:rowHeight];
 	[race setRowHeight:rowHeight];
 	
@@ -310,9 +308,7 @@
 	
 	// add text to string and adjust vertical baseline of text so it aligns with icon
 	[[aString mutableString] appendString:title];
-	CGFloat offset = [[TileSet instance] tileSize].height;
-	if ( offset > 32 )
-		offset = 32;
+	CGFloat offset = [[TileSet instance] imageSize].height;
 	offset = (offset - 16) * 10/16 + 2;
 	[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:offset] range:NSMakeRange(1, [title length])];
 

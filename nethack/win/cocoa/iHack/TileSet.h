@@ -44,6 +44,9 @@ extern short glyph2tile[];
 - (id)initWithImage:(NSImage *)img tileSize:(NSSize)ts;
 - (NSRect)sourceRectForGlyph:(int)glyph;
 - (NSRect)sourceRectForTile:(int)tile;
+
+// these are for menu images:
+- (NSSize)imageSize;
 - (NSImage *)imageForGlyph:(int)glyph enabled:(BOOL)enabled;
 
 @end

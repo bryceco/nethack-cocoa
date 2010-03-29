@@ -72,18 +72,24 @@ static TileSet *s_instance = nil;
 	return r;
 }
 
+- (NSSize)imageSize
+{
+	NSSize size = [self tileSize];
+	if ( size.width > 32.0 || size.height > 32.0 ) {
+		// since these images are used in menus we want to scale them down
+		CGFloat m = size.width > size.height ? size.width : size.height;
+		m = 32.0 / m;
+		size.width  *= m;
+		size.height *= m;
+	}
+	return size;
+}
+
 - (NSImage *)imageForGlyph:(int)glyph enabled:(BOOL)enabled
 {
 	// get image
 	NSRect srcRect = [self sourceRectForGlyph:glyph];
-	NSSize size = [self tileSize];
-	if ( size.width > 32 || size.height > 32 ) {
-		// since these images are used in menus we want to scale them down
-		CGFloat m = size.width > size.height ? size.width : size.height;
-		m = 32 / m;
-		size.width  *= m;
-		size.height *= m;
-	}
+	NSSize size = [self imageSize];
 	NSImage * newImage = [[[NSImage alloc] initWithSize:size] autorelease];
 	NSRect dstRect = NSMakeRect(0, 0, size.width, size.height);
 	[newImage lockFocus];
@@ -91,7 +97,6 @@ static TileSet *s_instance = nil;
 	[newImage unlockFocus];
 	return newImage;
 }
-
 
 
 - (void)dealloc {
