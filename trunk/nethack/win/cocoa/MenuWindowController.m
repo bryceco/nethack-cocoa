@@ -400,9 +400,7 @@
 		for ( NhItem * item in [group items] ) {
 			CGFloat glyphWidth = 0.0;
 			if ( [item glyph] != NO_GLYPH ) {
-				glyphWidth = [[TileSet instance] tileSize].width;
-				if ( glyphWidth > 32 )
-					glyphWidth = 32;
+				glyphWidth = [[TileSet instance] imageSize].width;
 			}
 			[self adjustColumnWidths:itemWidths forString:item.title attributes:itemAttributes glyphWidth:glyphWidth];
 		}
@@ -561,9 +559,7 @@
 
 			// adjust baseline of text so it is vertically centered with tile
 			if ( glyph != NO_GLYPH ) {
-				CGFloat offset = [[TileSet instance] tileSize].height;
-				if ( offset > 32 )
-					offset = 32;
+				CGFloat offset = [[TileSet instance] imageSize].height;
 				offset = (offset - 8) / 2;
 				[aString addAttribute:NSBaselineOffsetAttributeName value:[NSNumber numberWithDouble:offset] range:NSMakeRange(1,[[aString string] length]-1)];
 			}
