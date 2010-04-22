@@ -38,6 +38,12 @@ extern int unixmain(int argc, char **argv);
 	[netHackThread start];
 }
 
+-(BOOL)netHackThreadRunning
+{
+	return netHackThread && [netHackThread isExecuting];
+}
+
+
 - (void) netHackMainLoop:(id)arg {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	char *argv[] = {
