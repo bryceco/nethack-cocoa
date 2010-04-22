@@ -41,6 +41,7 @@
 #import "ExtCommandWindowController.h"
 #import "PlayerSelectionWindowController.h"
 #import "StatsView.h"
+#import "NetHackCocoaAppDelegate.h"
 
 #import "wincocoa.h" // cocoa_getpos etc.
 
@@ -175,19 +176,23 @@ static const float popoverItemHeight = 44.0f;
 	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];		
 }
 
--(void)closeAllWindows
+- (void)setTerminatedByUser:(BOOL)byUser
+{
+	terminatedByUser = YES;
+}
+
+-(void)nethackExited
 {
 	if (![NSThread isMainThread]) {
-		[self performSelectorOnMainThread:@selector(closeAllWindows) withObject:nil waitUntilDone:YES];
+		[self performSelectorOnMainThread:@selector(nethackExited) withObject:nil waitUntilDone:NO];
 	} else {
-		// close all windows and prepare for termination
-		NSArray * windows = [[NSApplication sharedApplication] windows];
-		for ( NSWindow * win in windows ) {
-			[win close];
+		
+		if ( terminatedByUser ) {
+			[[NSApplication sharedApplication] terminate:self];
+		} else {
+			// nethack exited, but let user close the app manually 
 		}
-		// flush defaults, because we are exiting via nethack thread and it may not be clean
-		[[NSUserDefaults standardUserDefaults] synchronize];
-	}	
+	}		
 }
 
 
@@ -370,8 +375,15 @@ static const float popoverItemHeight = 44.0f;
 
 - (IBAction)terminateApplication:(id)sender
 {
-	// map Cmd-Q to Shift-S
-	[[NhEventQueue instance] addKey:'S'];	
+	NetHackCocoaAppDelegate * delegate = (NetHackCocoaAppDelegate *) [[NSApplication sharedApplication] delegate];
+	if ( [delegate netHackThreadRunning] ) {
+		// map Cmd-Q to Shift-S
+		terminatedByUser = YES;
+		[[NhEventQueue instance] addKey:'S'];		
+	} else {
+		// thread already exited, so just exit ourself
+		[[NSApplication sharedApplication] terminate:self];
+	}
 }
 
 #pragma mark window API

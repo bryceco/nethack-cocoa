@@ -42,6 +42,7 @@
 
 @interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDataSource> {	
 	BOOL										isDirectionQuestion;
+	BOOL										terminatedByUser;
 	
 	NSMutableArray							*	userTiles;
 	
@@ -71,6 +72,8 @@
 
 - (void)initWindows;
 - (void)preferenceUpdate:(NSString *)pref;
+- (void)setTerminatedByUser:(BOOL)byUser;
+- (void)nethackExited;
 
 // window API
 - (void)handleDirectionQuestion:(NhYnQuestion *)q;
@@ -87,7 +90,6 @@
 - (void)showExtendedCommands;
 - (void)showPlayerSelection;
 - (void)showDirectionWithPrompt:(NSString *)prompt;
-- (void)closeAllWindows;
 
 // touch handling
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(NSView *)view;
