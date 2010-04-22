@@ -245,6 +245,15 @@ void error(const char *s, ...) {
 	exit(0);
 }
 
+void nethack_exit(int status)
+{
+	//	indicate were exiting
+	[[MainWindowController instance] nethackExited];
+
+	// exit thread
+	[NSThread exit];
+}
+
 
 void cocoa_decgraphics_mode_callback()
 {
@@ -280,9 +289,12 @@ void cocoa_get_nh_event() {
 }
 
 void cocoa_exit_nhwindows(const char *str) {
-	NSLog(@"exit_nhwindows %s", str);
-	// close all our windows so state gets saved cleanly
-	[[MainWindowController instance] closeAllWindows];
+	if ( str ) {
+		cocoa_raw_print( str );
+
+		// string is only set during user save, which means user wants to exit
+		[[MainWindowController instance] setTerminatedByUser:YES];
+	}
 }
 
 void cocoa_suspend_nhwindows(const char *str) {

@@ -35,4 +35,6 @@
 
 @property (assign) IBOutlet NSWindow *window;
 
+-(BOOL)netHackThreadRunning;
+
 @end
