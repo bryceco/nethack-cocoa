@@ -1,3 +1,1 @@
-= Source has moved to GitHub =
-
 See http://github.com/dirkz/NetHack-Mac-OS-X
