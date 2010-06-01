@@ -173,7 +173,8 @@ static const float popoverItemHeight = 44.0f;
 	BOOL	useAscii = iflags.wc_ascii_map;
 	[[NSUserDefaults standardUserDefaults] setBool:useAscii forKey:@"UseAscii"];
 	// save user defined tile sets
-	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];		
+	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];
+	[[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)setTerminatedByUser:(BOOL)byUser
