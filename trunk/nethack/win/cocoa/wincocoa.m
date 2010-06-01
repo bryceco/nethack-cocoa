@@ -276,6 +276,10 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 	extern void NDECL((*decgraphics_mode_callback));
 	decgraphics_mode_callback = cocoa_decgraphics_mode_callback;
 	
+	// hardwire OPTIONS=time,showexp for issue 8
+	flags.time = TRUE;
+	flags.showexp = TRUE;
+	
 	[[MainWindowController instance] initWindows];
 }
 
