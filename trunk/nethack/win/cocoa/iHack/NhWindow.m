@@ -90,6 +90,27 @@ static NhWindow *s_mapWindow = nil;
 	return self;
 }
 
+- (BOOL)stringReferencesHero:(NSString *)s
+{
+	NSRange r = [s rangeOfString:@"you" options:NSCaseInsensitiveSearch];
+	if ( r.location == NSNotFound )
+		return NO;
+	
+	// make sure Y is the starting letter
+	if ( r.location > 0 && isalnum([s characterAtIndex:r.location-1]) )
+		return NO;
+	
+	// treat 'your' just like 'you'
+	if ( [s characterAtIndex:r.location+r.length] == 'r' )
+		++r.length;
+	
+	// make sure no trailing letters
+	if ( r.location+r.length < [s length] && isalnum([s characterAtIndex:r.location+r.length]) ) 
+		return NO;
+	
+	return YES;
+}
+
 - (void)print:(const char *)str attr:(int)attr {
 	NSString *s = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
 	s = [s stringWithTrimmedWhitespaces];
@@ -100,6 +121,15 @@ static NhWindow *s_mapWindow = nil;
 
 		switch ( attr ) {
 			case ATR_NONE:
+				{
+					BOOL highlight = [self stringReferencesHero:s];
+					if ( highlight ) {
+						dict = [NSDictionary dictionaryWithObjectsAndKeys:
+								[NSColor blueColor], NSForegroundColorAttributeName,
+								//[NSColor blueColor], NSBackgroundColorAttributeName,
+								nil];
+					}
+				}
 				break;
 			case ATR_BOLD:
 				dict = [NSDictionary dictionaryWithObject:[NSFont boldSystemFontOfSize:[NSFont systemFontSize]]
@@ -112,7 +142,8 @@ static NhWindow *s_mapWindow = nil;
 				break;
 			case ATR_BLINK:
 			case ATR_INVERSE:
-				dict = [NSDictionary dictionaryWithObjectsAndKeys:[NSColor redColor], NSForegroundColorAttributeName,
+				dict = [NSDictionary dictionaryWithObjectsAndKeys:
+						[NSColor redColor], NSForegroundColorAttributeName,
 						[NSColor blueColor], NSBackgroundColorAttributeName,
 						nil];
 				break;
