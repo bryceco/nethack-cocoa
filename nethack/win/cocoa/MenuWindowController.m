@@ -235,7 +235,7 @@
 			// It's not a real group. Convert it to a disabled button under the last real group
 			ANY_P ident = { 0 };
 			ident.a_int = -1;
-			NhItem * item = [[NhItem alloc] initWithTitle:[group.title substringFromIndex:leadingSpaces] identifier:ident accelerator:0 glyph:NO_GLYPH selected:NO];
+			NhItem * item = [[NhItem alloc] initWithTitle:[group.title substringFromIndex:leadingSpaces] identifier:ident accelerator:0 group_accel:0 glyph:NO_GLYPH selected:NO];
 			[currentRealGroup addItem:item];
 			[item release];
 			[remove addObject:[NSNumber numberWithInt:index]];
@@ -337,7 +337,7 @@
 		for ( NhItem * item in [group items] ) {			
 			
 			BOOL isEnabled = item.identifier.a_int != -1;
-			int keyEquiv = item.inventoryLetter;			
+			int keyEquiv = item.inventoryLetter;
 			if ( keyEquiv == 0 && isEnabled && *nextKey ) {
 				keyEquiv = *nextKey++;
 				[item setInventoryLetter:keyEquiv];
@@ -351,7 +351,12 @@
 			if ( item.detail ) {
 				title = [title stringByAppendingFormat:@" (%@)", item.detail];
 			}
-			
+#if 0
+			// add group accelerator
+			if ( item.group_ch ) {
+				title = [title stringByAppendingFormat:@" ('%c')", item.group_ch];
+			}
+#endif		
 			// save expanded title
 			[item setTitle:title];
 		}

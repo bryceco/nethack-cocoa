@@ -32,10 +32,10 @@
 @synthesize selected;
 @synthesize maxAmount;
 
-- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch glyph:(int)g selected:(BOOL)s {
+- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch  group_accel:(char)group_accel glyph:(int)g selected:(BOOL)s {
 	NSArray *lines = [t splitNetHackDetails];
 	
-	if (self = [super initWithTitle:[lines objectAtIndex:0] inventoryLetter:ch]) {
+	if (self = [super initWithTitle:[lines objectAtIndex:0] inventoryLetter:ch group_accel:group_accel]) {
 		if (lines.count == 2) {
 			detail = [[lines objectAtIndex:1] copy];
 		} else {

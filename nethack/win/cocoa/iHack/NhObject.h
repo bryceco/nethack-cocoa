@@ -31,6 +31,7 @@
 	NSString *title;
 	NSString *detail;
 	char inventoryLetter;
+	char group_ch; 
 	int glyph;
 
 }
@@ -39,12 +40,13 @@
 @property (nonatomic, readonly) NSString *title;
 @property (nonatomic, readonly) NSString *detail;
 @property (nonatomic, readonly) char inventoryLetter;
+@property (nonatomic, readonly) char group_ch;
 @property (nonatomic, readonly) int glyph;
 
-+ (id)objectWithTitle:(NSString *)t inventoryLetter:(char)invLet;
++ (id)objectWithTitle:(NSString *)t inventoryLetter:(char)invLet group_accel:(char)group_accel;
 + (id)objectWithObject:(struct obj *)obj;
 
-- (id)initWithTitle:(NSString *)t inventoryLetter:(char)invLet;
+- (id)initWithTitle:(NSString *)t inventoryLetter:(char)invLet group_accel:(char)group_accel;
 - (id)initWithObject:(struct obj *)obj;
 - (void)setTitle:(NSString *)title;
 - (void)setInventoryLetter:(char)ch;

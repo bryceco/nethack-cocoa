@@ -67,10 +67,10 @@
 	// Hands / Gold
 	NSArray *specialObjects = nil;
 	if (u.ugold) {
-		specialObjects = [NSArray arrayWithObjects:[NhObject objectWithTitle:@"Gold" inventoryLetter:'$'],
-						  [NhObject objectWithTitle:@"Hands" inventoryLetter:'-'], nil];
+		specialObjects = [NSArray arrayWithObjects:[NhObject objectWithTitle:@"Gold" inventoryLetter:'$' group_accel:0],
+						  [NhObject objectWithTitle:@"Hands" inventoryLetter:'-' group_accel:0], nil];
 	} else {
-		specialObjects = [NSArray arrayWithObject:[NhObject objectWithTitle:@"Hands" inventoryLetter:'-']];
+		specialObjects = [NSArray arrayWithObject:[NhObject objectWithTitle:@"Hands" inventoryLetter:'-' group_accel:0]];
 	}
 	[objectClasses addObject:specialObjects];
 }
