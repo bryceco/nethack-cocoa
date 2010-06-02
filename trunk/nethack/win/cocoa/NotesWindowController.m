@@ -40,6 +40,7 @@
 {
 	NSString * text = [textView string];
 	[[NSUserDefaults standardUserDefaults] setObject:text forKey:@"NotesWindowText"];	
+	[[NSUserDefaults standardUserDefaults] synchronize];	
 }
 
 @end
