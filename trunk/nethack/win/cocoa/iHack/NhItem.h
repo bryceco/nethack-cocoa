@@ -41,6 +41,6 @@
 @property (nonatomic, assign) BOOL selected;
 @property (nonatomic, readonly) int maxAmount;
 
-- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch glyph:(int)g selected:(BOOL)s;
+- (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch group_accel:(char)group_ch glyph:(int)g selected:(BOOL)s;
 
 @end

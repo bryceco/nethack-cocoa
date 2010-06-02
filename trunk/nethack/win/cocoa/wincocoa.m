@@ -404,7 +404,7 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 	NSString *title = [NSString stringWithFormat:@"%s", str];
 	if (identifier->a_void) {
 		NhItem *i = [[NhItem alloc] initWithTitle:title
-									   identifier:*identifier accelerator:accelerator glyph:glyph selected:presel];
+									   identifier:*identifier accelerator:accelerator group_accel:group_accel glyph:glyph selected:presel];
 		[w.currentItemGroup addItem:i];
 		[i release];
 	} else {
