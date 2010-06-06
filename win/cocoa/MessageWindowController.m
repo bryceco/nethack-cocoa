@@ -47,7 +47,8 @@
 {
 	// convert leading space to tab
 	NSMutableString * mutable = [[text mutableCopyWithZone:NULL] autorelease];
-	[mutable replaceOccurrencesOfString:@"\n " withString:@"\n\t" options:0 range:NSMakeRange(0,[mutable length])];
+	[mutable replaceOccurrencesOfString:@"\n  " withString:@"\n\t" options:0 range:NSMakeRange(0,[mutable length])];
+	[mutable replaceOccurrencesOfString:@"\n* " withString:@"\n\t*" options:0 range:NSMakeRange(0,[mutable length])];
 	
 	[textField setEditable:YES];
 	[textField setStringValue:mutable];

@@ -113,7 +113,7 @@ static NhWindow *s_mapWindow = nil;
 
 - (void)print:(const char *)str attr:(int)attr {
 	NSString *s = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
-	s = [s stringWithTrimmedWhitespaces];
+//	s = [s stringWithTrimmedWhitespaces];
 	
 	if ( [self useAttributedStrings] ) {
 
