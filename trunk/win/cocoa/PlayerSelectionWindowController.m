@@ -114,9 +114,9 @@
 		
 		[race setNeedsDisplay];
 		[role setNeedsDisplay];
+
+		[self setupOthers];
 	}
-	
-	[self setupOthers];
 }
 
 -(void)selectRole
@@ -149,15 +149,14 @@
 		
 		[race setNeedsDisplay];
 		[role setNeedsDisplay];	
+
+		[self setupOthers];
 	}
-	[self setupOthers];
 }
 
 
 -(void)selectInitialPlayer
 {
-	BOOL fully_specified_role = YES;
-
 	gender[0] = sexMale;
 	gender[1] = sexFemale;
 
@@ -192,16 +191,11 @@
     int ro = flags.initrole;
     if (ro == ROLE_NONE || ro == ROLE_RANDOM) {
 		ro = rn2(cntRoles);
-		if (flags.initrole != ROLE_RANDOM) {
-			fully_specified_role = FALSE;
-		}
     }
+
     int ra = flags.initrace;
     if (ra == ROLE_NONE || ra == ROLE_RANDOM) {
 		ra = rn2(cntRaces);
-		if (flags.initrace != ROLE_RANDOM) {
-			fully_specified_role = FALSE;
-		}
     }
 	
     // make sure we have a valid combination, honoring 
@@ -213,43 +207,36 @@
     while (!validrace(ro,ra)) {
 		if (choose_race_first) {
 			ro = rn2(cntRoles);
-			if (flags.initrole != ROLE_RANDOM) {
-				fully_specified_role = FALSE;
-			}
 		} else {
 			ra = rn2(cntRaces);
-			if (flags.initrace != ROLE_RANDOM) {
-				fully_specified_role = FALSE;
-			}
 		}
     }
 	
     int g = flags.initgend;
     if (g == -1) {
 		g = rn2(ROLE_GENDERS);
-		fully_specified_role = FALSE;
     }
     while (!validgend(ro,ra,g)) {
 		g = rn2(ROLE_GENDERS);
     }
-	[gender[g] setState:NSOnState];
-	[self selectGender:g];
 	
     int a = flags.initalign;
     if (a == -1) {
 		a = rn2(ROLE_ALIGNS);
-		fully_specified_role = FALSE;
     }
     while (!validalign(ro,ra,a)) {
 		a = rn2(ROLE_ALIGNS);
     }
+	
+	[gender[g] setState:NSOnState];
+	[self selectGender:g];
 	
     [alignment[a] setState:NSOnState];
 	[self selectAlignment:a];
 	
 	[role selectRowIndexes:[NSIndexSet indexSetWithIndex:ro] byExtendingSelection:NO];
 	[race selectRowIndexes:[NSIndexSet indexSetWithIndex:ra] byExtendingSelection:NO];
-	
+
     flags.initrace = ra;
     flags.initrole = ro;
 }
