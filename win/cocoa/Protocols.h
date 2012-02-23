@@ -24,7 +24,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#if __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
+#if 0 && __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
 // Prior to 10.6 these were informal protocols, but we define them here so we can compile against 10.5 or 10.6
 @protocol NSApplicationDelegate <NSObject>
 @end

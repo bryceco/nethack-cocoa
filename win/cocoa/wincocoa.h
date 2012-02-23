@@ -69,8 +69,6 @@ void cocoa_end_screen();
 void cocoa_outrip(winid wid, int how);
 void cocoa_preference_update(const char * pref);
 
-extern boolean cocoa_getpos;
-
 coord CoordMake(xchar i, xchar j);
 
 #ifdef __OBJC__

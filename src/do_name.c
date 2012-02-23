@@ -4,10 +4,6 @@
 
 #include "hack.h"
 
-#if TARGET_OS_MAC
-#include "wincocoa.h"
-#endif
-
 #ifdef OVLB
 
 STATIC_DCL void FDECL(do_oname, (struct obj *));
@@ -58,9 +54,6 @@ const char *goal;
     const char *sdp;
     if(iflags.num_pad) sdp = ndir; else sdp = sdir;	/* DICE workaround */
 
-#if TARGET_OS_MAC
-	cocoa_getpos = 1;
-#endif
     if (flags.verbose) {
 	pline("(For instructions type a ?)");
 	msg_given = TRUE;
@@ -192,9 +185,6 @@ const char *goal;
     lock_mouse_cursor(FALSE);
 #endif
     if (msg_given) clear_nhwindow(WIN_MESSAGE);
-#if TARGET_OS_MAC
-	cocoa_getpos = 0;
-#endif
     cc->x = cx;
     cc->y = cy;
     return result;

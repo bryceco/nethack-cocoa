@@ -31,10 +31,15 @@
     NSWindow *window;
 	NSThread *netHackThread;
 	MainWindowController *mainWindowController;
+	NSRecursiveLock *nethackCoreLock;
 }
 
 @property (assign) IBOutlet NSWindow *window;
 
 -(BOOL)netHackThreadRunning;
+
+-(void)lockNethackCore;
+-(void)unlockNethackCore;
+
 
 @end

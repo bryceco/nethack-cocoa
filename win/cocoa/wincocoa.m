@@ -112,8 +112,6 @@ cocoa_outrip,
 cocoa_preference_update,
 };
 
-	
-boolean cocoa_getpos = 0;
 
 static char s_baseFilePath[FQN_MAX_FILENAME];
 

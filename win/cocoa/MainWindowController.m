@@ -159,6 +159,13 @@ static const float popoverItemHeight = 44.0f;
 		
 		// set table row spacing to zero in messages window
 		[messagesView setIntercellSpacing:NSMakeSize(0,0)];
+		
+		// initialize speech engine
+		voice = [[NSSpeechSynthesizer alloc] initWithVoice:nil];
+		float r = [voice rate];
+		[voice setRate:1.5*r];
+		[voice setDelegate:self];
+		voiceQueue = [[NSMutableArray array] retain];
 	}
 }
 
@@ -635,8 +642,12 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)clipAroundX:(int)x y:(int)y {
 	if (![NSThread isMainThread]) {
+
+		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+		[appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(clipAround:)
-							   withObject:[NSValue valueWithRange:NSMakeRange(x, y)] waitUntilDone:NO];
+							   withObject:[NSValue valueWithRange:NSMakeRange(x, y)] waitUntilDone:YES];
+		[appDelegate lockNethackCore];
 	} else {
 		[mainView cliparoundX:x y:y];
 	}
@@ -720,21 +731,31 @@ static const float popoverItemHeight = 44.0f;
 	}
 }
 
-// probably not used in cocoa
-- (void)handleDirectionTap:(e_direction)direction {
-	int key = [self keyFromDirection:direction];
-	[[NhEventQueue instance] addKey:key];
-}
+#pragma mark misc
 
-- (void)handleDirectionDoubleTap:(e_direction)direction {
-	if (!cocoa_getpos) {
-		int key = [self keyFromDirection:direction];
-		[[NhEventQueue instance] addKey:'g'];
-		[[NhEventQueue instance] addKey:key];
+- (void)speakString:(NSString *)text
+{
+	// add text to queue
+	if (![NSThread isMainThread]) {
+		[self performSelectorOnMainThread:@selector(speakString:) withObject:text waitUntilDone:NO];
+	} else {
+		if ( [voice isSpeaking] ) {
+			[voiceQueue addObject:text];
+		} else {
+			[voice startSpeakingString:text];
+		}
 	}
 }
 
-#pragma mark misc
+- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)success
+{
+	if ( [voiceQueue count] ) {
+		NSString * text = [voiceQueue objectAtIndex:0];
+		[voiceQueue removeObjectAtIndex:0];
+		[voice startSpeakingString:text];
+	}
+}
+
 
 - (void)dealloc {
     [super dealloc];
