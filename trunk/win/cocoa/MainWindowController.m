@@ -442,7 +442,10 @@ static const float popoverItemHeight = 44.0f;
 - (void)showPlayerSelection
 {
 	if (![NSThread isMainThread]) {
+		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+		[appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(showPlayerSelection) withObject:nil waitUntilDone:YES];
+		[appDelegate lockNethackCore];
 	} else {
 		[showPlayerSelection runModal];
 	}	
