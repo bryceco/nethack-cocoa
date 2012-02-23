@@ -33,6 +33,7 @@
 #import "wincocoa.h"
 #import "TooltipWindow.h"
 #import "NSImage+FlippedDrawing.h"
+#import "NetHackCocoaAppDelegate.h"
 
 #import "Inventory.h"
 
@@ -350,7 +351,12 @@ NSStringEncoding	codepage437encoding;
 NSString * DescriptionForTile( int x, int y )
 {
 	char    out_str[BUFSZ];
+
+	// get tile info, but don't interfere with nethack thread
+	NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+	[appDelegate lockNethackCore];
 	InventoryOfTile(x, y, out_str);
+	[appDelegate unlockNethackCore];
 
 	NSString * text = [NSString stringWithCString:out_str encoding:codepage437encoding];
 	

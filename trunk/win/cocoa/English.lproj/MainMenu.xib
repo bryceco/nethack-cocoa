@@ -3,16 +3,16 @@
 	<data>
 		<int key="IBDocument.SystemTarget">1050</int>
 		<string key="IBDocument.SystemVersion">10D573</string>
-		<string key="IBDocument.InterfaceBuilderVersion">783</string>
+		<string key="IBDocument.InterfaceBuilderVersion">788</string>
 		<string key="IBDocument.AppKitVersion">1038.29</string>
 		<string key="IBDocument.HIToolboxVersion">460.00</string>
 		<object class="NSMutableDictionary" key="IBDocument.PluginVersions">
 			<string key="NS.key.0">com.apple.InterfaceBuilder.CocoaPlugin</string>
-			<string key="NS.object.0">783</string>
+			<string key="NS.object.0">788</string>
 		</object>
 		<object class="NSMutableArray" key="IBDocument.EditedObjectIDs">
 			<bool key="EncodedWithXMLCoder">YES</bool>
-			<integer value="81"/>
+			<integer value="748"/>
 			<integer value="371"/>
 		</object>
 		<object class="NSArray" key="IBDocument.PluginDependencies">
@@ -1888,14 +1888,6 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="692969320">
-									<reference key="NSMenu" ref="995035100"/>
-									<string key="NSTitle">Call (name)</string>
-									<string key="NSKeyEquiv">C</string>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-								</object>
 								<object class="NSMenuItem" id="809505983">
 									<reference key="NSMenu" ref="995035100"/>
 									<string key="NSTitle">Chat</string>
@@ -2475,21 +2467,16 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="53064385">
-									<reference key="NSMenu" ref="71298312"/>
-									<string key="NSTitle">Name Object Type</string>
-									<string key="NSKeyEquiv"/>
-									<int key="NSMnemonicLoc">2147483647</int>
-									<reference key="NSOnImage" ref="35465992"/>
-									<reference key="NSMixedImage" ref="502551668"/>
-								</object>
 								<object class="NSMenuItem" id="754125965">
 									<reference key="NSMenu" ref="71298312"/>
-									<string key="NSTitle">Name Creature</string>
-									<string key="NSKeyEquiv"/>
+									<string key="NSTitle">Call (name) Creature</string>
+									<string key="NSKeyEquiv">C</string>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
+									<object class="NSAttributedString" key="NSAttributedTitle">
+										<string key="NSString"/>
+									</object>
 								</object>
 								<object class="NSMenuItem" id="1011872845">
 									<reference key="NSMenu" ref="71298312"/>
@@ -4999,14 +4986,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBActionConnection" key="connection">
 						<string key="label">performMenuAction:</string>
 						<reference key="source" ref="986761394"/>
-						<reference key="destination" ref="53064385"/>
-					</object>
-					<int key="connectionID">1014</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performMenuAction:</string>
-						<reference key="source" ref="986761394"/>
 						<reference key="destination" ref="754125965"/>
 					</object>
 					<int key="connectionID">1015</int>
@@ -5098,14 +5077,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<reference key="destination" ref="640431233"/>
 					</object>
 					<int key="connectionID">1078</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">performMenuAction:</string>
-						<reference key="source" ref="986761394"/>
-						<reference key="destination" ref="692969320"/>
-					</object>
-					<int key="connectionID">1079</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -6390,7 +6361,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="497174573"/>
 							<reference ref="523394606"/>
 							<reference ref="667995102"/>
-							<reference ref="692969320"/>
 							<reference ref="585353695"/>
 							<reference ref="430962954"/>
 							<reference ref="520258095"/>
@@ -6619,7 +6589,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 							<reference ref="603868879"/>
 							<reference ref="456939755"/>
 							<reference ref="28016797"/>
-							<reference ref="53064385"/>
 							<reference ref="754125965"/>
 							<reference ref="427956540"/>
 							<reference ref="433681266"/>
@@ -6672,11 +6641,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<object class="IBObjectRecord">
 						<int key="objectID">757</int>
 						<reference key="object" ref="28016797"/>
-						<reference key="parent" ref="71298312"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">756</int>
-						<reference key="object" ref="53064385"/>
 						<reference key="parent" ref="71298312"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -7063,11 +7027,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 						<int key="objectID">1019</int>
 						<reference key="object" ref="310111113"/>
 						<reference key="parent" ref="71298312"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">1020</int>
-						<reference key="object" ref="692969320"/>
-						<reference key="parent" ref="995035100"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">1021</int>
@@ -8602,7 +8561,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<bool key="EncodedWithXMLCoder">YES</bool>
 					<string>-3.IBPluginDependency</string>
 					<string>1019.IBPluginDependency</string>
-					<string>1020.IBPluginDependency</string>
 					<string>1021.IBPluginDependency</string>
 					<string>1022.IBPluginDependency</string>
 					<string>1023.IBPluginDependency</string>
@@ -8958,7 +8916,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>750.IBPluginDependency</string>
 					<string>753.IBPluginDependency</string>
 					<string>755.IBPluginDependency</string>
-					<string>756.IBPluginDependency</string>
 					<string>757.IBPluginDependency</string>
 					<string>758.IBPluginDependency</string>
 					<string>759.IBPluginDependency</string>
@@ -9035,7 +8992,6 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 				</object>
 				<object class="NSMutableArray" key="dict.values">
 					<bool key="EncodedWithXMLCoder">YES</bool>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -9336,7 +9292,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{505, 313}, {224, 523}}</string>
+					<string>{{461, 333}, {224, 503}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -9385,12 +9341,11 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<integer value="1"/>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
-					<string>{{625, 323}, {206, 513}}</string>
+					<string>{{581, 343}, {217, 493}}</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<integer value="1"/>
-					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
 					<string>com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -9506,7 +9461,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/DirectionWindowController.h</string>
+						<string key="minorKey">DirectionWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9616,7 +9571,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/EquipmentView.h</string>
+						<string key="minorKey">EquipmentView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9688,7 +9643,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/ExtCommandWindowController.h</string>
+						<string key="minorKey">ExtCommandWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9696,7 +9651,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/FlippedView.h</string>
+						<string key="minorKey">FlippedView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9768,7 +9723,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/InputWindowController.h</string>
+						<string key="minorKey">InputWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9776,7 +9731,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					<string key="superclassName">NSView</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/MainView.h</string>
+						<string key="minorKey">MainView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9932,7 +9887,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/MainWindowController.h</string>
+						<string key="minorKey">MainWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9951,7 +9906,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/NetHackCocoaAppDelegate.h</string>
+						<string key="minorKey">NetHackCocoaAppDelegate.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -9970,7 +9925,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/NotesWindowController.h</string>
+						<string key="minorKey">NotesWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -10091,7 +10046,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/PlayerSelectionWindowController.h</string>
+						<string key="minorKey">PlayerSelectionWindowController.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -10257,7 +10212,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/StatsView.h</string>
+						<string key="minorKey">StatsView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -10315,7 +10270,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 					</object>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">nethack/win/cocoa/YesNoWindowController.h</string>
+						<string key="minorKey">YesNoWindowController.h</string>
 					</object>
 				</object>
 			</object>
@@ -10894,7 +10849,7 @@ AAMAAAABAAEAAAFTAAMAAAAEAAAFwgAAAAAACAAIAAgACAABAAEAAQABA</bytes>
 			<integer value="3000" key="NS.object.0"/>
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
-		<string key="IBDocument.LastKnownRelativeProjectPath">../../../../NetHackCocoa.xcodeproj</string>
+		<string key="IBDocument.LastKnownRelativeProjectPath">../NetHackCocoa.xcodeproj</string>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<bool key="EncodedWithXMLCoder">YES</bool>

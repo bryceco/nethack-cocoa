@@ -25,6 +25,8 @@
 #import "NhEventQueue.h"
 #import "NhEvent.h"
 #import "NhCommand.h"
+#import "NetHackCocoaAppDelegate.h"
+
 
 static NhEventQueue *s_eventQueue;
 
@@ -73,6 +75,10 @@ static NhEventQueue *s_eventQueue;
 }
 
 - (NhEvent *) nextEvent {
+	
+	NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+	[appDelegate unlockNethackCore];
+	
 	[condition lock];
 	while (events.count == 0) {
 		[condition wait];
@@ -80,15 +86,24 @@ static NhEventQueue *s_eventQueue;
 	NhEvent *e = [[events objectAtIndex:0] retain];
 	[events removeObjectAtIndex:0];
 	[condition unlock];
+	
+	[appDelegate lockNethackCore];
+	
 	return [e autorelease];
 }
 
 - (void)waitForNextEvent {
+	
+	NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+	[appDelegate unlockNethackCore];
+	
 	[condition lock];
 	while (events.count == 0) {
 		[condition wait];
 	}
 	[condition unlock];
+	
+	[appDelegate lockNethackCore];
 }
 
 - (void) addCommand:(NhCommand *)cmd {

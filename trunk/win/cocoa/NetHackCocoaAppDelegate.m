@@ -43,12 +43,23 @@ extern int unixmain(int argc, char **argv);
 	return netHackThread && [netHackThread isExecuting];
 }
 
+-(void)lockNethackCore
+{
+	[nethackCoreLock lock];
+}
+-(void)unlockNethackCore
+{
+	[nethackCoreLock unlock];
+}
 
 - (void) netHackMainLoop:(id)arg {
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	char *argv[] = {
 		"NetHack",
 	};
+	
+	nethackCoreLock = [[NSRecursiveLock alloc] init];
+	[self lockNethackCore];
 	
 	// create necessary directories
 	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);

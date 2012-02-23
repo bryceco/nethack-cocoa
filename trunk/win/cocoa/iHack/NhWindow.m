@@ -27,6 +27,7 @@
 #import "NSString+Z.h"
 #import "NhMapWindow.h"
 #import "NhStatusWindow.h"
+#import "MainWindowController.h"
 
 
 static NhWindow *s_messageWindow = nil;
@@ -63,6 +64,27 @@ static NhWindow *s_mapWindow = nil;
 {
 	return type == NHW_MESSAGE;
 }
+
+- (BOOL)stringIsVoiced:(NSString *)s
+{
+	return NO;
+	
+	if ( type != NHW_MESSAGE )
+		return NO;
+	if ( [s hasPrefix:@"You kill "] )
+		return YES;
+	if ( [s hasPrefix:@"You destroy "] )
+		return YES;
+	if ( [s hasPrefix:@"You fall down the stairs."] )
+		return YES;
+	if ( [s hasPrefix:@"Your movements are "] )
+		return YES;
+	if ( [s hasPrefix:@"You feel "] )
+		return YES;
+	
+	return NO;
+}
+
 
 - (id)initWithType:(int)t {
 	if (self = [super init]) {
@@ -126,8 +148,12 @@ static NhWindow *s_mapWindow = nil;
 					if ( highlight ) {
 						dict = [NSDictionary dictionaryWithObjectsAndKeys:
 								[NSColor blueColor], NSForegroundColorAttributeName,
-								//[NSColor blueColor], NSBackgroundColorAttributeName,
 								nil];
+					}
+					BOOL isVoiced = [self stringIsVoiced:s];
+					if ( isVoiced ) {
+						MainWindowController * main = [MainWindowController instance];
+						[main speakString:s];
 					}
 				}
 				break;
