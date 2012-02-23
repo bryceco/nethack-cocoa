@@ -82,6 +82,29 @@
 	[acceptButton setEnabled:YES];
 }
 
+-(BOOL)selectAllInGroup:(char)groupAccel
+{
+	BOOL hit = NO;
+	for ( NSButton * button in [menuView subviews] ) {
+		if ( [button class] == [NSButton class] )  {
+			NSInteger itemTag = [button tag];
+			id item = [itemDict objectForKey:[NSNumber numberWithInt:itemTag]];
+			if ( item && [item class] == [NhItem class] ) {
+				NhItem * entry = item;
+				if ( entry.groupAccel == groupAccel ) {
+					[button setState:NSOnState];
+					hit = YES;
+				}
+			}
+		}
+	}
+	if ( hit ) {
+		[acceptButton setEnabled:YES];
+	}
+	return hit;
+}
+
+
 -(IBAction)selectUnknownBUC:(id)sender
 {
 	for ( NSButton * item in [menuView subviews] ) {
@@ -157,12 +180,19 @@
 -(void)keyDown:(NSEvent *)theEvent
 {
 	NSString * ch = [theEvent characters];
-	if ( [ch length] > 0 && [ch characterAtIndex:0] == '.' ) {
-		// make '.' a shortcut for select all
-		[self selectAll:self];
-	} else {
-		[super keyDown:theEvent];
+	if ( [ch length] > 0 ) {
+		char c = [ch characterAtIndex:0];
+		if ( c == '.' ) {
+			// make '.' a shortcut for select all
+			[self selectAll:self];
+			return;
+		}
+		// check for group accelerator
+		if ( [self selectAllInGroup:c] ) {
+			return;
+		}
 	}
+	[super keyDown:theEvent];
 }
 
 
