@@ -1117,6 +1117,11 @@ boolean uncomp;
 	    }
 	}
 # endif
+	
+# ifdef COCOA_GRAPHICS
+	args[++i] = filename;
+# endif
+	
 	args[++i] = (char *)0;
 
 # ifdef TTY_GRAPHICS
@@ -1146,6 +1151,7 @@ boolean uncomp;
 		 * without explicit filenames.  this is true of at least
 		 * compress and gzip, those mentioned in config.h.
 		 */
+# ifndef COCOA_GRAPHICS
 		if (uncomp) {
 			redirect(cfn, RDBMODE, stdin, uncomp);
 			redirect(filename, WRBMODE, stdout, uncomp);
@@ -1153,6 +1159,7 @@ boolean uncomp;
 			redirect(filename, RDBMODE, stdin, uncomp);
 			redirect(cfn, WRBMODE, stdout, uncomp);
 		}
+# endif
 		(void) setgid(getgid());
 		(void) setuid(getuid());
 		(void) execv(args[0], (char *const *) args);

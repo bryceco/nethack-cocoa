@@ -45,6 +45,7 @@
 -(IBAction)doAccept:(id)sender;
 -(IBAction)doCancel:(id)sender;
 -(IBAction)selectAll:(id)sender;
+-(IBAction)sortItems:(id)sender;
 -(IBAction)selectUnknownBUC:(id)sender;
 
 @end

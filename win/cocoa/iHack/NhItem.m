@@ -31,7 +31,6 @@
 @synthesize amount;
 @synthesize selected;
 @synthesize maxAmount;
-@synthesize groupAccel;
 
 - (id)initWithTitle:(NSString *)t identifier:(ANY_P)ident accelerator:(char)ch  group_accel:(char)group_accel glyph:(int)g selected:(BOOL)s {
 	NSArray *lines = [t splitNetHackDetails];
@@ -47,7 +46,6 @@
 		selected = s;
 		amount = -1; // all is default
 		maxAmount = [title parseNetHackAmount];
-		groupAccel = group_accel;
 	}
 	return self;
 }
