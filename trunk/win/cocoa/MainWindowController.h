@@ -44,6 +44,8 @@
 	BOOL										isDirectionQuestion;
 	BOOL										terminatedByUser;
 	
+	BOOL										useSpeech;
+	
 	NSSpeechSynthesizer						*	voice;
 	NSMutableArray							*	voiceQueue;
 	
@@ -103,5 +105,7 @@
 
 // speech
 - (void)speakString:(NSString *)text;
+
+@property (assign) BOOL useSpeech;
 
 @end

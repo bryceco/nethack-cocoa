@@ -91,7 +91,7 @@
 			id item = [itemDict objectForKey:[NSNumber numberWithInt:itemTag]];
 			if ( item && [item class] == [NhItem class] ) {
 				NhItem * entry = item;
-				if ( entry.groupAccel == groupAccel ) {
+				if ( entry.group_ch == groupAccel ) {
 					[button setState:NSOnState];
 					hit = YES;
 				}
@@ -364,6 +364,8 @@
 
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
+		char group_accel = 0;
+		
 		for ( NhItem * item in [group items] ) {			
 			
 			BOOL isEnabled = item.identifier.a_int != -1;
@@ -382,14 +384,25 @@
 				title = [title stringByAppendingFormat:@" (%@)", item.detail];
 			}
 #if 0
-			// add group accelerator
+			// add group accelerator to item
 			if ( item.group_ch ) {
-				title = [title stringByAppendingFormat:@" ('%c')", item.group_ch];
+				title = [title stringByAppendingFormat:@" (%c)", item.group_ch];
 			}
 #endif		
+			if ( group_accel > 0 && group_accel != item.group_ch )
+				group_accel = -1;
+			else 
+				group_accel = item.group_ch;
+				
 			// save expanded title
 			[item setTitle:title];
 		}
+#if 1
+		if ( group_accel > 0 ) {
+			// show group accelerator in title
+			[group setTitle:[group.title stringByAppendingFormat:@" - %c", group_accel]];
+		}
+#endif
 	}
 }
 
@@ -459,17 +472,135 @@
 	return tabs;
 }
 
+static NSString * skipPrefix( NSString * s, NSString * list[] )
+{
+	for ( int i = 0; list[i] != nil; ++i ) {
+		if ( [s hasPrefix:list[i]] )
+			return [s substringFromIndex:[list[i] length]];
+	}
+	return s;
+};
 
+
+static NSString * cleanAttributedString( NSString * s, BOOL decorated )
+{
+	int i = 0;
+	// skip leading icon
+	while ( [s characterAtIndex:i] > 255 )
+		++i;
+	while ( [s characterAtIndex:i] == ' ' )
+		++i;
+	if ( [s characterAtIndex:i] == '(' )
+		i += 4;
+	s = [s substringFromIndex:i];
+	
+	if ( !decorated ) {
+		// FIXME: doesn't handle plurals, etc.
+		static NSString * amt[] = {
+			@"a ",
+			@"an ",
+			@"the ",
+			nil
+		};
+		static NSString * buc[] = {
+			@"blessed ",
+			@"cursed ",
+			@"uncursed ",
+			nil
+		};
+		static NSString * corrode1[] = {
+			@"very ",
+			@"thoroughly ",
+			nil
+		};
+		static NSString * corrode2[] = {
+			@"rustproof ",
+			@"fireproof ",
+			@"corodeproof ",
+			@"fixed ",
+			@"rusty ",
+			@"burnt ",
+			@"corroded ",
+			@"rotted ",	
+			nil
+		};
+		
+		// skip quantity
+		s = skipPrefix(s, amt);
+		while ( [[NSCharacterSet decimalDigitCharacterSet] characterIsMember:[s characterAtIndex:0]] )
+			s = [s substringFromIndex:1];
+		if ( [s characterAtIndex:0] == ' ' )
+			s = [s substringFromIndex:1];
+		// skip buc
+		s = skipPrefix(s, buc);
+		// skip corrosion
+		s = skipPrefix(s, corrode1);
+		s = skipPrefix(s, corrode2);
+	}
+	//	NSLog(@"'%@'\n",s);
+	
+	return s;
+}
+
+static NSInteger compareButtonText(id button1, id button2, void * context )
+{
+	NSString * s1 = [[button1 attributedTitle] string];
+	NSString * s2 = [[button2 attributedTitle] string];
+	
+	s1 = cleanAttributedString(s1, YES);
+	s2 = cleanAttributedString(s2, YES);
+	
+	return [s1 compare:s2 options:NSCaseInsensitiveSearch];
+}
+
+-(IBAction)sortItems:(id)sender
+{
+	BOOL useDefault = [(NSButton *)sender state] == NSOffState;
+	
+	for ( NhItemGroup * group in [menuParams itemGroups] ) {
+		int len = [[group items] count];
+		// get list of buttons in this group
+		NSMutableArray * origButtonList = [NSMutableArray arrayWithCapacity:len];
+		for ( NhItem * item in [group items] ) {
+			int tag = [[[itemDict allKeysForObject:item] objectAtIndex:0] intValue];
+			NSButton * button = [menuView viewWithTag:tag];
+			[origButtonList addObject:button];
+		}
+		// sort buttons alphabetically
+		NSArray * newButtonList = useDefault 
+				? [origButtonList copy]
+				: [origButtonList sortedArrayUsingFunction:compareButtonText context:NULL];
+		// get list of button locations
+		NSMutableArray * posList = [NSMutableArray arrayWithCapacity:len];
+		for ( NSButton * button in origButtonList ) {
+			[posList addObject:[NSValue valueWithPoint:button.frame.origin]];
+		}
+		// sort button positions low to high
+		NSArray * posList2 = [posList sortedArrayUsingComparator:^(NSValue * o1, NSValue * o2)
+							  {
+								  NSPoint p1 = [o1 pointValue], p2 = [o2 pointValue]; 
+								  return p1.y < p2.y ? NSOrderedAscending
+														: p1.y > p2.y ? NSOrderedDescending
+														: NSOrderedSame; 
+							  }];
+		// assign new button locations
+		for ( int i = 0; i < len; ++i ) {
+			NSButton * button = [newButtonList objectAtIndex:i];
+			NSPoint pt = [[posList2 objectAtIndex:i] pointValue];
+			[button setFrameOrigin:pt];
+		}
+	}
+}
 
 
 -(void)windowDidLoad
 {
 	NSSize						minimumSize = [[self window] frame].size;
 	NSFont					*	groupFont	= [NSFont labelFontOfSize:15];
-	NSMutableDictionary		*	groupAttr	= [NSMutableDictionary dictionaryWithObject:groupFont forKey:NSFontAttributeName];
-	NSMutableDictionary		*	itemAttr	= [NSMutableDictionary dictionary];
+	NSMutableDictionary	*	groupAttr	= [NSMutableDictionary dictionaryWithObject:groupFont forKey:NSFontAttributeName];
+	NSMutableDictionary	*	itemAttr	= [NSMutableDictionary dictionary];
 	int							how			= [menuParams how];
-	NSInteger					itemTag		= 0;
+	NSInteger					itemTag		= 1;
 
 	BOOL showShortcuts = how == PICK_ANY 
 					&& ([[menuParams itemGroups] count] != 1

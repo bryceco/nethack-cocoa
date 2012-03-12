@@ -67,19 +67,32 @@ static NhWindow *s_mapWindow = nil;
 
 - (BOOL)stringIsVoiced:(NSString *)s
 {
-	return NO;
-	
 	if ( type != NHW_MESSAGE )
 		return NO;
-	if ( [s hasPrefix:@"You kill "] )
-		return YES;
-	if ( [s hasPrefix:@"You destroy "] )
-		return YES;
+
 	if ( [s hasPrefix:@"You fall down the stairs."] )
 		return YES;
-	if ( [s hasPrefix:@"Your movements are "] )
-		return YES;
 	if ( [s hasPrefix:@"You feel "] )
+		return YES;
+	if ( [s hasPrefix:@"You hear "] )
+		return YES;
+	if ( [s hasPrefix:@"You faint "] )
+		return YES;
+	if ( [s containsString:@" beginning to feel hungy"] )
+		return YES;
+	if ( [s containsString:@" needs food, badly!"] )
+		return YES;
+	
+	if ( [s hasPrefix:@"You have a sad feeling"] )
+		return YES;
+	
+	if ( [s containsString:@"confuses you"] )
+		return YES;
+	if ( [s containsString:@"Movement is "] )
+		return YES;
+	if ( [s containsString:@"movements are "] )
+		return YES;
+	if ( [s containsString:@"move a handspan "] )
 		return YES;
 	
 	return NO;

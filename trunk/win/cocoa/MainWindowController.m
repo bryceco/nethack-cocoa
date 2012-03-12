@@ -52,6 +52,9 @@ static const float popoverItemHeight = 44.0f;
 
 @implementation MainWindowController
 
+@synthesize useSpeech;
+
+
 + (MainWindowController *)instance {
 	return instance;
 }
@@ -135,6 +138,8 @@ static const float popoverItemHeight = 44.0f;
 		NSString *	asciiFontName = [[NSUserDefaults standardUserDefaults] objectForKey:@"AsciiFontName"];
 		CGFloat		asciiFontSize = [[NSUserDefaults standardUserDefaults] floatForKey:@"AsciiFontSize"];
 		
+		self.useSpeech = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseSpeech"];
+		
 		iflags.wc_ascii_map = [[NSUserDefaults standardUserDefaults] boolForKey:@"UseAscii"];
 		
 		// set defaults if no user preference
@@ -179,6 +184,8 @@ static const float popoverItemHeight = 44.0f;
 	[[NSUserDefaults standardUserDefaults] setFloat:[font pointSize] forKey:@"AsciiFontSize"];
 	BOOL	useAscii = iflags.wc_ascii_map;
 	[[NSUserDefaults standardUserDefaults] setBool:useAscii forKey:@"UseAscii"];
+	[[NSUserDefaults standardUserDefaults] setBool:self.useSpeech forKey:@"UseSpeech"];
+	
 	// save user defined tile sets
 	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
@@ -738,6 +745,9 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)speakString:(NSString *)text
 {
+	if ( !self.useSpeech )
+		return;
+	
 	// add text to queue
 	if (![NSThread isMainThread]) {
 		[self performSelectorOnMainThread:@selector(speakString:) withObject:text waitUntilDone:NO];
