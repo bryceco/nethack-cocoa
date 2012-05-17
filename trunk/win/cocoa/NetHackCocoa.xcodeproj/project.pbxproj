@@ -688,7 +688,7 @@
 /* Begin PBXFileReference section */
 		021281F114F6DD5D0046D56F /* NetHackCocoa.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = NetHackCocoa.entitlements; sourceTree = "<group>"; };
 		021281F314F6E0250046D56F /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = English; path = "container-migration.plist"; sourceTree = "<group>"; };
-		0212834E14F6E6240046D56F /* NetHackCocoa.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetHackCocoa.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0212834E14F6E6240046D56F /* NetHack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetHack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0224CAB811B8A58D00FC2199 /* NetHackCocoaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHackCocoaAppDelegate.h; sourceTree = "<group>"; };
 		0224CAB911B8A58D00FC2199 /* NetHackCocoaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetHackCocoaAppDelegate.m; sourceTree = "<group>"; };
 		0224CABD11B8A5E800FC2199 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -1721,7 +1721,7 @@
 			isa = PBXGroup;
 			children = (
 				8D1107320486CEB800E47090 /* NetHackCocoa.app */,
-				0212834E14F6E6240046D56F /* NetHackCocoa.app */,
+				0212834E14F6E6240046D56F /* NetHack.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1847,7 +1847,7 @@
 			name = "NetHackCocoa-Sandboxed";
 			productInstallPath = "$(HOME)/Applications";
 			productName = NetHackCocoa;
-			productReference = 0212834E14F6E6240046D56F /* NetHackCocoa.app */;
+			productReference = 0212834E14F6E6240046D56F /* NetHack.app */;
 			productType = "com.apple.product-type.application";
 		};
 		8D1107260486CEB800E47090 /* NetHackCocoa */ = {
@@ -2663,7 +2663,7 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PRODUCT_NAME = NetHackCocoa;
+				PRODUCT_NAME = NetHack;
 			};
 			name = Debug;
 		};
@@ -2679,7 +2679,7 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
-				PRODUCT_NAME = NetHackCocoa;
+				PRODUCT_NAME = NetHack;
 			};
 			name = Release;
 		};

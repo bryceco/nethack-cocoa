@@ -332,7 +332,7 @@ register struct obj *obj;
 				Strcpy(buf,"armor");
 			Strcat(buf, " called ");
 			Strcat(buf, un);
-		} else	Strcat(buf, dn);
+		} else	Strcat(buf, dn ? dn : "<bad>");
 		break;
 	    case FOOD_CLASS:
 		if (typ == SLIME_MOLD) {

@@ -81,6 +81,8 @@ extern int unixmain(int argc, char **argv);
 	// call NetHack
 	unixmain(sizeof argv/sizeof argv[0], argv);
 	
+	[self unlockNethackCore];
+
 	// clean up thread pool
 	[pool release];
 }

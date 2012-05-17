@@ -76,18 +76,44 @@ static NhWindow *s_mapWindow = nil;
 		return YES;
 	if ( [s hasPrefix:@"You hear "] )
 		return YES;
-	if ( [s hasPrefix:@"You faint "] )
+	
+	// blinded
+	if ( [s hasPrefix:@"Everything suddenly goes dark"] )
 		return YES;
-	if ( [s containsString:@" beginning to feel hungy"] )
+	if ( [s hasPrefix:@"It suddenly gets dark"] )
+		return YES;
+	if ( [s containsString:@"blinds you"] )
+		return YES;
+	if ( [s containsString:@"been creamed"] )
+		return YES;
+	
+	// hunger
+	if ( [s containsString:@" feel hungry"] )
+		return YES;
+	if ( [s containsString:@" feel weak"] )
+		return YES;
+	if ( [s hasPrefix:@"You faint "] )
 		return YES;
 	if ( [s containsString:@" needs food, badly!"] )
 		return YES;
 	
+	// pet
 	if ( [s hasPrefix:@"You have a sad feeling"] )
 		return YES;
 	
+	// confused/stunned
 	if ( [s containsString:@"confuses you"] )
 		return YES;
+	if ( [s hasPrefix:@"You stagger"] )
+		return YES;
+	if ( [s hasPrefix:@"You reel..."] )
+		return YES;
+	
+	// hallucinating
+	if ( [s containsString:@"are freaked out"] )
+		return YES;
+
+	// movement
 	if ( [s containsString:@"Movement is "] )
 		return YES;
 	if ( [s containsString:@"movements are "] )
@@ -149,6 +175,8 @@ static NhWindow *s_mapWindow = nil;
 - (void)print:(const char *)str attr:(int)attr {
 	NSString *s = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
 //	s = [s stringWithTrimmedWhitespaces];
+	
+//	s = [NSString stringWithFormat:@"%d: %@",moves,s];
 	
 	if ( [self useAttributedStrings] ) {
 

@@ -1058,6 +1058,10 @@ boolean uncomp;
 	}
 }
 
+#include <errno.h>
+
+int x = EAGAIN;
+
 /*
  * using system() is simpler, but opens up security holes and causes
  * problems on at least Interactive UNIX 3.0.1 (SVR3.2), where any
@@ -1119,6 +1123,7 @@ boolean uncomp;
 # endif
 	
 # ifdef COCOA_GRAPHICS
+	args[++i] = "-f";
 	args[++i] = filename;
 # endif
 	

@@ -400,7 +400,7 @@
 #if 1
 		if ( group_accel > 0 ) {
 			// show group accelerator in title
-			[group setTitle:[group.title stringByAppendingFormat:@" - %c", group_accel]];
+			[group setTitle:[group.title stringByAppendingFormat:@"   %c", group_accel]];
 		}
 #endif
 	}
@@ -568,7 +568,7 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 		}
 		// sort buttons alphabetically
 		NSArray * newButtonList = useDefault 
-				? [origButtonList copy]
+				? [[origButtonList copy] autorelease]
 				: [origButtonList sortedArrayUsingFunction:compareButtonText context:NULL];
 		// get list of button locations
 		NSMutableArray * posList = [NSMutableArray arrayWithCapacity:len];

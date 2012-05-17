@@ -166,7 +166,7 @@ static const float popoverItemHeight = 44.0f;
 		[messagesView setIntercellSpacing:NSMakeSize(0,0)];
 		
 		// initialize speech engine
-		voice = [[NSSpeechSynthesizer alloc] initWithVoice:nil];
+		voice = [[NSSpeechSynthesizer alloc] initWithVoice:@"com.apple.speech.synthesis.voice.Alex"];
 		float r = [voice rate];
 		[voice setRate:1.5*r];
 		[voice setDelegate:self];
@@ -615,7 +615,10 @@ static const float popoverItemHeight = 44.0f;
 	if (![NSThread isMainThread]) {
 
 		BOOL blocking = w.blocking;
+		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
+		[appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(displayWindow:) withObject:w waitUntilDone:blocking];
+		[appDelegate lockNethackCore];
 
 	} else {
 		
