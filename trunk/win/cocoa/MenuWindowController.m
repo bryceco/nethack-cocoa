@@ -585,36 +585,30 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 	}
 }
 
-
-typedef enum {
-	BUC_BLESSED = 1,
-	BUC_UNCURSED = 0,
-	BUC_CURSED = -1,
-} BUC;
-enum BUC GetBUC( NSString * text )
+typedef enum { BUC_ENUM_BLESSED, BUC_ENUM_UNCURSED, BUC_ENUM_CURSED }  BUC_ENUM;
+static BUC_ENUM GetBUC( NSString * text )
 {
 	// get blessed/cursed status
 	static struct {
 		NSString *	text;
-		enum BUC	buc;
-	} BUC[] = {
-		@" blessed", YES,
-		@" holy", YES,
-		@" cursed", NO,
-		@" unholy", NO,
+		BUC_ENUM	buc;
+	} List[] = {
+		@" blessed",	BUC_ENUM_BLESSED,
+		@" holy",		BUC_ENUM_BLESSED,
+		@" cursed",		BUC_ENUM_CURSED,
+		@" unholy",		BUC_ENUM_CURSED,
 	};
-	enum BUC buc = BUC_UNCURSED;
+	BUC_ENUM buc = BUC_ENUM_UNCURSED;
 	NSUInteger pos = NSNotFound;
-	for ( int i = 0; i < countof(BUC); ++i) {
-		NSUInteger loc = [title rangeOfString:BUC[i].text].location;
+	for ( int i = 0; i < sizeof List/sizeof List[0]; ++i) {
+		NSUInteger loc = [text rangeOfString:List[i].text].location;
 		if ( loc < pos ) {
 			pos = loc;
-			buc = BUC[i].buc;
+			buc = List[i].buc;
 		}
 	}
 	return buc;
 }
-
 
 -(void)windowDidLoad
 {
@@ -740,19 +734,20 @@ enum BUC GetBUC( NSString * text )
 			// get title
 			NSString * title = [item title];
 			
-			// get blessed/cursed status
-			enum BUC buc = GetBUC( title );
-
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
 			
 			// set paragraph style so we get tabs as we like
 			[aString addAttributes:itemAttr range:NSMakeRange(0,[[aString mutableString] length])];
+
+#if 0
+			// get blessed/cursed status
+			BUC_ENUM buc = GetBUC( title );
 			if ( buc != BUC_UNCURSED )
 				[aString addAttribute:NSForegroundColorAttributeName
-								value:(buc == BHC_BLESSED ? [NSColor blueColor] : [NSColor redColor])
+								value:(buc == BUC_ENUM_BLESSED ? [NSColor blueColor] : [NSColor redColor])
 								range:NSMakeRange(0,[[aString mutableString] length])];
-
+#endif
 			// adjust baseline of text so it is vertically centered with tile
 			if ( glyph != NO_GLYPH ) {
 				CGFloat offset = [[TileSet instance] imageSize].height;
