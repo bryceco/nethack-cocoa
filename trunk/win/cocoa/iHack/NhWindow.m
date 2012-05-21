@@ -70,11 +70,11 @@ static NhWindow *s_mapWindow = nil;
 	if ( type != NHW_MESSAGE )
 		return NO;
 
-	if ( [s hasPrefix:@"You fall down the stairs."] )
-		return YES;
 	if ( [s hasPrefix:@"You feel "] )
 		return YES;
 	if ( [s hasPrefix:@"You hear "] )
+		return YES;
+	if ( [s hasPrefix:@"You fall down the stairs."] )
 		return YES;
 	
 	// blinded
