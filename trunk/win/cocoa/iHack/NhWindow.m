@@ -98,7 +98,7 @@ static NhWindow *s_mapWindow = nil;
 		return YES;
 	
 	// pet
-	if ( [s hasPrefix:@"You have a sad feeling"] )
+	if ( [s containsString:@"feeling for a moment, then it passes"] )
 		return YES;
 	
 	// confused/stunned
@@ -119,6 +119,16 @@ static NhWindow *s_mapWindow = nil;
 	if ( [s containsString:@"movements are "] )
 		return YES;
 	if ( [s containsString:@"move a handspan "] )
+		return YES;
+
+	// stoning/chocking/sliming
+	if ( [s hasPrefix:@"You are slowing down"] )
+		return YES;
+	if ( [s hasPrefix:@"You find it hard to breathe"] )
+		return YES;
+	if ( [s containsString:@" is becoming constricted"] )
+		return YES;
+	if ( [s hasPrefix:@"You are turning a little"] )
 		return YES;
 	
 	return NO;

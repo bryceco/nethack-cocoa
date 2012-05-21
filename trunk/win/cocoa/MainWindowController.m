@@ -693,14 +693,7 @@ static const float popoverItemHeight = 44.0f;
 
 - (BOOL)isMovementKey:(char)k {
 	if (isalpha(k)) {
-		static char directionKeys[] = "kulnjbhy";
-		char *pStr = directionKeys;
-		char c;
-		while (c = *pStr++) {
-			if (c == k) {
-				return YES;
-			}
-		}
+		return strchr("kulnjbhy",k) != NULL;
 	}
 	return NO;
 }
