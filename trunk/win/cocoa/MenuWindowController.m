@@ -586,6 +586,36 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 }
 
 
+typedef enum {
+	BUC_BLESSED = 1,
+	BUC_UNCURSED = 0,
+	BUC_CURSED = -1,
+} BUC;
+enum BUC GetBUC( NSString * text )
+{
+	// get blessed/cursed status
+	static struct {
+		NSString *	text;
+		enum BUC	buc;
+	} BUC[] = {
+		@" blessed", YES,
+		@" holy", YES,
+		@" cursed", NO,
+		@" unholy", NO,
+	};
+	enum BUC buc = BUC_UNCURSED;
+	NSUInteger pos = NSNotFound;
+	for ( int i = 0; i < countof(BUC); ++i) {
+		NSUInteger loc = [title rangeOfString:BUC[i].text].location;
+		if ( loc < pos ) {
+			pos = loc;
+			buc = BUC[i].buc;
+		}
+	}
+	return buc;
+}
+
+
 -(void)windowDidLoad
 {
 	NSSize						minimumSize = [[self window] frame].size;
@@ -711,24 +741,16 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 			NSString * title = [item title];
 			
 			// get blessed/cursed status
-			NSUInteger isBlessed = [title rangeOfString:@" blessed"].location;
-			NSUInteger isCursed = [title rangeOfString:@" cursed"].location;
-			if ( isBlessed < isCursed )
-				isCursed = 0;
-			else if ( isCursed < isBlessed )
-				isBlessed = 0;
-			else
-				isBlessed = isCursed = 0;
-				
+			enum BUC buc = GetBUC( title );
 
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
 			
 			// set paragraph style so we get tabs as we like
 			[aString addAttributes:itemAttr range:NSMakeRange(0,[[aString mutableString] length])];
-			if ( isBlessed || isCursed )
+			if ( buc != BUC_UNCURSED )
 				[aString addAttribute:NSForegroundColorAttributeName
-								value:(isBlessed ? [NSColor blueColor] : [NSColor redColor])
+								value:(buc == BHC_BLESSED ? [NSColor blueColor] : [NSColor redColor])
 								range:NSMakeRange(0,[[aString mutableString] length])];
 
 			// adjust baseline of text so it is vertically centered with tile
