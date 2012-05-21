@@ -383,12 +383,6 @@
 			if ( item.detail ) {
 				title = [title stringByAppendingFormat:@" (%@)", item.detail];
 			}
-#if 0
-			// add group accelerator to item
-			if ( item.group_ch ) {
-				title = [title stringByAppendingFormat:@" (%c)", item.group_ch];
-			}
-#endif		
 			if ( group_accel > 0 && group_accel != item.group_ch )
 				group_accel = -1;
 			else 
@@ -397,12 +391,11 @@
 			// save expanded title
 			[item setTitle:title];
 		}
-#if 1
+
 		if ( group_accel > 0 ) {
 			// show group accelerator in title
 			[group setTitle:[group.title stringByAppendingFormat:@"   %c", group_accel]];
 		}
-#endif
 	}
 }
 
@@ -597,8 +590,8 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 {
 	NSSize						minimumSize = [[self window] frame].size;
 	NSFont					*	groupFont	= [NSFont labelFontOfSize:15];
-	NSMutableDictionary	*	groupAttr	= [NSMutableDictionary dictionaryWithObject:groupFont forKey:NSFontAttributeName];
-	NSMutableDictionary	*	itemAttr	= [NSMutableDictionary dictionary];
+	NSMutableDictionary		*	groupAttr	= [NSMutableDictionary dictionaryWithObject:groupFont forKey:NSFontAttributeName];
+	NSMutableDictionary		*	itemAttr	= [NSMutableDictionary dictionary];
 	int							how			= [menuParams how];
 	NSInteger					itemTag		= 1;
 
@@ -669,7 +662,7 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 		[label release];
 		
 		for ( NhItem * item in [group items] ) {
-
+			
 			// button is disabled if identifier is -1 (which we set zero in convertFakeGroupsToRealGroups)
 			BOOL isEnabled = item.identifier.a_int != -1 || how == PICK_NONE;
 
@@ -716,12 +709,27 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 			
 			// get title
 			NSString * title = [item title];
+			
+			// get blessed/cursed status
+			NSUInteger isBlessed = [title rangeOfString:@" blessed"].location;
+			NSUInteger isCursed = [title rangeOfString:@" cursed"].location;
+			if ( isBlessed < isCursed )
+				isCursed = 0;
+			else if ( isCursed < isBlessed )
+				isBlessed = 0;
+			else
+				isBlessed = isCursed = 0;
+				
 
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
 			
 			// set paragraph style so we get tabs as we like
 			[aString addAttributes:itemAttr range:NSMakeRange(0,[[aString mutableString] length])];
+			if ( isBlessed || isCursed )
+				[aString addAttribute:NSForegroundColorAttributeName
+								value:(isBlessed ? [NSColor blueColor] : [NSColor redColor])
+								range:NSMakeRange(0,[[aString mutableString] length])];
 
 			// adjust baseline of text so it is vertically centered with tile
 			if ( glyph != NO_GLYPH ) {
