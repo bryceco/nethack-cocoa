@@ -66,6 +66,9 @@
 	IBOutlet NotesWindowController			*	notesWindow;
 }
 
+@property (assign) BOOL useSpeech;
+
+
 + (MainWindowController *) instance;
 
 
@@ -98,14 +101,8 @@
 
 // touch handling
 - (void)handleMapTapTileX:(int)x y:(int)y forLocation:(CGPoint)p inView:(NSView *)view;
-#if 0
-- (void)handleDirectionTap:(e_direction)direction;
-- (void)handleDirectionDoubleTap:(e_direction)direction;
-#endif
 
 // speech
 - (void)speakString:(NSString *)text;
-
-@property (assign) BOOL useSpeech;
 
 @end

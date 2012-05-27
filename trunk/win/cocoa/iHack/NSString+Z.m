@@ -108,4 +108,37 @@
 	return s1;
 }
 
+// search for string with paddig on both sides (or at front or back of string)
+- (NSRange) rangeOfString:(NSString *)text withDelimiter:(NSString *)delim
+{
+	int dl = [delim length];
+	NSRange rng = NSMakeRange(-1, [self length]);
+	for (;;) {
+		rng.location += 1;
+		rng = [self rangeOfString:text options:NSCaseInsensitiveSearch range:rng];
+		if ( rng.location == NSNotFound )
+			break;
+		// check prefix
+		if ( rng.location == 0 ) {
+			// start is okay
+		} else if ( rng.location < dl ) {
+			continue; // not enough room for prefix delimiter
+		} else if ( [self compare:delim options:NSCaseInsensitiveSearch range:NSMakeRange(rng.location-dl,dl)] != NSOrderedSame ) {
+			continue;
+		}
+		// check suffix
+		if ( rng.location + rng.length == [self length] ) {
+			// tail of string
+		} else if ( rng.location + rng.length + dl >= [self length]) {
+			continue; // not enough room for suffix
+		} else if ( [self compare:delim options:NSCaseInsensitiveSearch range:NSMakeRange(rng.location+rng.length,dl)] != NSOrderedSame ) {
+			continue;
+		}
+		// found it
+		break;
+	}
+	return rng;
+}
+
+
 @end

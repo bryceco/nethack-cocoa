@@ -33,5 +33,6 @@
 - (NSString *) substringBetweenDelimiters:(NSString *)del;
 - (NSString *) substringStartingWithString:(NSString *)start;
 - (NSString *) stringWithTrimmedWhitespaces;
+- (NSRange) rangeOfString:(NSString *)text withDelimiter:(NSString *)delim;
 
 @end
