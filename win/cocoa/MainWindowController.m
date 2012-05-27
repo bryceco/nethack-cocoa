@@ -174,6 +174,7 @@ static const float popoverItemHeight = 44.0f;
 	}
 }
 
+
 -(void)windowWillClose:(NSNotification *)notification
 {
 	// save tile set preferences
@@ -189,6 +190,9 @@ static const float popoverItemHeight = 44.0f;
 	// save user defined tile sets
 	[[NSUserDefaults standardUserDefaults] setObject:userTiles forKey:@"UserTileSets"];
 	[[NSUserDefaults standardUserDefaults] synchronize];
+	
+	// if window closes then application needs to terminate
+	[self terminateApplication:nil];
 }
 
 - (void)setTerminatedByUser:(BOOL)byUser
@@ -212,14 +216,6 @@ static const float popoverItemHeight = 44.0f;
 
 
 #pragma mark menu actions
-
--(BOOL)windowShouldClose:(id)sender
-{
-	return NO;
-}
--(void)performClose:(id)sender
-{
-}
 
 - (void)performMenuAction:(id)sender
 {
@@ -385,7 +381,6 @@ static const float popoverItemHeight = 44.0f;
 		}
 	}		
 }
-
 
 
 - (IBAction)terminateApplication:(id)sender

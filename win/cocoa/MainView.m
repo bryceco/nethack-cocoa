@@ -36,9 +36,13 @@
 #import "NetHackCocoaAppDelegate.h"
 
 #import "Inventory.h"
+#import "NSString+Z.h"
 
 
 @implementation MainView
+
+@synthesize contextMenu;// = _contextMenu;
+@synthesize contextMenuObject;// = _contextMenuObject;
 
 NSStringEncoding	codepage437encoding;
 
@@ -333,6 +337,56 @@ NSStringEncoding	codepage437encoding;
 	NhEvent * e = [NhEvent eventWithX:mouseLoc.x y:mouseLoc.y];
 	[[NhEventQueue instance] addEvent:e];
 }
+
+
+#pragma mark Context menu
+
+- (IBAction)showContextInfo:(id)sender
+{
+}
+
+- (NSString *)cleanTileDescription:(NSString *)text
+{
+	// remove context string
+	NSRange r = [text rangeOfString:@"["];
+	if ( r.location != NSNotFound ) {
+		text = [text substringToIndex:r.location];
+	}
+	// remove extra words
+	NSArray * a = [NSArray arrayWithObjects:@"tame", @"invisible", @"peaceful", @"a", @"an", @"the", nil];
+	for ( NSString * s in a ) {
+		r = [text rangeOfString:s withDelimiter:@" "];
+		if ( r.location != NSNotFound ) {
+			text = [text stringByReplacingCharactersInRange:r withString:@""];
+		}
+	}
+	text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+	return text;
+}
+- (IBAction)doWebSearch:(id)sender
+{
+	NSString * text = [contextMenuObject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString * path = [NSString stringWithFormat:@"http://nethackwiki.com/mediawiki/index.php?search=%@",text];
+	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:path]];
+}
+
+- (NSMenu *) menuForEvent:(NSEvent *)theEvent
+{
+	NSPoint contextMenuPoint = [self convertPoint:[theEvent locationInWindow] fromView:nil];
+	contextMenuPoint.x = (int)(contextMenuPoint.x / tileSize.width);
+	contextMenuPoint.y = (int)(contextMenuPoint.y / tileSize.height);
+	if ( contextMenuPoint.x >= 0 && contextMenuPoint.x < COLNO && contextMenuPoint.y >= 0 && contextMenuPoint.y < ROWNO ) {
+		NSString * text = DescriptionForTile( contextMenuPoint.x, contextMenuPoint.y );
+		contextMenuObject = [self cleanTileDescription:text];
+		NSMenuItem * item = [contextMenu itemAtIndex:0];
+		NSString * title = [NSString stringWithFormat:@"Search the Nethack Wiki for '%@'", contextMenuObject];
+		[item setTitle:title];
+		return contextMenu;
+	}
+	return nil;
+}
+
+#pragma mark Tooltip
 
 - (void)cancelTooltip
 {
