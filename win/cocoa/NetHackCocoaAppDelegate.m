@@ -33,6 +33,11 @@ extern int unixmain(int argc, char **argv);
 
 @synthesize window;
 
+- (BOOL)applicationShouldTerminateAfterLastWindowClosed:(NSApplication *)theApplication
+{
+	return YES;
+}
+
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
 	netHackThread = [[NSThread alloc] initWithTarget:self selector:@selector(netHackMainLoop:) object:nil];
 	[netHackThread start];
@@ -53,10 +58,10 @@ extern int unixmain(int argc, char **argv);
 }
 
 - (void) netHackMainLoop:(id)arg {
+	extern int g_argc;
+	extern char ** g_argv;
+	
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	char *argv[] = {
-		"NetHack",
-	};
 	
 	nethackCoreLock = [[NSRecursiveLock alloc] init];
 	[self lockNethackCore];
@@ -79,7 +84,7 @@ extern int unixmain(int argc, char **argv);
 	[[NSUserName() capitalizedString] getCString:plname maxLength:PL_NSIZ encoding:NSASCIIStringEncoding];
 	
 	// call NetHack
-	unixmain(sizeof argv/sizeof argv[0], argv);
+	unixmain(g_argc, g_argv);
 	
 	[self unlockNethackCore];
 
