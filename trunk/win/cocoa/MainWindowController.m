@@ -59,6 +59,14 @@ static const float popoverItemHeight = 44.0f;
 	return instance;
 }
 
+- (void)setFont:(NSFont *)font
+{
+	for ( NSTableColumn * column in [self->messagesView tableColumns] ) {
+		NSCell * cell = [column dataCell];
+		[cell setFont:font];
+	}
+}
+
 // Convert keyEquivs in menu items to use their shifted equivalent
 // This makes them display with their more conventional character
 // bindings and lets us work internationally.
@@ -120,6 +128,13 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)awakeFromNib {
 	instance = self;
+	
+#if 0
+	{
+		NSFont * font = [NSFont fontWithName:@"Lucida Bright" size:13];
+		[self setFont:font];
+	}
+#endif
 	
 	NSMenu * menu = [[NSApplication sharedApplication] mainMenu];
 	[self fixMenuKeyEquivalents:menu];
@@ -475,7 +490,7 @@ static const float popoverItemHeight = 44.0f;
 	const char *pStr = [lets cStringUsingEncoding:NSASCIIStringEncoding];
 	enum eState { start, inv, invInterval, end } state = start;
 	char c, lastInv = 0;
-	while (c = *pStr++) {
+	while ((c = *pStr++)) {
 		switch (state) {
 			case start:
 				if (isalpha(c)) {
@@ -744,6 +759,13 @@ static const float popoverItemHeight = 44.0f;
 		[self performSelectorOnMainThread:@selector(speakString:) withObject:text waitUntilDone:NO];
 	} else {
 		if ( [voice isSpeaking] ) {
+			// don't be too redundant for messages repeated many times
+			int cnt = 0;
+			for ( NSString * s in voiceQueue ) {
+				if ( [text isEqualToString:s] )
+					if ( ++cnt >= 3 )
+						return;
+			}
 			[voiceQueue addObject:text];
 		} else {
 			[voice startSpeakingString:text];

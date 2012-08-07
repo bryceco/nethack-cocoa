@@ -333,10 +333,17 @@ char *argv[];
 				  pw = getpwuid(uid);
 			      }
 			  }
-			  if (pw && !strcmp(pw->pw_name,WIZARD)) {
-			      wizard = TRUE;
-			      break;
-			  }
+#ifdef COCOA_GRAPHICS
+				if (!strcmp(plname,WIZARD) || (pw && !strcmp(pw->pw_name,WIZARD))) {
+					wizard = TRUE;
+					break;
+				}
+#else
+				if (pw && !strcmp(pw->pw_name,WIZARD)) {
+					wizard = TRUE;
+					break;
+				}
+#endif
 			}
 			/* otherwise fall thru to discover */
 			wiz_error_flag = TRUE;
