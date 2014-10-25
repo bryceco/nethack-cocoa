@@ -180,13 +180,15 @@
 		raceEnabled[i] = YES;
 	for ( int i = 0; i < cntRoles; ++i )
 		roleEnabled[i] = YES;
-	
 
 	// set table row height based on tiles
 	CGFloat rowHeight = [[TileSet instance] imageSize].height;
 	[role setRowHeight:rowHeight];
 	[race setRowHeight:rowHeight];
-	
+
+	[race reloadData];
+	[role reloadData];
+
     // Randomize race and role, unless specified in config
     int ro = flags.initrole;
     if (ro == ROLE_NONE || ro == ROLE_RANDOM) {

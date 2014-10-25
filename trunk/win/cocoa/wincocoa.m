@@ -123,7 +123,8 @@ coord CoordMake(xchar i, xchar j) {
 
 @implementation WinCocoa
 
-+ (void)load {
++ (void)load
+{
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
 	strcpy(s_baseFilePath, [[[NSBundle mainBundle] resourcePath] cStringUsingEncoding:NSASCIIStringEncoding]);
 
@@ -136,11 +137,13 @@ coord CoordMake(xchar i, xchar j) {
 	[pool release];
 }
 
-+ (const char *)baseFilePath {
++ (const char *)baseFilePath
+{
 	return s_baseFilePath;
 }
 
-+ (void)expandFilename:(const char *)filename intoPath:(char *)path {
++ (void)expandFilename:(const char *)filename intoPath:(char *)path
+{
 	sprintf(path, "%s/%s", [self baseFilePath], filename);
 }
 
@@ -216,7 +219,8 @@ coord CoordMake(xchar i, xchar j) {
 
 @end
 
-FILE *cocoa_dlb_fopen(const char *filename, const char *mode) {
+FILE *cocoa_dlb_fopen(const char *filename, const char *mode)
+{
 	char path[FQN_MAX_FILENAME];
 	[WinCocoa expandFilename:filename intoPath:path];
 	FILE *file = fopen(path, mode);
@@ -227,12 +231,14 @@ FILE *cocoa_dlb_fopen(const char *filename, const char *mode) {
 void intron() {}
 void introff() {}
 
-int dosuspend() {
+int dosuspend()
+{
 	NSLog(@"dosuspend");
 	return 0;
 }
 
-void error(const char *s, ...) {
+void error(const char *s, ...)
+{
 	//NSLog(@"error: %s");
 	char message[512];
 	va_list ap;
@@ -265,7 +271,8 @@ void cocoa_decgraphics_mode_callback()
 
 #pragma mark nethack window API
 
-void cocoa_init_nhwindows(int* argc, char** argv) {
+void cocoa_init_nhwindows(int* argc, char** argv)
+{
 	//NSLog(@"init_nhwindows");
 	iflags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
@@ -285,12 +292,14 @@ void cocoa_init_nhwindows(int* argc, char** argv) {
 	[[MainWindowController instance] initWindows];
 }
 
-void cocoa_askname() {
+void cocoa_askname()
+{
 	//NSLog(@"askname");
 	cocoa_getlin("Enter your name", plname);
 }
 
-void cocoa_get_nh_event() {
+void cocoa_get_nh_event()
+{
 	//NSLog(@"get_nh_event");
 }
 
@@ -303,15 +312,18 @@ void cocoa_exit_nhwindows(const char *str) {
 	}
 }
 
-void cocoa_suspend_nhwindows(const char *str) {
+void cocoa_suspend_nhwindows(const char *str)
+{
 	NSLog(@"suspend_nhwindows %s", str);
 }
 
-void cocoa_resume_nhwindows() {
+void cocoa_resume_nhwindows()
+{
 	NSLog(@"resume_nhwindows");
 }
 
-winid cocoa_create_nhwindow(int type) {
+winid cocoa_create_nhwindow(int type)
+{
 	NhWindow *w = nil;
 	switch (type) {
 		case NHW_MAP:
@@ -336,18 +348,21 @@ winid cocoa_create_nhwindow(int type) {
 	return (winid) w;
 }
 
-void cocoa_clear_nhwindow(winid wid) {
+void cocoa_clear_nhwindow(winid wid)
+{
 	//NSLog(@"clear_nhwindow %x", wid);
 	[(NhWindow *) wid clear];
 }
 
-void cocoa_display_nhwindow(winid wid, BOOLEAN_P block) {
+void cocoa_display_nhwindow(winid wid, BOOLEAN_P block)
+{
 	//NSLog(@"display_nhwindow %x, %i, %i", wid, ((NhWindow *) wid).type, block);
 	((NhWindow *) wid).blocking = block;
 	[[MainWindowController instance] displayWindow:(NhWindow *) wid];
 }
 
-void cocoa_destroy_nhwindow(winid wid) {
+void cocoa_destroy_nhwindow(winid wid)
+{
 	//NSLog(@"destroy_nhwindow %x", wid);
 	NhWindow *w = (NhWindow *) wid;
 	if (w != [NhWindow messageWindow] && w != [NhWindow statusWindow] && w != [NhWindow mapWindow]) {
@@ -355,7 +370,8 @@ void cocoa_destroy_nhwindow(winid wid) {
 	}
 }
 
-void cocoa_curs(winid wid, int x, int y) {
+void cocoa_curs(winid wid, int x, int y)
+{
 	//NSLog(@"curs %x %d,%d", wid, x, y);
 
 	if (wid == WIN_MAP) {
@@ -363,7 +379,8 @@ void cocoa_curs(winid wid, int x, int y) {
 	}
 }
 
-void cocoa_putstr(winid wid, int attr, const char *text) {
+void cocoa_putstr(winid wid, int attr, const char *text)
+{
 	//NSLog(@"putstr %x %s", wid, text);
 	if (wid == WIN_ERR || !wid) {
 		wid = BASE_WINDOW;
@@ -375,7 +392,8 @@ void cocoa_putstr(winid wid, int attr, const char *text) {
 	}		
 }
 
-void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
+void cocoa_display_file(const char *filename, BOOLEAN_P must_exist)
+{
 	char tmp[ PATH_MAX ];
 	[WinCocoa expandFilename:filename intoPath:tmp];
 
@@ -393,14 +411,16 @@ void cocoa_display_file(const char *filename, BOOLEAN_P must_exist) {
 
 #pragma mark menu
 
-void cocoa_start_menu(winid wid) {
+void cocoa_start_menu(winid wid)
+{
 	//NSLog(@"start_menu %x", wid);
 	[(NhMenuWindow *) wid startMenu];
 }
 
 void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 					 CHAR_P accelerator, CHAR_P group_accel, int attr, 
-					 const char *str, BOOLEAN_P presel) {
+					 const char *str, BOOLEAN_P presel)
+{
 	//NSLog(@"add_menu %x %s", wid, str);
 	NhMenuWindow *w = (NhMenuWindow *) wid;
 	NSString *title = [NSString stringWithFormat:@"%s", str];
@@ -416,7 +436,8 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 	}
 }
 
-void cocoa_end_menu(winid wid, const char *prompt) {
+void cocoa_end_menu(winid wid, const char *prompt)
+{
 	//NSLog(@"end_menu %x, %s", wid, prompt);
 	if (prompt) {
 		((NhMenuWindow *) wid).prompt = [NSString stringWithFormat:@"%s", prompt];
@@ -426,7 +447,8 @@ void cocoa_end_menu(winid wid, const char *prompt) {
 	}
 }
 
-int cocoa_select_menu(winid wid, int how, menu_item **selected) {
+int cocoa_select_menu(winid wid, int how, menu_item **selected)
+{
 	//NSLog(@"select_menu %x", wid);
 	NhMenuWindow *w = (NhMenuWindow *) wid;
 	w.how = how;
@@ -452,53 +474,63 @@ int cocoa_select_menu(winid wid, int how, menu_item **selected) {
 	}
 }
 
-void cocoa_update_inventory() {
+void cocoa_update_inventory()
+{
 	//NSLog(@"update_inventory");
 	[[MainWindowController instance] updateInventory];
 }
 
-void cocoa_mark_synch() {
+void cocoa_mark_synch()
+{
 	//NSLog(@"mark_synch");
 }
 
-void cocoa_wait_synch() {
+void cocoa_wait_synch()
+{
 	NSLog(@"wait_synch");
 //	[[MainViewController instance] refreshAllViews];
 }
 
-void cocoa_cliparound(int x, int y) {
+void cocoa_cliparound(int x, int y)
+{
 	//NSLog(@"cliparound %d,%d", x, y);
 	cocoa_cliparound_window(NHW_MAP, x, y);
 }
 
-void cocoa_cliparound_window(winid wid, int x, int y) {
+void cocoa_cliparound_window(winid wid, int x, int y)
+{
 	//	NSLog(@"cliparound_window %x %d,%d", wid, x, y);
 	if (wid == NHW_MAP) {
 		[[MainWindowController instance] clipAroundX:x y:y];
 	}
 }
 
-void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph) {
+void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph)
+{
 	//NSLog(@"print_glyph %x %d,%d", wid, x, y);
 	[(NhMapWindow *) wid printGlyph:glyph atX:x y:y];
 }
 
-void cocoa_raw_print(const char *str) {
+void cocoa_raw_print(const char *str)
+{
 	//NSLog(@"raw_print %s", str);
 	cocoa_putstr((winid) [NhWindow messageWindow], 0, str);
 }
 
-void cocoa_raw_print_bold(const char *str) {
+void cocoa_raw_print_bold(const char *str)
+{
 	//NSLog(@"raw_print_bold %s", str);
 	cocoa_raw_print(str);
 }
 
-int cocoa_nhgetch() {
+int cocoa_nhgetch()
+{
 	NSLog(@"nhgetch");
 	return 0;
 }
 
-int cocoa_nh_poskey(int *x, int *y, int *mod) {
+int cocoa_nh_poskey(int *x, int *y, int *mod)
+{
 	//NSLog(@"nh_poskey");
 	[[MainWindowController instance] refreshAllViews];
 	NhEvent *e = [[NhEventQueue instance] nextEvent];
@@ -510,19 +542,22 @@ int cocoa_nh_poskey(int *x, int *y, int *mod) {
 	return e.key;
 }
 
-void cocoa_nhbell() {
+void cocoa_nhbell()
+{
 	NSLog(@"nhbell");
 	NSBeep();
 }
 
-int cocoa_doprev_message() {
+int cocoa_doprev_message()
+{
 	NSLog(@"doprev_message");
 	return 0;
 }
 
 #pragma mark yn_function 
 
-char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
+char cocoa_yn_function(const char *question, const char *choices, CHAR_P def)
+{
 	//NSLog(@"yn_function %s", question);
 	static const char * AlwaysYes[] = {
 		"Really save?",
@@ -580,7 +615,8 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def) {
 	}
 }
 
-void cocoa_getlin(const char *prompt, char *line) {
+void cocoa_getlin(const char *prompt, char *line)
+{
 	//NSLog(@"getlin %s", prompt);
 	cocoa_putstr(WIN_MESSAGE, 0, prompt);
 	[[MainWindowController instance] refreshAllViews];
@@ -594,7 +630,8 @@ void cocoa_getlin(const char *prompt, char *line) {
 	}
 }
 
-int cocoa_get_ext_cmd() {
+int cocoa_get_ext_cmd()
+{
 	//NSLog(@"get_ext_cmd");
 	if ([[NhEventQueue instance] peek]) {
 		// already have extended command in queue
@@ -615,24 +652,29 @@ int cocoa_get_ext_cmd() {
 	return -1;
 }
 
-void cocoa_number_pad(int num) {
+void cocoa_number_pad(int num)
+{
 	//NSLog(@"number_pad %d", num);
 }
 
-void cocoa_delay_output() {
+void cocoa_delay_output()
+{
 	//NSLog(@"delay_output");
 	usleep(50000);
 }
 
-void cocoa_start_screen() {
+void cocoa_start_screen()
+{
 	NSLog(@"start_screen");
 }
 
-void cocoa_end_screen() {
+void cocoa_end_screen()
+{
 	NSLog(@"end_screen");
 }
 
-void cocoa_outrip(winid wid, int how) {
+void cocoa_outrip(winid wid, int how)
+{
 	NSLog(@"outrip %x", wid);
 }
 
@@ -646,13 +688,15 @@ void cocoa_preference_update(const char * pref)
 
 // from tty port
 /* clean up and quit */
-static void bail(const char *mesg) {
+static void bail(const char *mesg)
+{
     cocoa_exit_nhwindows(mesg);
     terminate(EXIT_SUCCESS);
 }
 
 // from tty port
-static int cocoa_role_select(char *pbuf, char *plbuf) {
+static int cocoa_role_select(char *pbuf, char *plbuf)
+{
 	int i, n;
 	char thisch, lastch = 0;
     char rolenamebuf[QBUFSZ];
@@ -717,7 +761,8 @@ static int cocoa_role_select(char *pbuf, char *plbuf) {
 }
 
 // from tty port
-static int cocoa_race_select(char * pbuf, char * plbuf) {
+static int cocoa_race_select(char * pbuf, char * plbuf)
+{
 	int i, k, n;
 	char thisch, lastch = -1;
 	winid win;
@@ -785,7 +830,8 @@ static int cocoa_race_select(char * pbuf, char * plbuf) {
 }
 
 // from tty port
-void cocoa_player_selection() {
+void cocoa_player_selection()
+{
 #if 1
 	[[MainWindowController instance] showPlayerSelection];
 #else

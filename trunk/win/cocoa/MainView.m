@@ -38,6 +38,8 @@
 #import "Inventory.h"
 #import "NSString+Z.h"
 
+#import <Carbon/Carbon.h>	// key codes
+
 
 @implementation MainView
 
@@ -503,14 +505,65 @@ NSString * DescriptionForTile( int x, int y )
 }
 
 
-- (void)keyDown:(NSEvent *)theEvent 
+static NSEvent * g_pendingKeyEvent = nil;
+
+- (void)keyDown:(NSEvent *)theEvent
 {
 	if ( [theEvent type] == NSKeyDown ) {
-		
+
+		if ( g_pendingKeyEvent ) {
+			unsigned short k1 = [g_pendingKeyEvent keyCode];
+			unsigned short k2 = [theEvent keyCode];
+			unsigned int newKeyCode = 0;
+			if ( (k1 == kVK_LeftArrow && k2 == kVK_UpArrow) || (k2 == kVK_LeftArrow && k1 == kVK_UpArrow) )	{
+				newKeyCode = kVK_ANSI_Keypad7;
+			} else if ( (k1 == kVK_RightArrow && k2 == kVK_UpArrow) || (k2 == kVK_RightArrow && k1 == kVK_UpArrow) ) {
+				newKeyCode = kVK_ANSI_Keypad9;
+			} else if ( (k1 == kVK_LeftArrow && k2 == kVK_DownArrow) || (k2 == kVK_LeftArrow && k1 == kVK_DownArrow) )	{
+				newKeyCode = kVK_ANSI_Keypad1;
+			} else if ( (k1 == kVK_RightArrow && k2 == kVK_DownArrow) || (k2 == kVK_RightArrow && k1 == kVK_DownArrow) ) {
+				newKeyCode = kVK_ANSI_Keypad3;
+			} else {
+				wchar_t key = [WinCocoa keyWithKeyEvent:g_pendingKeyEvent];
+				if ( key ) {
+					[[NhEventQueue instance] addKey:key];
+				}
+			}
+			[g_pendingKeyEvent release];
+			g_pendingKeyEvent = nil;
+			if ( newKeyCode ) {
+				NSEvent * newEvent = [NSEvent keyEventWithType:NSKeyDown location:theEvent.locationInWindow modifierFlags:theEvent.modifierFlags timestamp:theEvent.timestamp windowNumber:theEvent.windowNumber context:theEvent.context characters:@"" charactersIgnoringModifiers:@"" isARepeat:theEvent.isARepeat keyCode:newKeyCode];
+				theEvent = newEvent;
+			}
+		} else {
+			switch ( [theEvent keyCode] ) {
+				case kVK_LeftArrow:
+				case kVK_RightArrow:
+				case kVK_DownArrow:
+				case kVK_UpArrow:
+					g_pendingKeyEvent = [theEvent retain];
+					return;
+			}
+		}
+
 		wchar_t key = [WinCocoa keyWithKeyEvent:theEvent];
 		if ( key ) {
-			[[NhEventQueue instance] addKey:key];			
+			[[NhEventQueue instance] addKey:key];
 		}
+	}
+}
+
+- (void)keyUp:(NSEvent *)theEvent
+{
+	if ( [theEvent type] == NSKeyUp ) {
+		if ( g_pendingKeyEvent ) {
+			wchar_t key = [WinCocoa keyWithKeyEvent:g_pendingKeyEvent];
+			if ( key ) {
+				[[NhEventQueue instance] addKey:key];
+			}
+		}
+		[g_pendingKeyEvent release];
+		g_pendingKeyEvent = nil;
 	}
 }
 

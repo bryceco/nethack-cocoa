@@ -207,6 +207,10 @@
  */
 #define INSURANCE	/* allow crashed game recovery */
 
+#ifdef COCOA_GRAPHICS
+#define SELF_RECOVER		/* Allow the game itself to recover from an aborted game */
+#endif
+
 #ifndef MAC
 # define CHDIR		/* delete if no chdir() available */
 #endif
