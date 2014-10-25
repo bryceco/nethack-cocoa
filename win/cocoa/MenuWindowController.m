@@ -836,7 +836,6 @@ static BUC_ENUM GetBUC( NSString * text )
 		// need to run modal
 		[[NSApplication sharedApplication] runModalForWindow:[win window]];
 	}
-	
 }
 
 @end

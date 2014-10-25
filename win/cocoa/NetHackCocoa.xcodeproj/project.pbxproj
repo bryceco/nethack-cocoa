@@ -344,7 +344,6 @@
 		0212834514F6E6240046D56F /* zap.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CCC911B8A92500FC2199 /* zap.c */; };
 		0212834614F6E6240046D56F /* unixmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6511B8A92600FC2199 /* unixmain.c */; };
 		0212834714F6E6240046D56F /* unixres.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6611B8A92600FC2199 /* unixres.c */; };
-		0212834814F6E6240046D56F /* unixunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6711B8A92600FC2199 /* unixunix.c */; };
 		0212834A14F6E6240046D56F /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 		0224CABA11B8A58D00FC2199 /* NetHackCocoaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0224CAB911B8A58D00FC2199 /* NetHackCocoaAppDelegate.m */; };
 		0224CABF11B8A5E800FC2199 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0224CABD11B8A5E800FC2199 /* main.m */; };
@@ -564,7 +563,6 @@
 		0224CE3011B8A92600FC2199 /* zap.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CCC911B8A92500FC2199 /* zap.c */; };
 		0224CEB911B8A92600FC2199 /* unixmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6511B8A92600FC2199 /* unixmain.c */; };
 		0224CEBA11B8A92600FC2199 /* unixres.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6611B8A92600FC2199 /* unixres.c */; };
-		0224CEBB11B8A92600FC2199 /* unixunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6711B8A92600FC2199 /* unixunix.c */; };
 		0224CF0E11B8AB2200FC2199 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0224CF0611B8AB2200FC2199 /* InfoPlist.strings */; };
 		0224CF0F11B8AB2200FC2199 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0224CF0811B8AB2200FC2199 /* MainMenu.xib */; };
 		0224CF1011B8AB2200FC2199 /* MenuWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0224CF0A11B8AB2200FC2199 /* MenuWindow.xib */; };
@@ -682,6 +680,8 @@
 		02447C5B11B8C821008CB9C7 /* wizard1.lev in Resources */ = {isa = PBXBuildFile; fileRef = 02447BE911B8C821008CB9C7 /* wizard1.lev */; };
 		02447C5C11B8C821008CB9C7 /* wizard2.lev in Resources */ = {isa = PBXBuildFile; fileRef = 02447BEA11B8C821008CB9C7 /* wizard2.lev */; };
 		02447C5D11B8C821008CB9C7 /* wizard3.lev in Resources */ = {isa = PBXBuildFile; fileRef = 02447BEB11B8C821008CB9C7 /* wizard3.lev */; };
+		028E8B3319FACD8E009DF54C /* unixunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6711B8A92600FC2199 /* unixunix.c */; };
+		028E8B3419FACD8E009DF54C /* unixunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6711B8A92600FC2199 /* unixunix.c */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -1874,7 +1874,15 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0450;
+				LastUpgradeCheck = 0610;
+				TargetAttributes = {
+					021281F514F6E6240046D56F = {
+						DevelopmentTeam = MKTTC6734C;
+					};
+					8D1107260486CEB800E47090 = {
+						DevelopmentTeam = MKTTC6734C;
+					};
+				};
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "NetHackCocoa" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -2353,6 +2361,7 @@
 				021282ED14F6E6240046D56F /* dokick.c in Sources */,
 				021282EE14F6E6240046D56F /* dothrow.c in Sources */,
 				021282EF14F6E6240046D56F /* drawing.c in Sources */,
+				028E8B3419FACD8E009DF54C /* unixunix.c in Sources */,
 				021282F014F6E6240046D56F /* dungeon.c in Sources */,
 				021282F114F6E6240046D56F /* eat.c in Sources */,
 				021282F214F6E6240046D56F /* end.c in Sources */,
@@ -2441,7 +2450,6 @@
 				0212834514F6E6240046D56F /* zap.c in Sources */,
 				0212834614F6E6240046D56F /* unixmain.c in Sources */,
 				0212834714F6E6240046D56F /* unixres.c in Sources */,
-				0212834814F6E6240046D56F /* unixunix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2510,6 +2518,7 @@
 				0224CDD711B8A92600FC2199 /* dokick.c in Sources */,
 				0224CDD811B8A92600FC2199 /* dothrow.c in Sources */,
 				0224CDD911B8A92600FC2199 /* drawing.c in Sources */,
+				028E8B3319FACD8E009DF54C /* unixunix.c in Sources */,
 				0224CDDA11B8A92600FC2199 /* dungeon.c in Sources */,
 				0224CDDB11B8A92600FC2199 /* eat.c in Sources */,
 				0224CDDC11B8A92600FC2199 /* end.c in Sources */,
@@ -2598,7 +2607,6 @@
 				0224CE3011B8A92600FC2199 /* zap.c in Sources */,
 				0224CEB911B8A92600FC2199 /* unixmain.c in Sources */,
 				0224CEBA11B8A92600FC2199 /* unixres.c in Sources */,
-				0224CEBB11B8A92600FC2199 /* unixunix.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2654,6 +2662,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = NetHackCocoa.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2665,6 +2675,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = NetHack;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2673,6 +2684,8 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CODE_SIGN_ENTITLEMENTS = NetHackCocoa.entitlements;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
@@ -2682,6 +2695,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = NetHack;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -2689,6 +2703,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
@@ -2700,6 +2717,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = NetHackCocoa;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -2707,6 +2725,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_MODEL_TUNING = G5;
@@ -2716,6 +2737,7 @@
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.5;
 				PRODUCT_NAME = NetHackCocoa;
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -2730,9 +2752,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				VALID_ARCHS = i386;
 			};
 			name = Debug;
 		};
@@ -2746,8 +2769,10 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_TYPECHECK_CALLS_TO_PRINTF = NO;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
+				VALID_ARCHS = i386;
 			};
 			name = Release;
 		};
