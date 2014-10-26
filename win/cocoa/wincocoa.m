@@ -250,9 +250,12 @@ void error(const char *s, ...)
 	exit(0);
 }
 
-void cocoa_wait_for_idle()
+void cocoa_prepare_for_exit()
 {
-	// probably sufficient to only do this once, but just in case..
+	NetHackCocoaAppDelegate * delegate = [[NSApplication sharedApplication] delegate];
+	[delegate unlockNethackCore];
+
+	// give UI thread a chance to settle down before we tear down data structures (e.g. inventory)
 	for ( int i = 0; i < 100; ++i ) {
 		usleep(20);
 		dispatch_sync( dispatch_get_main_queue(), ^{});
@@ -261,9 +264,6 @@ void cocoa_wait_for_idle()
 
 void nethack_exit(int status)
 {
-	NetHackCocoaAppDelegate * delegate = [[NSApplication sharedApplication] delegate];
-	[delegate unlockNethackCore];
-	
 	//	indicate were exiting
 	[[MainWindowController instance] nethackExited];
 

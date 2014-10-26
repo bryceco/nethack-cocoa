@@ -124,6 +124,7 @@
 #ifdef COCOA_GRAPHICS
 # define DEFAULT_WINDOW_SYS "cocoa"
 # define DEFAULT_WC_TILED_MAP   /* Default to tiles if users doesn't say wc_ascii_map */
+# define STORE_PLNAME_IN_FILE
 #endif
 
 #ifndef DEFAULT_WINDOW_SYS
