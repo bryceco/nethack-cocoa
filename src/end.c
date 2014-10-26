@@ -963,6 +963,10 @@ int status;
 #ifdef MAC
 	getreturn("to exit");
 #endif
+#ifdef COCOA_GRAPHICS
+	// Wait until main thread is idle before we exit:
+	cocoa_wait_for_idle();
+#endif
 	/* don't bother to try to release memory if we're in panic mode, to
 	   avoid trouble in case that happens to be due to memory problems */
 	if (!program_state.panicking) {
