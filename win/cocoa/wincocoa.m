@@ -254,6 +254,7 @@ void cocoa_wait_for_idle()
 {
 	// probably sufficient to only do this once, but just in case..
 	for ( int i = 0; i < 100; ++i ) {
+		usleep(20);
 		dispatch_sync( dispatch_get_main_queue(), ^{});
 	}
 }
