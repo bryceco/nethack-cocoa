@@ -964,7 +964,8 @@ int status;
 	getreturn("to exit");
 #endif
 #ifdef COCOA_GRAPHICS
-	// Wait until main thread is idle before we exit:
+	// Wait until main thread is idle before we deallocate data structures
+	extern void cocoa_wait_for_idle();
 	cocoa_wait_for_idle();
 #endif
 	/* don't bother to try to release memory if we're in panic mode, to

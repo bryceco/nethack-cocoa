@@ -163,6 +163,7 @@ getlock()
 		} else {
 			// Try to recover
 			if(!recover_savefile()) {
+				unlock_file(HLOCK);
 				int fail = unlink(lock);
 				error("Couldn't recover old game.");
 			} else {
