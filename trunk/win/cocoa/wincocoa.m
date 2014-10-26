@@ -250,6 +250,14 @@ void error(const char *s, ...)
 	exit(0);
 }
 
+void cocoa_wait_for_idle()
+{
+	// probably sufficient to only do this once, but just in case..
+	for ( int i = 0; i < 100; ++i ) {
+		dispatch_sync( dispatch_get_main_queue(), ^{});
+	}
+}
+
 void nethack_exit(int status)
 {
 	NetHackCocoaAppDelegate * delegate = [[NSApplication sharedApplication] delegate];

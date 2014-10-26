@@ -164,7 +164,7 @@ getlock()
 			// Try to recover
 			if(!recover_savefile()) {
 				int fail = unlink(lock);
-				panic("Couldn't recover old game.");
+				error("Couldn't recover old game.");
 			} else {
 				set_levelfile_name(lock, 0);
 				fd = open(fq_lock, O_RDWR | O_EXCL | O_CREAT, 0644);
