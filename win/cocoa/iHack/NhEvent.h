@@ -43,8 +43,8 @@
 + (id) eventWithX:(int)i y:(int)j;
 + (id) eventWithKey:(int)k;
 
-- (id) initWithKey:(int)k mod:(int)m x:(int)i y:(int)j;
-- (id) initWithX:(int)i y:(int)j;
-- (id) initWithKey:(int)k;
+- (instancetype) initWithKey:(int)k mod:(int)m x:(int)i y:(int)j;
+- (instancetype) initWithX:(int)i y:(int)j;
+- (instancetype) initWithKey:(int)k;
 
 @end
