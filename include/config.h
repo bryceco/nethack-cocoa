@@ -65,6 +65,10 @@
 #endif
 #endif
 
+#if defined(__APPLE__) && defined(COCOA_GRAPHICS)
+#define DEFAULT_WINDOW_SYS "cocoa"
+#endif
+
 /* Amiga supports AMII_GRAPHICS and/or TTY_GRAPHICS */
 #ifdef AMIGA
 #define AMII_GRAPHICS             /* (optional) */

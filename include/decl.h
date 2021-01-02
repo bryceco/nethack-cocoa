@@ -233,9 +233,9 @@ E const int zapcolors[];
 #endif
 
 E const struct class_sym def_oc_syms[MAXOCLASSES]; /* default class symbols */
-E uchar oc_syms[MAXOCLASSES];                      /* current class symbols */
+//E uchar oc_syms[MAXOCLASSES];                      /* current class symbols */
 E const struct class_sym def_monsyms[MAXMCLASSES]; /* default class symbols */
-E uchar monsyms[MAXMCLASSES];                      /* current class symbols */
+//E uchar monsyms[MAXMCLASSES];                      /* current class symbols */
 
 #include "obj.h"
 E NEARDATA struct obj *invent, *uarm, *uarmc, *uarmh, *uarms, *uarmg, *uarmf,

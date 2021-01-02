@@ -166,6 +166,8 @@
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = sourcecode.yacc;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 				"$(NH_INC_DIR)/lev_comp.h",
@@ -177,6 +179,8 @@
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = sourcecode.lex;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 				"$(NH_UTIL_DIR)/lev_lex.c",
@@ -188,6 +192,8 @@
 			compilerSpec = com.apple.compilers.proxy.script;
 			filePatterns = dgn_comp.y;
 			fileType = sourcecode.yacc;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 				"$(NH_UTIL_DIR)/dgn_yacc.c",
@@ -199,6 +205,8 @@
 			isa = PBXBuildRule;
 			compilerSpec = com.apple.compilers.proxy.script;
 			fileType = sourcecode.lex;
+			inputFiles = (
+			);
 			isEditable = 1;
 			outputFiles = (
 				"$(NH_UTIL_DIR)/dgn_lex.c",
@@ -1998,7 +2006,7 @@
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
@@ -2074,7 +2082,7 @@
 				GCC_NO_COMMON_BLOCKS = NO;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = NO;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_PEDANTIC = YES;
+				GCC_WARN_PEDANTIC = NO;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
