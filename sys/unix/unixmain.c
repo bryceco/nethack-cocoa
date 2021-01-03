@@ -64,6 +64,16 @@ char *argv[];
     {
 /* special hack to change working directory to a resource fork when
    running from finder --sam */
+#if defined(COCOA_GRAPHICS)
+		char mac_path[1024];
+		strcpy(mac_path,argv[0]);
+		char * tail = strrchr(mac_path,'/');
+		*tail = 0;
+		tail = strrchr(mac_path,'/');
+		strcpy(tail+1,"Resources/");
+		if ( chdir(mac_path) < 0 )
+			error("can't locate resource folder");
+#else
 #define MAC_PATH_VALUE ".app/Contents/MacOS/"
         char mac_cwd[1024], *mac_exe = argv[0], *mac_tmp;
         int arg0_len = strlen(mac_exe), mac_tmp_len, mac_lhs_len = 0;
@@ -89,6 +99,7 @@ char *argv[];
                 free(mac_tmp);
             }
         }
+#endif
     }
 #endif
 

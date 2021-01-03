@@ -346,8 +346,11 @@
  */
 #define INSURANCE /* allow crashed game recovery */
 
-#ifndef MAC
+#if !defined(MAC) && !defined(COCOA_GRAPHICS)
 #define CHDIR /* delete if no chdir() available */
+#endif
+#if defined(COCOA_GRAPHICS)
+#define NOCWD_ASSUMPTIONS
 #endif
 
 #ifdef CHDIR

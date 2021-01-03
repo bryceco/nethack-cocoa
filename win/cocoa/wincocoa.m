@@ -227,14 +227,6 @@ coord CoordMake(xchar i, xchar j) {
 
 @end
 
-FILE *cocoa_dlb_fopen(const char *filename, const char *mode)
-{
-	char path[FQN_MAX_FILENAME];
-	[WinCocoa expandFilename:filename intoPath:path];
-	FILE *file = fopen(path, mode);
-	return file;
-}
-
 // These must be defined but are not used (they handle keyboard interrupts).
 void intron() {}
 void introff() {}

@@ -1838,7 +1838,7 @@ E const char *NDECL(get_portable_device);
 
 /* ### pcsys.c ### */
 
-#if defined(MICRO) || defined(WIN32)
+#if defined(MICRO) || defined(WIN32) || defined(COCOA_GRAPHICS)
 E void NDECL(flushout);
 E int NDECL(dosh);
 #ifdef MFLOPPY
