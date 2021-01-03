@@ -65,24 +65,16 @@ extern int unixmain(int argc, char **argv);
 	nethackCoreLock = [[NSRecursiveLock alloc] init];
 	[self lockNethackCore];
 
-#if 0
-	// create necessary directories
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	NSString *baseDirectory = [paths objectAtIndex:0];
-	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"NetHackCocoa"];
-	if (![[NSFileManager defaultManager] fileExistsAtPath:baseDirectory]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:baseDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
-	}
-#else
+#if 0 // This is now handled by the underlying cocoa port.
 	NSString * baseDirectory = [[[NSProcessInfo processInfo] environment] objectForKey:@"HOME"];
 	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"nethackdir"];
-#endif
 	NSLog(@"baseDir %@", baseDirectory);
 	setenv("NETHACKDIR", [baseDirectory UTF8String], 1);
 	NSString *saveDirectory = [baseDirectory stringByAppendingPathComponent:@"save"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:saveDirectory]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:saveDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
+#endif
 		
 	// set plname (very important for save files and getlock)
 	[[NSUserName() capitalizedString] getCString:plname maxLength:PL_NSIZ encoding:NSASCIIStringEncoding];

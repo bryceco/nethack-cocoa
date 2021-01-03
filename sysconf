@@ -39,7 +39,7 @@ GENERICUSERS=play player game games nethack nethacker
 
 # Use the player name for matching WIZARDS, EXPLORERS and SHELLERS,
 # instead of the user's login name.
-#CHECK_PLNAME=1
+CHECK_PLNAME=1
 
 # Limit the number of simultaneous games (see also nethack.sh).
 # Valid values are 0-25.
@@ -48,7 +48,7 @@ GENERICUSERS=play player game games nethack nethacker
 # but number of different players is not limited.
 # Setting this to any other value constructs the lock files with
 # letter and "lock" (eg. alock, block, ...)
-MAXPLAYERS=10
+#MAXPLAYERS=10
 
 # If not null, added to string "To get local support, " in the support
 # information help.

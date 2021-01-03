@@ -18,16 +18,6 @@
 		021281FE14F6E6240046D56F /* Arrow-W.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3C11B8A75200FC2199 /* Arrow-W.png */; };
 		021281FF14F6E6240046D56F /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3D11B8A75200FC2199 /* nethack.icns */; };
 		0212820014F6E6240046D56F /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3E11B8A75200FC2199 /* petmark.png */; };
-		0212822F14F6E6240046D56F /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBD811B8A82300FC2199 /* absurd128.png */; };
-		0212823014F6E6240046D56F /* absurd32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBD911B8A82300FC2199 /* absurd32.png */; };
-		0212823114F6E6240046D56F /* chozo32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDA11B8A82300FC2199 /* chozo32.png */; };
-		0212823214F6E6240046D56F /* chozo32b.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDB11B8A82300FC2199 /* chozo32b.png */; };
-		0212823314F6E6240046D56F /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDC11B8A82300FC2199 /* kins32.bmp */; };
-		0212823414F6E6240046D56F /* nh32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDD11B8A82300FC2199 /* nh32.png */; };
-		0212823514F6E6240046D56F /* tiles10x20.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDE11B8A82300FC2199 /* tiles10x20.bmp */; };
-		0212823614F6E6240046D56F /* tiles16.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDF11B8A82300FC2199 /* tiles16.bmp */; };
-		0212823714F6E6240046D56F /* tiles20x40.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBE011B8A82300FC2199 /* tiles20x40.bmp */; };
-		0212823814F6E6240046D56F /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBE111B8A82300FC2199 /* tiles32.png */; };
 		0212823914F6E6240046D56F /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBEC11B8A85F00FC2199 /* Credits.rtf */; };
 		0212823C14F6E6240046D56F /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0224CF0611B8AB2200FC2199 /* InfoPlist.strings */; };
 		0212823D14F6E6240046D56F /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0224CF0811B8AB2200FC2199 /* MainMenu.xib */; };
@@ -123,16 +113,6 @@
 		0224CB4611B8A75200FC2199 /* Arrow-W.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3C11B8A75200FC2199 /* Arrow-W.png */; };
 		0224CB4711B8A75200FC2199 /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3D11B8A75200FC2199 /* nethack.icns */; };
 		0224CB4811B8A75200FC2199 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CB3E11B8A75200FC2199 /* petmark.png */; };
-		0224CBE211B8A82300FC2199 /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBD811B8A82300FC2199 /* absurd128.png */; };
-		0224CBE311B8A82300FC2199 /* absurd32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBD911B8A82300FC2199 /* absurd32.png */; };
-		0224CBE411B8A82300FC2199 /* chozo32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDA11B8A82300FC2199 /* chozo32.png */; };
-		0224CBE511B8A82300FC2199 /* chozo32b.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDB11B8A82300FC2199 /* chozo32b.png */; };
-		0224CBE611B8A82300FC2199 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDC11B8A82300FC2199 /* kins32.bmp */; };
-		0224CBE711B8A82300FC2199 /* nh32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDD11B8A82300FC2199 /* nh32.png */; };
-		0224CBE811B8A82300FC2199 /* tiles10x20.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDE11B8A82300FC2199 /* tiles10x20.bmp */; };
-		0224CBE911B8A82300FC2199 /* tiles16.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBDF11B8A82300FC2199 /* tiles16.bmp */; };
-		0224CBEA11B8A82300FC2199 /* tiles20x40.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBE011B8A82300FC2199 /* tiles20x40.bmp */; };
-		0224CBEB11B8A82300FC2199 /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBE111B8A82300FC2199 /* tiles32.png */; };
 		0224CBEE11B8A85F00FC2199 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 0224CBEC11B8A85F00FC2199 /* Credits.rtf */; };
 		0224CEB911B8A92600FC2199 /* unixmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6511B8A92600FC2199 /* unixmain.c */; };
 		0224CEBA11B8A92600FC2199 /* unixres.c in Sources */ = {isa = PBXBuildFile; fileRef = 0224CD6611B8A92600FC2199 /* unixres.c */; };
@@ -494,16 +474,6 @@
 		0224CB3C11B8A75200FC2199 /* Arrow-W.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Arrow-W.png"; path = "images/Arrow-W.png"; sourceTree = "<group>"; };
 		0224CB3D11B8A75200FC2199 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; name = nethack.icns; path = images/nethack.icns; sourceTree = "<group>"; };
 		0224CB3E11B8A75200FC2199 /* petmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = petmark.png; path = images/petmark.png; sourceTree = "<group>"; };
-		0224CBD811B8A82300FC2199 /* absurd128.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd128.png; sourceTree = "<group>"; };
-		0224CBD911B8A82300FC2199 /* absurd32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd32.png; sourceTree = "<group>"; };
-		0224CBDA11B8A82300FC2199 /* chozo32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chozo32.png; sourceTree = "<group>"; };
-		0224CBDB11B8A82300FC2199 /* chozo32b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chozo32b.png; sourceTree = "<group>"; };
-		0224CBDC11B8A82300FC2199 /* kins32.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kins32.bmp; sourceTree = "<group>"; };
-		0224CBDD11B8A82300FC2199 /* nh32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = nh32.png; sourceTree = "<group>"; };
-		0224CBDE11B8A82300FC2199 /* tiles10x20.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles10x20.bmp; sourceTree = "<group>"; };
-		0224CBDF11B8A82300FC2199 /* tiles16.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles16.bmp; sourceTree = "<group>"; };
-		0224CBE011B8A82300FC2199 /* tiles20x40.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = tiles20x40.bmp; sourceTree = "<group>"; };
-		0224CBE111B8A82300FC2199 /* tiles32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tiles32.png; sourceTree = "<group>"; };
 		0224CBEC11B8A85F00FC2199 /* Credits.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		0224CD6511B8A92600FC2199 /* unixmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixmain.c; sourceTree = "<group>"; };
 		0224CD6611B8A92600FC2199 /* unixres.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixres.c; sourceTree = "<group>"; };
@@ -779,16 +749,6 @@
 			children = (
 				02503F6D25A0158000D71800 /* new tiles24.png */,
 				02503F6425A010DF00D71800 /* Nethack Modern 24.bmp */,
-				0224CBD811B8A82300FC2199 /* absurd128.png */,
-				0224CBD911B8A82300FC2199 /* absurd32.png */,
-				0224CBDA11B8A82300FC2199 /* chozo32.png */,
-				0224CBDB11B8A82300FC2199 /* chozo32b.png */,
-				0224CBDC11B8A82300FC2199 /* kins32.bmp */,
-				0224CBDD11B8A82300FC2199 /* nh32.png */,
-				0224CBDE11B8A82300FC2199 /* tiles10x20.bmp */,
-				0224CBDF11B8A82300FC2199 /* tiles16.bmp */,
-				0224CBE011B8A82300FC2199 /* tiles20x40.bmp */,
-				0224CBE111B8A82300FC2199 /* tiles32.png */,
 			);
 			path = tilesets;
 			sourceTree = "<group>";
@@ -1383,16 +1343,6 @@
 				023D8915259D6203002ADE0C /* lethdrum.uu in Resources */,
 				02B088FE25A160CE00E1862D /* sysconf in Resources */,
 				023D8925259D6203002ADE0C /* wdnharp.uu in Resources */,
-				0212822F14F6E6240046D56F /* absurd128.png in Resources */,
-				0212823014F6E6240046D56F /* absurd32.png in Resources */,
-				0212823114F6E6240046D56F /* chozo32.png in Resources */,
-				0212823214F6E6240046D56F /* chozo32b.png in Resources */,
-				0212823314F6E6240046D56F /* kins32.bmp in Resources */,
-				0212823414F6E6240046D56F /* nh32.png in Resources */,
-				0212823514F6E6240046D56F /* tiles10x20.bmp in Resources */,
-				0212823614F6E6240046D56F /* tiles16.bmp in Resources */,
-				0212823714F6E6240046D56F /* tiles20x40.bmp in Resources */,
-				0212823814F6E6240046D56F /* tiles32.png in Resources */,
 				0212823914F6E6240046D56F /* Credits.rtf in Resources */,
 				023D8921259D6203002ADE0C /* firehorn.uu in Resources */,
 				0212823C14F6E6240046D56F /* InfoPlist.strings in Resources */,
@@ -1432,16 +1382,6 @@
 				023D8914259D6203002ADE0C /* lethdrum.uu in Resources */,
 				02B088FD25A160CE00E1862D /* sysconf in Resources */,
 				023D8924259D6203002ADE0C /* wdnharp.uu in Resources */,
-				0224CBE211B8A82300FC2199 /* absurd128.png in Resources */,
-				0224CBE311B8A82300FC2199 /* absurd32.png in Resources */,
-				0224CBE411B8A82300FC2199 /* chozo32.png in Resources */,
-				0224CBE511B8A82300FC2199 /* chozo32b.png in Resources */,
-				0224CBE611B8A82300FC2199 /* kins32.bmp in Resources */,
-				0224CBE711B8A82300FC2199 /* nh32.png in Resources */,
-				0224CBE811B8A82300FC2199 /* tiles10x20.bmp in Resources */,
-				0224CBE911B8A82300FC2199 /* tiles16.bmp in Resources */,
-				0224CBEA11B8A82300FC2199 /* tiles20x40.bmp in Resources */,
-				0224CBEB11B8A82300FC2199 /* tiles32.png in Resources */,
 				0224CBEE11B8A85F00FC2199 /* Credits.rtf in Resources */,
 				023D8920259D6203002ADE0C /* firehorn.uu in Resources */,
 				0224CF0E11B8AB2200FC2199 /* InfoPlist.strings in Resources */,
@@ -1895,7 +1835,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
 				COPY_PHASE_STRIP = NO;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 3660;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_BUILTIN_FUNCTIONS = YES;
@@ -1906,7 +1846,7 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.6.6;
 				OTHER_CFLAGS = (
 					"-DNOMAIL",
 					"-DNOTPARMDECL",
@@ -1932,7 +1872,7 @@
 				CODE_SIGN_IDENTITY = "Mac Developer";
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1000;
+				CURRENT_PROJECT_VERSION = 3660;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_ENABLE_BUILTIN_FUNCTIONS = YES;
@@ -1942,7 +1882,7 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 3.6.6;
 				OTHER_CFLAGS = (
 					"-DNOMAIL",
 					"-DNOTPARMDECL",
