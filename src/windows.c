@@ -44,6 +44,9 @@ extern struct window_procs Gnome_procs;
 #ifdef MSWIN_GRAPHICS
 extern struct window_procs mswin_procs;
 #endif
+#ifdef COCOA_GRAPHICS
+extern struct window_procs cocoa_procs;
+#endif
 #ifdef WINCHAIN
 extern struct window_procs chainin_procs;
 extern void FDECL(chainin_procs_init, (int));
@@ -126,7 +129,7 @@ static struct win_choices {
     { &Gnome_procs, 0 CHAINR(0) },
 #endif
 #ifdef MSWIN_GRAPHICS
-    { &mswin_procs, 0 CHAINR(0) },
+	{ &mswin_procs, 0 CHAINR(0) },
 #endif
 #ifdef WINCHAIN
     { &chainin_procs, chainin_procs_init, chainin_procs_chain },
@@ -135,6 +138,9 @@ static struct win_choices {
 
     { (struct window_procs *) &trace_procs, trace_procs_init,
       trace_procs_chain },
+#endif
+#ifdef COCOA_GRAPHICS
+	{ &cocoa_procs, 0 CHAINR(0) },
 #endif
     { 0, 0 CHAINR(0) } /* must be last */
 };
@@ -878,6 +884,7 @@ const char *status_fieldnm[MAXBLSTATS];
 const char *status_fieldfmt[MAXBLSTATS];
 char *status_vals[MAXBLSTATS];
 boolean status_activefields[MAXBLSTATS];
+extern NEARDATA winid WIN_STATUS;
 
 void
 genl_status_init()
