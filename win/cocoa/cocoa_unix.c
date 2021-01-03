@@ -261,6 +261,11 @@ void set_fqn_prefixes(void)
 	strcat(tmpfile,"/perm");
 	close(open(tmpfile,O_CREAT|O_WRONLY,0777));
 
+	// create nethackdir/save
+	strcpy(tmpfile,nethackdir);
+	strcat(tmpfile,"/save");
+	mkdir(tmpfile,0777);
+
 	int len = strlen(nethackdir);
 	char * prefix = (char *) alloc(len + 2);
 	Strcpy(prefix, nethackdir);
