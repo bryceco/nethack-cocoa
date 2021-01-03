@@ -46,7 +46,11 @@ static boolean wiz_error_flag = FALSE;
 static struct passwd *NDECL(get_unix_pw);
 
 int
+#if defined(COCOA_GRAPHICS)
 unixmain(argc, argv)
+#else
+main(argc, argv)
+#endif
 int argc;
 char *argv[];
 {
