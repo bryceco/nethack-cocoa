@@ -255,7 +255,6 @@ static NhWindow *s_mapWindow = nil;
 	if ( [self useAttributedStrings] ) {
 		NSString * turn = @"------------";
 		if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
-			NSLog(@"%@",lines.lastObject);
 			NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
 			[lines addObject:text];
 			[text release];
