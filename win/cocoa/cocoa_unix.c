@@ -247,10 +247,16 @@ const char *path;
 
 void set_fqn_prefixes(void)
 {
-	char nethackdir[1024];
-	char * home = getenv("HOME");
-	strcpy(nethackdir,home);
-	strcat(nethackdir,"/nethackdir");
+	char dirbuf[1024];
+	char * nethackdir = nh_getenv("NETHACKDIR");
+	if (!nethackdir)
+		nethackdir = nh_getenv("HACKDIR");
+	if (!nethackdir) {
+		char * home = getenv("HOME");
+		strcpy(dirbuf,home);
+		strcat(dirbuf,"/nethackdir");
+		nethackdir = dirbuf;
+	}
 
 	// create nethackdir
 	mkdir(nethackdir,0777);
