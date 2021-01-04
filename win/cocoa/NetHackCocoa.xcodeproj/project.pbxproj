@@ -716,7 +716,7 @@
 		02503F6D25A0158000D71800 /* new tiles24.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "new tiles24.png"; sourceTree = "<group>"; };
 		02B088EC25A14F1F00E1862D /* cocoa_unix.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = cocoa_unix.c; sourceTree = "<group>"; };
 		02B088FC25A160CE00E1862D /* sysconf */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = sysconf; path = ../../sysconf; sourceTree = "<group>"; };
-		02B0890525A17FFF00E1862D /* nhdat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = nhdat; sourceTree = "<group>"; };
+		02B0890525A17FFF00E1862D /* nhdat */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = nhdat; path = ../../../dat/nhdat; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -1085,6 +1085,14 @@
 			path = sounds;
 			sourceTree = "<group>";
 		};
+		0253455F25A271EE009BDF03 /* dat */ = {
+			isa = PBXGroup;
+			children = (
+				02B0890525A17FFF00E1862D /* nhdat */,
+			);
+			path = dat;
+			sourceTree = "<group>";
+		};
 		029225EC1135173C00A96147 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -1100,14 +1108,6 @@
 				0224CB3E11B8A75200FC2199 /* petmark.png */,
 			);
 			name = Images;
-			sourceTree = "<group>";
-		};
-		02B0890A25A1800900E1862D /* dat */ = {
-			isa = PBXGroup;
-			children = (
-				02B0890525A17FFF00E1862D /* nhdat */,
-			);
-			path = dat;
 			sourceTree = "<group>";
 		};
 		080E96DDFE201D6D7F000001 /* Classes */ = {
@@ -1242,7 +1242,7 @@
 		43F7AB321129551500CF5B3C /* nethack */ = {
 			isa = PBXGroup;
 			children = (
-				02B0890A25A1800900E1862D /* dat */,
+				0253455F25A271EE009BDF03 /* dat */,
 				023D873D259D50E0002ADE0C /* src */,
 				023D86C8259D50A7002ADE0C /* include */,
 				0224CCCA11B8A92500FC2199 /* sys */,
