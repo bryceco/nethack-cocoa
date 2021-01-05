@@ -182,13 +182,25 @@ static NhWindow *s_mapWindow = nil;
 	return YES;
 }
 
-- (void)print:(const char *)str attr:(int)attr {
+- (void)print:(const char *)str attr:(int)attr
+{
+	[self lock];
+
 	NSString *s = [NSString stringWithCString:str encoding:NSASCIIStringEncoding];
-//	s = [s stringWithTrimmedWhitespaces];
-	
-//	s = [NSString stringWithFormat:@"%d: %@",moves,s];
-	
 	if ( [self useAttributedStrings] ) {
+
+		if ( didClear ) {
+			didClear = NO;
+			NSString * turn = @"------------";
+			if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
+				NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
+				[lines addObject:text];
+				[text release];
+			}
+			while (lines.count > 200) {
+				[lines removeObjectAtIndex:0];
+			}
+		}
 
 		NSDictionary * dict = nil;
 
@@ -229,8 +241,8 @@ static NhWindow *s_mapWindow = nil;
 		s = (id)s2;
 	}
 			
-	[self lock];
 	[lines addObject:s];
+
 	[self unlock];
 }
 
@@ -246,20 +258,9 @@ static NhWindow *s_mapWindow = nil;
 
 - (void)clear {
 	// message window
+	didClear = YES;
 	[self lock];
-	while (lines.count > 200) {
-		[lines removeObjectAtIndex:0];
-	}
 	[self unlock];
-
-	if ( [self useAttributedStrings] ) {
-		NSString * turn = @"------------";
-		if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
-			NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
-			[lines addObject:text];
-			[text release];
-		}		
-	}
 }
 
 
@@ -322,6 +323,7 @@ static NhWindow *s_mapWindow = nil;
 		[[result retain] autorelease];
 	}
 	[self unlock];
+
 	return result;
 }
 

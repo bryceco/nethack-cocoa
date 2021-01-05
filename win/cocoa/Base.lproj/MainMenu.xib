@@ -529,7 +529,7 @@
                 <outlet property="delegate" destination="943" id="1017"/>
                 <outlet property="initialFirstResponder" destination="566" id="567"/>
             </connections>
-            <point key="canvasLocation" x="-150" y="129"/>
+            <point key="canvasLocation" x="-146" y="-239"/>
         </window>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
@@ -1473,6 +1473,7 @@
             <connections>
                 <outlet property="delegate" destination="855" id="880"/>
             </connections>
+            <point key="canvasLocation" x="-347" y="114"/>
         </window>
         <customObject id="919" customClass="ExtCommandWindowController">
             <connections>
@@ -1547,7 +1548,7 @@ DQ
             <connections>
                 <outlet property="delegate" destination="919" id="1497"/>
             </connections>
-            <point key="canvasLocation" x="-117" y="541"/>
+            <point key="canvasLocation" x="-389" y="425"/>
         </window>
         <customObject id="906" customClass="InputWindowController">
             <connections>
@@ -1619,6 +1620,7 @@ Gw
                 <outlet property="delegate" destination="906" id="918"/>
                 <outlet property="initialFirstResponder" destination="907" id="917"/>
             </connections>
+            <point key="canvasLocation" x="74" y="236"/>
         </window>
         <customObject id="885" customClass="YesNoWindowController">
             <connections>
@@ -1673,6 +1675,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="885" id="895"/>
             </connections>
+            <point key="canvasLocation" x="74" y="236"/>
         </window>
         <customObject id="1165" customClass="PlayerSelectionWindowController">
             <connections>
@@ -1722,7 +1725,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="qSC-88-ppB">
                             <rect key="frame" x="1" y="0.0" width="110" height="264"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="1138" id="1137">
                                     <rect key="frame" x="0.0" y="0.0" width="110" height="239"/>
@@ -1770,7 +1773,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <clipView key="contentView" id="64A-mh-px7">
                             <rect key="frame" x="1" y="0.0" width="147" height="465"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" rowHeight="32" headerView="1144" id="1145">
                                     <rect key="frame" x="0.0" y="0.0" width="147" height="440"/>
@@ -1932,6 +1935,7 @@ Gw
                 <outlet property="delegate" destination="1165" id="1196"/>
                 <outlet property="initialFirstResponder" destination="1159" id="1202"/>
             </connections>
+            <point key="canvasLocation" x="74" y="286"/>
         </window>
         <customObject id="1229" customClass="NotesWindowController">
             <connections>

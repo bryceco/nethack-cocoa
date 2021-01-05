@@ -786,8 +786,7 @@
 		0224CF1A11B8ABE000FC2199 /* Windows */ = {
 			isa = PBXGroup;
 			children = (
-				0224CAC811B8A64900FC2199 /* wincocoa.h */,
-				0224CAC911B8A64900FC2199 /* wincocoa.m */,
+				02B088EC25A14F1F00E1862D /* cocoa_unix.c */,
 				0224CACB11B8A6F200FC2199 /* DirectionWindowController.h */,
 				0224CACC11B8A6F200FC2199 /* DirectionWindowController.m */,
 				0224CACD11B8A6F200FC2199 /* EquipmentView.h */,
@@ -819,9 +818,10 @@
 				0224CAE711B8A6F200FC2199 /* StatsView.m */,
 				0224CAE811B8A6F200FC2199 /* TooltipWindow.h */,
 				0224CAE911B8A6F200FC2199 /* TooltipWindow.m */,
+				0224CAC811B8A64900FC2199 /* wincocoa.h */,
+				0224CAC911B8A64900FC2199 /* wincocoa.m */,
 				0224CAEA11B8A6F200FC2199 /* YesNoWindowController.h */,
 				0224CAEB11B8A6F200FC2199 /* YesNoWindowController.m */,
-				02B088EC25A14F1F00E1862D /* cocoa_unix.c */,
 			);
 			name = Windows;
 			sourceTree = "<group>";
