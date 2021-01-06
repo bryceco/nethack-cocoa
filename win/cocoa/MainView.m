@@ -224,7 +224,7 @@ NSStringEncoding	codepage437encoding;
 		// set stuff up for ascii drawing
 		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
 		NSRange rangeAll = NSMakeRange(0,[aString length]);
-		[aString setAlignment:NSCenterTextAlignment range:rangeAll];
+		[aString setAlignment:NSTextAlignmentCenter range:rangeAll];
 		[aString addAttribute:NSFontAttributeName value:asciiFont range:rangeAll];
 		
 		for (int j = 0; j < ROWNO; ++j) {
@@ -270,7 +270,7 @@ NSStringEncoding	codepage437encoding;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
 							[image drawAdjustedInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0];
 #else
-							[image drawInRect:r fromRect:srcRect operation:NSCompositeCopy fraction:1.0f respectFlipped:YES hints:nil];
+							[image drawInRect:r fromRect:srcRect operation:NSCompositingOperationCopy fraction:1.0f respectFlipped:YES hints:nil];
 #endif
 						}
 						
@@ -278,7 +278,7 @@ NSStringEncoding	codepage437encoding;
 #if __MAC_OS_X_VERSION_MIN_REQUIRED < 1060
 							[petMark drawAdjustedInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0];
 #else
-							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositeSourceOver fraction:1.0f respectFlipped:YES hints:nil];
+							[petMark drawInRect:r fromRect:NSZeroRect operation:NSCompositingOperationSourceOver fraction:1.0f respectFlipped:YES hints:nil];
 #endif
 						}
 						
@@ -509,7 +509,7 @@ static NSEvent * g_pendingKeyEvent = nil;
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-	if ( [theEvent type] == NSKeyDown ) {
+	if ( [theEvent type] == NSEventTypeKeyDown ) {
 
 		if ( g_pendingKeyEvent ) {
 			unsigned short k1 = [g_pendingKeyEvent keyCode];
@@ -532,7 +532,16 @@ static NSEvent * g_pendingKeyEvent = nil;
 			[g_pendingKeyEvent release];
 			g_pendingKeyEvent = nil;
 			if ( newKeyCode ) {
-				NSEvent * newEvent = [NSEvent keyEventWithType:NSKeyDown location:theEvent.locationInWindow modifierFlags:theEvent.modifierFlags timestamp:theEvent.timestamp windowNumber:theEvent.windowNumber context:theEvent.context characters:@"" charactersIgnoringModifiers:@"" isARepeat:theEvent.isARepeat keyCode:newKeyCode];
+				NSEvent * newEvent = [NSEvent keyEventWithType:NSEventTypeKeyDown
+													  location:theEvent.locationInWindow
+												 modifierFlags:theEvent.modifierFlags
+													 timestamp:theEvent.timestamp
+												  windowNumber:theEvent.windowNumber
+													   context:nil
+													characters:@""
+								   charactersIgnoringModifiers:@""
+													 isARepeat:theEvent.isARepeat
+													   keyCode:newKeyCode];
 				theEvent = newEvent;
 			}
 		} else {
@@ -555,7 +564,7 @@ static NSEvent * g_pendingKeyEvent = nil;
 
 - (void)keyUp:(NSEvent *)theEvent
 {
-	if ( [theEvent type] == NSKeyUp ) {
+	if ( [theEvent type] == NSEventTypeKeyUp ) {
 		if ( g_pendingKeyEvent ) {
 			wchar_t key = [WinCocoa keyWithKeyEvent:g_pendingKeyEvent];
 			if ( key ) {

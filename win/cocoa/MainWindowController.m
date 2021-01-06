@@ -77,7 +77,7 @@ static MainWindowController* instance;
 			[self fixMenuKeyEquivalents:submenu];
 		} else {
 			NSUInteger mask = [item keyEquivalentModifierMask];
-			if ( mask & NSShiftKeyMask ) {
+			if ( mask & NSEventModifierFlagShift ) {
 				NSString * key = [item keyEquivalent];
 				switch ( [key characterAtIndex:0] ) {
 					case '1':		key = @"!";		break;
@@ -102,7 +102,7 @@ static MainWindowController* instance;
 					default:		key = nil;		break;
 				}
 				if ( key ) {
-					mask &= ~NSShiftKeyMask;
+					mask &= ~NSEventModifierFlagShift;
 					[item setKeyEquivalent:key];
 					[item setKeyEquivalentModifierMask:mask];
 				}				
@@ -241,10 +241,10 @@ static MainWindowController* instance;
 		// it has a key equivalent to use
 		char keyEquiv = [key characterAtIndex:0];
 		int modifier = [menuItem keyEquivalentModifierMask];
-		if ( modifier & NSControlKeyMask ) {
+		if ( modifier & NSEventModifierFlagControl ) {
 			keyEquiv = toupper(keyEquiv) - 'A' + 1;
 		}
-		if ( modifier & NSAlternateKeyMask ) {
+		if ( modifier & NSEventModifierFlagOption ) {
 			keyEquiv = 0x80 | keyEquiv;
 		}
 		[[NhEventQueue instance] addKey:keyEquiv];

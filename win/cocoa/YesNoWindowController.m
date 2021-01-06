@@ -46,9 +46,9 @@
 	// add/remove close button so ESC will/won't work
 	NSUInteger style = [[self window] styleMask];
 	if ( cancelChar ) {
-		style |= NSClosableWindowMask;
+		style |= NSWindowStyleMaskClosable;
 	} else {
-		style &= ~NSClosableWindowMask;
+		style &= ~NSWindowStyleMaskClosable;
 	}
 	[[self window] setStyleMask:style];
 #endif
@@ -71,7 +71,7 @@
 
 - (void)keyDown:(NSEvent *)theEvent
 {
-	if ( [theEvent type] == NSKeyDown ) {
+	if ( [theEvent type] == NSEventTypeKeyDown ) {
 		NSString * text = [theEvent charactersIgnoringModifiers];
 		if ( [text isEqualToString:[[[button1 title] substringToIndex:1] lowercaseString]] ) {
 			[self performButton:button1];

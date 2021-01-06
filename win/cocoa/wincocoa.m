@@ -157,7 +157,7 @@ coord CoordMake(xchar i, xchar j) {
 
 + (int)keyWithKeyEvent:(NSEvent *)keyEvent
 {
-	if ( [keyEvent type] != NSKeyDown )
+	if ( [keyEvent type] != NSEventTypeKeyDown )
 		return 0;
 		
 	int key = 0;
@@ -182,7 +182,7 @@ coord CoordMake(xchar i, xchar j) {
 	}
 	if ( key ) {
 		NSUInteger modifier = [keyEvent modifierFlags];
-		if ( modifier & NSShiftKeyMask ) {
+		if ( modifier & NSEventModifierFlagShift ) {
 			key = toupper(key);
 		}
 	} else {
@@ -202,22 +202,22 @@ coord CoordMake(xchar i, xchar j) {
 		}
 		
 		
-		if ( modifier & NSCommandKeyMask ) {
+		if ( modifier & NSEventModifierFlagCommand ) {
 			// map Cmd-x to Ctrl-x to match Qt port
 			if ( strchr( "ad", key ) != NULL ) {
-				modifier &= ~NSCommandKeyMask;
-				modifier |= NSControlKeyMask;
+				modifier &= ~NSEventModifierFlagCommand;
+				modifier |= NSEventModifierFlagControl;
 			}
 		}
 		
-		if ( modifier & NSShiftKeyMask  ) {
+		if ( modifier & NSEventModifierFlagShift  ) {
 			// system already upcases for us
 		}
-		if ( modifier & NSControlKeyMask ) {
+		if ( modifier & NSEventModifierFlagControl ) {
 			// convert to control key
 			key = toupper(key) - 'A' + 1;
 		}
-		if ( modifier & NSAlternateKeyMask ) {
+		if ( modifier & NSEventModifierFlagOption ) {
 			// convert to meta key
 			key = 0x80 | key;
 		}

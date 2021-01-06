@@ -62,7 +62,7 @@
 	[view setFrame:viewRect];
 	
 	
-	if ( self = [super initWithContentRect:[view frame] styleMask:NSBorderlessWindowMask backing:NSBackingStoreBuffered defer:YES] ) {
+	if ( self = [super initWithContentRect:[view frame] styleMask:NSWindowStyleMaskBorderless backing:NSBackingStoreBuffered defer:YES] ) {
 		[self setDelegate:self];
 		[self setContentView:view];
 		[self setOpaque:YES];

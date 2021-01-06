@@ -81,7 +81,7 @@
 // automatically dismiss if move key pressed
 -(void)keyDown:(NSEvent *)theEvent
 {
-	if ( [theEvent type] == NSKeyDown ) {
+	if ( [theEvent type] == NSEventTypeKeyDown ) {
 		int key = [WinCocoa keyWithKeyEvent:theEvent];
 		if ( key ) {
 			[[NhEventQueue instance] addKey:key];
