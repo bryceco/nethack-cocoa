@@ -28,7 +28,6 @@
 #import "NetHackCocoaAppDelegate.h"
 #import <Carbon/Carbon.h>	// key codes
 
-#include "dlb.h"
 #include "hack.h"
 #include "func_tab.h"
 
@@ -62,6 +61,7 @@ WC_ASCII_MAP|WC_TILED_MAP|
 WC_FONT_MAP|WC_TILE_FILE|WC_TILE_WIDTH|WC_TILE_HEIGHT|
 WC_PLAYER_SELECTION|WC_SPLASH_SCREEN,
 0L,
+{1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1},   /* color availability */
 cocoa_init_nhwindows,
 cocoa_player_selection,
 cocoa_askname,
@@ -75,6 +75,7 @@ cocoa_display_nhwindow,
 cocoa_destroy_nhwindow,
 cocoa_curs,
 cocoa_putstr,
+cocoa_putmixed,
 cocoa_display_file,
 cocoa_start_menu,
 cocoa_add_menu,
@@ -111,6 +112,13 @@ cocoa_start_screen,
 cocoa_end_screen,
 cocoa_outrip,
 cocoa_preference_update,
+cocoa_getmsghistory,
+cocoa_putmsghistory,
+cocoa_status_init,
+cocoa_status_finish,
+cocoa_status_enablefield,
+cocoa_status_update,
+win_can_suspend
 };
 
 
@@ -149,7 +157,7 @@ coord CoordMake(xchar i, xchar j) {
 
 + (int)keyWithKeyEvent:(NSEvent *)keyEvent
 {
-	if ( [keyEvent type] != NSKeyDown )
+	if ( [keyEvent type] != NSEventTypeKeyDown )
 		return 0;
 		
 	int key = 0;
@@ -174,7 +182,7 @@ coord CoordMake(xchar i, xchar j) {
 	}
 	if ( key ) {
 		NSUInteger modifier = [keyEvent modifierFlags];
-		if ( modifier & NSShiftKeyMask ) {
+		if ( modifier & NSEventModifierFlagShift ) {
 			key = toupper(key);
 		}
 	} else {
@@ -194,22 +202,22 @@ coord CoordMake(xchar i, xchar j) {
 		}
 		
 		
-		if ( modifier & NSCommandKeyMask ) {
+		if ( modifier & NSEventModifierFlagCommand ) {
 			// map Cmd-x to Ctrl-x to match Qt port
 			if ( strchr( "ad", key ) != NULL ) {
-				modifier &= ~NSCommandKeyMask;
-				modifier |= NSControlKeyMask;
+				modifier &= ~NSEventModifierFlagCommand;
+				modifier |= NSEventModifierFlagControl;
 			}
 		}
 		
-		if ( modifier & NSShiftKeyMask  ) {
+		if ( modifier & NSEventModifierFlagShift  ) {
 			// system already upcases for us
 		}
-		if ( modifier & NSControlKeyMask ) {
+		if ( modifier & NSEventModifierFlagControl ) {
 			// convert to control key
 			key = toupper(key) - 'A' + 1;
 		}
-		if ( modifier & NSAlternateKeyMask ) {
+		if ( modifier & NSEventModifierFlagOption ) {
 			// convert to meta key
 			key = 0x80 | key;
 		}
@@ -218,14 +226,6 @@ coord CoordMake(xchar i, xchar j) {
 }
 
 @end
-
-FILE *cocoa_dlb_fopen(const char *filename, const char *mode)
-{
-	char path[FQN_MAX_FILENAME];
-	[WinCocoa expandFilename:filename intoPath:path];
-	FILE *file = fopen(path, mode);
-	return file;
-}
 
 // These must be defined but are not used (they handle keyboard interrupts).
 void intron() {}
@@ -271,29 +271,34 @@ void nethack_exit(int status)
 	[NSThread exit];
 }
 
-
+#if 0
 void cocoa_decgraphics_mode_callback()
 {
 	// user tried to switch to DECgraphics, so switch them to IBM instead
 	switch_graphics( IBM_GRAPHICS );	
 }
+#endif
 
 #pragma mark nethack window API
 
 void cocoa_init_nhwindows(int* argc, char** argv)
 {
 	//NSLog(@"init_nhwindows");
-	iflags.runmode = RUN_STEP;
+	flags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
 	
 	// default ASCII mode is to use IBM graphics with color
 	iflags.use_color = TRUE;
+#if 0
 	switch_graphics(IBM_GRAPHICS);
-	
+#endif
+
+#if 0
 	// if user switches to DEC graphics don't let them
 	extern void NDECL((*decgraphics_mode_callback));
 	decgraphics_mode_callback = cocoa_decgraphics_mode_callback;
-	
+#endif
+
 	// hardwire OPTIONS=time,showexp for issue 8
 	flags.time = TRUE;
 	flags.showexp = TRUE;
@@ -398,7 +403,12 @@ void cocoa_putstr(winid wid, int attr, const char *text)
 	[(NhWindow *) wid print:text attr:attr];
 	if (wid == WIN_MESSAGE || wid == BASE_WINDOW) {
 		[[MainWindowController instance] refreshMessages];
-	}		
+	}
+}
+
+void cocoa_putmixed(winid wid, int attr, const char *text)
+{
+	genl_putmixed(wid, attr, text);
 }
 
 void cocoa_display_file(const char *filename, BOOLEAN_P must_exist)
@@ -514,7 +524,7 @@ void cocoa_cliparound_window(winid wid, int x, int y)
 	}
 }
 
-void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph)
+void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph, int background)
 {
 	//NSLog(@"print_glyph %x %d,%d", wid, x, y);
 	[(NhMapWindow *) wid printGlyph:glyph atX:x y:y];
@@ -682,7 +692,7 @@ void cocoa_end_screen()
 	NSLog(@"end_screen");
 }
 
-void cocoa_outrip(winid wid, int how)
+void cocoa_outrip(winid wid, int how, time_t when)
 {
 	NSLog(@"outrip %x", wid);
 }
@@ -693,369 +703,37 @@ void cocoa_preference_update(const char * pref)
 	[[MainWindowController instance] preferenceUpdate:[NSString stringWithUTF8String:pref]];
 }
 
+char *cocoa_getmsghistory(BOOLEAN_P init)
+{
+	// return messages oldest to newest
+	return NULL;
+}
+void cocoa_putmsghistory(const char * msg, BOOLEAN_P is_restoring)
+{
+}
+void cocoa_status_init()
+{
+}
+void cocoa_status_finish()
+{
+}
+void cocoa_status_enablefield(int a, const char *b, const char *c, BOOLEAN_P d)
+{
+}
+void cocoa_status_update(int a, genericptr_t b, int c, int d, int e, unsigned long *f)
+{
+}
+boolean win_can_suspend()
+{
+	return YES;
+}
+
+
 #pragma mark window API player_selection()
 
-// from tty port
-/* clean up and quit */
-static void bail(const char *mesg)
-{
-    cocoa_exit_nhwindows(mesg);
-    terminate(EXIT_SUCCESS);
-}
-
-// from tty port
-static int cocoa_role_select(char *pbuf, char *plbuf)
-{
-	int i, n;
-	char thisch, lastch = 0;
-    char rolenamebuf[QBUFSZ];
-	winid win;
-	anything any;
-	menu_item *selected = 0;
-	
-   	cocoa_clear_nhwindow(BASE_WINDOW);
-	cocoa_putstr(BASE_WINDOW, 0, "Choosing Character's Role");
-	
-	/* Prompt for a role */
-	win = create_nhwindow(NHW_MENU);
-	start_menu(win);
-	any.a_void = 0;         /* zero out all bits */
-	for (i = 0; roles[i].name.m; i++) {
-	    if (ok_role(i, flags.initrace, flags.initgend,
-					flags.initalign)) {
-			any.a_int = i+1;	/* must be non-zero */
-			thisch = lowc(roles[i].name.m[0]);
-			if (thisch == lastch) thisch = highc(thisch);
-			if (flags.initgend != ROLE_NONE && flags.initgend != ROLE_RANDOM) {
-				if (flags.initgend == 1  && roles[i].name.f)
-					Strcpy(rolenamebuf, roles[i].name.f);
-				else
-					Strcpy(rolenamebuf, roles[i].name.m);
-			} else {
-				if (roles[i].name.f) {
-					Strcpy(rolenamebuf, roles[i].name.m);
-					Strcat(rolenamebuf, "/");
-					Strcat(rolenamebuf, roles[i].name.f);
-				} else 
-					Strcpy(rolenamebuf, roles[i].name.m);
-			}	
-			add_menu(win, NO_GLYPH, &any, thisch,
-					 0, ATR_NONE, an(rolenamebuf), MENU_UNSELECTED);
-			lastch = thisch;
-	    }
-	}
-	any.a_int = pick_role(flags.initrace, flags.initgend,
-						  flags.initalign, PICK_RANDOM)+1;
-	if (any.a_int == 0)	/* must be non-zero */
-	    any.a_int = randrole()+1;
-		add_menu(win, NO_GLYPH, &any , '*', 0, ATR_NONE,
-				 "Random", MENU_UNSELECTED);
-		any.a_int = i+1;	/* must be non-zero */
-		add_menu(win, NO_GLYPH, &any , 'q', 0, ATR_NONE,
-				 "Quit", MENU_UNSELECTED);
-		Sprintf(pbuf, "Pick a role for your %s", plbuf);
-		end_menu(win, pbuf);
-		n = select_menu(win, PICK_ONE, &selected);
-		cocoa_destroy_nhwindow(win);
-		
-	/* Process the choice */
-		if (n != 1 || selected[0].item.a_int == any.a_int) {
-			free((genericptr_t) selected),	selected = 0;	
-			return (-1);		/* Selected quit */
-		}
-	
-	flags.initrole = selected[0].item.a_int - 1;
-	free((genericptr_t) selected),	selected = 0;
-	return (flags.initrole);
-}
-
-// from tty port
-static int cocoa_race_select(char * pbuf, char * plbuf)
-{
-	int i, k, n;
-	char thisch, lastch = -1;
-	winid win;
-	anything any;
-	menu_item *selected = 0;
-	
-	/* Count the number of valid races */
-	n = 0;	/* number valid */
-	k = 0;	/* valid race */
-	for (i = 0; races[i].noun; i++) {
-	    if (ok_race(flags.initrole, i, flags.initgend,
-					flags.initalign)) {
-			n++;
-			k = i;
-	    }
-	}
-	if (n == 0) {
-	    for (i = 0; races[i].noun; i++) {
-			if (validrace(flags.initrole, i)) {
-				n++;
-				k = i;
-			}
-	    }
-	}
-	
-	/* Permit the user to pick, if there is more than one */
-	if (n > 1) {
-	    cocoa_clear_nhwindow(BASE_WINDOW);
-	    cocoa_putstr(BASE_WINDOW, 0, "Choosing Race");
-	    win = create_nhwindow(NHW_MENU);
-	    start_menu(win);
-	    any.a_void = 0;         /* zero out all bits */
-	    for (i = 0; races[i].noun; i++)
-			if (ok_race(flags.initrole, i, flags.initgend,
-						flags.initalign)) {
-				any.a_int = i+1;	/* must be non-zero */
-				thisch = lowc(races[i].noun[0]);
-				if (thisch == lastch) thisch = highc(thisch);
-				add_menu(win, NO_GLYPH, &any, thisch,
-						 0, ATR_NONE, races[i].noun, MENU_UNSELECTED);
-				lastch = thisch;
-			}
-	    any.a_int = pick_race(flags.initrole, flags.initgend,
-							  flags.initalign, PICK_RANDOM)+1;
-	    if (any.a_int == 0)	/* must be non-zero */
-			any.a_int = randrace(flags.initrole)+1;
-	    add_menu(win, NO_GLYPH, &any , '*', 0, ATR_NONE,
-				 "Random", MENU_UNSELECTED);
-	    any.a_int = i+1;	/* must be non-zero */
-	    add_menu(win, NO_GLYPH, &any , 'q', 0, ATR_NONE,
-				 "Quit", MENU_UNSELECTED);
-	    Sprintf(pbuf, "Pick the race of your %s", plbuf);
-	    end_menu(win, pbuf);
-	    n = select_menu(win, PICK_ONE, &selected);
-	    destroy_nhwindow(win);
-	    if (n != 1 || selected[0].item.a_int == any.a_int)
-			return(-1);		/* Selected quit */
-		
-	    k = selected[0].item.a_int - 1;
-	    free((genericptr_t) selected),	selected = 0;
-	}
-	
-	flags.initrace = k;
-	return (k);
-}
 
 // from tty port
 void cocoa_player_selection()
 {
-#if 1
 	[[MainWindowController instance] showPlayerSelection];
-#else
-	int i, k, n;
-	char pick4u = 'n';
-	char pbuf[QBUFSZ], plbuf[QBUFSZ];
-	winid win;
-	anything any;
-	menu_item *selected = 0;
-	
-	/* prevent an unnecessary prompt */
-	rigid_role_checks();
-	
-	/* Should we randomly pick for the player? */
-	if (!flags.randomall &&
-	    (flags.initrole == ROLE_NONE || flags.initrace == ROLE_NONE ||
-	     flags.initgend == ROLE_NONE || flags.initalign == ROLE_NONE)) {
-			char *prompt = build_plselection_prompt(pbuf, QBUFSZ, flags.initrole,
-													flags.initrace, flags.initgend, flags.initalign);
-			
-			pick4u = cocoa_yn_function(prompt, "ynq", pick4u);
-			cocoa_clear_nhwindow(BASE_WINDOW);
-			
-			if (pick4u != 'y' && pick4u != 'n') {
-			give_up:	/* Quit */
-				if (selected) free((genericptr_t) selected);
-				bail((char *)0);
-				/*NOTREACHED*/
-				return;
-			}
-		}
-	
-	(void)  root_plselection_prompt(plbuf, QBUFSZ - 1,
-									flags.initrole, flags.initrace, flags.initgend, flags.initalign);
-	
-	/* Select a role, if necessary */
-	/* we'll try to be compatible with pre-selected race/gender/alignment,
-	 * but may not succeed */
-	if (flags.initrole < 0) {
-	    /* Process the choice */
-	    if (pick4u == 'y' || flags.initrole == ROLE_RANDOM || flags.randomall) {
-			/* Pick a random role */
-			flags.initrole = pick_role(flags.initrace, flags.initgend,
-									   flags.initalign, PICK_RANDOM);
-			if (flags.initrole < 0) {
-				cocoa_putstr(BASE_WINDOW, 0, "Incompatible role!");
-				flags.initrole = randrole();
-			}
-	    } else {
-	    	if (cocoa_role_select(pbuf, plbuf) < 0) goto give_up;
-	    }
-	    (void)  root_plselection_prompt(plbuf, QBUFSZ - 1,
-										flags.initrole, flags.initrace, flags.initgend, flags.initalign);
-	}
-	
-	/* Select a race, if necessary */
-	/* force compatibility with role, try for compatibility with
-	 * pre-selected gender/alignment */
-	if (flags.initrace < 0 || !validrace(flags.initrole, flags.initrace)) {
-	    /* pre-selected race not valid */
-	    if (pick4u == 'y' || flags.initrace == ROLE_RANDOM || flags.randomall) {
-			flags.initrace = pick_race(flags.initrole, flags.initgend,
-									   flags.initalign, PICK_RANDOM);
-			if (flags.initrace < 0) {
-				cocoa_putstr(BASE_WINDOW, 0, "Incompatible race!");
-				flags.initrace = randrace(flags.initrole);
-			}
-	    } else {	/* pick4u == 'n' */
-	    	if (cocoa_race_select(pbuf, plbuf) < 0) goto give_up;
-	    }
-	    (void)  root_plselection_prompt(plbuf, QBUFSZ - 1,
-										flags.initrole, flags.initrace, flags.initgend, flags.initalign);
-	}
-	
-	/* Select a gender, if necessary */
-	/* force compatibility with role/race, try for compatibility with
-	 * pre-selected alignment */
-	if (flags.initgend < 0 || !validgend(flags.initrole, flags.initrace,
-										 flags.initgend)) {
-		/* pre-selected gender not valid */
-		if (pick4u == 'y' || flags.initgend == ROLE_RANDOM || flags.randomall) {
-			flags.initgend = pick_gend(flags.initrole, flags.initrace,
-									   flags.initalign, PICK_RANDOM);
-			if (flags.initgend < 0) {
-				cocoa_putstr(BASE_WINDOW, 0, "Incompatible gender!");
-				flags.initgend = randgend(flags.initrole, flags.initrace);
-			}
-		} else {	/* pick4u == 'n' */
-			/* Count the number of valid genders */
-			n = 0;	/* number valid */
-			k = 0;	/* valid gender */
-			for (i = 0; i < ROLE_GENDERS; i++) {
-				if (ok_gend(flags.initrole, flags.initrace, i,
-							flags.initalign)) {
-					n++;
-					k = i;
-				}
-			}
-			if (n == 0) {
-				for (i = 0; i < ROLE_GENDERS; i++) {
-					if (validgend(flags.initrole, flags.initrace, i)) {
-						n++;
-						k = i;
-					}
-				}
-			}
-			
-			/* Permit the user to pick, if there is more than one */
-			if (n > 1) {
-				cocoa_clear_nhwindow(BASE_WINDOW);
-				cocoa_putstr(BASE_WINDOW, 0, "Choosing Gender");
-				win = create_nhwindow(NHW_MENU);
-				start_menu(win);
-				any.a_void = 0;         /* zero out all bits */
-				for (i = 0; i < ROLE_GENDERS; i++)
-					if (ok_gend(flags.initrole, flags.initrace, i,
-								flags.initalign)) {
-						any.a_int = i+1;
-						add_menu(win, NO_GLYPH, &any, genders[i].adj[0],
-								 0, ATR_NONE, genders[i].adj, MENU_UNSELECTED);
-					}
-				any.a_int = pick_gend(flags.initrole, flags.initrace,
-									  flags.initalign, PICK_RANDOM)+1;
-				if (any.a_int == 0)	/* must be non-zero */
-					any.a_int = randgend(flags.initrole, flags.initrace)+1;
-				add_menu(win, NO_GLYPH, &any , '*', 0, ATR_NONE,
-						 "Random", MENU_UNSELECTED);
-				any.a_int = i+1;	/* must be non-zero */
-				add_menu(win, NO_GLYPH, &any , 'q', 0, ATR_NONE,
-						 "Quit", MENU_UNSELECTED);
-				Sprintf(pbuf, "Pick the gender of your %s", plbuf);
-				end_menu(win, pbuf);
-				n = select_menu(win, PICK_ONE, &selected);
-				destroy_nhwindow(win);
-				if (n != 1 || selected[0].item.a_int == any.a_int)
-					goto give_up;		/* Selected quit */
-				
-				k = selected[0].item.a_int - 1;
-				free((genericptr_t) selected),	selected = 0;
-			}
-			flags.initgend = k;
-		}
-	    (void)  root_plselection_prompt(plbuf, QBUFSZ - 1,
-										flags.initrole, flags.initrace, flags.initgend, flags.initalign);
-	}
-	
-	/* Select an alignment, if necessary */
-	/* force compatibility with role/race/gender */
-	if (flags.initalign < 0 || !validalign(flags.initrole, flags.initrace,
-										   flags.initalign)) {
-	    /* pre-selected alignment not valid */
-	    if (pick4u == 'y' || flags.initalign == ROLE_RANDOM || flags.randomall) {
-			flags.initalign = pick_align(flags.initrole, flags.initrace,
-										 flags.initgend, PICK_RANDOM);
-			if (flags.initalign < 0) {
-				cocoa_putstr(BASE_WINDOW, 0, "Incompatible alignment!");
-				flags.initalign = randalign(flags.initrole, flags.initrace);
-			}
-	    } else {	/* pick4u == 'n' */
-			/* Count the number of valid alignments */
-			n = 0;	/* number valid */
-			k = 0;	/* valid alignment */
-			for (i = 0; i < ROLE_ALIGNS; i++) {
-				if (ok_align(flags.initrole, flags.initrace, flags.initgend,
-							 i)) {
-					n++;
-					k = i;
-				}
-			}
-			if (n == 0) {
-				for (i = 0; i < ROLE_ALIGNS; i++) {
-					if (validalign(flags.initrole, flags.initrace, i)) {
-						n++;
-						k = i;
-					}
-				}
-			}
-			
-			/* Permit the user to pick, if there is more than one */
-			if (n > 1) {
-				cocoa_clear_nhwindow(BASE_WINDOW);
-				cocoa_putstr(BASE_WINDOW, 0, "Choosing Alignment");
-				win = create_nhwindow(NHW_MENU);
-				start_menu(win);
-				any.a_void = 0;         /* zero out all bits */
-				for (i = 0; i < ROLE_ALIGNS; i++)
-					if (ok_align(flags.initrole, flags.initrace,
-								 flags.initgend, i)) {
-						any.a_int = i+1;
-						add_menu(win, NO_GLYPH, &any, aligns[i].adj[0],
-								 0, ATR_NONE, aligns[i].adj, MENU_UNSELECTED);
-					}
-				any.a_int = pick_align(flags.initrole, flags.initrace,
-									   flags.initgend, PICK_RANDOM)+1;
-				if (any.a_int == 0)	/* must be non-zero */
-					any.a_int = randalign(flags.initrole, flags.initrace)+1;
-				add_menu(win, NO_GLYPH, &any , '*', 0, ATR_NONE,
-						 "Random", MENU_UNSELECTED);
-				any.a_int = i+1;	/* must be non-zero */
-				add_menu(win, NO_GLYPH, &any , 'q', 0, ATR_NONE,
-						 "Quit", MENU_UNSELECTED);
-				Sprintf(pbuf, "Pick the alignment of your %s", plbuf);
-				end_menu(win, pbuf);
-				n = select_menu(win, PICK_ONE, &selected);
-				destroy_nhwindow(win);
-				if (n != 1 || selected[0].item.a_int == any.a_int)
-					goto give_up;		/* Selected quit */
-				
-				k = selected[0].item.a_int - 1;
-				free((genericptr_t) selected),	selected = 0;
-			}
-			flags.initalign = k;
-	    }
-	}
-	/* Success! */
-	cocoa_display_nhwindow(BASE_WINDOW, FALSE);
-#endif
 }

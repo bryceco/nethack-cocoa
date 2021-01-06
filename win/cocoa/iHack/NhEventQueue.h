@@ -26,11 +26,13 @@
 
 @class NhEvent;
 @class NhCommand;
+@class NetHackCocoaAppDelegate;
 
 @interface NhEventQueue : NSObject {
 	
 	NSMutableArray *events;
 	NSCondition *condition;
+	NetHackCocoaAppDelegate * appDelegate;
 
 }
 

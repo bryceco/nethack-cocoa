@@ -47,7 +47,7 @@ static TileSet *s_instance = nil;
 		NSRect rect = NSMakeRect(0,0,img.size.width,img.size.height);
 		image = [[NSImage alloc] initWithSize:rect.size];
 		[image lockFocus];
-		[img drawInRect:rect fromRect:rect operation:NSCompositeCopy fraction:1.0];
+		[img drawInRect:rect fromRect:rect operation:NSCompositingOperationCopy fraction:1.0];
 		[image unlockFocus];
 #else	
 		image = [img retain];
@@ -93,7 +93,7 @@ static TileSet *s_instance = nil;
 	NSImage * newImage = [[[NSImage alloc] initWithSize:size] autorelease];
 	NSRect dstRect = NSMakeRect(0, 0, size.width, size.height);
 	[newImage lockFocus];
-	[image drawInRect:dstRect fromRect:srcRect operation:NSCompositeCopy fraction:enabled ? 1.0f : 0.5];
+	[image drawInRect:dstRect fromRect:srcRect operation:NSCompositingOperationCopy fraction:enabled ? 1.0f : 0.5];
 	[newImage unlockFocus];
 	return newImage;
 }

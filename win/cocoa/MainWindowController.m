@@ -48,7 +48,6 @@
 #include "hack.h" // BUFSZ etc.
 
 static MainWindowController* instance;
-static const float popoverItemHeight = 44.0f;
 
 @implementation MainWindowController
 
@@ -78,7 +77,7 @@ static const float popoverItemHeight = 44.0f;
 			[self fixMenuKeyEquivalents:submenu];
 		} else {
 			NSUInteger mask = [item keyEquivalentModifierMask];
-			if ( mask & NSShiftKeyMask ) {
+			if ( mask & NSEventModifierFlagShift ) {
 				NSString * key = [item keyEquivalent];
 				switch ( [key characterAtIndex:0] ) {
 					case '1':		key = @"!";		break;
@@ -103,7 +102,7 @@ static const float popoverItemHeight = 44.0f;
 					default:		key = nil;		break;
 				}
 				if ( key ) {
-					mask &= ~NSShiftKeyMask;
+					mask &= ~NSEventModifierFlagShift;
 					[item setKeyEquivalent:key];
 					[item setKeyEquivalentModifierMask:mask];
 				}				
@@ -128,7 +127,9 @@ static const float popoverItemHeight = 44.0f;
 
 - (void)awakeFromNib {
 	instance = self;
-	
+
+	self.appDelegate = [[NSApplication sharedApplication] delegate];
+
 #if 0
 	{
 		NSFont * font = [NSFont fontWithName:@"Lucida Bright" size:13];
@@ -240,10 +241,10 @@ static const float popoverItemHeight = 44.0f;
 		// it has a key equivalent to use
 		char keyEquiv = [key characterAtIndex:0];
 		int modifier = [menuItem keyEquivalentModifierMask];
-		if ( modifier & NSControlKeyMask ) {
+		if ( modifier & NSEventModifierFlagControl ) {
 			keyEquiv = toupper(keyEquiv) - 'A' + 1;
 		}
-		if ( modifier & NSAlternateKeyMask ) {
+		if ( modifier & NSEventModifierFlagOption ) {
 			keyEquiv = 0x80 | keyEquiv;
 		}
 		[[NhEventQueue instance] addKey:keyEquiv];
@@ -459,10 +460,9 @@ static const float popoverItemHeight = 44.0f;
 - (void)showPlayerSelection
 {
 	if (![NSThread isMainThread]) {
-		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
-		[appDelegate unlockNethackCore];
+		[self.appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(showPlayerSelection) withObject:nil waitUntilDone:YES];
-		[appDelegate lockNethackCore];
+		[self.appDelegate lockNethackCore];
 	} else {
 		[showPlayerSelection runModal];
 	}	
@@ -625,10 +625,9 @@ static const float popoverItemHeight = 44.0f;
 	if (![NSThread isMainThread]) {
 
 		BOOL blocking = w.blocking;
-		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
-		[appDelegate unlockNethackCore];
+		[self.appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(displayWindow:) withObject:w waitUntilDone:blocking];
-		[appDelegate lockNethackCore];
+		[self.appDelegate lockNethackCore];
 
 	} else {
 		
@@ -666,11 +665,10 @@ static const float popoverItemHeight = 44.0f;
 - (void)clipAroundX:(int)x y:(int)y {
 	if (![NSThread isMainThread]) {
 
-		NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
-		[appDelegate unlockNethackCore];
+		[self.appDelegate unlockNethackCore];
 		[self performSelectorOnMainThread:@selector(clipAround:)
 							   withObject:[NSValue valueWithRange:NSMakeRange(x, y)] waitUntilDone:YES];
-		[appDelegate lockNethackCore];
+		[self.appDelegate lockNethackCore];
 	} else {
 		[mainView cliparoundX:x y:y];
 	}

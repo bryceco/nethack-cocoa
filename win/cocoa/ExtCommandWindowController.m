@@ -110,7 +110,12 @@
 			[item setState:NSOffState];
 		}
 	}
+	[self.window makeFirstResponder:button];
 	[acceptButton setEnabled:YES];
+
+	// scroll so button is visible in case it was selected by a key press
+	NSRect rc = NSInsetRect(button.frame, 0, -60);
+	[menuView scrollRectToVisible:rc];
 }
 
 -(void)doAccept:(id)sender

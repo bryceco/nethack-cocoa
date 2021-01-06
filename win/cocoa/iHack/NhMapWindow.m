@@ -31,15 +31,13 @@
 - (id) initWithType:(int)t {
 	if (self = [super initWithType:t]) {
 		NSLog(@"map window %x", self);
-		size_t numBytes = COLNO * ROWNO * sizeof(int);
-		glyphs = malloc(numBytes);
-		memset(glyphs, kNoGlyph, numBytes);
+		memset(glyphs, kNoGlyph, sizeof glyphs);
 	}
 	return self;
 }
 
 - (void) printGlyph:(int)glyph atX:(XCHAR_P)x y:(XCHAR_P)y {
-	glyphs[y * COLNO + x] = glyph;
+	glyphs[y][x] = glyph;
 }
 
 - (void)setCursX:(XCHAR_P)x y:(XCHAR_P)y {
@@ -55,17 +53,15 @@
 
 
 - (int) glyphAtX:(XCHAR_P)x y:(XCHAR_P)y {
-	return glyphs[y * COLNO + x];
+	return glyphs[y][x];
 }
 
 - (void) clear {
 	[super clear];
-	size_t numBytes = COLNO * ROWNO * sizeof(int);
-	memset(glyphs, kNoGlyph, numBytes);
+	memset(glyphs, kNoGlyph, sizeof glyphs);
 }
 
 - (void) dealloc {
-	free(glyphs);
 	[super dealloc];
 }
 

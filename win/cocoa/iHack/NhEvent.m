@@ -30,7 +30,7 @@
 
 @synthesize key, mod, x, y;
 
-+ (id) eventWithKey:(int)k mod:(int)m x:(int)i y:(int)j {
++ (id) eventWithKeychar:(int)k mod:(int)m x:(int)i y:(int)j {
 	return [[[self alloc] initWithKey:k mod:m x:i y:j] autorelease];
 }
 
@@ -38,8 +38,8 @@
 	return [[[self alloc] initWithX:i y:j] autorelease];
 }
 
-+ (id) eventWithKey:(int)k {
-	return [[[self alloc] initWithKey:k] autorelease];
++ (id) eventWithKeychar:(int)k {
+	return [[[self alloc] initWithKeychar:k] autorelease];
 }
 
 - (id) initWithKey:(int)k mod:(int)m x:(int)i y:(int)j {
@@ -56,7 +56,7 @@
 	return [self initWithKey:0 mod:CLICK_1 x:i y:j];
 }
 
-- (id) initWithKey:(int)k {
+- (id) initWithKeychar:(int)k {
 	return [self initWithKey:k mod:-1 x:-1 y:-1];
 }
 

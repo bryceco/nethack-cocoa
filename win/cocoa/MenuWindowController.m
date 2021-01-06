@@ -809,7 +809,8 @@ static BUC_ENUM GetBUC( NSString * text )
 	rc.size.width  += viewRect.size.width  - viewSizeOrig.width;
 	
 	// widen by size of scroll bar in case there is a vertical scrollbar
-	rc.size.width += [NSScroller scrollerWidth];
+	rc.size.width += [NSScroller scrollerWidthForControlSize:NSControlSizeRegular
+											   scrollerStyle:NSScrollerStyleLegacy];
 	rc.size.width += 5; // for aesthetics
 	
 	if ( rc.size.height < minimumSize.height )

@@ -1,51 +1,69 @@
-#	NetHack Makefile.
-#	SCCS Id: @(#)Makefile.dat	3.4	1992/09/18
+#      NetHack Datafiles Makefile.dat $NHDT-Date: 1447844574 2018/04/25 19:25:54 $ $NHDT-Branch: NetHack-3.6.0 $:$NHDT-Revision: 1.22 $
+# Copyright (c) 2018 by Pasi Kallinen
+# NetHack may be freely redistributed.  See license for details.
+
+# Root of source tree:
+NHSROOT=..
 
 # for Atari
 # SHELL=E:/GEMINI2/MUPFEL.TTP
 # UUDECODE=uudecode
 
-VARDAT = data rumors quest.dat oracles options
+VARDAT = bogusmon data engrave epitaph rumors quest.dat oracles options
 
 all:	$(VARDAT) spec_levs quest_levs dungeon
 
 ../util/makedefs:
-	(cd ../util ; make makedefs)
+	(cd ../util ; $(MAKE) makedefs)
 
 ../util/dgn_comp:
-	(cd ../util ; make dgn_comp)
+	(cd ../util ; $(MAKE) dgn_comp)
 
 ../util/lev_comp:
-	(cd ../util ; make lev_comp)
+	(cd ../util ; $(MAKE) lev_comp)
 
 ../util/tile2x11:
-	(cd ../util ; make tile2x11)
+	(cd ../util ; $(MAKE) tile2x11)
 
 ../util/tile2beos:
-	(cd ../util ; make tile2beos)
+	(cd ../util ; $(MAKE) tile2beos)
 
 ../util/tile2bmp:
-	(cd ../util ; make tile2bmp)
+	(cd ../util ; $(MAKE) tile2bmp)
 
 x11tiles: ../util/tile2x11 ../win/share/monsters.txt ../win/share/objects.txt \
-				../win/share/other.txt
+				../win/share/other.txt \
+                                ../win/share/monsters.txt
 	../util/tile2x11 ../win/share/monsters.txt ../win/share/objects.txt \
+				../win/share/other.txt \
+                                -grayscale ../win/share/monsters.txt
+
+beostiles: ../util/tile2beos ../win/share/monsters.txt \
+				../win/share/objects.txt \
+				../win/share/other.txt
+	../util/tile2beos ../win/share/monsters.txt \
+				../win/share/objects.txt \
 				../win/share/other.txt
 
-beostiles: ../util/tile2beos ../win/share/monsters.txt ../win/share/objects.txt \
-				../win/share/other.txt
-	../util/tile2beos ../win/share/monsters.txt ../win/share/objects.txt \
-				../win/share/other.txt
-
-nhtiles.bmp: ../util/tile2bmp ../win/share/monsters.txt ../win/share/objects.txt \
+nhtiles.bmp: ../util/tile2bmp ../win/share/monsters.txt \
+				../win/share/objects.txt \
 				../win/share/other.txt
 	../util/tile2bmp $@
 
 NetHack.ad: ../win/X11/NetHack.ad
-	cp ../win/X11/NetHack.ad NetHack.ad
+# handle "#define foo bar" -lines
+	grep ^#define ../win/X11/NetHack.ad | \
+		sed -e 's/^#define/s/g' -e 's/  */ /g' \
+		    -e 's/$$/ g/g' > NetHack.ad.tmp
+	grep -v ^#define ../win/X11/NetHack.ad | \
+		sed -f NetHack.ad.tmp > NetHack.ad
+	-rm -f NetHack.ad.tmp
 
 pet_mark.xbm: ../win/X11/pet_mark.xbm
 	cp ../win/X11/pet_mark.xbm pet_mark.xbm
+
+pilemark.xbm: ../win/X11/pilemark.xbm
+	cp ../win/X11/pilemark.xbm pilemark.xbm
 
 rip.xpm: ../win/X11/rip.xpm
 	cp ../win/X11/rip.xpm rip.xpm
@@ -63,10 +81,10 @@ Info.plist: ../win/Qt/Info.pli
 	cp ../win/Qt/Info.pli Info.plist
 
 ../util/tile2img.ttp:
-	(cd ../util ; make tile2img.ttp)
+	(cd ../util ; $(MAKE) tile2img.ttp)
 
 ../util/xpm2img.ttp:
-	(cd ../util ; make xpm2img.ttp)
+	(cd ../util ; $(MAKE) xpm2img.ttp)
 nh16.img: ../util/tile2img.ttp ../win/share/monsters.txt \
 				../win/share/objects.txt ../win/share/other.txt
 	../util/tile2img.ttp nh16.img
@@ -93,6 +111,15 @@ quest.dat:	quest.txt ../util/makedefs
 
 oracles:	oracles.txt ../util/makedefs
 	../util/makedefs -h
+
+engrave:	engrave.txt ../util/makedefs
+	../util/makedefs -s
+
+epitaph:	epitaph.txt ../util/makedefs
+	../util/makedefs -s
+
+bogusmon:	bogusmon.txt ../util/makedefs
+	../util/makedefs -s
 
 # note: 'options' should have already been made when include/date.h was created
 options:	../util/makedefs
@@ -138,7 +165,12 @@ dungeon: dungeon.def ../util/makedefs ../util/dgn_comp
 	../util/makedefs -e
 	../util/dgn_comp dungeon.pdf
 
-spotless:
+# gitinfo.txt is optionally made by src/Makefile when creating date.h
+clean:
+	-rm -f gitinfo.txt
+
+spotless: clean
 	-rm -f spec_levs quest_levs *.lev $(VARDAT) dungeon dungeon.pdf
-	-rm -f nhdat x11tiles beostiles pet_mark.xbm rip.xpm mapbg.xpm
+	-rm -f nhdat x11tiles beostiles pet_mark.xbm pilemark.xbm rip.xpm mapbg.xpm
 	-rm -f rip.img GEM_RSC.RSC title.img nh16.img NetHack.ad
+	-rm -f nhsplash.xpm nhtiles.bmp

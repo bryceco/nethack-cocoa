@@ -33,7 +33,7 @@
 }
 
 - (id)initWithText:(NSString *)t {
-	if (self = [super initWithKey:-1]) {
+	if (self = [super initWithKeychar:-1]) {
 		text = [t copy];
 	}
 	return self;

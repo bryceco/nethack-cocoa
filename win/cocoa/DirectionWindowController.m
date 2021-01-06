@@ -41,7 +41,7 @@
 
 	int key = [keyEquiv characterAtIndex:0];
 	int mod = [button keyEquivalentModifierMask];
-	if ( mod & NSShiftKeyMask ) {
+	if ( mod & NSEventModifierFlagShift ) {
 		if ( key == '.' )
 			key = '>';
 		else if ( key == ',' )
@@ -56,7 +56,7 @@
 - (void)keyDown:(NSEvent *)theEvent 
 {
 	const char directions[] = "bjnhlyku<.>";
-	if ( [theEvent type] == NSKeyDown ) {
+	if ( [theEvent type] == NSEventTypeKeyDown ) {
 		char key = [WinCocoa keyWithKeyEvent:theEvent];
 		if ( key ) {
 			if ( strchr( directions, key ) != NULL ) {

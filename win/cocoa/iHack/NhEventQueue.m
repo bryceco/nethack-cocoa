@@ -26,7 +26,7 @@
 #import "NhEvent.h"
 #import "NhCommand.h"
 #import "NetHackCocoaAppDelegate.h"
-
+#import "MainWindowController.h"
 
 static NhEventQueue *s_eventQueue;
 
@@ -44,6 +44,7 @@ static NhEventQueue *s_eventQueue;
 	if (self = [super init]) {
 		condition = [[NSCondition alloc] init];
 		events = [[NSMutableArray alloc] init];
+		appDelegate = [MainWindowController instance].appDelegate;
 	}
 	return self;
 }
@@ -56,7 +57,7 @@ static NhEventQueue *s_eventQueue;
 }
 
 - (void) addKey:(int)k {
-	[self addEvent:[NhEvent eventWithKey:k]];
+	[self addEvent:[NhEvent eventWithKeychar:k]];
 }
 
 - (void)addEscapeKey {
@@ -67,7 +68,7 @@ static NhEventQueue *s_eventQueue;
 	[condition lock];
 	const char *pStr = keys;
 	while (*pStr) {
-		[events addObject:[NhEvent eventWithKey:*pStr]];
+		[events addObject:[NhEvent eventWithKeychar:*pStr]];
 		pStr++;
 	}
 	[condition signal];
@@ -76,7 +77,6 @@ static NhEventQueue *s_eventQueue;
 
 - (NhEvent *) nextEvent {
 	
-	NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
 	[appDelegate unlockNethackCore];
 	
 	[condition lock];
@@ -94,7 +94,6 @@ static NhEventQueue *s_eventQueue;
 
 - (void)waitForNextEvent {
 	
-	NetHackCocoaAppDelegate * appDelegate = [[NSApplication sharedApplication] delegate];
 	[appDelegate unlockNethackCore];
 	
 	[condition lock];

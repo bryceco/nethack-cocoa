@@ -1,4 +1,5 @@
-/*	SCCS Id: @(#)tile2x11.h 3.4	1995/01/25	*/
+/* NetHack 3.6	tile2x11.h	$NHDT-Date: 1524689515 2018/04/25 20:51:55 $  $NHDT-Branch: NetHack-3.6.0 $:$NHDT-Revision: 1.10 $ */
+/*      Copyright (c) 2002 by David Cohrs              */
 /* NetHack may be freely redistributed.  See license for details. */
 
 #ifndef TILE2X11_H
@@ -19,4 +20,4 @@ typedef struct {
 /* how wide each row in the tile file is, in tiles */
 #define TILES_PER_ROW (40)
 
-#endif	/* TILE2X11_H */
+#endif /* TILE2X11_H */

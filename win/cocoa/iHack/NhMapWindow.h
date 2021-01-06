@@ -32,7 +32,7 @@
 
 @interface NhMapWindow : NhWindow {
 	
-	int *glyphs;
+	int glyphs[ROWNO][COLNO];
 
 	XCHAR_P cursorX;
 	XCHAR_P cursorY;

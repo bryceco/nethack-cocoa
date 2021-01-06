@@ -34,5 +34,9 @@ int main(int argc, char *argv[])
 {
 	g_argc = argc;
 	g_argv = argv;
+
+	extern void set_fqn_prefixes(void);
+	set_fqn_prefixes();
+
     return NSApplicationMain(argc,  (const char **) argv);
 }

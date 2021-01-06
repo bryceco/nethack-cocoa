@@ -1,3 +1,4 @@
+/* clang-format off */
 /* XPM */
 static const char *blind_xpm[] = {
 /* width height ncolors chars_per_pixel */
@@ -945,6 +946,20 @@ static const char *pet_mark_small_xpm[] = {
 "..X.."
 };
 /* XPM */
+static const char *pile_mark_xpm[] = {
+/* width height ncolors chars_per_pixel */
+"5 5 2 1",
+/* colors */
+". c None",
+"X c #00FF00",
+/* pixels */
+"..X..",
+"..X..",
+"XXXXX",
+"..X..",
+"..X.."
+};
+/* XPM */
 static const char *satiated_xpm[] = {
 /* width height ncolors chars_per_pixel */
 "40 40 23 1",
@@ -1404,3 +1419,4 @@ static const char *wis_xpm[] = {
 "oooooooooooooooooooooooooooooooooooooooo",
 "oooooooooooooooooooooooooooooooooooooooo"
 };
+/* clang-format on */

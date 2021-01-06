@@ -39,6 +39,7 @@
 @class NotesWindowController;
 @class StatsView;
 @class EquipmentView;
+@class NetHackCocoaAppDelegate;
 
 @interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDataSource,NSSpeechSynthesizerDelegate> {	
 	BOOL										isDirectionQuestion;
@@ -66,7 +67,8 @@
 	IBOutlet NotesWindowController			*	notesWindow;
 }
 
-@property (assign) BOOL useSpeech;
+@property (assign) 	BOOL useSpeech;
+@property (strong)	NetHackCocoaAppDelegate * appDelegate;
 
 
 + (MainWindowController *) instance;

@@ -1,6 +1,15 @@
 $ ! vms/install.com -- set up nethack 'playground'
+$! $NHDT-Date: 1573172443 2019/11/08 00:20:43 $  $NHDT-Branch: NetHack-3.6 $:$NHDT-Revision: 1.12 $
+$! Copyright (c) 2016 by Robert Patrick Rankin
+$! NetHack may be freely redistributed.  See license for details.
+$ !
+$ ! $NHDT-Date: 1573172452 2019/11/08 00:20:52 $  $NHDT-Branch: NetHack-3.6 $:$NHDT-Revision: 1.12 $
 $ !
 $ ! Use vmsbuild.com to create nethack.exe, makedefs, and lev_comp *first*.
+$ !
+$ ! Note: this command procedure is also used by the top level Makefile
+$ ! if you build and install with MMS or MMK.  In that situation, only the
+$ ! Makefile will need any editing.
 $ !
 $ ! Edit this file to define gamedir & gameuic, or else invoke it with two
 $ ! command line parameters, as in:
@@ -17,13 +26,16 @@ $	if p2.nes."" then  gameuic := 'p2'
 $
 $	! note: all filespecs contain some punctuation,
 $	!	to avoid inadvertent logical name interaction
-$	play_files = "PERM.,RECORD.,LOGFILE.,PANICLOG."
-$	help_files = "HELP.,HH.,CMDHELP.,WIZHELP.,OPTHELP.,HISTORY.,LICENSE."
-$	data_files = "DATA.,RUMORS.,ORACLES.,OPTIONS.,QUEST.DAT"
+$	play_files = "PERM.,RECORD.,LOGFILE.,XLOGFILE.,PANICLOG."
+$	help_files = "HELP.,HH.,CMDHELP.,KEYHELP.,WIZHELP.,OPTHELP.," -
+		   + "HISTORY.,LICENSE."
+$	data_files = "DATA.,RUMORS.,ORACLES.,OPTIONS.,QUEST.DAT,TRIBUTE.," -
+		   + "ENGRAVE.,EPITAPH.,BOGUSMON."
+$	sysconf_file = "[.sys.vms]sysconf"
 $	guidebook  = "[.doc]Guidebook.txt"
 $	invoc_proc = "[.sys.vms]nethack.com"
 $	trmcp_file = "[.sys.share]termcap"
-$	spec_files = "AIR.LEV,ASMODEUS.LEV,ASTRAL.LEV,BAALZ.LEV,BIGRM-%.LEV," -
+$	spec_files = "AIR.LEV,ASMODEUS.LEV,ASTRAL.LEV,BAALZ.LEV,BIGRM-*.LEV," -
 		   + "CASTLE.LEV,EARTH.LEV,FAKEWIZ%.LEV,FIRE.LEV," -
 		   + "JUIBLEX.LEV,KNOX.LEV,MEDUSA-%.LEV,MINEFILL.LEV," -
 		   + "MINETN-%.LEV,MINEND-%.LEV,ORACLE.LEV,ORCUS.LEV," -
@@ -41,7 +53,7 @@ $	dngn_input = "dungeon.pdf"
 $	dlb_files  = help_files + "," + data_files + "," -
 		   + spec_files + "," + qstl_files + "," + dngn_files
 $	data_libry = "nh-data.dlb"
-$	xtrn_files = "LICENSE.,HISTORY.,OPTIONS."
+$	xtrn_files = "LICENSE.,HISTORY.,OPTIONS.,SYMBOLS."
 $ makedefs := $sys$disk:[-.util]makedefs
 $ lev_comp := $sys$disk:[-.util]lev_comp
 $ dgn_comp := $sys$disk:[-.util]dgn_comp
@@ -77,6 +89,8 @@ $ makedefs -r	!rumors.tru + rumors.fal -> rumors
 $	milestone "(oracles)"
 $ makedefs -h	!oracles.txt -> oracles
 $	milestone "(dungeon preprocess)"
+$ makedefs -s
+$	milestone "(engrave, epitaph, bogusmon)"
 $ makedefs -e	!dungeon.def -> dungeon.pdf
 $	milestone "(quest text)"
 $ makedefs -q	!quest.txt -> quest.dat
@@ -222,6 +236,17 @@ $ if f$search("''gamedir'termcap").nes."" then  goto skip_termcap
 $	milestone "(termcap)"
 $ call copy_file 'trmcp_file' 'gamedir'termcap "r"
 $skip_termcap:
+$ if p3.nes."" then  exit
+$!
+$! provide template sysconf file (needed if nethack is built w/ SYSCF enabled)
+$make_sysconf:
+$ if f$search(sysconf_file).eqs."" then  goto skip_sysconf
+$ if f$search("''gamedir'sysconf_file").nes."" then  goto skip_sysconf
+$       milestone "(sysconf)"
+$ call copy_file 'sysconf_file' 'gamedir'sysconf "r"
+$!	owner should be able to manually edit sysconf; others shouldn't
+$ set file/Prot=(s:rwd,o:rwd,g:r,w:r) 'gamedir'sysconf
+$skip_sysconf:
 $ if p3.nes."" then  exit
 $!
 $! done

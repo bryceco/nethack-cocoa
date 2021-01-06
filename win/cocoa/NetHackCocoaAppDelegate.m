@@ -22,10 +22,9 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
-#import "NetHackCocoaAppDelegate.h"
-#import "wincocoa.h"
-
 #include <sys/stat.h>
+#import "wincocoa.h"
+#import "NetHackCocoaAppDelegate.h"
 
 extern int unixmain(int argc, char **argv);
 
@@ -65,20 +64,17 @@ extern int unixmain(int argc, char **argv);
 	
 	nethackCoreLock = [[NSRecursiveLock alloc] init];
 	[self lockNethackCore];
-	
-	// create necessary directories
-	NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-	NSString *baseDirectory = [paths objectAtIndex:0];
-	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"NetHackCocoa"];
-	if (![[NSFileManager defaultManager] fileExistsAtPath:baseDirectory]) {
-		[[NSFileManager defaultManager] createDirectoryAtPath:baseDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
-	}
+
+#if 0 // This is now handled by the underlying cocoa port.
+	NSString * baseDirectory = [[[NSProcessInfo processInfo] environment] objectForKey:@"HOME"];
+	baseDirectory = [baseDirectory stringByAppendingPathComponent:@"nethackdir"];
 	NSLog(@"baseDir %@", baseDirectory);
 	setenv("NETHACKDIR", [baseDirectory UTF8String], 1);
 	NSString *saveDirectory = [baseDirectory stringByAppendingPathComponent:@"save"];
 	if (![[NSFileManager defaultManager] fileExistsAtPath:saveDirectory]) {
 		[[NSFileManager defaultManager] createDirectoryAtPath:saveDirectory withIntermediateDirectories:YES attributes:nil error:NULL];
 	}
+#endif
 		
 	// set plname (very important for save files and getlock)
 	[[NSUserName() capitalizedString] getCString:plname maxLength:PL_NSIZ encoding:NSASCIIStringEncoding];

@@ -1,14 +1,26 @@
-@REM  SCCS Id: @(#)nhsetup.bat  3.4     $Date: 2002/07/24 08:25:21 $
-@REM  Copyright (c) NetHack PC Development Team 1993, 1996, 2002
+@REM  NetHack 3.6	nhsetup.bat	$NHDT-Date: 1554784485 2019/04/09 04:34:45 $  $NHDT-Branch: NetHack-3.6.2-beta01 $:$NHDT-Revision: 1.37 $ */
+@REM  Copyright (c) NetHack PC Development Team 1993-2019
 @REM  NetHack may be freely redistributed.  See license for details. 
 @REM  Win32 setup batch file, see Install.nt for details
 @REM
 @echo off
+pushd %~dp0
+set WIN32PATH=..\..\win\win32
+set BINPATH=..\..\binary
+set VCDir=
 
-set _pause=
+goto :main
 
-:nxtcheck
-echo Checking to see if directories are set up properly
+:dirname
+rem Get the dirname of the second argument and set the variable who's
+rem name was specified in the first argument.
+call set %~1=%%~dp2
+call set %~1=%%%~1:~0,-1%%
+goto :EOF
+
+:main
+
+echo Checking to see if source tree directories are set up properly...
 if not exist ..\..\include\hack.h goto :err_dir
 if not exist ..\..\src\hack.c goto :err_dir
 if not exist ..\..\dat\wizard.des goto :err_dir
@@ -16,10 +28,13 @@ if not exist ..\..\util\makedefs.c goto :err_dir
 if not exist ..\..\sys\winnt\winnt.c goto :err_dir
 echo Directories look ok.
 
+:movemakes
+echo Moving Makefiles into ..\..\src for those not using Visual Studio
+REM Some file movemet for those that still want to use MAKE or NMAKE and a Makefile
 :do_tty
-if NOT exist ..\..\binary\*.* mkdir ..\..\binary
-if NOT exist ..\..\binary\license copy ..\..\dat\license ..\..\binary\license >nul
-echo Copying Microsoft Makefile - Makefile.msc to ..\..\src\Makefile.
+if NOT exist %BINPATH%\*.* mkdir %BINPATH%
+if NOT exist %BINPATH%\license copy ..\..\dat\license %BINPATH%\license >nul
+echo Copying Microsoft Makefile - Makefile.msc to ..\..\src\Makefile...
 if NOT exist ..\..\src\Makefile goto :domsc
 copy ..\..\src\Makefile ..\..\src\Makefile-orig >nul
 echo      Your existing
@@ -30,18 +45,7 @@ echo           ..\..\src\Makefile-orig
 copy Makefile.msc ..\..\src\Makefile >nul
 echo Microsoft Makefile copied ok.
 
-echo Copying Borland Makefile - Makefile.bcc to ..\..\src\Makefile.bcc
-if NOT exist ..\..\src\Makefile.bcc goto :dobor
-copy ..\..\src\Makefile.bcc ..\..\src\Makefile.bcc-orig >nul
-echo      Your existing 
-echo           ..\..\src\Makefile.bcc 
-echo      has been renamed to 
-echo           ..\..\src\Makefile.bcc-orig
-:dobor
-copy Makefile.bcc ..\..\src\Makefile.bcc >nul
-echo Borland Makefile copied ok.
-
-echo Copying MinGW Makefile - Makefile.gcc to ..\..\src\Makefile.gcc
+echo Copying MinGW Makefile - Makefile.gcc to ..\..\src\Makefile.gcc...
 if NOT exist ..\..\src\Makefile.gcc goto :dogcc
 copy ..\..\src\Makefile.gcc ..\..\src\Makefile.gcc-orig >nul
 echo      Your existing
@@ -52,33 +56,49 @@ echo           ..\..\src\Makefile.gcc-orig
 copy Makefile.gcc ..\..\src\Makefile.gcc >nul
 echo MinGW Makefile copied ok.
 
-:do_win
-if not exist ..\..\win\win32\nethack.dsw goto :err_win
-echo.
-echo Copying Visual C project files to ..\..\build directory
-echo Copying ..\..\win\win32\nethack.dsw  ..\..\nethack.dsw
-copy ..\..\win\win32\nethack.dsw  ..\.. >nul
-if NOT exist ..\..\binary\*.* echo Creating ..\..\binary directory
-if NOT exist ..\..\binary\*.* mkdir ..\..\binary
-if NOT exist ..\..\binary\license copy ..\..\dat\license ..\..\binary\license >nul
-if NOT exist ..\..\build\*.* echo Creating ..\..\build directory
-if NOT exist ..\..\build\*.* mkdir ..\..\build
-copy ..\..\win\win32\dgncomp.dsp   ..\..\build >nul
-copy ..\..\win\win32\dgnstuff.dsp  ..\..\build >nul
-copy ..\..\win\win32\dgnstuff.mak  ..\..\build >nul
-copy ..\..\win\win32\dlb_main.dsp  ..\..\build >nul
-copy ..\..\win\win32\levcomp.dsp   ..\..\build >nul
-copy ..\..\win\win32\levstuff.dsp  ..\..\build >nul
-copy ..\..\win\win32\levstuff.mak  ..\..\build >nul
-copy ..\..\win\win32\makedefs.dsp  ..\..\build >nul
-copy ..\..\win\win32\recover.dsp   ..\..\build >nul
-copy ..\..\win\win32\tile2bmp.dsp  ..\..\build >nul
-copy ..\..\win\win32\tiles.dsp     ..\..\build >nul
-copy ..\..\win\win32\tiles.mak     ..\..\build >nul
-copy ..\..\win\win32\tilemap.dsp   ..\..\build >nul
-copy ..\..\win\win32\uudecode.dsp   ..\..\build >nul
-copy ..\..\win\win32\nethackw.dsp   ..\..\build >nul
+echo Done copying files.
 
+echo Checking version of VC++ installed...
+:vscheck2019
+SET REGTREE=HKLM\SOFTWARE\WOW6432Node\Microsoft\VisualStudio
+@REM i can see your house from here... or at least your VC++ folder
+set VCDir="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\"
+if not defined VCDir goto :vscheck2017
+if not exist %VCDir% goto :vscheck2017
+if not "%VSCMD_VER%"=="16.0.0" goto :vscheck2017
+set MSVCVERSION=2019
+set MSVCPROJ=2017
+goto :fallback
+
+:vscheck2017
+SET REGTREE=HKLM\SOFTWARE\WOW6432Node\Microsoft\VisualStudio\SxS\VS7
+@REM i can see your house from here... or at least your VC++ folder
+for /f "usebackq skip=2 tokens=1-2*" %%a IN (`reg query %REGTREE% /v 15.0`) do @set VCDir="%%c"
+if not defined VCDir goto :vscheck2015
+if not exist %VCDir% goto :vscheck2015
+set MSVCVERSION=2017
+set MSVCPROJ=2017
+goto :fallback
+
+:vscheck2015
+rem cannot use the registry trick used for vc2017
+rem 14 = 2015
+SET VCVERS=14
+rem Finally, let's determine the root folder for this VC installation.
+set VCROOT=%%VS%VCVERS%0COMNTOOLS%%
+if "%VCROOT:~-1%"=="\" set VCROOT=%VCROOT:~0,-1%
+rem VCROOT=VSDir\Common7\Tools
+call :dirname VCROOT "%VCROOT%"
+rem VCROOT=VSDir\Common7
+call :dirname VCROOT "%VCROOT%"
+rem VCROOT=VSDir
+set VCDir=%VCROOT%\VC
+SET MSVCVERSION=2015
+
+:fallback
+echo Using VS%MSVCVERSION%.
+set SRCPATH=%WIN32PATH%\vs%MSVCPROJ%
+echo NetHack VS%MSVCVERSION% project files are in %SRCPATH%
 goto :done
 
 :err_win
@@ -86,12 +106,6 @@ echo Some of the files needed to build graphical NetHack
 echo for Windows are not in the expected places.
 echo Check "Install.nt" for a list of the steps required 
 echo to build NetHack.
-goto :fini
-
-:err_data
-echo A required file ..\..\dat\data.bas seems to be missing.
-echo Check "Files." in the root directory for your NetHack distribution
-echo and make sure that all required files exist.
 goto :fini
 
 :err_dir
@@ -107,8 +121,8 @@ echo.
 
 :fini
 :end
-set _pause=Y
-if "%0"=="nhsetup" set _pause=N
-if "%0"=="NHSETUP" set _pause=N
+set _pause=N
+for %%x in (%cmdcmdline%) do if /i "%%~x"=="/c" set _pause=Y
 if "%_pause%"=="Y" pause
 set _pause=
+popd

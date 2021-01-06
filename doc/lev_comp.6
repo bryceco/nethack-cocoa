@@ -1,5 +1,17 @@
-.TH LEV_COMP 6 "16 May 1996"
-.UC 4
+.TH LEV_COMP 6 "25 May 2015" NETHACK
+.de ND
+.ds Nd \\$3
+..
+.de NB
+.ds Nb \\$2
+..
+.de NR
+.ds Nr \\$2
+..
+.ND $NHDT-Date: 1524689549 2018/04/25 20:52:29 $
+.NB $NHDT-Branch: NetHack-3.6.0 $
+.NR $NHDT-Revision: 1.7 $
+.ds Na Kenneth Lorber
 .SH NAME
 lev_comp \- NetHack special levels compiler
 .SH SYNOPSIS
@@ -498,7 +510,7 @@ The maximum size of a map is normally 76 columns by 21 rows.
 \&'H'	a secret corridor
 \&'{'	a fountain
 \&'\\'	a throne
-\&'K'	a sink (if SINKS is defined, else a room location)
+\&'K'	a sink
 \&'}'	a part of a moat or other deep water
 \&'P'	a pool
 \&'L'	lava
@@ -570,3 +582,7 @@ dgn_comp(6), nethack(6)
 .PP
 Probably infinite.
 Most importantly, still needs additional bounds checking.
+.SH COPYRIGHT
+This file is Copyright (C) \*(Na and was last modified \*(Nd (version
+\*(Nb:\*(Nr).
+NetHack may be freely redistributed.  See license for details.

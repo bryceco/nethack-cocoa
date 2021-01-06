@@ -39,12 +39,12 @@
 @property (nonatomic, readonly) int y;
 @property (nonatomic, readonly) BOOL isKeyEvent;
 
-+ (id) eventWithKey:(int)k mod:(int)m x:(int)i y:(int)j;
++ (id) eventWithKeychar:(int)k mod:(int)m x:(int)i y:(int)j;
 + (id) eventWithX:(int)i y:(int)j;
-+ (id) eventWithKey:(int)k;
++ (id) eventWithKeychar:(int)k;
 
 - (instancetype) initWithKey:(int)k mod:(int)m x:(int)i y:(int)j;
 - (instancetype) initWithX:(int)i y:(int)j;
-- (instancetype) initWithKey:(int)k;
+- (instancetype) initWithKeychar:(int)k;
 
 @end

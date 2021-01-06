@@ -1,5 +1,9 @@
 $ ! sys/vms/spec_lev.com -- preprocess nethack's special level compiler code
 $ !
+$ ! $NHDT-Date: 1524689429 2018/04/25 20:50:29 $  $NHDT-Branch: NetHack-3.6.0 $:$NHDT-Revision: 1.5 $
+$! Copyright (c) 2016 by Robert Patrick Rankin
+$! NetHack may be freely redistributed.  See license for details.
+$ !
 $ ! This operation needs to be performed prior to executing vmsbuild.com.
 $ ! Process the scanning and parsing code for NetHack's special level
 $ ! and dungeon compilers.  *.l and *.y are converted into *'.c and *.h.

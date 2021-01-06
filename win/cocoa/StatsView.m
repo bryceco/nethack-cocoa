@@ -73,7 +73,11 @@
 	//	Home 1 $:218 HP:173(173) Pw:36(36) AC:-7 Xp:16/366949 T:45071 Hungry   Blind Burdened
 	//	Dlvl:17 *:143 HP:199(199) Pw:57(57) AC:-9 Xp:20/5124335 T:52985 Fainting
 
-	NSString * Gold = [NSString stringWithFormat:@"%c:", oc_syms[COIN_CLASS]];
+	// Bryce the Troglodyte           St:18 Dx:17 Co:15 In:9 Wi:8 Ch:8 Lawful
+	// Dlvl:1 $:0 HP:16(16) Pw:2(2) AC:8 Xp:1/0 T:1
+
+	nhsym goldch = showsyms[COIN_CLASS + SYM_OFF_O];
+	NSString * Gold = [NSString stringWithFormat:@"%c:", goldch];
 	
 	if ( [text rangeOfString:Gold].location != NSNotFound ) {
 		

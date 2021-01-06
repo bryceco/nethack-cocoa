@@ -31,6 +31,7 @@
 	NSLock *lock;
 	NSString *lineDelimiter;
 	BOOL blocking;
+	BOOL didClear;
 
 }
 

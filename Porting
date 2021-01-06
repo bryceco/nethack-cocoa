@@ -1,4 +1,4 @@
-  NetHack Porting Guidelines		v 3.4			1999-11-29
+  NetHack Porting Guidelines		v 3.6			1999-11-29
 
 
      1.0	Introduction
@@ -27,7 +27,8 @@ new machine.  The basic steps in porting the program are:
 	    If your machine uses a windowing system already supported,
 	    you need the win subdirectory for that system (or the
 	    appropriate sys subdirectory if the windowing system was
-	    previously considered restricted to one OS).
+	    previously considered restricted to one OS) and possibly
+	    win/share.
 
 	2.  Modify the appropriate include files to customize NetHack to
 	    your system.  You may need to add a new OS-specific "*conf.h"
@@ -170,3 +171,7 @@ creation.
 	An object of the NetHack development project is to get the game
 working on as many different types of hardware and under as many different
 operating systems as is practical.  Any assistance will be appreciated.
+
+# NetHack 3.6  Porting       $NHDT-Date: 1524689603 2018/04/25 20:53:23 $  $NHDT-Branch: NetHack-3.6.0 $:$NHDT-Revision: 1.5 $
+# Copyright (c) 2005 by Michael Allison
+# NetHack may be freely redistributed.  See license for details.

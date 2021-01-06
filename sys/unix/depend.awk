@@ -1,5 +1,6 @@
 # depend.awk -- awk script used to construct makefile dependencies
 # for nethack's source files (`make depend' support for Makefile.src).
+# $NHDT-Date: 1546220373 2018/12/31 01:39:33 $  $NHDT-Branch: NetHack-3.6.2-beta01 $:$NHDT-Revision: 1.8 $
 #
 # usage:
 #   cd src ; nawk -f depend.awk ../include/*.h list-of-.c/.cpp-files
@@ -21,6 +22,7 @@
 #	assumed to be the last #include in the file where it occurs.
 # win32api.h gets special handling because it only exists for some ports;
 #	it's assumed to be the last #include in the file where it occurs
+# zlib.h ditto
 #
 BEGIN		{ FS = "\""			#for `#include "X"', $2 is X
 		  special[++sp_cnt] = "../include/config.h"
@@ -29,15 +31,24 @@ BEGIN		{ FS = "\""			#for `#include "X"', $2 is X
 		  alt_deps["../include/patchlev.h"] = ""
 		  alt_deps["interp.c"] = " #interp.c"	#comment it out
 		  alt_deps["../include/win32api.h"] = " #../include/win32api.h"
+		  alt_deps["../include/zlib.h"] = " #zlib.h"	#comment it out
 		}
 FNR == 1	{ output_dep()			#finish previous file
 		  file = FILENAME		#setup for current file
 		}
 /^\#[ \t]*include[ \t]+\"/  {			#find `#include "X"'
-		  incl = $2;
+		  incl = $2
 		  #[3.4.0: gnomehack headers currently aren't in include]
+		  #[3.6.2: Qt4 headers aren't in include either]
+		  #[3.6.2: curses headers likewise]
 		  if (incl ~ /\.h$/) {
-		    if (incl ~ /^gn/)	# gnomehack special case
+                    if (incl ~ "curses\.h")
+                      incl = ""	 # skip "curses.h"; it should be <curses.h>
+		    else if (incl ~ /^curs/)	# curses special case
+		      incl = "../win/curses/" incl
+		    else if (incl ~ /^qt4/)	# Qt v4 special case
+		      incl = "../win/Qt4/" incl
+		    else if (incl ~ /^gn/)	# gnomehack special case
 		      incl = "../win/gnome/" incl
 		    else
 		      incl = "../include/" incl
@@ -77,7 +88,7 @@ function output_specials(			i, sp, alt_sp)
     print "#", alt_sp, "timestamp"	#output a `make' comment
  #- sub("\\.", "_", alt_sp);  alt_sp = "$(" toupper(alt_sp) ")"
  #+ Some nawks don't have toupper(), so hardwire these instead.
-    sub("config.h", "$(CONFIG_H)", alt_sp);  sub("hack.h", "$(HACK_H)", alt_sp);
+    sub("config.h", "$(CONFIG_H)", alt_sp);  sub("hack.h", "$(HACK_H)", alt_sp)
     format_dep(alt_sp, sp)		#output the target
     print "\ttouch " alt_sp		#output a build command
     alt_deps[sp] = alt_sp		#alternate dependency for depend()
@@ -110,11 +121,13 @@ function format_dep(target, source,		n, i, list)
   source = list[2]
   if (source ~ /\// && substr(source, 1, 11) != "../include/") {
     if (source ~ /\.cpp$/ )
-      print "\t$(CXX) $(CXXFLAGS) -c " source
+      print "\t$(CXX) $(CXXFLAGS) -c -o $@ " source
+    else if (source ~ /\/X11\//)	# "../win/X11/foo.c"
+      print "\t$(CC) $(CFLAGS) $(X11CFLAGS) -c -o $@ " source
     else if (source ~ /\/gnome\//)	# "../win/gnome/foo.c"
-      print "\t$(CC) $(CFLAGS) $(GNOMEINC) -c " source
+      print "\t$(CC) $(CFLAGS) $(GNOMEINC) -c -o $@ " source
     else
-      print "\t$(CC) $(CFLAGS) -c " source
+      print "\t$(CC) $(CFLAGS) -c -o $@ " source
   }
 }
 

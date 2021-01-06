@@ -22,11 +22,11 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#include "hack.h"
 
 #import "PlayerSelectionWindowController.h"
 #import "TileSet.h"
 
-#include "hack.h"
 
 @implementation PlayerSelectionWindowController
 

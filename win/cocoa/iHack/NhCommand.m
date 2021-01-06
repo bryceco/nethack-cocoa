@@ -214,7 +214,8 @@ enum InvFlags {
 	NSMutableArray *commands = [NSMutableArray array];
 	coord nhDelta = CoordMake(tp.x-u.ux, tp.y-u.uy);
 	int dir = xytod(nhDelta.x, nhDelta.y);
-	char direction = sdir[dir];
+	static const char sdir[] = "hykulnjb><";
+ 	char direction = sdir[dir];
 	if (tp.x > 0 && tp.y > 0 && tp.x < COLNO && tp.y < ROWNO) {
 		if (IS_DOOR(levl[tp.x][tp.y].typ)) {
 			int mask = levl[tp.x][tp.y].doormask;
