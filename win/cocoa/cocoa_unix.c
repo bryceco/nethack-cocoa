@@ -66,6 +66,7 @@ getlock()
 #if defined(MSDOS) && defined(NO_TERMS)
 	int grmode = iflags.grmode;
 #endif
+	boolean resuming = TRUE;
 
 	/* we ignore QUIT and INT at this point */
 	if (!lock_file(HLOCK, LOCKPREFIX, 10)) {
@@ -161,10 +162,33 @@ getlock()
 #endif /*SELF_RECOVER*/
 	else {
 		unlock_file(HLOCK);
-#if defined(CHDIR) && !defined(NOCWD_ASSUMPTIONS)
-		chdirx(orgdir, 0);
-#endif
-		error("%s", "Cannot start a new game.");
+		resuming = FALSE;
+//#if defined(CHDIR) && !defined(NOCWD_ASSUMPTIONS)
+//		chdirx(orgdir, 0);
+//#endif
+//		error("%s", "Cannot start a new game.");
+	}
+
+	if (!resuming) {
+		boolean neednewlock = (!*plname);
+		/* new game:  start by choosing role, race, etc;
+		   player might change the hero's name while doing that,
+		   in which case we try to restore under the new name
+		   and skip selection this time if that didn't succeed */
+		if (!iflags.renameinprogress || iflags.defer_plname || neednewlock) {
+			player_selection();
+			if (iflags.renameinprogress) {
+				/* player has renamed the hero while selecting role;
+				   if locking alphabetically, the existing lock file
+				   can still be used; otherwise, discard current one
+				   and create another for the new character name */
+				if (!locknum) {
+					delete_levelfile(0); /* remove empty lock file */
+					getlock();
+				}
+			}
+		}
+		newgame();
 	}
 
 gotlock:

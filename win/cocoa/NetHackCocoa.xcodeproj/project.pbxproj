@@ -1796,6 +1796,17 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = (
+					"-DNOMAIL",
+					"-DNOTPARMDECL",
+					"-DUSE_TILES",
+					"-DNOTTYGRAPHICS",
+					"-DCOCOA_GRAPHICS",
+					"-DDLB",
+					"-DSELF_RECOVER",
+					"-DNOSHELL",
+					"-DPC_LOCKING",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hack.cocoa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NetHack;
 				PROVISIONING_PROFILE = "";
@@ -1820,6 +1831,17 @@
 				INFOPLIST_FILE = "NetHackCocoa-Info.plist";
 				INSTALL_PATH = "$(HOME)/Applications";
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				OTHER_CFLAGS = (
+					"-DNOMAIL",
+					"-DNOTPARMDECL",
+					"-DUSE_TILES",
+					"-DNOTTYGRAPHICS",
+					"-DCOCOA_GRAPHICS",
+					"-DDLB",
+					"-DSELF_RECOVER",
+					"-DNOSHELL",
+					"-DPC_LOCKING",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = "net.hack.cocoa.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = NetHack;
 				PROVISIONING_PROFILE = "";

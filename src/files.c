@@ -1313,7 +1313,7 @@ docompress_file(filename, uncomp)
 const char *filename;
 boolean uncomp;
 {
-    char cfn[80];
+    char cfn[256];
     FILE *cf;
     const char *args[10];
 #ifdef COMPRESS_OPTIONS
