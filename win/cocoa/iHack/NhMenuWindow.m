@@ -89,7 +89,8 @@
 {
 	NSString * text = [self text];
 	if ( [text length] ) {
-		NSAlert * alert = [NSAlert alertWithMessageText:text defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+		NSAlert * alert = [[[NSAlert alloc] init] autorelease];
+		alert.messageText = text;
 		return [alert runModal];
 	}
 	// cancelled

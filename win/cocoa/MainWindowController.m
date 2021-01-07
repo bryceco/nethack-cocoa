@@ -259,7 +259,8 @@ static MainWindowController* instance;
 			[[NhEventQueue instance] addEvent:e];
 		} else {
 			// unknown
-			NSAlert * alert = [NSAlert alertWithMessageText:@"Menu binding not implemented" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@""];
+			NSAlert * alert = [[NSAlert alloc] init];
+			alert.messageText = @"Menu binding not implemented";
 			[alert runModal];		
 		}
 	}
@@ -321,7 +322,8 @@ static MainWindowController* instance;
 		[equipmentView updateInventory];
 		
 	} else {
-		NSAlert * alert = [NSAlert alertWithMessageText:@"The tile set could not be loaded" defaultButton:nil alternateButton:nil otherButton:nil informativeTextWithFormat:@"The file may be unreadable, or the dimensions may not be appropriate"];
+		NSAlert * alert = [[NSAlert alloc] init];
+		alert.messageText = @"The tile set could not be loaded";
 		[alert runModal];
 	}
 }
