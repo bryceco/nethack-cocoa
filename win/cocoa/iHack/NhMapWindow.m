@@ -30,7 +30,7 @@
 
 - (id) initWithType:(int)t {
 	if (self = [super initWithType:t]) {
-		NSLog(@"map window %x", self);
+		NSLog(@"map window %lx", (long)self);
 		memset(glyphs, kNoGlyph, sizeof glyphs);
 	}
 	return self;

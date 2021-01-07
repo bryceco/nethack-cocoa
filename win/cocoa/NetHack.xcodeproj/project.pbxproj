@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0201C21025A67A44005C22FA /* sysconf in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFF25A6660C000AB261 /* sysconf */; };
 		02894C6825A65C12000AB261 /* tile.c in Sources */ = {isa = PBXBuildFile; fileRef = 02894C6725A65C12000AB261 /* tile.c */; };
-		02894D8D25A661FE000AB261 /* NetHackCocoaAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D8C25A661FE000AB261 /* NetHackCocoaAppDelegate.m */; };
+		02894D8D25A661FE000AB261 /*  in Sources */ = {isa = PBXBuildFile; fileRef = 02894D8C25A661FE000AB261 /*  */; };
 		02894DB925A66220000AB261 /* NotesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D9725A6621F000AB261 /* NotesWindowController.m */; };
 		02894DBA25A66220000AB261 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D9A25A6621F000AB261 /* StatsView.m */; };
 		02894DBB25A66220000AB261 /* NSImage+FlippedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D9B25A6621F000AB261 /* NSImage+FlippedDrawing.m */; };
@@ -48,6 +49,46 @@
 		02894E1325A66255000AB261 /* Action.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894DFE25A66255000AB261 /* Action.m */; };
 		02894E1425A66255000AB261 /* NSIndexPath+Z.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894E0025A66255000AB261 /* NSIndexPath+Z.m */; };
 		02894E4D25A66538000AB261 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02894E4C25A66538000AB261 /* Cocoa.framework */; };
+		02EDA84D25A675390068C1C9 /* petmark.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EAE25A6660C000AB261 /* petmark.png */; };
+		02EDA84E25A675390068C1C9 /* Arrow-S.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EAF25A6660C000AB261 /* Arrow-S.png */; };
+		02EDA84F25A675390068C1C9 /* Arrow-E.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB025A6660C000AB261 /* Arrow-E.png */; };
+		02EDA85025A675390068C1C9 /* Arrow-NW.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB125A6660C000AB261 /* Arrow-NW.png */; };
+		02EDA85125A675390068C1C9 /* Arrow-NE.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB225A6660C000AB261 /* Arrow-NE.png */; };
+		02EDA85225A675390068C1C9 /* Arrow-W.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB325A6660C000AB261 /* Arrow-W.png */; };
+		02EDA85325A675390068C1C9 /* Arrow-N.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB425A6660C000AB261 /* Arrow-N.png */; };
+		02EDA85425A675390068C1C9 /* nethack.icns in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB525A6660C000AB261 /* nethack.icns */; };
+		02EDA85525A675390068C1C9 /* Arrow-SW.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB625A6660C000AB261 /* Arrow-SW.png */; };
+		02EDA85625A675390068C1C9 /* Arrow-SE.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894EB725A6660C000AB261 /* Arrow-SE.png */; };
+		02EDA85D25A675840068C1C9 /* kins32.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6025A6660B000AB261 /* kins32.bmp */; };
+		02EDA85E25A675850068C1C9 /* chozo32b.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6125A6660B000AB261 /* chozo32b.png */; };
+		02EDA85F25A675850068C1C9 /* absurd32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6225A6660B000AB261 /* absurd32.png */; };
+		02EDA86025A675850068C1C9 /* Nethack Modern 24.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6325A6660B000AB261 /* Nethack Modern 24.bmp */; };
+		02EDA86125A675850068C1C9 /* tiles10x20.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6425A6660B000AB261 /* tiles10x20.bmp */; };
+		02EDA86225A675850068C1C9 /* new tiles24.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6525A6660B000AB261 /* new tiles24.png */; };
+		02EDA86325A675850068C1C9 /* tiles20x40.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6625A6660B000AB261 /* tiles20x40.bmp */; };
+		02EDA86425A675850068C1C9 /* tiles16.bmp in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6725A6660C000AB261 /* tiles16.bmp */; };
+		02EDA86525A675850068C1C9 /* chozo32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6825A6660C000AB261 /* chozo32.png */; };
+		02EDA86625A675850068C1C9 /* absurd128.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6925A6660C000AB261 /* absurd128.png */; };
+		02EDA86725A675850068C1C9 /* tiles32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6A25A6660C000AB261 /* tiles32.png */; };
+		02EDA86825A675850068C1C9 /* nh32.png in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6B25A6660C000AB261 /* nh32.png */; };
+		02EDA86F25A675940068C1C9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6C25A6660C000AB261 /* Credits.rtf */; };
+		02EDA87625A675AE0068C1C9 /* MenuWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EF525A6660C000AB261 /* MenuWindow.xib */; };
+		02EDA87725A675AE0068C1C9 /* MessageWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EF725A6660C000AB261 /* MessageWindow.xib */; };
+		02EDA87825A675AE0068C1C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFB25A6660C000AB261 /* InfoPlist.strings */; };
+		02EDA87925A675AE0068C1C9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFD25A6660C000AB261 /* MainMenu.xib */; };
+		02EDA88E25A675E80068C1C9 /* bell.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88125A675E80068C1C9 /* bell.uu */; };
+		02EDA88F25A675E80068C1C9 /* toolhorn.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88225A675E80068C1C9 /* toolhorn.uu */; };
+		02EDA89025A675E80068C1C9 /* wdnflute.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88325A675E80068C1C9 /* wdnflute.uu */; };
+		02EDA89125A675E80068C1C9 /* lethdrum.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88425A675E80068C1C9 /* lethdrum.uu */; };
+		02EDA89225A675E80068C1C9 /* erthdrum.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88525A675E80068C1C9 /* erthdrum.uu */; };
+		02EDA89325A675E80068C1C9 /* README in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88625A675E80068C1C9 /* README */; };
+		02EDA89425A675E80068C1C9 /* .gitattributes in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88725A675E80068C1C9 /* .gitattributes */; };
+		02EDA89525A675E80068C1C9 /* mgcflute.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88825A675E80068C1C9 /* mgcflute.uu */; };
+		02EDA89625A675E80068C1C9 /* mgcharp.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88925A675E80068C1C9 /* mgcharp.uu */; };
+		02EDA89725A675E80068C1C9 /* firehorn.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88A25A675E80068C1C9 /* firehorn.uu */; };
+		02EDA89825A675E80068C1C9 /* bugle.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88B25A675E80068C1C9 /* bugle.uu */; };
+		02EDA89925A675E80068C1C9 /* wdnharp.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88C25A675E80068C1C9 /* wdnharp.uu */; };
+		02EDA89A25A675E80068C1C9 /* frsthorn.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88D25A675E80068C1C9 /* frsthorn.uu */; };
 		3192867C21A3ACAC00325BEB /* lev_comp.y in Sources */ = {isa = PBXBuildFile; fileRef = 3192867B21A3ACAB00325BEB /* lev_comp.y */; };
 		3192867E21A3ACB800325BEB /* lev_comp.l in Sources */ = {isa = PBXBuildFile; fileRef = 3192867D21A3ACB800325BEB /* lev_comp.l */; };
 		31B8A30C21A20D8B0055BD01 /* makedefs.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A30B21A20D8B0055BD01 /* makedefs.c */; };
@@ -159,9 +200,6 @@
 		31B8A3E621A238B30055BD01 /* dog.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3E421A238B30055BD01 /* dog.c */; };
 		31B8A3E821A23AB50055BD01 /* vis_tab.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3E721A23AB50055BD01 /* vis_tab.c */; };
 		31B8A3EC21A23CF20055BD01 /* posixregex.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3EB21A23CF20055BD01 /* posixregex.c */; };
-		31B8A3EF21A23D420055BD01 /* ioctl.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3ED21A23D420055BD01 /* ioctl.c */; };
-		31B8A3F021A23D420055BD01 /* unixtty.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3EE21A23D420055BD01 /* unixtty.c */; };
-		31B8A3F521A23DD10055BD01 /* unixunix.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3F221A23DD10055BD01 /* unixunix.c */; };
 		31B8A3F621A23DD10055BD01 /* unixmain.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3F321A23DD10055BD01 /* unixmain.c */; };
 		31B8A3F721A23DD10055BD01 /* unixres.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A3F421A23DD10055BD01 /* unixres.c */; };
 		31B8A41321A23F650055BD01 /* version.c in Sources */ = {isa = PBXBuildFile; fileRef = 31B8A32721A238010055BD01 /* version.c */; };
@@ -367,47 +405,50 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		022D969925A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		022D969A25A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MenuWindow.xib; sourceTree = "<group>"; };
+		022D969B25A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MessageWindow.xib; sourceTree = "<group>"; };
 		02894C6725A65C12000AB261 /* tile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tile.c; path = ../../src/tile.c; sourceTree = "<group>"; };
-		02894D8B25A661FE000AB261 /* NetHackCocoaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetHackCocoaAppDelegate.h; path = ../../../win/cocoa/NetHackCocoaAppDelegate.h; sourceTree = "<group>"; };
-		02894D8C25A661FE000AB261 /* NetHackCocoaAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NetHackCocoaAppDelegate.m; path = ../../../win/cocoa/NetHackCocoaAppDelegate.m; sourceTree = "<group>"; };
-		02894D9525A6621F000AB261 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NotesWindowController.h; path = ../../../win/cocoa/NotesWindowController.h; sourceTree = "<group>"; };
-		02894D9625A6621F000AB261 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainWindowController.h; path = ../../../win/cocoa/MainWindowController.h; sourceTree = "<group>"; };
-		02894D9725A6621F000AB261 /* NotesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NotesWindowController.m; path = ../../../win/cocoa/NotesWindowController.m; sourceTree = "<group>"; };
-		02894D9825A6621F000AB261 /* ExtCommandWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ExtCommandWindowController.h; path = ../../../win/cocoa/ExtCommandWindowController.h; sourceTree = "<group>"; };
-		02894D9925A6621F000AB261 /* Protocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Protocols.h; path = ../../../win/cocoa/Protocols.h; sourceTree = "<group>"; };
-		02894D9A25A6621F000AB261 /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StatsView.m; path = ../../../win/cocoa/StatsView.m; sourceTree = "<group>"; };
-		02894D9B25A6621F000AB261 /* NSImage+FlippedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSImage+FlippedDrawing.m"; path = "../../../win/cocoa/NSImage+FlippedDrawing.m"; sourceTree = "<group>"; };
-		02894D9C25A6621F000AB261 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FlippedView.m; path = ../../../win/cocoa/FlippedView.m; sourceTree = "<group>"; };
-		02894D9D25A6621F000AB261 /* InputWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = InputWindowController.h; path = ../../../win/cocoa/InputWindowController.h; sourceTree = "<group>"; };
-		02894D9E25A6621F000AB261 /* DirectionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DirectionWindowController.h; path = ../../../win/cocoa/DirectionWindowController.h; sourceTree = "<group>"; };
-		02894D9F25A6621F000AB261 /* TooltipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TooltipWindow.h; path = ../../../win/cocoa/TooltipWindow.h; sourceTree = "<group>"; };
-		02894DA025A6621F000AB261 /* InputWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = InputWindowController.m; path = ../../../win/cocoa/InputWindowController.m; sourceTree = "<group>"; };
-		02894DA125A6621F000AB261 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainView.h; path = ../../../win/cocoa/MainView.h; sourceTree = "<group>"; };
-		02894DA225A6621F000AB261 /* MenuWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuWindowController.h; path = ../../../win/cocoa/MenuWindowController.h; sourceTree = "<group>"; };
-		02894DA325A6621F000AB261 /* TooltipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TooltipWindow.m; path = ../../../win/cocoa/TooltipWindow.m; sourceTree = "<group>"; };
-		02894DA425A6621F000AB261 /* NSImage+FlippedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSImage+FlippedDrawing.h"; path = "../../../win/cocoa/NSImage+FlippedDrawing.h"; sourceTree = "<group>"; };
-		02894DA525A6621F000AB261 /* wincocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = wincocoa.h; path = ../../../win/cocoa/wincocoa.h; sourceTree = "<group>"; };
-		02894DA625A6621F000AB261 /* MessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MessageWindowController.m; path = ../../../win/cocoa/MessageWindowController.m; sourceTree = "<group>"; };
-		02894DA725A6621F000AB261 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainView.m; path = ../../../win/cocoa/MainView.m; sourceTree = "<group>"; };
-		02894DA825A6621F000AB261 /* MessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MessageWindowController.h; path = ../../../win/cocoa/MessageWindowController.h; sourceTree = "<group>"; };
-		02894DA925A6621F000AB261 /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StatsView.h; path = ../../../win/cocoa/StatsView.h; sourceTree = "<group>"; };
-		02894DAA25A66220000AB261 /* YesNoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = YesNoWindowController.h; path = ../../../win/cocoa/YesNoWindowController.h; sourceTree = "<group>"; };
-		02894DAB25A66220000AB261 /* EquipmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = EquipmentView.h; path = ../../../win/cocoa/EquipmentView.h; sourceTree = "<group>"; };
-		02894DAC25A66220000AB261 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FlippedView.h; path = ../../../win/cocoa/FlippedView.h; sourceTree = "<group>"; };
-		02894DAD25A66220000AB261 /* ExtCommandWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ExtCommandWindowController.m; path = ../../../win/cocoa/ExtCommandWindowController.m; sourceTree = "<group>"; };
-		02894DAE25A66220000AB261 /* YesNoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = YesNoWindowController.m; path = ../../../win/cocoa/YesNoWindowController.m; sourceTree = "<group>"; };
-		02894DAF25A66220000AB261 /* PlayerSelectionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PlayerSelectionWindowController.h; path = ../../../win/cocoa/PlayerSelectionWindowController.h; sourceTree = "<group>"; };
-		02894DB025A66220000AB261 /* Inventory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = Inventory.c; path = ../../../win/cocoa/Inventory.c; sourceTree = "<group>"; };
-		02894DB125A66220000AB261 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainWindowController.m; path = ../../../win/cocoa/MainWindowController.m; sourceTree = "<group>"; };
-		02894DB225A66220000AB261 /* PlayerSelectionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PlayerSelectionWindowController.m; path = ../../../win/cocoa/PlayerSelectionWindowController.m; sourceTree = "<group>"; };
-		02894DB325A66220000AB261 /* cocoa_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = cocoa_unix.c; path = ../../../win/cocoa/cocoa_unix.c; sourceTree = "<group>"; };
-		02894DB425A66220000AB261 /* DirectionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DirectionWindowController.m; path = ../../../win/cocoa/DirectionWindowController.m; sourceTree = "<group>"; };
-		02894DB525A66220000AB261 /* MenuWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuWindowController.m; path = ../../../win/cocoa/MenuWindowController.m; sourceTree = "<group>"; };
-		02894DB625A66220000AB261 /* EquipmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = EquipmentView.m; path = ../../../win/cocoa/EquipmentView.m; sourceTree = "<group>"; };
-		02894DB725A66220000AB261 /* Inventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Inventory.h; path = ../../../win/cocoa/Inventory.h; sourceTree = "<group>"; };
-		02894DB825A66220000AB261 /* wincocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = wincocoa.m; path = ../../../win/cocoa/wincocoa.m; sourceTree = "<group>"; };
-		02894DD225A6623C000AB261 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = ../../../win/cocoa/main.m; sourceTree = "<group>"; };
-		02894DD325A6623C000AB261 /* NetHackCocoa_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NetHackCocoa_Prefix.pch; path = ../../../win/cocoa/NetHackCocoa_Prefix.pch; sourceTree = "<group>"; };
+		02894D8B25A661FE000AB261 /* NetHackCocoaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHackCocoaAppDelegate.h; sourceTree = "<group>"; };
+		02894D8C25A661FE000AB261 /*  */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = ""; sourceTree = "<group>"; };
+		02894D9525A6621F000AB261 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesWindowController.h; sourceTree = "<group>"; };
+		02894D9625A6621F000AB261 /* MainWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainWindowController.h; sourceTree = "<group>"; };
+		02894D9725A6621F000AB261 /* NotesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotesWindowController.m; sourceTree = "<group>"; };
+		02894D9825A6621F000AB261 /* ExtCommandWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExtCommandWindowController.h; sourceTree = "<group>"; };
+		02894D9925A6621F000AB261 /* Protocols.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Protocols.h; sourceTree = "<group>"; };
+		02894D9A25A6621F000AB261 /* StatsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatsView.m; sourceTree = "<group>"; };
+		02894D9B25A6621F000AB261 /* NSImage+FlippedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSImage+FlippedDrawing.m"; sourceTree = "<group>"; };
+		02894D9C25A6621F000AB261 /* FlippedView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlippedView.m; sourceTree = "<group>"; };
+		02894D9D25A6621F000AB261 /* InputWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InputWindowController.h; sourceTree = "<group>"; };
+		02894D9E25A6621F000AB261 /* DirectionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DirectionWindowController.h; sourceTree = "<group>"; };
+		02894D9F25A6621F000AB261 /* TooltipWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TooltipWindow.h; sourceTree = "<group>"; };
+		02894DA025A6621F000AB261 /* InputWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InputWindowController.m; sourceTree = "<group>"; };
+		02894DA125A6621F000AB261 /* MainView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainView.h; sourceTree = "<group>"; };
+		02894DA225A6621F000AB261 /* MenuWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuWindowController.h; sourceTree = "<group>"; };
+		02894DA325A6621F000AB261 /* TooltipWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TooltipWindow.m; sourceTree = "<group>"; };
+		02894DA425A6621F000AB261 /* NSImage+FlippedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSImage+FlippedDrawing.h"; sourceTree = "<group>"; };
+		02894DA525A6621F000AB261 /* wincocoa.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wincocoa.h; sourceTree = "<group>"; };
+		02894DA625A6621F000AB261 /* MessageWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MessageWindowController.m; sourceTree = "<group>"; };
+		02894DA725A6621F000AB261 /* MainView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainView.m; sourceTree = "<group>"; };
+		02894DA825A6621F000AB261 /* MessageWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MessageWindowController.h; sourceTree = "<group>"; };
+		02894DA925A6621F000AB261 /* StatsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatsView.h; sourceTree = "<group>"; };
+		02894DAA25A66220000AB261 /* YesNoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = YesNoWindowController.h; sourceTree = "<group>"; };
+		02894DAB25A66220000AB261 /* EquipmentView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EquipmentView.h; sourceTree = "<group>"; };
+		02894DAC25A66220000AB261 /* FlippedView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlippedView.h; sourceTree = "<group>"; };
+		02894DAD25A66220000AB261 /* ExtCommandWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExtCommandWindowController.m; sourceTree = "<group>"; };
+		02894DAE25A66220000AB261 /* YesNoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = YesNoWindowController.m; sourceTree = "<group>"; };
+		02894DAF25A66220000AB261 /* PlayerSelectionWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PlayerSelectionWindowController.h; sourceTree = "<group>"; };
+		02894DB025A66220000AB261 /* Inventory.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Inventory.c; sourceTree = "<group>"; };
+		02894DB125A66220000AB261 /* MainWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainWindowController.m; sourceTree = "<group>"; };
+		02894DB225A66220000AB261 /* PlayerSelectionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PlayerSelectionWindowController.m; sourceTree = "<group>"; };
+		02894DB325A66220000AB261 /* cocoa_unix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = cocoa_unix.c; sourceTree = "<group>"; };
+		02894DB425A66220000AB261 /* DirectionWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DirectionWindowController.m; sourceTree = "<group>"; };
+		02894DB525A66220000AB261 /* MenuWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuWindowController.m; sourceTree = "<group>"; };
+		02894DB625A66220000AB261 /* EquipmentView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EquipmentView.m; sourceTree = "<group>"; };
+		02894DB725A66220000AB261 /* Inventory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Inventory.h; sourceTree = "<group>"; };
+		02894DB825A66220000AB261 /* wincocoa.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = wincocoa.m; sourceTree = "<group>"; };
+		02894DD225A6623C000AB261 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		02894DD325A6623C000AB261 /* NetHackCocoa_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHackCocoa_Prefix.pch; sourceTree = "<group>"; };
 		02894DDC25A66254000AB261 /* NhItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NhItem.h; path = ../../../win/cocoa/iHack/NhItem.h; sourceTree = "<group>"; };
 		02894DDD25A66254000AB261 /* NhYnQuestion.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NhYnQuestion.m; path = ../../../win/cocoa/iHack/NhYnQuestion.m; sourceTree = "<group>"; };
 		02894DDE25A66254000AB261 /* NhMapWindow.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NhMapWindow.m; path = ../../../win/cocoa/iHack/NhMapWindow.m; sourceTree = "<group>"; };
@@ -446,11 +487,10 @@
 		02894DFF25A66255000AB261 /* NhWindow.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NhWindow.h; path = ../../../win/cocoa/iHack/NhWindow.h; sourceTree = "<group>"; };
 		02894E0025A66255000AB261 /* NSIndexPath+Z.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSIndexPath+Z.m"; path = "../../../win/cocoa/iHack/NSIndexPath+Z.m"; sourceTree = "<group>"; };
 		02894E0125A66255000AB261 /* NhTextInputEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NhTextInputEvent.h; path = ../../../win/cocoa/iHack/NhTextInputEvent.h; sourceTree = "<group>"; };
-		02894E3325A6648A000AB261 /* NetHackCocoa-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NetHackCocoa-Info.plist"; path = "../../win/cocoa/NetHackCocoa-Info.plist"; sourceTree = "<group>"; };
 		02894E4C25A66538000AB261 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		02894E5C25A665B9000AB261 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = en; path = "../../../win/cocoa/en.lproj/container-migration.plist"; sourceTree = "<group>"; };
 		02894E5D25A665B9000AB261 /* NetHackCocoa.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; name = NetHackCocoa.entitlements; path = ../../../win/cocoa/NetHackCocoa.entitlements; sourceTree = "<group>"; };
-		02894E5E25A665B9000AB261 /* NetHackCocoa-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NetHackCocoa-Info.plist"; path = "../../../win/cocoa/NetHackCocoa-Info.plist"; sourceTree = "<group>"; };
+		02894E5E25A665B9000AB261 /* NetHack-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "NetHack-Info.plist"; path = "../../../win/cocoa/NetHack-Info.plist"; sourceTree = "<group>"; };
 		02894E6025A6660B000AB261 /* kins32.bmp */ = {isa = PBXFileReference; lastKnownFileType = image.bmp; path = kins32.bmp; sourceTree = "<group>"; };
 		02894E6125A6660B000AB261 /* chozo32b.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = chozo32b.png; sourceTree = "<group>"; };
 		02894E6225A6660B000AB261 /* absurd32.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = absurd32.png; sourceTree = "<group>"; };
@@ -474,12 +514,21 @@
 		02894EB525A6660C000AB261 /* nethack.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = nethack.icns; sourceTree = "<group>"; };
 		02894EB625A6660C000AB261 /* Arrow-SW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SW.png"; sourceTree = "<group>"; };
 		02894EB725A6660C000AB261 /* Arrow-SE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SE.png"; sourceTree = "<group>"; };
-		02894EF625A6660C000AB261 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MenuWindow.xib; sourceTree = "<group>"; };
-		02894EF825A6660C000AB261 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MessageWindow.xib; sourceTree = "<group>"; };
 		02894EFC25A6660C000AB261 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
-		02894EFE25A6660C000AB261 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = MainMenu.xib; sourceTree = "<group>"; };
-		02894EFF25A6660C000AB261 /* sysconf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sysconf; path = ../../../sysconf; sourceTree = "<group>"; };
-		2A953FB221A3F404007906E5 /* XCode.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = XCode.xcconfig; sourceTree = "<group>"; };
+		02894EFF25A6660C000AB261 /* sysconf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sysconf; path = ../../../win/cocoa/sysconf; sourceTree = "<group>"; };
+		02EDA88125A675E80068C1C9 /* bell.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bell.uu; sourceTree = "<group>"; };
+		02EDA88225A675E80068C1C9 /* toolhorn.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = toolhorn.uu; sourceTree = "<group>"; };
+		02EDA88325A675E80068C1C9 /* wdnflute.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wdnflute.uu; sourceTree = "<group>"; };
+		02EDA88425A675E80068C1C9 /* lethdrum.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = lethdrum.uu; sourceTree = "<group>"; };
+		02EDA88525A675E80068C1C9 /* erthdrum.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = erthdrum.uu; sourceTree = "<group>"; };
+		02EDA88625A675E80068C1C9 /* README */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README; sourceTree = "<group>"; };
+		02EDA88725A675E80068C1C9 /* .gitattributes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = .gitattributes; sourceTree = "<group>"; };
+		02EDA88825A675E80068C1C9 /* mgcflute.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mgcflute.uu; sourceTree = "<group>"; };
+		02EDA88925A675E80068C1C9 /* mgcharp.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = mgcharp.uu; sourceTree = "<group>"; };
+		02EDA88A25A675E80068C1C9 /* firehorn.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = firehorn.uu; sourceTree = "<group>"; };
+		02EDA88B25A675E80068C1C9 /* bugle.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = bugle.uu; sourceTree = "<group>"; };
+		02EDA88C25A675E80068C1C9 /* wdnharp.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = wdnharp.uu; sourceTree = "<group>"; };
+		02EDA88D25A675E80068C1C9 /* frsthorn.uu */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = frsthorn.uu; sourceTree = "<group>"; };
 		3186A36D21A4B0F90052BF02 /* xwindowp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = xwindowp.h; path = ../../include/xwindowp.h; sourceTree = "<group>"; };
 		3186A36E21A4B0FA0052BF02 /* botl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = botl.h; path = ../../include/botl.h; sourceTree = "<group>"; };
 		3186A36F21A4B0FA0052BF02 /* winprocs.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = winprocs.h; path = ../../include/winprocs.h; sourceTree = "<group>"; };
@@ -580,7 +629,7 @@
 		3186A3CE21A4B0FE0052BF02 /* winGnome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = winGnome.h; path = ../../include/winGnome.h; sourceTree = "<group>"; };
 		3186A3CF21A4B0FE0052BF02 /* lev.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = lev.h; path = ../../include/lev.h; sourceTree = "<group>"; };
 		3186A3D021A4B0FE0052BF02 /* decl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = decl.h; path = ../../include/decl.h; sourceTree = "<group>"; };
-		3189577121A1FCC100FB2ABE /* NetHack */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = NetHack; sourceTree = BUILT_PRODUCTS_DIR; };
+		3189577121A1FCC100FB2ABE /* NetHack.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetHack.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3189577F21A1FDA400FB2ABE /* makedefs */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = makedefs; sourceTree = BUILT_PRODUCTS_DIR; };
 		3192867B21A3ACAB00325BEB /* lev_comp.y */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.yacc; name = lev_comp.y; path = ../../util/lev_comp.y; sourceTree = "<group>"; };
 		3192867D21A3ACB800325BEB /* lev_comp.l */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.lex; name = lev_comp.l; path = ../../util/lev_comp.l; sourceTree = "<group>"; };
@@ -695,12 +744,8 @@
 		31B8A3E421A238B30055BD01 /* dog.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = dog.c; path = ../../src/dog.c; sourceTree = "<group>"; };
 		31B8A3E721A23AB50055BD01 /* vis_tab.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = vis_tab.c; path = ../../src/vis_tab.c; sourceTree = "<group>"; };
 		31B8A3EB21A23CF20055BD01 /* posixregex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = posixregex.c; path = ../share/posixregex.c; sourceTree = "<group>"; };
-		31B8A3ED21A23D420055BD01 /* ioctl.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ioctl.c; path = ../share/ioctl.c; sourceTree = "<group>"; };
-		31B8A3EE21A23D420055BD01 /* unixtty.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = unixtty.c; path = ../share/unixtty.c; sourceTree = "<group>"; };
-		31B8A3F221A23DD10055BD01 /* unixunix.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixunix.c; sourceTree = "<group>"; };
 		31B8A3F321A23DD10055BD01 /* unixmain.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixmain.c; sourceTree = "<group>"; };
 		31B8A3F421A23DD10055BD01 /* unixres.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = unixres.c; sourceTree = "<group>"; };
-		31B8A41521A243CC0055BD01 /* libncurses.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libncurses.tbd; path = usr/lib/libncurses.tbd; sourceTree = SDKROOT; };
 		31B8A41E21A2669A0055BD01 /* lev_comp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = lev_comp; sourceTree = BUILT_PRODUCTS_DIR; };
 		31B8A42521A267E60055BD01 /* lev_yacc.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lev_yacc.c; path = ../../util/lev_yacc.c; sourceTree = "<group>"; };
 		31B8A42621A267E60055BD01 /* lev_lex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = lev_lex.c; path = ../../util/lev_lex.c; sourceTree = "<group>"; };
@@ -766,25 +811,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0201C21725A67AEF005C22FA /* dat */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = dat;
+			sourceTree = "<group>";
+		};
 		02894C6F25A66082000AB261 /* nethack */ = {
 			isa = PBXGroup;
 			children = (
-				31B8A3F821A23E490055BD01 /* win */,
+				0201C21725A67AEF005C22FA /* dat */,
 				31B8A3E921A23CC40055BD01 /* sys */,
 				3189579621A2046700FB2ABE /* include */,
 				3189579321A200EC00FB2ABE /* util */,
 				3189578C21A1FF8200FB2ABE /* src */,
 			);
-			path = nethack;
+			name = nethack;
+			path = ../..;
 			sourceTree = "<group>";
 		};
 		02894D8425A6611C000AB261 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
 				02894D8B25A661FE000AB261 /* NetHackCocoaAppDelegate.h */,
-				02894D8C25A661FE000AB261 /* NetHackCocoaAppDelegate.m */,
+				02894D8C25A661FE000AB261 /*  */,
 			);
-			path = Classes;
+			name = Classes;
 			sourceTree = "<group>";
 		};
 		02894D9425A6620E000AB261 /* Windows */ = {
@@ -827,7 +880,7 @@
 				02894DAA25A66220000AB261 /* YesNoWindowController.h */,
 				02894DAE25A66220000AB261 /* YesNoWindowController.m */,
 			);
-			path = Windows;
+			name = Windows;
 			sourceTree = "<group>";
 		};
 		02894DD125A6622A000AB261 /* Other Sources */ = {
@@ -836,7 +889,7 @@
 				02894DD225A6623C000AB261 /* main.m */,
 				02894DD325A6623C000AB261 /* NetHackCocoa_Prefix.pch */,
 			);
-			path = "Other Sources";
+			name = "Other Sources";
 			sourceTree = "<group>";
 		};
 		02894DDB25A66245000AB261 /* iHack */ = {
@@ -889,7 +942,7 @@
 			children = (
 				02894EFF25A6660C000AB261 /* sysconf */,
 				02894E5D25A665B9000AB261 /* NetHackCocoa.entitlements */,
-				02894E5E25A665B9000AB261 /* NetHackCocoa-Info.plist */,
+				02894E5E25A665B9000AB261 /* NetHack-Info.plist */,
 				02894E6C25A6660C000AB261 /* Credits.rtf */,
 				02894E5B25A665B9000AB261 /* container-migration.plist */,
 				02894EF425A6660C000AB261 /* English.lproj */,
@@ -948,16 +1001,36 @@
 			path = ../../../win/cocoa/English.lproj;
 			sourceTree = "<group>";
 		};
+		02EDA88025A675E80068C1C9 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
+				02EDA88125A675E80068C1C9 /* bell.uu */,
+				02EDA88225A675E80068C1C9 /* toolhorn.uu */,
+				02EDA88325A675E80068C1C9 /* wdnflute.uu */,
+				02EDA88425A675E80068C1C9 /* lethdrum.uu */,
+				02EDA88525A675E80068C1C9 /* erthdrum.uu */,
+				02EDA88625A675E80068C1C9 /* README */,
+				02EDA88725A675E80068C1C9 /* .gitattributes */,
+				02EDA88825A675E80068C1C9 /* mgcflute.uu */,
+				02EDA88925A675E80068C1C9 /* mgcharp.uu */,
+				02EDA88A25A675E80068C1C9 /* firehorn.uu */,
+				02EDA88B25A675E80068C1C9 /* bugle.uu */,
+				02EDA88C25A675E80068C1C9 /* wdnharp.uu */,
+				02EDA88D25A675E80068C1C9 /* frsthorn.uu */,
+			);
+			name = sounds;
+			path = ../share/sounds;
+			sourceTree = "<group>";
+		};
 		3189576821A1FCC100FB2ABE = {
 			isa = PBXGroup;
 			children = (
+				02894D8425A6611C000AB261 /* Classes */,
+				02894D9425A6620E000AB261 /* Windows */,
 				02894E5A25A6659E000AB261 /* Resources */,
 				02894DDB25A66245000AB261 /* iHack */,
 				02894DD125A6622A000AB261 /* Other Sources */,
-				02894D9425A6620E000AB261 /* Windows */,
-				02894D8425A6611C000AB261 /* Classes */,
 				02894C6F25A66082000AB261 /* nethack */,
-				2A953FB221A3F404007906E5 /* XCode.xcconfig */,
 				3189577221A1FCC100FB2ABE /* Products */,
 				31B8A41421A243CB0055BD01 /* Frameworks */,
 			);
@@ -966,7 +1039,7 @@
 		3189577221A1FCC100FB2ABE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3189577121A1FCC100FB2ABE /* NetHack */,
+				3189577121A1FCC100FB2ABE /* NetHack.app */,
 				3189577F21A1FDA400FB2ABE /* makedefs */,
 				31B8A41E21A2669A0055BD01 /* lev_comp */,
 				31B8A43621A268DF0055BD01 /* dgn_comp */,
@@ -1238,9 +1311,8 @@
 		31B8A3EA21A23CDB0055BD01 /* share */ = {
 			isa = PBXGroup;
 			children = (
-				31B8A3ED21A23D420055BD01 /* ioctl.c */,
-				31B8A3EE21A23D420055BD01 /* unixtty.c */,
 				31B8A3EB21A23CF20055BD01 /* posixregex.c */,
+				02EDA88025A675E80068C1C9 /* sounds */,
 			);
 			name = share;
 			sourceTree = "<group>";
@@ -1250,25 +1322,14 @@
 			children = (
 				31B8A3F321A23DD10055BD01 /* unixmain.c */,
 				31B8A3F421A23DD10055BD01 /* unixres.c */,
-				31B8A3F221A23DD10055BD01 /* unixunix.c */,
 			);
 			name = unix;
-			sourceTree = "<group>";
-		};
-		31B8A3F821A23E490055BD01 /* win */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = win;
-			path = ..;
 			sourceTree = "<group>";
 		};
 		31B8A41421A243CB0055BD01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 				02894E4C25A66538000AB261 /* Cocoa.framework */,
-				31B8A41521A243CC0055BD01 /* libncurses.tbd */,
-				02894E3325A6648A000AB261 /* NetHackCocoa-Info.plist */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1282,6 +1343,7 @@
 			buildPhases = (
 				3189576D21A1FCC100FB2ABE /* Sources */,
 				3189576E21A1FCC100FB2ABE /* Frameworks */,
+				02EDA84C25A675120068C1C9 /* Resources */,
 				3189576F21A1FCC100FB2ABE /* CopyFiles */,
 				3192867121A3A2D500325BEB /* Copy nethack */,
 				317E7C5421A3804400F6E4E5 /* Build Guidebook */,
@@ -1299,8 +1361,8 @@
 			);
 			name = NetHack;
 			productName = NetHack;
-			productReference = 3189577121A1FCC100FB2ABE /* NetHack */;
-			productType = "com.apple.product-type.tool";
+			productReference = 3189577121A1FCC100FB2ABE /* NetHack.app */;
+			productType = "com.apple.product-type.application";
 		};
 		3189577E21A1FDA400FB2ABE /* makedefs */ = {
 			isa = PBXNativeTarget;
@@ -1414,7 +1476,8 @@
 		3189576921A1FCC100FB2ABE /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1130;
+				LastSwiftUpdateCheck = 1230;
+				LastUpgradeCheck = 1230;
 				ORGANIZATIONNAME = "Bart House";
 				TargetAttributes = {
 					3189577021A1FCC100FB2ABE = {
@@ -1437,7 +1500,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 3189576C21A1FCC100FB2ABE /* Build configuration list for PBXProject "NetHackCocoa" */;
+			buildConfigurationList = 3189576C21A1FCC100FB2ABE /* Build configuration list for PBXProject "NetHack" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -1460,6 +1523,57 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		02EDA84C25A675120068C1C9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0201C21025A67A44005C22FA /* sysconf in Resources */,
+				02EDA88F25A675E80068C1C9 /* toolhorn.uu in Resources */,
+				02EDA87625A675AE0068C1C9 /* MenuWindow.xib in Resources */,
+				02EDA87725A675AE0068C1C9 /* MessageWindow.xib in Resources */,
+				02EDA89725A675E80068C1C9 /* firehorn.uu in Resources */,
+				02EDA87825A675AE0068C1C9 /* InfoPlist.strings in Resources */,
+				02EDA89025A675E80068C1C9 /* wdnflute.uu in Resources */,
+				02EDA89925A675E80068C1C9 /* wdnharp.uu in Resources */,
+				02EDA87925A675AE0068C1C9 /* MainMenu.xib in Resources */,
+				02EDA86F25A675940068C1C9 /* Credits.rtf in Resources */,
+				02EDA85D25A675840068C1C9 /* kins32.bmp in Resources */,
+				02EDA88E25A675E80068C1C9 /* bell.uu in Resources */,
+				02EDA89425A675E80068C1C9 /* .gitattributes in Resources */,
+				02EDA89525A675E80068C1C9 /* mgcflute.uu in Resources */,
+				02EDA89125A675E80068C1C9 /* lethdrum.uu in Resources */,
+				02EDA85E25A675850068C1C9 /* chozo32b.png in Resources */,
+				02EDA85F25A675850068C1C9 /* absurd32.png in Resources */,
+				02EDA89325A675E80068C1C9 /* README in Resources */,
+				02EDA86025A675850068C1C9 /* Nethack Modern 24.bmp in Resources */,
+				02EDA89625A675E80068C1C9 /* mgcharp.uu in Resources */,
+				02EDA86125A675850068C1C9 /* tiles10x20.bmp in Resources */,
+				02EDA89225A675E80068C1C9 /* erthdrum.uu in Resources */,
+				02EDA86225A675850068C1C9 /* new tiles24.png in Resources */,
+				02EDA86325A675850068C1C9 /* tiles20x40.bmp in Resources */,
+				02EDA86425A675850068C1C9 /* tiles16.bmp in Resources */,
+				02EDA86525A675850068C1C9 /* chozo32.png in Resources */,
+				02EDA89A25A675E80068C1C9 /* frsthorn.uu in Resources */,
+				02EDA86625A675850068C1C9 /* absurd128.png in Resources */,
+				02EDA86725A675850068C1C9 /* tiles32.png in Resources */,
+				02EDA86825A675850068C1C9 /* nh32.png in Resources */,
+				02EDA84D25A675390068C1C9 /* petmark.png in Resources */,
+				02EDA84E25A675390068C1C9 /* Arrow-S.png in Resources */,
+				02EDA89825A675E80068C1C9 /* bugle.uu in Resources */,
+				02EDA84F25A675390068C1C9 /* Arrow-E.png in Resources */,
+				02EDA85025A675390068C1C9 /* Arrow-NW.png in Resources */,
+				02EDA85125A675390068C1C9 /* Arrow-NE.png in Resources */,
+				02EDA85225A675390068C1C9 /* Arrow-W.png in Resources */,
+				02EDA85325A675390068C1C9 /* Arrow-N.png in Resources */,
+				02EDA85425A675390068C1C9 /* nethack.icns in Resources */,
+				02EDA85525A675390068C1C9 /* Arrow-SW.png in Resources */,
+				02EDA85625A675390068C1C9 /* Arrow-SE.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
 		317E7C4521A3548F00F6E4E5 /* Build rumors */ = {
@@ -1907,7 +2021,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "mkdir -p ${NH_INSTALL_DIR}/save\ncd ${NH_DAT_DIR}\ncp nhdat license symbols ${NH_INSTALL_DIR}\ncp ${NH_SRC_DIR}/nethack ${NH_INSTALL_DIR}\ncp ${NH_UTIL_DIR}/recover ${NH_INSTALL_DIR}\ntouch ${NH_INSTALL_DIR}/perm\ntouch ${NH_INSTALL_DIR}/record\ntouch ${NH_INSTALL_DIR}/logfile\ntouch ${NH_INSTALL_DIR}/xlogfile\ncd ${NH_ROOT_DIR}\nsys/unix/hints/macosx.sh editsysconf sys/unix/sysconf ${NH_INSTALL_DIR}/sysconf\n";
+			shellScript = "exit 0\nmkdir -p ${NH_INSTALL_DIR}/save\ncd ${NH_DAT_DIR}\ncp nhdat license symbols ${NH_INSTALL_DIR}\ncp ${NH_SRC_DIR}/nethack ${NH_INSTALL_DIR}\ncp ${NH_UTIL_DIR}/recover ${NH_INSTALL_DIR}\ntouch ${NH_INSTALL_DIR}/perm\ntouch ${NH_INSTALL_DIR}/record\ntouch ${NH_INSTALL_DIR}/logfile\ntouch ${NH_INSTALL_DIR}/xlogfile\ncd ${NH_ROOT_DIR}\nsys/unix/hints/macosx.sh editsysconf sys/unix/sysconf ${NH_INSTALL_DIR}/sysconf\n";
 		};
 		3192867121A3A2D500325BEB /* Copy nethack */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1927,7 +2041,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ${BUILT_PRODUCTS_DIR}/nethack ${NH_SRC_DIR}/nethack\n";
+			shellScript = "exit 0\ncp ${BUILT_PRODUCTS_DIR}/nethack ${NH_SRC_DIR}/nethack\n";
 		};
 		3192867221A3AA5700325BEB /* copy dlb */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2072,7 +2186,6 @@
 				31B8A3AD21A238060055BD01 /* uhitm.c in Sources */,
 				31B8A3B321A238060055BD01 /* track.c in Sources */,
 				31B8A3A721A238060055BD01 /* minion.c in Sources */,
-				31B8A3F021A23D420055BD01 /* unixtty.c in Sources */,
 				31B8A37F21A238060055BD01 /* extralev.c in Sources */,
 				31B8A39B21A238060055BD01 /* dogmove.c in Sources */,
 				31B8A3C121A238060055BD01 /* read.c in Sources */,
@@ -2080,7 +2193,7 @@
 				31B8A3E221A238500055BD01 /* display.c in Sources */,
 				31B8A3DD21A238060055BD01 /* dothrow.c in Sources */,
 				31B8A39421A238060055BD01 /* mcastu.c in Sources */,
-				02894D8D25A661FE000AB261 /* NetHackCocoaAppDelegate.m in Sources */,
+				02894D8D25A661FE000AB261 /*  in Sources */,
 				02894E1025A66255000AB261 /* ZDirection.m in Sources */,
 				02894E0625A66255000AB261 /* NhInventory.m in Sources */,
 				31B8A3C221A238060055BD01 /* role.c in Sources */,
@@ -2109,7 +2222,6 @@
 				31B8A39321A238060055BD01 /* were.c in Sources */,
 				02894C6825A65C12000AB261 /* tile.c in Sources */,
 				02894DC225A66220000AB261 /* YesNoWindowController.m in Sources */,
-				31B8A3EF21A23D420055BD01 /* ioctl.c in Sources */,
 				02894DC825A66220000AB261 /* MenuWindowController.m in Sources */,
 				31B8A38321A238060055BD01 /* mhitu.c in Sources */,
 				31B8A3B021A238060055BD01 /* mkroom.c in Sources */,
@@ -2119,7 +2231,6 @@
 				31B8A38721A238060055BD01 /* o_init.c in Sources */,
 				02894DC025A66220000AB261 /* MainView.m in Sources */,
 				02894E0225A66255000AB261 /* NhYnQuestion.m in Sources */,
-				31B8A3F521A23DD10055BD01 /* unixunix.c in Sources */,
 				31B8A3CE21A238060055BD01 /* potion.c in Sources */,
 				02894E0725A66255000AB261 /* NhItem.m in Sources */,
 				02894E0C25A66255000AB261 /* NhWindow.m in Sources */,
@@ -2276,7 +2387,7 @@
 		02894EF525A6660C000AB261 /* MenuWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				02894EF625A6660C000AB261 /* English */,
+				022D969A25A66D8E0032C58D /* en */,
 			);
 			name = MenuWindow.xib;
 			sourceTree = "<group>";
@@ -2284,7 +2395,7 @@
 		02894EF725A6660C000AB261 /* MessageWindow.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				02894EF825A6660C000AB261 /* English */,
+				022D969B25A66D8E0032C58D /* en */,
 			);
 			name = MessageWindow.xib;
 			sourceTree = "<group>";
@@ -2300,7 +2411,7 @@
 		02894EFD25A6660C000AB261 /* MainMenu.xib */ = {
 			isa = PBXVariantGroup;
 			children = (
-				02894EFE25A6660C000AB261 /* English */,
+				022D969925A66D8E0032C58D /* en */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -2310,7 +2421,6 @@
 /* Begin XCBuildConfiguration section */
 		3189577621A1FCC100FB2ABE /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A953FB221A3F404007906E5 /* XCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2335,6 +2445,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2392,7 +2503,6 @@
 		};
 		3189577721A1FCC100FB2ABE /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2A953FB221A3F404007906E5 /* XCode.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -2417,6 +2527,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = NO;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -2471,9 +2582,10 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 3660;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				INFOPLIST_FILE = "$(SRCROOT)/../../win/cocoa/NetHackCocoa-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../win/cocoa/NetHack-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MARKETING_VERSION = 3.6.6;
 				OTHER_CFLAGS = (
@@ -2498,9 +2610,10 @@
 				CLANG_ENABLE_OBJC_ARC = NO;
 				CODE_SIGN_IDENTITY = "-";
 				CODE_SIGN_STYLE = Automatic;
+				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
 				CURRENT_PROJECT_VERSION = 3660;
 				GCC_C_LANGUAGE_STANDARD = c99;
-				INFOPLIST_FILE = "$(SRCROOT)/../../win/cocoa/NetHackCocoa-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/../../win/cocoa/NetHack-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
 				MARKETING_VERSION = 3.6.6;
 				OTHER_CFLAGS = (
@@ -2618,7 +2731,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3189576C21A1FCC100FB2ABE /* Build configuration list for PBXProject "NetHackCocoa" */ = {
+		3189576C21A1FCC100FB2ABE /* Build configuration list for PBXProject "NetHack" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3189577621A1FCC100FB2ABE /* Debug */,

@@ -17,7 +17,7 @@
                BlueprintIdentifier = "31B8A44921A26A4B0055BD01"
                BuildableName = "recover"
                BlueprintName = "recover"
-               ReferencedContainer = "container:NetHack.xcodeproj">
+               ReferencedContainer = "container:NetHackCocoa.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,7 +33,7 @@
             BlueprintIdentifier = "31B8A44921A26A4B0055BD01"
             BuildableName = "recover"
             BlueprintName = "recover"
-            ReferencedContainer = "container:NetHack.xcodeproj">
+            ReferencedContainer = "container:NetHackCocoa.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -56,7 +56,7 @@
             BlueprintIdentifier = "31B8A44921A26A4B0055BD01"
             BuildableName = "recover"
             BlueprintName = "recover"
-            ReferencedContainer = "container:NetHack.xcodeproj">
+            ReferencedContainer = "container:NetHackCocoa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -73,7 +73,7 @@
             BlueprintIdentifier = "31B8A44921A26A4B0055BD01"
             BuildableName = "recover"
             BlueprintName = "recover"
-            ReferencedContainer = "container:NetHack.xcodeproj">
+            ReferencedContainer = "container:NetHackCocoa.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

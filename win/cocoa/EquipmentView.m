@@ -23,6 +23,8 @@
  */
 
 #import "hack.h"
+#undef yn	// avoid conflict with math.h
+
 #import "EquipmentView.h"
 #import "TileSet.h"
 

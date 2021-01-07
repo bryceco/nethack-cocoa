@@ -24,6 +24,7 @@
  */
 
 #include "hack.h"
+#undef yn	// avoid conflict with math.h
 
 extern FILE *cocoa_fopen(const char *filename, const char *mode);
 
@@ -83,6 +84,8 @@ boolean win_can_suspend();
 coord CoordMake(xchar i, xchar j);
 
 #ifdef __OBJC__
+
+#import <AppKit/AppKit.h>
 
 @class NhEventQueue;
 

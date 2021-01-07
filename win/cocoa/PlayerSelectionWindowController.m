@@ -23,6 +23,7 @@
  */
 
 #include "hack.h"
+#undef yn	// avoid yn conflict with math.h
 
 #import "PlayerSelectionWindowController.h"
 #import "TileSet.h"

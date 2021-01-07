@@ -2,6 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "self:/Users/bryce/SourceCode/GitHub/nethack-cocoa/sys/unix/NetHackCocoa.xcodeproj">
+      location = "self:/Users/bryce/SourceCode/GitHub/nethack-cocoa/sys/unix/NetHack.xcodeproj">
    </FileRef>
 </Workspace>

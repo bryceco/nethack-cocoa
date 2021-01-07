@@ -23,6 +23,7 @@
  */
 
 #import "hack.h"
+#undef yn	// avoid conflict with math.h
 
 #import <Foundation/Foundation.h>
 #import "NhWindow.h"

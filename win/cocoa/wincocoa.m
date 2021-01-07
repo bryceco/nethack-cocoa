@@ -532,6 +532,9 @@ void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph, int backgroun
 
 void cocoa_raw_print(const char *str)
 {
+#if DEBUG
+	NSLog(@"%s",str);
+#endif
 	//NSLog(@"raw_print %s", str);
 	cocoa_putstr((winid) [NhWindow messageWindow], 0, str);
 }
@@ -694,7 +697,7 @@ void cocoa_end_screen()
 
 void cocoa_outrip(winid wid, int how, time_t when)
 {
-	NSLog(@"outrip %x", wid);
+	NSLog(@"outrip %lx", wid);
 }
 
 

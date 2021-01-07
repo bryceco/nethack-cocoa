@@ -23,6 +23,7 @@
  */
 
 #import "TileSet.h"
+#import <AppKit/AppKit.h>
 
 static TileSet *s_instance = nil;
 
