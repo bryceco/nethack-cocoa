@@ -532,7 +532,7 @@ void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph, int backgroun
 
 void cocoa_raw_print(const char *str)
 {
-#if DEBUG
+#ifdef DEBUG
 	NSLog(@"%s",str);
 #endif
 	//NSLog(@"raw_print %s", str);

@@ -23,6 +23,11 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+
+#ifdef __OBJC__
+#import <Cocoa/Cocoa.h>
+#endif
+
 #include "hack.h"
 #undef yn	// avoid conflict with math.h
 
@@ -85,9 +90,8 @@ coord CoordMake(xchar i, xchar j);
 
 #ifdef __OBJC__
 
-#import <AppKit/AppKit.h>
-
 @class NhEventQueue;
+@class NSEvent;
 
 @interface WinCocoa : NSObject {
 }
