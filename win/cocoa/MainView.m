@@ -43,8 +43,8 @@
 
 @implementation MainView
 
-@synthesize contextMenu;// = _contextMenu;
-@synthesize contextMenuObject;// = _contextMenuObject;
+@synthesize contextMenu;
+@synthesize contextMenuObject;
 
 NSStringEncoding	codepage437encoding;
 
@@ -62,15 +62,14 @@ NSStringEncoding	codepage437encoding;
 
 		// compute required size for selected font
 		NSSize total = { 0, 0 };
-		NSCell * cell = [[[NSCell alloc] initTextCell:@""] autorelease];
+		NSCell * cell = [[NSCell alloc] initTextCell:@""];
 		[cell setFont:asciiFont];
 		[cell setEditable:NO];
 		[cell setSelectable:NO];
 		for ( int ch = 32; ch < 127; ++ch ) {
 			NSString * text = [[NSString alloc] initWithFormat:@"%c", ch];
 			[cell setTitle:text];
-			[text release];
-			
+
 			NSSize size = [cell cellSize];
 			
 			if ( size.width > total.width )
@@ -99,10 +98,7 @@ NSStringEncoding	codepage437encoding;
 
 -(BOOL)setAsciiFont:(NSFont *)font
 {
-	if ( font != asciiFont ) {
-		[asciiFont release];
-		asciiFont = [font retain];
-	}
+	asciiFont = font;
 	return YES;
 }
 
@@ -123,7 +119,7 @@ NSStringEncoding	codepage437encoding;
 	if ( tilesetImage == nil ) {
 		tileSetName = [tileSetName stringByExpandingTildeInPath];
 		NSURL * url = [NSURL fileURLWithPath:tileSetName isDirectory:NO];
-		tilesetImage = [[[NSImage alloc] initByReferencingURL:url] autorelease];
+		tilesetImage = [[NSImage alloc] initByReferencingURL:url];
 		if ( tilesetImage == nil ) {
 			return NO;
 		}
@@ -136,10 +132,9 @@ NSStringEncoding	codepage437encoding;
 		return NO;
 	}
 	
-	TileSet *tileSet = [[[TileSet alloc] initWithImage:tilesetImage tileSize:size] autorelease];
+	TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:size];
 	[TileSet setInstance:tileSet];
 	
-	[_tileSetName release];
 	_tileSetName = [tileSetName copy];
 
 	return YES;
@@ -163,7 +158,7 @@ NSStringEncoding	codepage437encoding;
 		[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(boundsDidChangeNotification:) 
 													 name:NSViewFrameDidChangeNotification object:self];
 		
-		asciiColors = [[NSArray arrayWithObjects:
+		asciiColors = @[
 			/* CLR_BLACK			*/	[NSColor colorWithDeviceRed:0.333 green:0.333 blue:0.333 alpha:1.0],
 			/* CLR_RED				*/	[NSColor redColor],
 			/* CLR_GREEN			*/	[NSColor colorWithDeviceRed:0.0 green:0.5 blue:0.0 alpha:1.0],
@@ -180,8 +175,8 @@ NSStringEncoding	codepage437encoding;
 			/* CLR_BRIGHT_MAGENTA	*/	[NSColor colorWithDeviceRed:1.0 green:0.50 blue:1.0 alpha:1.0],
 			/* CLR_BRIGHT_CYAN		*/	[NSColor colorWithDeviceRed:0.5 green:1.00 blue:1.0 alpha:1.0],
 			/* CLR_WHITE			*/	[NSColor whiteColor],
-						nil] retain];
-		asciiFont = [[NSFont boldSystemFontOfSize:24.0] retain];
+		];
+		asciiFont = [NSFont boldSystemFontOfSize:24.0];
 	}
 		
 	return self;
@@ -222,7 +217,7 @@ NSStringEncoding	codepage437encoding;
 		}
 	
 		// set stuff up for ascii drawing
-		NSMutableAttributedString * aString = [[[NSMutableAttributedString alloc] initWithString:@"X"] autorelease];
+		NSMutableAttributedString * aString = [[NSMutableAttributedString alloc] initWithString:@"X"];
 		NSRange rangeAll = NSMakeRange(0,[aString length]);
 		[aString setAlignment:NSTextAlignmentCenter range:rangeAll];
 		[aString addAttribute:NSFontAttributeName value:asciiFont range:rangeAll];
@@ -249,7 +244,6 @@ NSStringEncoding	codepage437encoding;
 								char ch[] = { ochar, 0 };
 								NSString * string = [[NSString alloc] initWithCString:ch encoding:codepage437encoding];
 								[[aString mutableString] setString:string];
-								[string release];								
 							}
 							
 							// text color
@@ -312,10 +306,6 @@ NSStringEncoding	codepage437encoding;
 		[color setStroke];
 		[NSBezierPath strokeRect:r];
 	}
-}
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 #pragma mark NSResponder
@@ -394,7 +384,6 @@ NSStringEncoding	codepage437encoding;
 {
 	if ( tooltipTimer ) {
 		[tooltipTimer invalidate];
-		[tooltipTimer release];
 		tooltipTimer = nil;
 	}
 	if ( tooltipWindow ) {
@@ -495,7 +484,7 @@ NSString * DescriptionForTile( int x, int y )
 	if ( !NSPointInRect( tooltipPoint, visrect ) )
 		return;
 		
-	tooltipTimer = [[NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(tooltipFired) userInfo:nil repeats:NO] retain];
+	tooltipTimer = [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(tooltipFired) userInfo:nil repeats:NO];
 }
 
 - (void) boundsDidChangeNotification:(NSNotification *)notification
@@ -529,7 +518,6 @@ static NSEvent * g_pendingKeyEvent = nil;
 					[[NhEventQueue instance] addKey:key];
 				}
 			}
-			[g_pendingKeyEvent release];
 			g_pendingKeyEvent = nil;
 			if ( newKeyCode ) {
 				NSEvent * newEvent = [NSEvent keyEventWithType:NSEventTypeKeyDown
@@ -550,7 +538,7 @@ static NSEvent * g_pendingKeyEvent = nil;
 				case kVK_RightArrow:
 				case kVK_DownArrow:
 				case kVK_UpArrow:
-					g_pendingKeyEvent = [theEvent retain];
+					g_pendingKeyEvent = theEvent;
 					return;
 			}
 		}
@@ -571,7 +559,6 @@ static NSEvent * g_pendingKeyEvent = nil;
 				[[NhEventQueue instance] addKey:key];
 			}
 		}
-		[g_pendingKeyEvent release];
 		g_pendingKeyEvent = nil;
 	}
 }

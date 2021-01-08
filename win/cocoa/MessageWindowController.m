@@ -37,7 +37,7 @@
 {
 	if ( self = [super initWithWindowNibName:@"MessageWindow"] ) {
 		
-		text = [message retain];
+		text = [message copy];
 
 	}
 	return self;
@@ -46,7 +46,7 @@
 -(void)windowDidLoad
 {
 	// convert leading space to tab
-	NSMutableString * mutable = [[text mutableCopyWithZone:NULL] autorelease];
+	NSMutableString * mutable = [text mutableCopyWithZone:NULL];
 	[mutable replaceOccurrencesOfString:@"\n  " withString:@"\n\t" options:0 range:NSMakeRange(0,[mutable length])];
 	[mutable replaceOccurrencesOfString:@"\n* " withString:@"\n\t*" options:0 range:NSMakeRange(0,[mutable length])];
 	
@@ -109,14 +109,6 @@
 #if RUN_MODAL
 	[[NSApplication sharedApplication] stopModal];
 #endif
-	
-	[self autorelease];
-}
-
--(void)dealloc
-{
-	[text release];
-	[super dealloc];
 }
 
 @end

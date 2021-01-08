@@ -295,9 +295,8 @@
 	// create attributed string with glyph
 	NSTextAttachment * attachment = [[NSTextAttachment alloc] init];
 	[(NSCell *)[attachment attachmentCell] setImage:image];
-	NSMutableAttributedString * aString = [[[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy] autorelease];
-	[attachment release];
-	
+	NSMutableAttributedString * aString = [[NSAttributedString attributedStringWithAttachment:attachment] mutableCopy];
+
 	// add text to string and adjust vertical baseline of text so it aligns with icon
 	[[aString mutableString] appendString:title];
 	CGFloat offset = [[TileSet instance] imageSize].height;

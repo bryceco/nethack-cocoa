@@ -30,11 +30,11 @@
 @implementation NhCommand
 
 + (id)commandWithTitle:(const char *)t keys:(const char *)c {
-	return [[[self alloc] initWithTitle:t keys:c] autorelease];
+	return [[self alloc] initWithTitle:t keys:c];
 }
 
 + (id)commandWithTitle:(const char *)t key:(char)c {
-	return [[[self alloc] initWithTitle:t key:c] autorelease];
+	return [[self alloc] initWithTitle:t key:c];
 }
 
 + (void)addCommand:(NhCommand *)cmd toCommands:(NSMutableArray *)commands {
@@ -264,7 +264,6 @@ enum InvFlags {
 
 - (void)dealloc {
 	free(keys);
-	[super dealloc];
 }
 
 #pragma mark Action

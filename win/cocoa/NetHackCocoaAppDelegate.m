@@ -60,8 +60,6 @@ extern int unixmain(int argc, char **argv);
 	extern int g_argc;
 	extern char ** g_argv;
 	
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-	
 	nethackCoreLock = [[NSRecursiveLock alloc] init];
 	[self lockNethackCore];
 
@@ -83,9 +81,6 @@ extern int unixmain(int argc, char **argv);
 	unixmain(g_argc, g_argv);
 	
 	[self unlockNethackCore];
-
-	// clean up thread pool
-	[pool release];
 }
 
 @end

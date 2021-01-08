@@ -54,14 +54,7 @@
 
 - (void)setTitle:(NSString *)t
 {
-	[title release];
 	title = [t copy];
-}
-
-- (void) dealloc {
-	[title release];
-	[items release];
-	[super dealloc];
 }
 
 @end

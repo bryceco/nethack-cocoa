@@ -38,7 +38,7 @@
 -(IBAction)doAccept:(id)sender
 {
 	NSString * text = [inputField stringValue];
-	NhTextInputEvent * e = [[[NhTextInputEvent alloc] initWithText:text] autorelease];
+	NhTextInputEvent * e = [[NhTextInputEvent alloc] initWithText:text];
 	[[NhEventQueue instance] addEvent:e];
 	[[self window] close];
 }
@@ -46,7 +46,7 @@
 -(IBAction)doCancel:(id)sender
 {
 	NSString * text = @"\033";
-	NhTextInputEvent * e = [[[NhTextInputEvent alloc] initWithText:text] autorelease];
+	NhTextInputEvent * e = [[NhTextInputEvent alloc] initWithText:text];
 	[[NhEventQueue instance] addEvent:e];	
 	[[self window] close];
 }

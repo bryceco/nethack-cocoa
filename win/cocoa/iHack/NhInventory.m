@@ -83,9 +83,4 @@
 	return classArray[oclass] != nil;
 }
 
-- (void)dealloc {
-	[objectClasses release];
-	[super dealloc];
-}
-
 @end

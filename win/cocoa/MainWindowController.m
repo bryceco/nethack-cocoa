@@ -42,6 +42,7 @@
 #import "PlayerSelectionWindowController.h"
 #import "StatsView.h"
 #import "NetHackCocoaAppDelegate.h"
+#import "EquipmentView.h"
 
 #import "wincocoa.h" // cocoa_getpos etc.
 
@@ -186,7 +187,7 @@ static MainWindowController* instance;
 		float r = [voice rate];
 		[voice setRate:1.5*r];
 		[voice setDelegate:self];
-		voiceQueue = [[NSMutableArray array] retain];
+		voiceQueue = [NSMutableArray array];
 	}
 }
 
@@ -304,7 +305,6 @@ static MainWindowController* instance;
 			userTiles = [[NSMutableArray alloc] initWithCapacity:1];
 		}
 		[userTiles addObject:path];
-		[item release];
 	}
 }
 - (IBAction)selectTileSet:(id)sender
@@ -376,7 +376,6 @@ static MainWindowController* instance;
 		NSMenuItem * item = [[NSMenuItem alloc] initWithTitle:name action:@selector(selectTileSet:) keyEquivalent:@""];
 		[item setTarget:self];
 		[menu addItem:item];
-		[item release];
 	}
 }
 - (void)menuWillOpen:(NSMenu *)menu
@@ -780,11 +779,6 @@ static MainWindowController* instance;
 		[voiceQueue removeObjectAtIndex:0];
 		[voice startSpeakingString:text];
 	}
-}
-
-
-- (void)dealloc {
-    [super dealloc];
 }
 
 @end

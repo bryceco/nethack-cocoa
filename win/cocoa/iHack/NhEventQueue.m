@@ -83,13 +83,13 @@ static NhEventQueue *s_eventQueue;
 	while (events.count == 0) {
 		[condition wait];
 	}
-	NhEvent *e = [[events objectAtIndex:0] retain];
+	NhEvent *e = [events objectAtIndex:0];
 	[events removeObjectAtIndex:0];
 	[condition unlock];
 	
 	[appDelegate lockNethackCore];
 	
-	return [e autorelease];
+	return e;
 }
 
 - (void)waitForNextEvent {
@@ -114,12 +114,6 @@ static NhEventQueue *s_eventQueue;
 		return [events objectAtIndex:0];
 	}
 	return nil;
-}
-
-- (void) dealloc {
-	[condition release];
-	[events release];
-	[super dealloc];
 }
 
 @end

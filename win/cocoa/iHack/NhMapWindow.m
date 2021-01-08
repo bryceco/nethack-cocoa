@@ -61,8 +61,4 @@
 	memset(glyphs, kNoGlyph, sizeof glyphs);
 }
 
-- (void) dealloc {
-	[super dealloc];
-}
-
 @end

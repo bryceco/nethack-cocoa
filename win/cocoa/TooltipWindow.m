@@ -29,7 +29,7 @@
 
 -(id)initWithText:(NSString *)text location:(NSPoint)point
 {
-	NSTextField * view = [[[NSTextField alloc] initWithFrame:NSMakeRect(point.x, point.y, 10, 10)] autorelease];
+	NSTextField * view = [[NSTextField alloc] initWithFrame:NSMakeRect(point.x, point.y, 10, 10)];
 	NSColor * bgColor = [NSColor colorWithDeviceRed:1.0 green:1.0 blue:202/255.0 alpha:1.0];
 	
 	[view setStringValue:text];
@@ -67,7 +67,7 @@
 		[self setContentView:view];
 		[self setOpaque:YES];
 		[self setHasShadow:YES];
-		[self setReleasedWhenClosed:YES];
+		[self setReleasedWhenClosed:NO];
 		[self orderFront:self];
 	}
 	return self;
@@ -75,11 +75,6 @@
 
 -(void)windowWillClose
 {
-}
-
--(void)dealloc
-{
-	[super dealloc];
 }
 
 @end

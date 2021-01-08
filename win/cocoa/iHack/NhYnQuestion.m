@@ -37,9 +37,4 @@
 	return self;
 }
 
-- (void) dealloc {
-	[question release];
-	[super dealloc];
-}
-
 @end

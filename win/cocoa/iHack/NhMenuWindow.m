@@ -49,7 +49,6 @@
 		NhItemGroup *g = [[NhItemGroup alloc] initWithTitle:@"All" dummy:YES];
 		[itemGroups addObject:g];
 		currentItemGroup = g;
-		[g release];
 	}
 	return currentItemGroup;
 }
@@ -72,24 +71,16 @@
 }
 
 - (void)startMenu {
-	[itemGroups release];
-	[selected release];
 	currentItemGroup = nil;
 	itemGroups = [[NSMutableArray alloc] init];
 	selected = [[NSMutableArray alloc] init];
-}
-
-- (void) dealloc {
-	[itemGroups release];
-	[selected release];
-	[super dealloc];
 }
 
 -(char)runModal
 {
 	NSString * text = [self text];
 	if ( [text length] ) {
-		NSAlert * alert = [[[NSAlert alloc] init] autorelease];
+		NSAlert * alert = [[NSAlert alloc] init];
 		alert.messageText = text;
 		return [alert runModal];
 	}

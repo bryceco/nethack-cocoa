@@ -195,7 +195,6 @@ static NhWindow *s_mapWindow = nil;
 			if ( ! [[[lines lastObject] string] isEqualToString:turn] ) {
 				NSAttributedString * text = [[NSAttributedString alloc] initWithString:turn];
 				[lines addObject:text];
-				[text release];
 			}
 			while (lines.count > 200) {
 				[lines removeObjectAtIndex:0];
@@ -237,7 +236,7 @@ static NhWindow *s_mapWindow = nil;
 						nil];
 				break;
 		}
-		NSAttributedString * s2 = [[[NSAttributedString alloc] initWithString:s attributes:dict] autorelease];
+		NSAttributedString * s2 = [[NSAttributedString alloc] initWithString:s attributes:dict];
 		s = (id)s2;
 	}
 			
@@ -290,14 +289,12 @@ static NhWindow *s_mapWindow = nil;
 		
 		for ( NSAttributedString * msg in messages ) {
 			if ( t == nil ) {
-				t = [[[NSMutableAttributedString alloc] initWithString:@""] autorelease];
+				t = [[NSMutableAttributedString alloc] initWithString:@""];
 			} else {
 				[t appendAttributedString:delim];
 			}
 			[t appendAttributedString:msg];
 		} 
-		
-		[delim release];
 		return t;
 		
 	} else {
@@ -320,7 +317,6 @@ static NhWindow *s_mapWindow = nil;
 	[self lock];
 	if ( row < [lines count] ) {
 		result = [lines objectAtIndex:row];
-		[[result retain] autorelease];
 	}
 	[self unlock];
 
@@ -334,12 +330,6 @@ static NhWindow *s_mapWindow = nil;
 
 - (void)unlock {
 	[lock unlock];
-}
-
-- (void)dealloc {
-	[lines release];
-	[lock release];
-	[super dealloc];
 }
 
 @end

@@ -29,7 +29,7 @@
 @synthesize text;
 
 + (id)eventWithText:(NSString *)t {
-	return [[[self alloc] initWithText:t] autorelease];
+	return [[self alloc] initWithText:t];
 }
 
 - (id)initWithText:(NSString *)t {
@@ -37,11 +37,6 @@
 		text = [t copy];
 	}
 	return self;
-}
-
-- (void)dealloc {
-	[text release];
-	[super dealloc];
 }
 
 @end

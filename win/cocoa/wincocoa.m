@@ -131,9 +131,12 @@ coord CoordMake(xchar i, xchar j) {
 
 @implementation WinCocoa
 
+static NSMutableDictionary<NSNumber *,NhWindow *>	* g_WindowDict;
+
 + (void)load
 {
-    NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
+	g_WindowDict = [NSMutableDictionary new];
+
 	strcpy(s_baseFilePath, [[[NSBundle mainBundle] resourcePath] cStringUsingEncoding:NSASCIIStringEncoding]);
 
 	NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -141,8 +144,6 @@ coord CoordMake(xchar i, xchar j) {
 	if ( netHackOptions ) {
 		setenv("NETHACKOPTIONS", [netHackOptions cStringUsingEncoding:NSASCIIStringEncoding], 1);
 	}
-	
-	[pool release];
 }
 
 + (const char *)baseFilePath
@@ -338,6 +339,7 @@ void cocoa_resume_nhwindows()
 
 winid cocoa_create_nhwindow(int type)
 {
+	static int wid_index = 1;
 	NhWindow *w = nil;
 	switch (type) {
 		case NHW_MAP:
@@ -358,29 +360,33 @@ winid cocoa_create_nhwindow(int type)
 		default:
 			assert(NO);
 	}
-	//NSLog(@"create_nhwindow(%x) %x", type, w);
-	return (winid) w;
+	g_WindowDict[@(wid_index)] = w;
+	NSLog(@"create_nhwindow(%x) %x = %p", type, wid_index, w);
+
+	return wid_index++;
 }
 
 void cocoa_clear_nhwindow(winid wid)
 {
 	//NSLog(@"clear_nhwindow %x", wid);
-	[(NhWindow *) wid clear];
+	NhWindow * win = g_WindowDict[@(wid)];
+	[win clear];
 }
 
 void cocoa_display_nhwindow(winid wid, BOOLEAN_P block)
 {
 	//NSLog(@"display_nhwindow %x, %i, %i", wid, ((NhWindow *) wid).type, block);
-	((NhWindow *) wid).blocking = block;
-	[[MainWindowController instance] displayWindow:(NhWindow *) wid];
+	NhWindow * win = g_WindowDict[@(wid)];
+	win.blocking = block;
+	[[MainWindowController instance] displayWindow:win];
 }
 
 void cocoa_destroy_nhwindow(winid wid)
 {
-	//NSLog(@"destroy_nhwindow %x", wid);
-	NhWindow *w = (NhWindow *) wid;
-	if (w != [NhWindow messageWindow] && w != [NhWindow statusWindow] && w != [NhWindow mapWindow]) {
-		[w release];
+	NhWindow * win = g_WindowDict[@(wid)];
+	NSLog(@"destroy_nhwindow %x = %p", wid, win);
+	if (win != [NhWindow messageWindow] && win != [NhWindow statusWindow] && win != [NhWindow mapWindow]) {
+		[g_WindowDict removeObjectForKey:@(wid)];
 	}
 }
 
@@ -389,7 +395,8 @@ void cocoa_curs(winid wid, int x, int y)
 	//NSLog(@"curs %x %d,%d", wid, x, y);
 
 	if (wid == WIN_MAP) {
-		[(NhMapWindow *) wid setCursX:x y:y];
+		NhMapWindow * win = (NhMapWindow *) g_WindowDict[@(wid)];
+		[win setCursX:x y:y];
 	}
 }
 
@@ -400,7 +407,8 @@ void cocoa_putstr(winid wid, int attr, const char *text)
 		wid = BASE_WINDOW;
 	}
 	// normal output to a window
-	[(NhWindow *) wid print:text attr:attr];
+	NhWindow * win = g_WindowDict[@(wid)];
+	[win print:text attr:attr];
 	if (wid == WIN_MESSAGE || wid == BASE_WINDOW) {
 		[[MainWindowController instance] refreshMessages];
 	}
@@ -433,7 +441,8 @@ void cocoa_display_file(const char *filename, BOOLEAN_P must_exist)
 void cocoa_start_menu(winid wid)
 {
 	//NSLog(@"start_menu %x", wid);
-	[(NhMenuWindow *) wid startMenu];
+	NhMenuWindow * win = (NhMenuWindow *) g_WindowDict[@(wid)];
+	[win startMenu];
 }
 
 void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
@@ -441,49 +450,50 @@ void cocoa_add_menu(winid wid, int glyph, const ANY_P *identifier,
 					 const char *str, BOOLEAN_P presel)
 {
 	//NSLog(@"add_menu %x %s", wid, str);
-	NhMenuWindow *w = (NhMenuWindow *) wid;
+	NhMenuWindow * win = (NhMenuWindow *) g_WindowDict[@(wid)];
+
 	NSString *title = [NSString stringWithFormat:@"%s", str];
 	if (identifier->a_void) {
 		NhItem *i = [[NhItem alloc] initWithTitle:title
 									   identifier:*identifier accelerator:accelerator group_accel:group_accel glyph:glyph selected:presel];
-		[w.currentItemGroup addItem:i];
-		[i release];
+		[win.currentItemGroup addItem:i];
 	} else {
 		NhItemGroup *g = [[NhItemGroup alloc] initWithTitle:title];
-		[w addItemGroup:g];
-		[g release];
+		[win addItemGroup:g];
 	}
 }
 
 void cocoa_end_menu(winid wid, const char *prompt)
 {
 	//NSLog(@"end_menu %x, %s", wid, prompt);
+	NhMenuWindow * win = (NhMenuWindow *) g_WindowDict[@(wid)];
 	if (prompt) {
-		((NhMenuWindow *) wid).prompt = [NSString stringWithFormat:@"%s", prompt];
+		win.prompt = [NSString stringWithFormat:@"%s", prompt];
 		//cocoa_putstr(WIN_MESSAGE, 0, prompt);
 	} else {
-		((NhMenuWindow *) wid).prompt = nil;
+		win.prompt = nil;
 	}
 }
 
 int cocoa_select_menu(winid wid, int how, menu_item **selected)
 {
 	//NSLog(@"select_menu %x", wid);
-	NhMenuWindow *w = (NhMenuWindow *) wid;
-	w.how = how;
+	NhMenuWindow * win = (NhMenuWindow *) g_WindowDict[@(wid)];
+
+	win.how = how;
 	*selected = NULL;
-	[[MainWindowController instance] showMenuWindow:w];
+	[[MainWindowController instance] showMenuWindow:win];
 	
 	if ( how != PICK_NONE ) {
 		NhEvent *e = [[NhEventQueue instance] nextEvent];
 		if (e.key > 0) {
-			menu_item *pMenu = *selected = calloc(sizeof(menu_item), w.selected.count);
-			for (NhItem *item in w.selected) {
+			menu_item *pMenu = *selected = calloc(sizeof(menu_item), win.selected.count);
+			for (NhItem *item in win.selected) {
 				pMenu->count = item.amount;
 				pMenu->item = item.identifier;
 				pMenu++;
 			}
-			return w.selected.count;		
+			return win.selected.count;
 		} else {
 			// cancelled
 			return -1;
@@ -527,7 +537,8 @@ void cocoa_cliparound_window(winid wid, int x, int y)
 void cocoa_print_glyph(winid wid, XCHAR_P x, XCHAR_P y, int glyph, int background)
 {
 	//NSLog(@"print_glyph %x %d,%d", wid, x, y);
-	[(NhMapWindow *) wid printGlyph:glyph atX:x y:y];
+	NhMapWindow * win = (NhMapWindow *) g_WindowDict[@(wid)];
+	[win printGlyph:glyph atX:x y:y];
 }
 
 void cocoa_raw_print(const char *str)
@@ -617,7 +628,6 @@ char cocoa_yn_function(const char *question, const char *choices, CHAR_P def)
 				NhYnQuestion * q = [[NhYnQuestion alloc] initWithQuestion:question choices:choices default:def];
 				[[MainWindowController instance] showYnQuestion:q];
 				NhEvent * e = [[NhEventQueue instance] nextEvent];
-				[q release];
 				return e.key;
 			}
 		}
@@ -697,7 +707,7 @@ void cocoa_end_screen()
 
 void cocoa_outrip(winid wid, int how, time_t when)
 {
-	NSLog(@"outrip %lx", wid);
+	NSLog(@"outrip %x", wid);
 }
 
 

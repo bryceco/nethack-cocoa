@@ -65,12 +65,4 @@
 	[self.invocations addObject:inv];
 }
 
-- (void)dealloc {
-	[title release];
-	if (invocations) { // guard against auto-creation
-		[invocations release];
-	}
-	[super dealloc];
-}
-
 @end

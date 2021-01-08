@@ -39,12 +39,9 @@
 	
 	NSArray	*	asciiColors;
 	NSFont	*	asciiFont;
-	
-	NSString *	contextMenuObject;
-	NSMenu *	contextMenu;
 }
 
-@property (assign) IBOutlet NSMenu * contextMenu;
+@property (strong) IBOutlet NSMenu * contextMenu;
 @property (strong,nonatomic) NSString * contextMenuObject;
 
 - (void)cliparoundX:(int)x y:(int)y;

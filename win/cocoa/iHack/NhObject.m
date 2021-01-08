@@ -35,11 +35,11 @@
 @synthesize group_ch;
 
 + (id)objectWithTitle:(NSString *)t inventoryLetter:(char)invLet group_accel:(char)group_accel {
-	return [[[self alloc] initWithTitle:t inventoryLetter:invLet group_accel:group_accel] autorelease];
+	return [[self alloc] initWithTitle:t inventoryLetter:invLet group_accel:group_accel];
 }
 
 + (id)objectWithObject:(struct obj *)obj {
-	return [[[self alloc] initWithObject:obj] autorelease];
+	return [[self alloc] initWithObject:obj];
 }
 
 - (id)initWithTitle:(NSString *)t inventoryLetter:(char)invLet group_accel:(char)group_accel {
@@ -67,19 +67,12 @@
 
 - (void)setTitle:(NSString *)t
 {
-	[title release];
 	title = [t copy];
 }
 
 - (void)setInventoryLetter:(char)ch
 {
 	inventoryLetter = ch;
-}
-
-- (void)dealloc {
-	[title release];
-	[detail release];
-	[super dealloc];
 }
 
 @end
