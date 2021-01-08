@@ -46,7 +46,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="637" height="376"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="563">
+                    <scrollView autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="563" userLabel="Map Scroll View - Main View">
                         <rect key="frame" x="0.0" y="0.0" width="637" height="216"/>
                         <clipView key="contentView" id="G9F-qL-WuI">
                             <rect key="frame" x="1" y="1" width="620" height="199"/>
@@ -655,14 +655,14 @@
                             <outlet property="weaponHand" destination="1625" id="1662"/>
                         </connections>
                     </customView>
-                    <scrollView horizontalHuggingPriority="100" horizontalCompressionResistancePriority="250" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1677">
-                        <rect key="frame" x="484" y="215" width="153" height="161"/>
+                    <scrollView horizontalHuggingPriority="100" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1677" userLabel="Messages Scroll View - Table View">
+                        <rect key="frame" x="484" y="216" width="153" height="160"/>
                         <clipView key="contentView" id="pFX-fE-rfW">
-                            <rect key="frame" x="1" y="1" width="151" height="159"/>
+                            <rect key="frame" x="1" y="1" width="151" height="158"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" typeSelect="NO" rowHeight="16" id="1680">
-                                    <rect key="frame" x="0.0" y="0.0" width="151" height="159"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="151" height="158"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -704,12 +704,12 @@
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="563" secondAttribute="bottom" id="5KQ-rv-9bP"/>
                     <constraint firstItem="1383" firstAttribute="leading" secondItem="372" secondAttribute="leading" id="5xL-8C-Mf3"/>
+                    <constraint firstItem="563" firstAttribute="top" secondItem="1677" secondAttribute="bottom" id="8re-dW-73a"/>
                     <constraint firstItem="1383" firstAttribute="top" secondItem="372" secondAttribute="top" id="B0B-tp-OXS"/>
                     <constraint firstItem="1656" firstAttribute="top" secondItem="372" secondAttribute="top" id="Ly0-iG-nvw"/>
                     <constraint firstItem="563" firstAttribute="top" secondItem="1656" secondAttribute="bottom" id="NUf-CQ-Whh"/>
                     <constraint firstAttribute="trailing" secondItem="563" secondAttribute="trailing" id="PsC-bf-P3H"/>
                     <constraint firstAttribute="trailing" secondItem="1677" secondAttribute="trailing" id="R81-Lb-nne"/>
-                    <constraint firstItem="563" firstAttribute="top" secondItem="1680" secondAttribute="bottom" id="Rmz-OO-fmG"/>
                     <constraint firstItem="1656" firstAttribute="leading" secondItem="1383" secondAttribute="trailing" id="WWk-Mb-pTR"/>
                     <constraint firstItem="563" firstAttribute="top" secondItem="1383" secondAttribute="bottom" id="Wb0-Z2-tsy"/>
                     <constraint firstItem="1677" firstAttribute="top" secondItem="372" secondAttribute="top" id="hFf-v2-0F0"/>
