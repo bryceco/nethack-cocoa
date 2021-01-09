@@ -32,6 +32,22 @@
 
 @implementation ExtCommandWindowController
 
+-(void)awakeFromNib
+{
+	[super awakeFromNib];
+	__weak ExtCommandWindowController * weakself = self;
+	[NSEvent addLocalMonitorForEventsMatchingMask:NSEventMaskKeyDown handler:^NSEvent * _Nullable(NSEvent * _Nonnull event) {
+		if ( NSApplication.sharedApplication.keyWindow == weakself.window ) {
+			return [weakself myKeyDown:event];
+		}
+		return event;
+	}];
+}
+
+-(id)init
+{
+	return [super init];
+}
 
 -(void)runModal
 {
@@ -99,6 +115,36 @@
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];
 }
 
+- (NSEvent *)myKeyDown:(NSEvent *)event
+{
+	// get a list of all buttons that match event
+	NSMutableArray * matches = [NSMutableArray new];
+	NSButton * current = nil;
+	for ( NSButton * item in [menuView subviews] ) {
+		if ( [item class] == [NSButton class] )  {
+			if ( [item.keyEquivalent isEqualToString:event.charactersIgnoringModifiers] ) {
+				[matches addObject:item];
+				if ( item.state == NSOnState ) {
+					current = item;
+				}
+			}
+		}
+	}
+	if ( current == nil || matches.count < 2 ) {
+		// standard handling
+		return event;
+	} else {
+		// select the next button in list
+		NSInteger index = [matches indexOfObject:current];
+		if ( ++index >= matches.count )
+			index = 0;
+		current = matches[index];
+//		[current setState:NSOnState];
+		[current performClick:nil];
+		[self buttonClick:current];
+		return nil;	// no further processing
+	}
+}
 
 -(void)buttonClick:(id)sender
 {
