@@ -361,7 +361,7 @@ winid cocoa_create_nhwindow(int type)
 			assert(NO);
 	}
 	g_WindowDict[@(wid_index)] = w;
-	NSLog(@"create_nhwindow(%x) %x = %p", type, wid_index, w);
+//	NSLog(@"create_nhwindow(%x) %x = %p", type, wid_index, w);
 
 	return wid_index++;
 }
@@ -384,7 +384,7 @@ void cocoa_display_nhwindow(winid wid, BOOLEAN_P block)
 void cocoa_destroy_nhwindow(winid wid)
 {
 	NhWindow * win = g_WindowDict[@(wid)];
-	NSLog(@"destroy_nhwindow %x = %p", wid, win);
+//	NSLog(@"destroy_nhwindow %x = %p", wid, win);
 	if (win != [NhWindow messageWindow] && win != [NhWindow statusWindow] && win != [NhWindow mapWindow]) {
 		[g_WindowDict removeObjectForKey:@(wid)];
 	}
