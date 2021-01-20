@@ -41,7 +41,7 @@
 -(void)clearAll
 {
 	NSString * clear = @"";
-	[name setStringValue:clear];
+	[name 	setStringValue:clear];
 	[role	setStringValue:clear];
 	[dlvl	setStringValue:clear];
 	[hp		setStringValue:clear];
@@ -69,12 +69,13 @@
 {
 	NSCharacterSet * whitespace = [NSCharacterSet whitespaceCharacterSet];
 	
-	
-	//	Home 1 $:218 HP:173(173) Pw:36(36) AC:-7 Xp:16/366949 T:45071 Hungry   Blind Burdened
-	//	Dlvl:17 *:143 HP:199(199) Pw:57(57) AC:-9 Xp:20/5124335 T:52985 Fainting
 
 	// Bryce the Troglodyte           St:18 Dx:17 Co:15 In:9 Wi:8 Ch:8 Lawful
+
+	// Home 1 $:218 HP:173(173) Pw:36(36) AC:-7 Xp:16/366949 T:45071 Hungry   Blind Burdened
+	// Dlvl:17 *:143 HP:199(199) Pw:57(57) AC:-9 Xp:20/5124335 T:52985 Fainting
 	// Dlvl:1 $:0 HP:16(16) Pw:2(2) AC:8 Xp:1/0 T:1
+	// Dlvl:8 $:0 HP:104(116) Pw:17(17) AC:-7 Xp:10/5729 Satiated Burdened Stun T:13845
 
 	nhsym goldch = showsyms[COIN_CLASS + SYM_OFF_O];
 	NSString * Gold = [NSString stringWithFormat:@"%c:", goldch];
@@ -157,13 +158,13 @@
 			[scanner scanUpToCharactersFromSet:whitespace intoString:&value];
 			[turn setStringValue:value];
 		} else {
-			[turn setStringValue:@""];			
+			[turn setStringValue:@""];
 		}
-		
+
 		value = [[scanner string] substringFromIndex:[scanner scanLocation]];
 		value = [value stringByTrimmingCharactersInSet:whitespace];
 		[state setStringValue:value];
-				
+
 	} else {
 
 		// foo the bar St:18/02 Dx:18 Co:18 In:7 Ch:6 Neutral

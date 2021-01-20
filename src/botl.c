@@ -210,8 +210,11 @@ do_statusline2()
      * wider displays can still show wider status than the map if the
      * interface supports that.
      */
+#if defined(COCOA_GRAPHICS)
+	dx = hln = xln = tln = cln = 0;	// force items to be in the standard order
+#endif
     if ((dln - dx) + 1 + hln + 1 + xln + 1 + tln + 1 + cln <= COLNO) {
-        Sprintf(newbot2, "%s %s %s %s %s", dloc, hlth, expr, tmmv, cond);
+		Sprintf(newbot2, "%s %s %s %s %s", dloc, hlth, expr, tmmv, cond);
     } else {
         if (dln + 1 + hln + 1 + xln + 1 + tln + 1 + cln + 1 > MAXCO) {
             panic("bot2: second status line exceeds MAXCO (%u > %d)",
