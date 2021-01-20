@@ -291,11 +291,27 @@ void set_fqn_prefixes(void)
 	strcat(tmpfile,"/perm");
 	close(open(tmpfile,O_CREAT|O_WRONLY,0777));
 
+	// create nethackdir/record
+	strcpy(tmpfile,nethackdir);
+	strcat(tmpfile,"/record");
+	close(open(tmpfile,O_CREAT|O_WRONLY,0777));
+
+	// create nethackdir/logfile
+	strcpy(tmpfile,nethackdir);
+	strcat(tmpfile,"/logfile");
+	close(open(tmpfile,O_CREAT|O_WRONLY,0777));
+
+	// create nethackdir/xlogfile
+	strcpy(tmpfile,nethackdir);
+	strcat(tmpfile,"/xlogfile");
+	close(open(tmpfile,O_CREAT|O_WRONLY,0777));
+
 	// create nethackdir/save
 	strcpy(tmpfile,nethackdir);
 	strcat(tmpfile,"/save");
 	mkdir(tmpfile,0777);
 
+	// set fqnames
 	int len = strlen(nethackdir);
 	char * prefix = (char *) alloc(len + 2);
 	Strcpy(prefix, nethackdir);
