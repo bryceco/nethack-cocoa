@@ -1991,13 +1991,13 @@ Gw
                         </textFieldCell>
                     </textField>
                     <scrollView horizontalHuggingPriority="750" verticalHuggingPriority="750" autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1134" userLabel="Race Scroll View - Table View">
-                        <rect key="frame" x="19" y="229" width="100" height="160"/>
+                        <rect key="frame" x="19" y="192" width="100" height="197"/>
                         <clipView key="contentView" id="CTQ-yH-Jgg">
-                            <rect key="frame" x="1" y="0.0" width="98" height="159"/>
+                            <rect key="frame" x="1" y="0.0" width="98" height="196"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnReordering="NO" columnResizing="NO" multipleSelection="NO" autosaveColumns="NO" headerView="1138" id="1137">
-                                    <rect key="frame" x="0.0" y="0.0" width="98" height="134"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="98" height="171"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                     <size key="intercellSpacing" width="3" height="2"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2026,7 +2026,7 @@ Gw
                         </clipView>
                         <constraints>
                             <constraint firstAttribute="width" constant="100" id="9gR-HS-9tb"/>
-                            <constraint firstAttribute="height" constant="160" id="vYL-9l-AP6"/>
+                            <constraint firstAttribute="height" constant="197" id="vYL-9l-AP6"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1136">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
