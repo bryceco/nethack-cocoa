@@ -66,7 +66,7 @@
                             <rect key="frame" x="1" y="200" width="620" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.9750415973377704" horizontal="NO" id="564">
+                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.97171381031613979" horizontal="NO" id="564">
                             <rect key="frame" x="621" y="1" width="15" height="199"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -655,7 +655,7 @@
                             <outlet property="weaponHand" destination="1625" id="1662"/>
                         </connections>
                     </customView>
-                    <scrollView horizontalHuggingPriority="100" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1677" userLabel="Messages Scroll View - Table View">
+                    <scrollView horizontalHuggingPriority="100" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" autohidesScrollers="YES" horizontalLineScroll="18" horizontalPageScroll="10" verticalLineScroll="18" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1677" userLabel="Messages Scroll View - Table View">
                         <rect key="frame" x="484" y="216" width="153" height="160"/>
                         <clipView key="contentView" id="pFX-fE-rfW">
                             <rect key="frame" x="1" y="1" width="151" height="158"/>
@@ -673,12 +673,12 @@
                                                 <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
                                             </tableHeaderCell>
-                                            <textFieldCell key="dataCell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1685">
+                                            <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="1685">
                                                 <font key="font" metaFont="system"/>
                                                 <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                 <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                             </textFieldCell>
-                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
+                                            <tableColumnResizingMask key="resizingMask" resizeWithTable="YES"/>
                                         </tableColumn>
                                     </tableColumns>
                                     <connections>
@@ -692,7 +692,7 @@
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="100" constant="2000" id="xdR-5x-WkY"/>
                         </constraints>
                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1679">
-                            <rect key="frame" x="1" y="148" width="104" height="15"/>
+                            <rect key="frame" x="-100" y="-100" width="104" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1678">
