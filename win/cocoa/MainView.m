@@ -107,39 +107,6 @@ NSStringEncoding	codepage437encoding;
 	return asciiFont;
 }
 
-- (NSString *)tileSet
-{
-	return _tileSetName;
-}
-
-
--(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
-{
-	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
-	if ( tilesetImage == nil ) {
-		tileSetName = [tileSetName stringByExpandingTildeInPath];
-		NSURL * url = [NSURL fileURLWithPath:tileSetName isDirectory:NO];
-		tilesetImage = [[NSImage alloc] initByReferencingURL:url];
-		if ( tilesetImage == nil ) {
-			return NO;
-		}
-	}
-	
-	// make sure dimensions work
-	NSSize imageSize = [tilesetImage size];
-	if ( (imageSize.width / size.width) * (imageSize.height / size.height) < 1014 ) {
-		// not enough images
-		return NO;
-	}
-	
-	TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:size];
-	[TileSet setInstance:tileSet];
-	
-	_tileSetName = [tileSetName copy];
-
-	return YES;
-}
-
 - (id)initWithFrame:(NSRect)frame {
 
 	if (self = [super initWithFrame:frame]) {

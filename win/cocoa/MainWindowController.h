@@ -51,7 +51,8 @@
 	NSMutableArray							*	voiceQueue;
 	
 	NSMutableArray							*	userTiles;
-	
+	NSString 								*	_tileSetName;
+
 	IBOutlet MainView						*	mainView;
 	IBOutlet NSTableView					*	messagesView;
 	IBOutlet NSMenu							*	tileSetMenu;

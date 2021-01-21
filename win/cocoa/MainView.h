@@ -29,7 +29,6 @@
 
 @interface MainView : NSView {
 
-	NSString *	_tileSetName;
 	NSSize		tileSize;
 	NSImage	*	petMark;
 
@@ -45,8 +44,6 @@
 @property (strong,nonatomic) NSString * contextMenuObject;
 
 - (void)cliparoundX:(int)x y:(int)y;
-- (BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size;
-- (NSString *)tileSet;
 - (NSFont *)asciiFont;
 - (BOOL)setAsciiFont:(NSFont *)font;
 - (void)enableAsciiMode:(BOOL)enable;

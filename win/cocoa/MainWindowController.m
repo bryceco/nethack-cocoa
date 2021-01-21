@@ -41,6 +41,7 @@
 #import "ExtCommandWindowController.h"
 #import "PlayerSelectionWindowController.h"
 #import "StatsView.h"
+#import "TileSet.h"
 #import "NetHackCocoaAppDelegate.h"
 #import "EquipmentView.h"
 
@@ -161,12 +162,14 @@ static MainWindowController* instance;
 		
 		// set defaults if no user preference
 		if ( tileSetName == nil ) {
-			tileSetName = @"kins32.bmp";
+			tileSetName = @"tiles24.bmp";
 		}
-		
 		NSSize size = [self tileSetSizeFromName:tileSetName];
-		[mainView setTileSet:tileSetName size:size];
-		
+		if ( ![self setTileSet:tileSetName size:size] ) {
+
+		}
+		_tileSetName = tileSetName;
+
 		NSFont * font = [NSFont fontWithName:asciiFontName size:asciiFontSize];
 		if ( font == nil ) {
 			font = [NSFont systemFontOfSize:14.0];
@@ -191,12 +194,10 @@ static MainWindowController* instance;
 	}
 }
 
-
 -(void)windowWillClose:(NSNotification *)notification
 {
 	// save tile set preferences
-	NSString * tileSetName = [mainView tileSet];
-	[[NSUserDefaults standardUserDefaults] setObject:tileSetName forKey:@"TileSetName"];
+	[[NSUserDefaults standardUserDefaults] setObject:_tileSetName forKey:@"TileSetName"];
 	NSFont * font = [mainView asciiFont];
 	[[NSUserDefaults standardUserDefaults] setObject:[font fontName] forKey:@"AsciiFontName"];
 	[[NSUserDefaults standardUserDefaults] setFloat:[font pointSize] forKey:@"AsciiFontSize"];
@@ -224,7 +225,7 @@ static MainWindowController* instance;
 	} else {
 		
 		if ( terminatedByUser ) {
-			[[NSApplication sharedApplication] terminate:self];
+			[self.window close];
 		} else {
 			// nethack exited, but let user close the app manually 
 		}
@@ -287,6 +288,44 @@ static MainWindowController* instance;
 	[asciiModeMenuItem setState:NSOnState];
 }
 
+
+-(NSImage *)imageForTileSetName:(NSString *)tileSetName size:(NSSize)size
+{
+	NSImage *tilesetImage = [NSImage imageNamed:tileSetName];
+	if ( tilesetImage == nil ) {
+		tileSetName = [tileSetName stringByExpandingTildeInPath];
+		NSURL * url = [NSURL fileURLWithPath:tileSetName isDirectory:NO];
+		tilesetImage = [[NSImage alloc] initByReferencingURL:url];
+		if ( tilesetImage == nil ) {
+			return nil;
+		}
+	}
+
+	// make sure dimensions work
+	NSSize imageSize = [tilesetImage size];
+	int count = (imageSize.width / size.width) * (imageSize.height / size.height);
+	NSLog(@"%@: %ld", tileSetName, (long)count);
+	if ( count < 40*37-4 ) {
+		// not enough images
+		return nil;
+	}
+	return tilesetImage;
+}
+
+-(BOOL)setTileSet:(NSString *)tileSetName size:(NSSize)size
+{
+	NSImage *tilesetImage = [self imageForTileSetName:tileSetName size:size];
+	if ( tilesetImage == nil )
+		return NO;
+
+	TileSet *tileSet = [[TileSet alloc] initWithImage:tilesetImage tileSize:size];
+	[TileSet setInstance:tileSet];
+
+	_tileSetName = tileSetName;
+
+	return YES;
+}
+
 - (IBAction)addTileSet:(id)sender
 {
 	NSOpenPanel * panel = [NSOpenPanel openPanel];
@@ -313,7 +352,7 @@ static MainWindowController* instance;
 	NSString * name = [item title];
 	NSSize size = [self tileSetSizeFromName:name];
 
-	BOOL ok = [mainView setTileSet:name size:size];
+	BOOL ok = [self setTileSet:name size:size];
 	if ( ok ) {
 
 		// put us in tile mode
@@ -323,7 +362,7 @@ static MainWindowController* instance;
 		
 	} else {
 		NSAlert * alert = [[NSAlert alloc] init];
-		alert.messageText = @"The tile set could not be loaded";
+		alert.messageText = @"The tile set is not valid for this version of NetHack";
 		[alert runModal];
 	}
 }
@@ -347,7 +386,12 @@ static MainWindowController* instance;
 			NSString * path = [tileFolder stringByAppendingPathComponent:name];
 			NSDictionary * attr = [[NSFileManager defaultManager] attributesOfItemAtPath:path error:NULL];
 			if ( attr && [attr fileSize] >= 10000 ) {
-				[files addObject:name];
+
+				NSSize size = [self tileSetSizeFromName:name];
+				NSImage * image = [self imageForTileSetName:name size:size];
+				if ( image ) {
+					[files addObject:name];
+				}
 			}				
 		}
 	}
@@ -398,7 +442,6 @@ static MainWindowController* instance;
 		}
 	}		
 }
-
 
 - (IBAction)terminateApplication:(id)sender
 {
