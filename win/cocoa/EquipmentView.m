@@ -64,7 +64,11 @@
 
 - (void)updateInventory
 {
-	// FIXME: at end of game these objects may become deallocated causing a crash
+	if ( program_state.gameover ) {
+		// A end of game these objects may become deallocated causing a crash
+		return;
+	}
+
 	[self updateSlot:weaponHand		item:uwep		text:@"weapon"];
 	[self updateSlot:alternateHand	item:u.twoweap?uswapwep:uarms	text:@"shield"];
 	[self updateSlot:shirt			item:uarmu		text:@"shirt"];
