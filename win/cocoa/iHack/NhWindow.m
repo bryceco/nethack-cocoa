@@ -209,7 +209,7 @@ static NhWindow *s_mapWindow = nil;
 					BOOL highlight = [self stringReferencesHero:s];
 					if ( highlight ) {
 						dict = [NSDictionary dictionaryWithObjectsAndKeys:
-								[NSColor blueColor], NSForegroundColorAttributeName,
+								[NSColor systemBlueColor], NSForegroundColorAttributeName,
 								nil];
 					}
 					BOOL isVoiced = [self stringIsVoiced:s];
@@ -231,8 +231,8 @@ static NhWindow *s_mapWindow = nil;
 			case ATR_BLINK:
 			case ATR_INVERSE:
 				dict = [NSDictionary dictionaryWithObjectsAndKeys:
-						[NSColor redColor], NSForegroundColorAttributeName,
-						[NSColor blueColor], NSBackgroundColorAttributeName,
+						[NSColor systemRedColor], NSForegroundColorAttributeName,
+						[NSColor systemBlueColor], NSBackgroundColorAttributeName,
 						nil];
 				break;
 		}

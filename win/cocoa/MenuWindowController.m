@@ -730,7 +730,7 @@ static BUC_ENUM GetBUC( NSString * text )
 			BUC_ENUM buc = GetBUC( title );
 			if ( buc != BUC_UNCURSED )
 				[aString addAttribute:NSForegroundColorAttributeName
-								value:(buc == BUC_ENUM_BLESSED ? [NSColor blueColor] : [NSColor redColor])
+								value:(buc == BUC_ENUM_BLESSED ? [NSColor systemBlueColor] : [NSColor systemRedColor])
 								range:NSMakeRange(0,[[aString mutableString] length])];
 #endif
 			// adjust baseline of text so it is vertically centered with tile

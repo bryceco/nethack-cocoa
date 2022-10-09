@@ -185,6 +185,9 @@ static MainWindowController* instance;
 		// set table row spacing to zero in messages window
 		[messagesView setIntercellSpacing:NSMakeSize(0,0)];
 		
+		// use system colors for dark mode compatibility
+		[messagesView setBackgroundColor:NSColor.textBackgroundColor];
+		
 		// initialize speech engine
 		voice = [[NSSpeechSynthesizer alloc] initWithVoice:@"com.apple.speech.synthesis.voice.Alex"];
 		float r = [voice rate];

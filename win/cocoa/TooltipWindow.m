@@ -30,11 +30,10 @@
 -(id)initWithText:(NSString *)text location:(NSPoint)point
 {
 	NSTextField * view = [[NSTextField alloc] initWithFrame:NSMakeRect(point.x, point.y, 10, 10)];
-	NSColor * bgColor = [NSColor colorWithDeviceRed:1.0 green:1.0 blue:202/255.0 alpha:1.0];
 	
 	[view setStringValue:text];
 	[view setBordered:YES];
-	[view setBackgroundColor:bgColor];
+	[view setBackgroundColor:NSColor.textBackgroundColor];
 	[view setEditable:NO];
 	[view setSelectable:NO];
 	[view sizeToFit];
