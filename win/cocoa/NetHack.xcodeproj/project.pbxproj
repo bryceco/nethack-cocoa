@@ -1667,7 +1667,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ${BUILT_PRODUCTS_DIR}/makedefs ${NH_UTIL_DIR}/makedefs\ncodesign -s - ${NH_UTIL_DIR}/makedefs\n";
+			shellScript = "cp ${BUILT_PRODUCTS_DIR}/makedefs ${NH_UTIL_DIR}/makedefs\ncodesign --force -s - ${NH_UTIL_DIR}/makedefs\n";
 		};
 		317E7C4C21A3625000F6E4E5 /* Copy lev_comp */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1687,7 +1687,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ${BUILT_PRODUCTS_DIR}/lev_comp ${NH_UTIL_DIR}/lev_comp\ncodesign -s - ${NH_UTIL_DIR}/lev_comp\n";
+			shellScript = "cp ${BUILT_PRODUCTS_DIR}/lev_comp ${NH_UTIL_DIR}/lev_comp\ncodesign --force -s - ${NH_UTIL_DIR}/lev_comp\n";
 		};
 		317E7C4D21A3649B00F6E4E5 /* Build quest levels */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -1789,7 +1789,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ${BUILT_PRODUCTS_DIR}/dgn_comp ${NH_UTIL_DIR}/dgn_comp\ncodesign -s - ${NH_UTIL_DIR}/dgn_comp\n";
+			shellScript = "cp ${BUILT_PRODUCTS_DIR}/dgn_comp ${NH_UTIL_DIR}/dgn_comp\ncodesign --force -s - ${NH_UTIL_DIR}/dgn_comp\n";
 		};
 		317E7C5121A373E100F6E4E5 /* Build dungeon */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2061,7 +2061,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "cp ${BUILT_PRODUCTS_DIR}/dlb ${NH_UTIL_DIR}/dlb\ncodesign -s - ${NH_UTIL_DIR}/dlb\n";
+			shellScript = "cp ${BUILT_PRODUCTS_DIR}/dlb ${NH_UTIL_DIR}/dlb\ncodesign --force -s - ${NH_UTIL_DIR}/dlb\n";
 		};
 		3192867F21A3AF8000325BEB /* Build oracles */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -2582,14 +2582,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 3660;
+				CURRENT_PROJECT_VERSION = 3670;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MKTTC6734C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				INFOPLIST_FILE = "$(SRCROOT)//NetHack-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.7;
 				OTHER_CFLAGS = (
 					"-DNOMAIL",
 					"-DNOTPARMDECL",
@@ -2615,14 +2615,14 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CREATE_INFOPLIST_SECTION_IN_BINARY = YES;
-				CURRENT_PROJECT_VERSION = 3660;
+				CURRENT_PROJECT_VERSION = 3670;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_TEAM = MKTTC6734C;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_C_LANGUAGE_STANDARD = c99;
 				INFOPLIST_FILE = "$(SRCROOT)//NetHack-Info.plist";
 				MACOSX_DEPLOYMENT_TARGET = "$(RECOMMENDED_MACOSX_DEPLOYMENT_TARGET)";
-				MARKETING_VERSION = 3.6.6;
+				MARKETING_VERSION = 3.6.7;
 				OTHER_CFLAGS = (
 					"-DNOMAIL",
 					"-DNOTPARMDECL",
