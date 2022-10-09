@@ -76,7 +76,6 @@
 		02EDA86F25A675940068C1C9 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 02894E6C25A6660C000AB261 /* Credits.rtf */; };
 		02EDA87625A675AE0068C1C9 /* MenuWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EF525A6660C000AB261 /* MenuWindow.xib */; };
 		02EDA87725A675AE0068C1C9 /* MessageWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EF725A6660C000AB261 /* MessageWindow.xib */; };
-		02EDA87825A675AE0068C1C9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFB25A6660C000AB261 /* InfoPlist.strings */; };
 		02EDA87925A675AE0068C1C9 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFD25A6660C000AB261 /* MainMenu.xib */; };
 		02EDA88E25A675E80068C1C9 /* bell.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88125A675E80068C1C9 /* bell.uu */; };
 		02EDA88F25A675E80068C1C9 /* toolhorn.uu in Resources */ = {isa = PBXBuildFile; fileRef = 02EDA88225A675E80068C1C9 /* toolhorn.uu */; };
@@ -517,7 +516,6 @@
 		02894EB425A6660C000AB261 /* Arrow-N.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-N.png"; sourceTree = "<group>"; };
 		02894EB625A6660C000AB261 /* Arrow-SW.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SW.png"; sourceTree = "<group>"; };
 		02894EB725A6660C000AB261 /* Arrow-SE.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Arrow-SE.png"; sourceTree = "<group>"; };
-		02894EFC25A6660C000AB261 /* English */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = English; path = InfoPlist.strings; sourceTree = "<group>"; };
 		02894EFF25A6660C000AB261 /* sysconf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = sysconf; path = ../../../win/cocoa/sysconf; sourceTree = "<group>"; };
 		029B3F2425A68741004D746E /* posixregex.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = posixregex.c; path = "nethack-cocoa/sys/share/posixregex.c"; sourceTree = "<group>"; };
 		029FBA342601993A00E87BD0 /* nethack.iconset */ = {isa = PBXFileReference; lastKnownFileType = folder.iconset; path = nethack.iconset; sourceTree = "<group>"; };
@@ -999,7 +997,6 @@
 			children = (
 				02894EF525A6660C000AB261 /* MenuWindow.xib */,
 				02894EF725A6660C000AB261 /* MessageWindow.xib */,
-				02894EFB25A6660C000AB261 /* InfoPlist.strings */,
 				02894EFD25A6660C000AB261 /* MainMenu.xib */,
 			);
 			name = English.lproj;
@@ -1510,7 +1507,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				English,
 				Base,
 			);
 			mainGroup = 3189576821A1FCC100FB2ABE;
@@ -1538,7 +1534,6 @@
 				02EDA87625A675AE0068C1C9 /* MenuWindow.xib in Resources */,
 				02EDA87725A675AE0068C1C9 /* MessageWindow.xib in Resources */,
 				02EDA89725A675E80068C1C9 /* firehorn.uu in Resources */,
-				02EDA87825A675AE0068C1C9 /* InfoPlist.strings in Resources */,
 				02EDA89025A675E80068C1C9 /* wdnflute.uu in Resources */,
 				029FBA352601993A00E87BD0 /* nethack.iconset in Resources */,
 				02EDA89925A675E80068C1C9 /* wdnharp.uu in Resources */,
@@ -2403,14 +2398,6 @@
 				022D969B25A66D8E0032C58D /* en */,
 			);
 			name = MessageWindow.xib;
-			sourceTree = "<group>";
-		};
-		02894EFB25A6660C000AB261 /* InfoPlist.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				02894EFC25A6660C000AB261 /* English */,
-			);
-			name = InfoPlist.strings;
 			sourceTree = "<group>";
 		};
 		02894EFD25A6660C000AB261 /* MainMenu.xib */ = {
