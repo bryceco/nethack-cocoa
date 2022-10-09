@@ -324,7 +324,7 @@ NSStringEncoding	codepage437encoding;
 }
 - (IBAction)doWebSearch:(id)sender
 {
-	NSString * text = [contextMenuObject stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	NSString * text = [contextMenuObject stringByAddingPercentEncodingWithAllowedCharacters:NSCharacterSet.URLQueryAllowedCharacterSet];
 	NSString * path = [NSString stringWithFormat:@"http://nethackwiki.com/mediawiki/index.php?search=%@",text];
 	[[NSWorkspace sharedWorkspace] openURL:[NSURL URLWithString:path]];
 }
