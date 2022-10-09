@@ -76,7 +76,7 @@
 {
 	for ( NSButton * item in [menuView subviews] ) {
 		if ( [item class] == [NSButton class] )  {
-			[item setState:NSOnState];
+			[item setState:NSControlStateValueOn];
 		}
 	}
 	[acceptButton setEnabled:YES];
@@ -92,7 +92,7 @@
 			if ( item && [item class] == [NhItem class] ) {
 				NhItem * entry = item;
 				if ( entry.group_ch == groupAccel ) {
-					[button setState:NSOnState];
+					[button setState:NSControlStateValueOn];
 					hit = YES;
 				}
 			}
@@ -117,7 +117,7 @@
 			{
 				known = YES;
 			}
-			[item setState:known ? NSOffState : NSOnState];
+			[item setState:known ? NSControlStateValueOff : NSControlStateValueOn];
 		}
 	}	
 	[acceptButton setEnabled:YES];
@@ -133,7 +133,7 @@
 			NSInteger key = [button tag];
 			NhItem * item = [itemDict objectForKey:[NSNumber numberWithInt:key]];
 			// check if button state was changed from original value
-			if ( ([button state] == NSOnState) != item.selected )  {
+			if ( ([button state] == NSControlStateValueOn) != item.selected )  {
 				[item setSelected:YES];
 				[menuParams.selected addObject:item];
 			} else {
@@ -537,7 +537,7 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 
 -(IBAction)sortItems:(id)sender
 {
-	BOOL useDefault = [(NSButton *)sender state] == NSOffState;
+	BOOL useDefault = [(NSButton *)sender state] == NSControlStateValueOff;
 	
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		int len = [[group items] count];
@@ -679,14 +679,14 @@ static BUC_ENUM GetBUC( NSString * text )
 
 			NSRect rect = NSMakeRect(itemIndent, yPos, viewRect.size.width, 10 );
 			NSButton * button = [[NSButton alloc] initWithFrame:rect];	
-			[button setButtonType:how == PICK_ANY ? NSSwitchButton 
-								 : how == PICK_ONE ? NSRadioButton
-								 : NSMomentaryChangeButton];
+			[button setButtonType:how == PICK_ANY ? NSButtonTypeSwitch 
+								 : how == PICK_ONE ? NSButtonTypeRadio
+								 : NSButtonTypeMomentaryChange];
 			[button setBordered:NO];
 			[button setTarget:self];
 			[button setAction:@selector(buttonClick:)];
 			if ( item.selected ) {
-				[button setState:NSOnState];
+				[button setState:NSControlStateValueOn];
 			}
 
 			// set a unique ID for button to map it to item

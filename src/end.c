@@ -66,7 +66,7 @@ STATIC_DCL void FDECL(dump_everything, (int, time_t));
 STATIC_DCL int NDECL(num_extinct);
 
 #if defined(__BEOS__) || defined(MICRO) || defined(OS2) || defined(COCOA_GRAPHICS)
-extern void FDECL(nethack_exit, (int));
+extern void FDECL(nethack_exit, (int)) NORETURN;
 #else
 #define nethack_exit exit
 #endif

@@ -46,7 +46,7 @@
 
 - (void)update {
 	[objectClasses removeAllObjects];
-	memset(classArray, (int) nil, sizeof(classArray));
+	memset(classArray, (long) nil, sizeof(classArray));
 	for (struct obj *otmp = invent; otmp; otmp = otmp->nobj) {
 		NSMutableArray *array = [self arrayForClass:otmp->oclass];
 		[array addObject:[NhObject objectWithObject:otmp]];

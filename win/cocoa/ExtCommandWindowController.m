@@ -66,7 +66,7 @@
 			
 			NSRect rect = NSMakeRect(itemIndent, yPos, viewRect.size.width, 10 );
 			NSButton * button = [[NSButton alloc] initWithFrame:rect];	
-			[button setButtonType:NSRadioButton];
+			[button setButtonType:NSButtonTypeRadio];
 			[button setBordered:NO];
 			NSString * key = [NSString stringWithFormat:@"%c", extcmdlist[i].ef_txt[0]];
 			[button setKeyEquivalent:key];
@@ -109,7 +109,7 @@
 	// initialize button states
 	[acceptButton setEnabled:NO];
 	for ( NSButton * button in [menuView subviews] ) {
-		[button setState:NSOffState];
+		[button setState:NSControlStateValueOff];
 	}
 
 	[[NSApplication sharedApplication] runModalForWindow:[self window]];
@@ -124,7 +124,7 @@
 		if ( [item class] == [NSButton class] )  {
 			if ( [item.keyEquivalent isEqualToString:event.charactersIgnoringModifiers] ) {
 				[matches addObject:item];
-				if ( item.state == NSOnState ) {
+				if ( item.state == NSControlStateValueOn ) {
 					current = item;
 				}
 			}
@@ -152,7 +152,7 @@
 	// unselect any other items
 	for ( NSButton * item in [menuView subviews] ) {
 		if ( [item class] == [button class]  &&  item != button )  {
-			[item setState:NSOffState];
+			[item setState:NSControlStateValueOff];
 		}
 	}
 	[self.window makeFirstResponder:button];
@@ -168,7 +168,7 @@
 	// get list of selected tags
 	for ( NSButton * button in [menuView subviews] ) {
 		// add selected item
-		if ( [button state] == NSOnState ) {
+		if ( [button state] == NSControlStateValueOn ) {
 			int tag = [button tag];
 			NSString * cmd = [NSString stringWithUTF8String:extcmdlist[tag].ef_txt];
 			NhTextInputEvent * e = [[NhTextInputEvent alloc] initWithText:cmd];

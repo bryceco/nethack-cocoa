@@ -177,7 +177,7 @@ static MainWindowController* instance;
 		[mainView setAsciiFont:font];
 		
 		// place check mark on ASCII menu item
-		[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
+		[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSControlStateValueOn : NSControlStateValueOff];
 		
 		// select ascii mode in map view
 		[mainView enableAsciiMode:iflags.wc_ascii_map];
@@ -271,8 +271,8 @@ static MainWindowController* instance;
 - (IBAction)enableAsciiMode:(id)sender
 {
 	NSMenuItem * menuItem = sender;
-	bool enable = [menuItem state] == NSOffState;
-	[menuItem setState:enable ? NSOnState : NSOffState];
+	bool enable = [menuItem state] == NSControlStateValueOff;
+	[menuItem setState:enable ? NSControlStateValueOn : NSControlStateValueOff];
 	
 	[mainView enableAsciiMode:enable];
 }
@@ -285,7 +285,7 @@ static MainWindowController* instance;
 	[mainView setAsciiFont:newFont];
 	// put us in ascii mode
 	[mainView enableAsciiMode:YES];
-	[asciiModeMenuItem setState:NSOnState];
+	[asciiModeMenuItem setState:NSControlStateValueOn];
 }
 
 
@@ -357,7 +357,7 @@ static MainWindowController* instance;
 
 		// put us in tile mode
 		[mainView enableAsciiMode:NO];
-		[asciiModeMenuItem setState:NSOffState];
+		[asciiModeMenuItem setState:NSControlStateValueOff];
 		[equipmentView updateInventory];
 		
 	} else {
@@ -437,7 +437,7 @@ static MainWindowController* instance;
 		[self performSelectorOnMainThread:@selector(preferenceUpdate:) withObject:pref waitUntilDone:YES];
 	} else {
 		if ( [pref isEqualToString:@"ascii_map"] ) {
-			[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSOnState : NSOffState];
+			[asciiModeMenuItem setState:iflags.wc_ascii_map ? NSControlStateValueOn : NSControlStateValueOff];
 			[mainView enableAsciiMode:iflags.wc_ascii_map];
 		}
 	}		

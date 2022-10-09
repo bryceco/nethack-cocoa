@@ -115,8 +115,8 @@
 		[race setDelegate:self];
 		[role setDelegate:self];
 		
-		[race setNeedsDisplay];
-		[role setNeedsDisplay];
+		race.needsDisplay = YES;
+		role.needsDisplay = YES;
 
 		[self setupOthers];
 	}
@@ -150,8 +150,8 @@
 		[race setDelegate:self];
 		[role setDelegate:self];
 		
-		[race setNeedsDisplay];
-		[role setNeedsDisplay];	
+		race.needsDisplay = YES;
+		role.needsDisplay = YES;
 
 		[self setupOthers];
 	}
@@ -233,10 +233,10 @@
 		a = rn2(ROLE_ALIGNS);
     }
 	
-	[gender[g] setState:NSOnState];
+	[gender[g] setState:NSControlStateValueOn];
 	[self selectGender:g];
 	
-    [alignment[a] setState:NSOnState];
+	[alignment[a] setState:NSControlStateValueOn];
 	[self selectAlignment:a];
 	
 	[role selectRowIndexes:[NSIndexSet indexSetWithIndex:ro] byExtendingSelection:NO];
@@ -342,7 +342,7 @@
 		[self selectAlignment:2];
 	}
 	// gender might have changed:
-	[role setNeedsDisplay];
+	role.needsDisplay = YES;
 }
 
 -(void)doAccept:(id)sender
