@@ -708,7 +708,7 @@ void cocoa_end_screen()
 
 void cocoa_outrip(winid wid, int how, time_t when)
 {
-	NSLog(@"outrip %x", wid);
+	NSLog(@"outrip %lx", wid);
 }
 
 
