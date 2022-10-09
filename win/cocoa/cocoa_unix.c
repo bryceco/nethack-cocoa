@@ -33,6 +33,7 @@ static int NDECL(eraseoldlocks);
 #endif
 
 #ifdef PC_LOCKING
+#ifndef SELF_RECOVER
 static int
 eraseoldlocks()
 {
@@ -55,6 +56,7 @@ eraseoldlocks()
 		return 0; /* cannot remove it */
 	return (1);   /* success! */
 }
+#endif /* SELF_RECOVER */
 
 void
 getlock()
