@@ -29,7 +29,9 @@ static struct stat hbuf;
 #endif
 
 #ifdef PC_LOCKING
+#ifndef SELF_RECOVER
 static int NDECL(eraseoldlocks);
+#endif
 #endif
 
 #ifdef PC_LOCKING
