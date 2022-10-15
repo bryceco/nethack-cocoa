@@ -1,118 +1,118 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
-    <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21506"/>
-        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
-    </dependencies>
-    <objects>
-        <customObject id="-2" userLabel="File's Owner" customClass="MenuWindowController">
-            <connections>
-                <outlet property="acceptButton" destination="5" id="14"/>
-                <outlet property="cancelButton" destination="6" id="15"/>
-                <outlet property="menuView" destination="8" id="20"/>
-                <outlet property="selectAll" destination="30" id="36"/>
-                <outlet property="window" destination="3" id="16"/>
-            </connections>
-        </customObject>
-        <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
-        <window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="3" userLabel="Menu Window" customClass="NSPanel">
-            <windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES"/>
-            <windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
-            <rect key="contentRect" x="157" y="203" width="398" height="258"/>
-            <rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
-            <value key="minSize" type="size" width="250" height="100"/>
-            <view key="contentView" id="4">
-                <rect key="frame" x="0.0" y="0.0" width="398" height="258"/>
-                <autoresizingMask key="autoresizingMask"/>
-                <subviews>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
-                        <rect key="frame" x="192" y="12" width="96" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="11">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
+	<dependencies>
+		<plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21506"/>
+		<capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+	</dependencies>
+	<objects>
+		<customObject id="-2" userLabel="File's Owner" customClass="MenuWindowController">
+			<connections>
+				<outlet property="acceptButton" destination="5" id="14"/>
+				<outlet property="cancelButton" destination="6" id="15"/>
+				<outlet property="menuView" destination="8" id="20"/>
+				<outlet property="selectAll" destination="30" id="36"/>
+				<outlet property="window" destination="3" id="16"/>
+			</connections>
+		</customObject>
+		<customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
+		<customObject id="-3" userLabel="Application" customClass="NSObject"/>
+		<window allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" visibleAtLaunch="NO" animationBehavior="default" id="3" userLabel="Menu Window" customClass="NSPanel">
+			<windowStyleMask key="styleMask" titled="YES" closable="YES" resizable="YES" utility="YES"/>
+			<windowPositionMask key="initialPositionMask" leftStrut="YES" rightStrut="YES" topStrut="YES" bottomStrut="YES"/>
+			<rect key="contentRect" x="157" y="203" width="398" height="258"/>
+			<rect key="screenRect" x="0.0" y="0.0" width="1728" height="1079"/>
+			<value key="minSize" type="size" width="250" height="100"/>
+			<view key="contentView" id="4">
+				<rect key="frame" x="0.0" y="0.0" width="398" height="258"/>
+				<autoresizingMask key="autoresizingMask"/>
+				<subviews>
+					<button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6">
+						<rect key="frame" x="192" y="12" width="96" height="32"/>
+						<autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+						<buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="11">
+							<behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+							<font key="font" metaFont="system"/>
+							<string key="keyEquivalent" base64-UTF8="YES">
 Gw
 </string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="doCancel:" target="-2" id="18"/>
-                        </connections>
-                    </button>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
-                        <rect key="frame" x="288" y="12" width="96" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="Accept" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="12">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent" base64-UTF8="YES">
+						</buttonCell>
+						<connections>
+							<action selector="doCancel:" target="-2" id="18"/>
+						</connections>
+					</button>
+					<button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5">
+						<rect key="frame" x="288" y="12" width="96" height="32"/>
+						<autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+						<buttonCell key="cell" type="push" title="Accept" bezelStyle="rounded" alignment="center" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="12">
+							<behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+							<font key="font" metaFont="system"/>
+							<string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
-                        </buttonCell>
-                        <connections>
-                            <action selector="doAccept:" target="-2" id="17"/>
-                        </connections>
-                    </button>
-                    <scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
-                        <rect key="frame" x="0.0" y="60" width="398" height="178"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <clipView key="contentView" id="MbX-Hd-uTW">
-                            <rect key="frame" x="0.0" y="0.0" width="398" height="178"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                            <subviews>
-                                <customView id="8" customClass="FlippedView">
-                                    <rect key="frame" x="0.0" y="0.0" width="398" height="178"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                </customView>
-                            </subviews>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="9">
-                            <rect key="frame" x="0.0" y="163" width="383" height="15"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="10">
-                            <rect key="frame" x="383" y="0.0" width="15" height="163"/>
-                            <autoresizingMask key="autoresizingMask"/>
-                        </scroller>
-                    </scrollView>
-                    <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30">
-                        <rect key="frame" x="14" y="12" width="96" height="32"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <buttonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="31">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                            <font key="font" metaFont="system"/>
-                            <string key="keyEquivalent">a</string>
-                            <modifierMask key="keyEquivalentModifierMask" command="YES"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="selectAll:" target="-2" id="34"/>
-                        </connections>
-                    </button>
-                    <button toolTip="Show items alphabetically" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
-                        <rect key="frame" x="355" y="238" width="35" height="19"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="recessed" title="Abc" alternateTitle="Abc" bezelStyle="recessed" image="buttonCell:39:image" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="39">
-                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
-                            <font key="font" size="12" name="Helvetica-Oblique"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="sortItems:" target="-2" id="40"/>
-                        </connections>
-                    </button>
-                </subviews>
-            </view>
-            <connections>
-                <outlet property="delegate" destination="-2" id="19"/>
-                <outlet property="initialFirstResponder" destination="6" id="13"/>
-            </connections>
-            <point key="canvasLocation" x="30" y="132"/>
-        </window>
-    </objects>
-    <resources>
-        <image name="buttonCell:39:image" width="1" height="1">
-            <mutableData key="keyedArchiveRepresentation">
+						</buttonCell>
+						<connections>
+							<action selector="doAccept:" target="-2" id="17"/>
+						</connections>
+					</button>
+					<scrollView fixedFrame="YES" borderType="none" autohidesScrollers="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7">
+						<rect key="frame" x="0.0" y="60" width="398" height="178"/>
+						<autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+						<clipView key="contentView" id="MbX-Hd-uTW">
+							<rect key="frame" x="0.0" y="0.0" width="398" height="178"/>
+							<autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+							<subviews>
+								<customView id="8" customClass="FlippedView">
+									<rect key="frame" x="0.0" y="0.0" width="398" height="178"/>
+									<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+								</customView>
+							</subviews>
+							<color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+						</clipView>
+						<scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="9">
+							<rect key="frame" x="0.0" y="163" width="383" height="15"/>
+							<autoresizingMask key="autoresizingMask"/>
+						</scroller>
+						<scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="10">
+							<rect key="frame" x="383" y="0.0" width="15" height="163"/>
+							<autoresizingMask key="autoresizingMask"/>
+						</scroller>
+					</scrollView>
+					<button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="30">
+						<rect key="frame" x="14" y="12" width="96" height="32"/>
+						<autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+						<buttonCell key="cell" type="push" title="All" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="31">
+							<behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+							<font key="font" metaFont="system"/>
+							<string key="keyEquivalent">a</string>
+							<modifierMask key="keyEquivalentModifierMask" command="YES"/>
+						</buttonCell>
+						<connections>
+							<action selector="selectAll:" target="-2" id="34"/>
+						</connections>
+					</button>
+					<button toolTip="Show items alphabetically" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="38">
+						<rect key="frame" x="355" y="238" width="35" height="19"/>
+						<autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+						<buttonCell key="cell" type="recessed" title="Abc" alternateTitle="Abc" bezelStyle="recessed" image="buttonCell:39:image" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="39">
+							<behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+							<font key="font" size="12" name="Helvetica-Oblique"/>
+						</buttonCell>
+						<connections>
+							<action selector="sortItems:" target="-2" id="40"/>
+						</connections>
+					</button>
+				</subviews>
+			</view>
+			<connections>
+				<outlet property="delegate" destination="-2" id="19"/>
+				<outlet property="initialFirstResponder" destination="6" id="13"/>
+			</connections>
+			<point key="canvasLocation" x="30" y="132"/>
+		</window>
+	</objects>
+	<resources>
+		<image name="buttonCell:39:image" width="1" height="1">
+			<mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGBwpYJHZlcnNpb25ZJGFyY2hpdmVyVCR0b3BYJG9iamVjdHMSAAGGoF8QD05T
 S2V5ZWRBcmNoaXZlctEICVRyb290gAGuCwwZGh8UJCkqMTQ3PUBVJG51bGzWDQ4PEBESExQVFhcYVk5T
 U2l6ZV5OU1Jlc2l6aW5nTW9kZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVwc1dOU0NvbG9ygAIQAIAN
@@ -162,6 +162,6 @@ sACyALQAuQC7AL0AxADJANQA1gDYANoA3wDiAOQA5gDoAO8BBgEiASQBJgmyCbcJwgnLCd4J4gntCfYJ
 +woDCgYKCwoaCh4KJQotCjoKPwpBCkMKSApQClMKWApgAAAAAAAAAgEAAAAAAAAAQwAAAAAAAAAAAAAA
 AAAACmM
 </mutableData>
-        </image>
-    </resources>
+		</image>
+	</resources>
 </document>
