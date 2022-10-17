@@ -444,9 +444,9 @@
 	// convert widths to tab stops
 	NSMutableArray * tabs = [NSMutableArray arrayWithCapacity:[itemWidths count]];
 	CGFloat pos = 0.0;
-	CGFloat SPACE = 5.0;
+	CGFloat SPACE = 10.0;
 	for ( NSNumber * width in itemWidths ) {
-		pos += [width floatValue] + SPACE;
+		pos += ceil([width floatValue]) + SPACE;
 		NSTextTab * tab = [[NSTextTab alloc] initWithType:NSLeftTabStopType location:pos];
 		[tabs addObject:tab];
 	}
@@ -611,7 +611,7 @@ static BUC_ENUM GetBUC( NSString * text )
 	BOOL showShortcuts = how == PICK_ANY 
 					&& ([[menuParams itemGroups] count] != 1
 						||  ![[[[menuParams itemGroups] objectAtIndex:0] title] isEqualToString:@"All"]);
-	
+
 	// add new labels
 	CGFloat groupIndent	= 25.0;
 	CGFloat itemIndent	= 40.0;
@@ -650,8 +650,13 @@ static BUC_ENUM GetBUC( NSString * text )
 	CGFloat yPos = 0.0;
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
+		NSString * title = [group title];
+		if ( iflags.menu_tab_sep && ![title hasPrefix:@"\t"] ) {
+			title = [@"\t" stringByAppendingString:title];
+		}
+
 		NSRect rect = NSMakeRect(groupIndent, yPos, viewRect.size.width, 10 );
-		if ( [group.title length] > 0 && [group.title characterAtIndex:0] == '\t' ) {
+		if ( [title hasPrefix:@"\t"] ) {
 			// group is indented, so compensate for button image size
 			rect.origin.x += checkboxWidth;
 		}
@@ -660,7 +665,6 @@ static BUC_ENUM GetBUC( NSString * text )
 		NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
 		
 		// create title attributed string
-		NSString * title = [group title];
 		NSAttributedString * aTitle = [[NSAttributedString alloc] initWithString:title attributes:groupAttr];
 		[label setObjectValue:aTitle];
 
@@ -669,6 +673,7 @@ static BUC_ENUM GetBUC( NSString * text )
 		[label setBordered:NO];
 		[label setFont:groupFont];
 		[label sizeToFit];
+
 		[menuView addSubview:label];
 		yPos += [label bounds].size.height;
 
@@ -718,7 +723,7 @@ static BUC_ENUM GetBUC( NSString * text )
 			
 			// get title
 			NSString * title = [item title];
-			
+
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
 			

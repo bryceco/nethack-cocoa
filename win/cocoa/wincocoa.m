@@ -288,6 +288,7 @@ void cocoa_init_nhwindows(int* argc, char** argv)
 	flags.runmode = RUN_STEP;
 	iflags.window_inited = TRUE;
 	iflags.toptenwin = TRUE;
+	iflags.menu_tab_sep = TRUE;
 	
 	// default ASCII mode is to use IBM graphics with color
 	iflags.use_color = TRUE;
