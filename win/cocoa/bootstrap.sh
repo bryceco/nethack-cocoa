@@ -11,7 +11,7 @@
 pushd ../../sys/unix
 
 # no symbolic links used to enable easier patching
-sh setup.sh
+sh setup.sh hints/unix
 
 cd ../..
 
