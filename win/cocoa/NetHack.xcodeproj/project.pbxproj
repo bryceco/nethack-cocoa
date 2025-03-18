@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0201C21025A67A44005C22FA /* sysconf in Resources */ = {isa = PBXBuildFile; fileRef = 02894EFF25A6660C000AB261 /* sysconf */; };
+		02678F1E2D8A2F1300E0648C /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 02678F1D2D8A2F1300E0648C /* AVFoundation.framework */; };
 		02894C6825A65C12000AB261 /* tile.c in Sources */ = {isa = PBXBuildFile; fileRef = 02894C6725A65C12000AB261 /* tile.c */; };
 		02894DB925A66220000AB261 /* NotesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D9725A6621F000AB261 /* NotesWindowController.m */; };
 		02894DBA25A66220000AB261 /* StatsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 02894D9A25A6621F000AB261 /* StatsView.m */; };
@@ -413,6 +414,7 @@
 		022D969925A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		022D969A25A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MenuWindow.xib; sourceTree = "<group>"; };
 		022D969B25A66D8E0032C58D /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = ../en.lproj/MessageWindow.xib; sourceTree = "<group>"; };
+		02678F1D2D8A2F1300E0648C /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		02894C6725A65C12000AB261 /* tile.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tile.c; path = "nethack-cocoa/src/tile.c"; sourceTree = "<group>"; };
 		02894D8B25A661FE000AB261 /* NetHackCocoaAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetHackCocoaAppDelegate.h; sourceTree = "<group>"; };
 		02894D9525A6621F000AB261 /* NotesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotesWindowController.h; sourceTree = "<group>"; };
@@ -772,6 +774,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02678F1E2D8A2F1300E0648C /* AVFoundation.framework in Frameworks */,
 				02894E4D25A66538000AB261 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1330,6 +1333,7 @@
 		31B8A41421A243CB0055BD01 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				02678F1D2D8A2F1300E0648C /* AVFoundation.framework */,
 				02894E4C25A66538000AB261 /* Cocoa.framework */,
 			);
 			name = Frameworks;

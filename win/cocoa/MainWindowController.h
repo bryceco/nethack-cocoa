@@ -22,6 +22,8 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "ZDirection.h"
 #import "Protocols.h"
 
@@ -41,13 +43,13 @@
 @class EquipmentView;
 @class NetHackCocoaAppDelegate;
 
-@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDataSource,NSSpeechSynthesizerDelegate> {	
+@interface MainWindowController : NSWindowController <NSWindowDelegate,NSMenuDelegate,NSTableViewDataSource,AVSpeechSynthesizerDelegate,NSFontChanging> {
 	BOOL										isDirectionQuestion;
 	BOOL										terminatedByUser;
 	
 	BOOL										useSpeech;
 	
-	NSSpeechSynthesizer						*	voice;
+	AVSpeechSynthesizer						*	voice;
 	NSMutableArray							*	voiceQueue;
 	
 	NSMutableArray							*	userTiles;

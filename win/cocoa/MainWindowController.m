@@ -22,6 +22,8 @@
  Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "MainWindowController.h"
 #import "MainView.h"
 #import "NhYnQuestion.h"
@@ -189,9 +191,7 @@ static MainWindowController* instance;
 		[messagesView setBackgroundColor:NSColor.textBackgroundColor];
 		
 		// initialize speech engine
-		voice = [[NSSpeechSynthesizer alloc] initWithVoice:@"com.apple.speech.synthesis.voice.Alex"];
-		float r = [voice rate];
-		[voice setRate:1.5*r];
+		voice = [[AVSpeechSynthesizer alloc] init];
 		[voice setDelegate:self];
 		voiceQueue = [NSMutableArray array];
 	}
@@ -813,17 +813,22 @@ static MainWindowController* instance;
 			}
 			[voiceQueue addObject:text];
 		} else {
-			[voice startSpeakingString:text];
+			// Start speaking
+			AVSpeechUtterance * utterance = [AVSpeechUtterance speechUtteranceWithString:text];
+			utterance.voice = [AVSpeechSynthesisVoice voiceWithIdentifier:@"com.apple.ttsbundle.Alex-compact"];
+			[voice speakUtterance:utterance];
 		}
 	}
 }
 
-- (void)speechSynthesizer:(NSSpeechSynthesizer *)sender didFinishSpeaking:(BOOL)success
+- (void)speechSynthesizer:(AVSpeechSynthesizer *)synthesizer didFinishSpeechUtterance:(AVSpeechUtterance *)utterance
 {
 	if ( [voiceQueue count] ) {
 		NSString * text = [voiceQueue objectAtIndex:0];
 		[voiceQueue removeObjectAtIndex:0];
-		[voice startSpeakingString:text];
+		AVSpeechUtterance * utterance = [AVSpeechUtterance speechUtteranceWithString:text];
+		utterance.voice = [AVSpeechSynthesisVoice voiceWithIdentifier:@"com.apple.ttsbundle.Alex-compact"];
+		[voice speakUtterance:utterance];
 	}
 }
 
