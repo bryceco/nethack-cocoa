@@ -32,8 +32,8 @@
 	NhMenuWindow		*	menuParams;
 	
 	NSMutableDictionary	*	itemDict;
-	
-	IBOutlet NSView		*	menuView;
+
+	IBOutlet NSGridView	*	gridView;
 	IBOutlet NSButton	*	cancelButton;
 	IBOutlet NSButton	*	acceptButton;
 

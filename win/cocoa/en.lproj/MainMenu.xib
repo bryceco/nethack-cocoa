@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="21506" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="23504" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="21506"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="23504"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -61,11 +61,11 @@
                             </subviews>
                             <color key="backgroundColor" red="0.098039217289999994" green="0.098039217289999994" blue="0.098039217289999994" alpha="1" colorSpace="calibratedRGB"/>
                         </clipView>
-                        <scroller key="horizontalScroller" verticalHuggingPriority="750" horizontal="YES" id="565">
+                        <scroller key="horizontalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="565">
                             <rect key="frame" x="1" y="200" width="620" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" verticalHuggingPriority="750" doubleValue="0.97171381031613979" horizontal="NO" id="564">
+                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="0.97171381031613979" horizontal="NO" id="564">
                             <rect key="frame" x="621" y="1" width="15" height="199"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -73,7 +73,7 @@
                     <customView focusRingType="none" horizontalHuggingPriority="750" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1383" customClass="StatsView">
                         <rect key="frame" x="0.0" y="216" width="366" height="160"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1384">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1384">
                                 <rect key="frame" x="20" y="139" width="127" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Vlad the Enchanter" id="1454">
                                     <font key="font" metaFont="systemBold"/>
@@ -81,7 +81,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1385">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1385">
                                 <rect key="frame" x="20" y="120" width="103" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="The Astral Plane" id="1453">
                                     <font key="font" metaFont="system"/>
@@ -89,7 +89,7 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1386">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1386">
                                 <rect key="frame" x="163" y="139" width="141" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="left" title="Neutral Human Wizard" id="1452">
                                     <font key="font" metaFont="system"/>
@@ -117,7 +117,7 @@
                                 </columns>
                                 <gridCells>
                                     <gridCell row="E4T-RC-1gQ" column="ape-X2-xsN" id="1q4-ob-9dd">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1387">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1387">
                                             <rect key="frame" x="-2" y="21" width="26" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Hp:" id="1451">
                                                 <font key="font" metaFont="system"/>
@@ -127,7 +127,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="E4T-RC-1gQ" column="84f-8y-lkW" id="yB8-1s-cfI">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1393">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1393">
                                             <rect key="frame" x="23" y="21" width="66" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="222(333)" id="1445">
                                                 <font key="font" metaFont="systemBold"/>
@@ -146,7 +146,7 @@
                                         </levelIndicator>
                                     </gridCell>
                                     <gridCell row="E4T-RC-1gQ" column="UOC-Bc-Eao" id="ZIc-Rd-QOd">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1395">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1395">
                                             <rect key="frame" x="179" y="21" width="40" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Level:" id="1443">
                                                 <font key="font" metaFont="system"/>
@@ -156,7 +156,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="E4T-RC-1gQ" column="YYD-8z-Clh" id="Aga-0A-aul">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1396">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1396">
                                             <rect key="frame" x="218" y="21" width="28" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="23" id="1442">
                                                 <font key="font" metaFont="systemBold"/>
@@ -166,7 +166,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="E4T-RC-1gQ" column="YpX-YD-WCH" id="OCb-KQ-Cgj">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1416">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1416">
                                             <rect key="frame" x="265" y="21" width="25" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="XP:" id="1422">
                                                 <font key="font" metaFont="system"/>
@@ -176,7 +176,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="E4T-RC-1gQ" column="7GC-hs-1JJ" id="Upy-QF-d9i">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1397">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1397">
                                             <rect key="frame" x="289" y="21" width="57" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="1441">
                                                 <font key="font" metaFont="systemBold"/>
@@ -186,7 +186,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="ape-X2-xsN" id="nAD-GF-gFD">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1388">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1388">
                                             <rect key="frame" x="-2" y="0.0" width="26" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Pw:" id="1450">
                                                 <font key="font" metaFont="system"/>
@@ -196,7 +196,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="84f-8y-lkW" id="RTg-jl-rrv">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1394">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1394">
                                             <rect key="frame" x="23" y="0.0" width="66" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="222(333)" id="1444">
                                                 <font key="font" metaFont="systemBold"/>
@@ -215,7 +215,7 @@
                                         </levelIndicator>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="UOC-Bc-Eao" id="9w2-ek-V0W">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1391">
                                             <rect key="frame" x="179" y="0.0" width="40" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="AC:" id="1447">
                                                 <font key="font" metaFont="system"/>
@@ -225,7 +225,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="YYD-8z-Clh" id="GcR-pa-8Ak">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1392">
                                             <rect key="frame" x="218" y="0.0" width="28" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="-23" id="1446">
                                                 <font key="font" metaFont="systemBold"/>
@@ -235,7 +235,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="YpX-YD-WCH" id="qsu-RI-yix">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1414">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1414">
                                             <rect key="frame" x="265" y="0.0" width="25" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="$:" id="1424">
                                                 <font key="font" metaFont="system"/>
@@ -245,7 +245,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="ua5-7y-SYL" column="7GC-hs-1JJ" id="2yq-9B-xgk">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1415">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1415">
                                             <rect key="frame" x="289" y="0.0" width="57" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="999999" id="1423">
                                                 <font key="font" metaFont="systemBold"/>
@@ -277,7 +277,7 @@
                                 </columns>
                                 <gridCells>
                                     <gridCell row="qGe-cm-1B0" column="aVl-nx-6oo" id="2PK-jx-jjB">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1398">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1398">
                                             <rect key="frame" x="-2" y="21" width="26" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Str:" id="1440">
                                                 <font key="font" metaFont="system"/>
@@ -287,7 +287,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="EJM-Lg-M3r" id="hiU-rk-wO1">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1399">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1399">
                                             <rect key="frame" x="23" y="21" width="40" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18/01" id="1439">
                                                 <font key="font" metaFont="systemBold"/>
@@ -297,7 +297,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="WOq-qS-87r" id="KmE-5B-PY3">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1402">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1402">
                                             <rect key="frame" x="82" y="21" width="31" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Dex:" id="1436">
                                                 <font key="font" metaFont="system"/>
@@ -307,7 +307,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="jBW-Sr-6TT" id="ej7-PV-rOv">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1403">
                                             <rect key="frame" x="112" y="21" width="20" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18" id="1435">
                                                 <font key="font" metaFont="systemBold"/>
@@ -317,7 +317,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="Gsb-iU-oeY" id="gVU-Ve-Qrk">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1406">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1406">
                                             <rect key="frame" x="151" y="21" width="33" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Con:" id="1432">
                                                 <font key="font" metaFont="system"/>
@@ -327,7 +327,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="RhV-yp-msa" id="XMN-OJ-1lN">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1408">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1408">
                                             <rect key="frame" x="183" y="21" width="20" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18" id="1430">
                                                 <font key="font" metaFont="systemBold"/>
@@ -337,7 +337,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="T7y-iR-wbw" id="lad-f9-rsD">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1410">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1410">
                                             <rect key="frame" x="222" y="21" width="36" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Turn:" id="1428">
                                                 <font key="font" metaFont="system"/>
@@ -347,7 +347,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="qGe-cm-1B0" column="Dwu-PI-J0N" id="z4i-bb-yed">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1411">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1411">
                                             <rect key="frame" x="257" y="21" width="66" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="9999999" id="1427">
                                                 <font key="font" metaFont="systemBold"/>
@@ -357,7 +357,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="aVl-nx-6oo" id="vM1-mJ-qnz">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1400">
                                             <rect key="frame" x="-2" y="0.0" width="26" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Int:" id="1438">
                                                 <font key="font" metaFont="system"/>
@@ -367,7 +367,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="EJM-Lg-M3r" id="jyX-xY-pFI">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1401">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1401">
                                             <rect key="frame" x="23" y="0.0" width="40" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18" id="1437">
                                                 <font key="font" metaFont="systemBold"/>
@@ -377,7 +377,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="WOq-qS-87r" id="OPF-Fj-R96">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1404">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1404">
                                             <rect key="frame" x="82" y="0.0" width="31" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Wis:" id="1434">
                                                 <font key="font" metaFont="system"/>
@@ -387,7 +387,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="jBW-Sr-6TT" id="xwo-TG-L7V">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1405">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1405">
                                             <rect key="frame" x="112" y="0.0" width="20" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18" id="1433">
                                                 <font key="font" metaFont="systemBold"/>
@@ -397,7 +397,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="Gsb-iU-oeY" id="Y23-on-jKg">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1407">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1407">
                                             <rect key="frame" x="151" y="0.0" width="33" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Cha:" id="1431">
                                                 <font key="font" metaFont="system"/>
@@ -407,7 +407,7 @@
                                         </textField>
                                     </gridCell>
                                     <gridCell row="Dxw-W4-esz" column="RhV-yp-msa" id="8JN-hs-czQ">
-                                        <textField key="contentView" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1409">
+                                        <textField key="contentView" focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1409">
                                             <rect key="frame" x="183" y="0.0" width="20" height="16"/>
                                             <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="18" id="1429">
                                                 <font key="font" metaFont="systemBold"/>
@@ -423,7 +423,7 @@
                             <box autoresizesSubviews="NO" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" boxType="separator" translatesAutoresizingMaskIntoConstraints="NO" id="1419">
                                 <rect key="frame" x="22" y="24" width="334" height="5"/>
                             </box>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1420">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1420">
                                 <rect key="frame" x="20" y="5" width="222" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Confused, Stunned, Hallucinating" id="1421">
                                     <font key="font" metaFont="systemBold"/>
@@ -487,7 +487,7 @@
                     <customView translatesAutoresizingMaskIntoConstraints="NO" id="1656" customClass="EquipmentView">
                         <rect key="frame" x="366" y="216" width="118" height="160"/>
                         <subviews>
-                            <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1673">
+                            <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="1673">
                                 <rect key="frame" x="28" y="144" width="62" height="16"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="Wearing:" id="1674">
                                     <font key="font" metaFont="system"/>
@@ -690,11 +690,11 @@
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" priority="100" constant="2000" id="xdR-5x-WkY"/>
                         </constraints>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1679">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1679">
                             <rect key="frame" x="-100" y="-100" width="104" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="NO" id="1678">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="1678">
                             <rect key="frame" x="105" y="1" width="15" height="148"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -1539,14 +1539,14 @@
                     </button>
                     <button translatesAutoresizingMaskIntoConstraints="NO" id="831">
                         <rect key="frame" x="13" y="110" width="41" height="42"/>
-                        <constraints>
-                            <constraint firstAttribute="width" constant="35" id="gYN-3B-lpx"/>
-                        </constraints>
                         <buttonCell key="cell" type="bevel" title="y" bezelStyle="regularSquare" image="Arrow-NW" imagePosition="overlaps" alignment="center" borderStyle="border" imageScaling="proportionallyDown" id="832">
                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                             <font key="font" metaFont="system"/>
                             <string key="keyEquivalent">y</string>
                         </buttonCell>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="35" id="gYN-3B-lpx"/>
+                        </constraints>
                         <connections>
                             <action selector="chooseDirection:" target="855" id="869"/>
                         </connections>
@@ -1765,7 +1765,7 @@ DQ
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="r72-rn-7R0">
                             <rect key="frame" x="0.0" y="0.0" width="398" height="198"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <customView id="1492" customClass="FlippedView">
                                     <rect key="frame" x="0.0" y="0.0" width="397" height="198"/>
@@ -1774,11 +1774,11 @@ DQ
                             </subviews>
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1491">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1491">
                             <rect key="frame" x="0.0" y="183" width="383" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1490">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1490">
                             <rect key="frame" x="383" y="0.0" width="15" height="183"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -1816,7 +1816,7 @@ DQ
                 <rect key="frame" x="0.0" y="0.0" width="363" height="115"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="907">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="907">
                         <rect key="frame" x="19" y="47" width="324" height="21"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" drawsBackground="YES" id="908">
                             <font key="font" metaFont="system"/>
@@ -1824,7 +1824,7 @@ DQ
                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="909">
+                    <textField focusRingType="none" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="909">
                         <rect key="frame" x="17" y="76" width="329" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Response:" id="910">
                             <font key="font" metaFont="system"/>
@@ -1918,7 +1918,7 @@ Gw
                             <action selector="performButton:" target="885" id="893"/>
                         </connections>
                     </button>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="362" translatesAutoresizingMaskIntoConstraints="NO" id="898">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" preferredMaxLayoutWidth="362" translatesAutoresizingMaskIntoConstraints="NO" id="898">
                         <rect key="frame" x="17" y="78" width="366" height="16"/>
                         <textFieldCell key="cell" sendsActionOnEndEditing="YES" title="Multiline Label" id="899">
                             <font key="font" metaFont="system"/>
@@ -1966,7 +1966,7 @@ Gw
                 <rect key="frame" x="0.0" y="0.0" width="456" height="441"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="1130">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="1130">
                         <rect key="frame" x="17" y="404" width="44" height="16"/>
                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Name:" id="1131">
                             <font key="font" metaFont="system"/>
@@ -1974,7 +1974,7 @@ Gw
                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                         </textFieldCell>
                     </textField>
-                    <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="1132">
+                    <textField focusRingType="none" verticalHuggingPriority="750" horizontalCompressionResistancePriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="1132">
                         <rect key="frame" x="62" y="401" width="237" height="21"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="150" id="inH-FM-32a"/>
@@ -2027,11 +2027,11 @@ Gw
                             <constraint firstAttribute="width" constant="134" id="9gR-HS-9tb"/>
                             <constraint firstAttribute="height" constant="197" id="vYL-9l-AP6"/>
                         </constraints>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1136">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1136">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1135">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1135">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -2069,11 +2069,11 @@ Gw
                     <box autoresizesSubviews="NO" borderType="line" title="Sex" translatesAutoresizingMaskIntoConstraints="NO" id="1177">
                         <rect key="frame" x="329" y="311" width="110" height="78"/>
                         <view key="contentView" id="XuH-l2-3EZ">
-                            <rect key="frame" x="3" y="3" width="104" height="60"/>
+                            <rect key="frame" x="4" y="5" width="102" height="58"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1150">
-                                    <rect key="frame" x="18" y="10" width="72" height="38"/>
+                                    <rect key="frame" x="18" y="8" width="72" height="38"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="72" height="18"/>
@@ -2111,11 +2111,11 @@ Gw
                     <box autoresizesSubviews="NO" borderType="line" title="Alignment" translatesAutoresizingMaskIntoConstraints="NO" id="1179">
                         <rect key="frame" x="324" y="182" width="110" height="98"/>
                         <view key="contentView" id="5CZ-Cv-e2O">
-                            <rect key="frame" x="3" y="3" width="104" height="80"/>
+                            <rect key="frame" x="4" y="5" width="102" height="78"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <matrix verticalHuggingPriority="750" fixedFrame="YES" allowsEmptySelection="NO" autorecalculatesCellSize="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1154">
-                                    <rect key="frame" x="18" y="10" width="83" height="58"/>
+                                    <rect key="frame" x="18" y="8" width="83" height="58"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                     <size key="cellSize" width="83" height="18"/>
@@ -2195,11 +2195,11 @@ Gw
                             <constraint firstAttribute="width" constant="158" id="8QY-Ji-aLi"/>
                             <constraint firstAttribute="height" constant="370" id="hbv-C7-Pt3"/>
                         </constraints>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" horizontal="YES" id="1146">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="1146">
                             <rect key="frame" x="1" y="119" width="223" height="15"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1147">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1147">
                             <rect key="frame" x="224" y="17" width="15" height="102"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -2259,7 +2259,7 @@ Gw
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <clipView key="contentView" id="etL-It-IJv">
                             <rect key="frame" x="1" y="1" width="276" height="378"/>
-                            <autoresizingMask key="autoresizingMask"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             <subviews>
                                 <textView importsGraphics="NO" verticallyResizable="YES" usesFontPanel="YES" findStyle="panel" allowsUndo="YES" usesRuler="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="1228">
                                     <rect key="frame" x="0.0" y="0.0" width="276" height="378"/>
@@ -2273,11 +2273,11 @@ Gw
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </clipView>
-                        <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1227">
+                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="1227">
                             <rect key="frame" x="-100" y="-100" width="87" height="18"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
-                        <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1226">
+                        <scroller key="verticalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="1226">
                             <rect key="frame" x="262" y="1" width="15" height="363"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </scroller>
@@ -2287,6 +2287,7 @@ Gw
             <connections>
                 <outlet property="delegate" destination="1229" id="1232"/>
             </connections>
+            <point key="canvasLocation" x="447" y="-78"/>
         </window>
         <userDefaultsController representsSharedInstance="YES" id="1693"/>
         <menu title="MainView Context Menu" id="1699">

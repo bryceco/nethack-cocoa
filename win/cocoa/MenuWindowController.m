@@ -74,7 +74,7 @@
 
 -(IBAction)selectAll:(id)sender
 {
-	for ( NSButton * item in [menuView subviews] ) {
+	for ( NSButton * item in [gridView subviews] ) {
 		if ( [item class] == [NSButton class] )  {
 			[item setState:NSControlStateValueOn];
 		}
@@ -85,7 +85,7 @@
 -(BOOL)selectAllInGroup:(char)groupAccel
 {
 	BOOL hit = NO;
-	for ( NSButton * button in [menuView subviews] ) {
+	for ( NSButton * button in [gridView subviews] ) {
 		if ( [button class] == [NSButton class] )  {
 			NSInteger itemTag = [button tag];
 			id item = [itemDict objectForKey:[NSNumber numberWithInt:itemTag]];
@@ -107,7 +107,7 @@
 
 -(IBAction)selectUnknownBUC:(id)sender
 {
-	for ( NSButton * item in [menuView subviews] ) {
+	for ( NSButton * item in [gridView subviews] ) {
 		if ( [item class] == [NSButton class] )  {
 			BOOL known = NO;
 			NSString * text = [[item attributedTitle] string];
@@ -127,7 +127,7 @@
 -(void)doAccept:(id)sender
 {
 	// get list of selected tags
-	for ( NSButton * button in [menuView subviews] ) {
+	for ( NSButton * button in [gridView subviews] ) {
 		if ( [button class] == [NSButton class] ) {
 			// add selected item
 			NSInteger key = [button tag];
@@ -545,7 +545,7 @@ static NSInteger compareButtonText(id button1, id button2, void * context )
 		NSMutableArray * origButtonList = [NSMutableArray arrayWithCapacity:len];
 		for ( NhItem * item in [group items] ) {
 			int tag = [[[itemDict allKeysForObject:item] objectAtIndex:0] intValue];
-			NSButton * button = [menuView viewWithTag:tag];
+			NSButton * button = [gridView viewWithTag:tag];
 			[origButtonList addObject:button];
 		}
 		// sort buttons alphabetically
@@ -603,8 +603,6 @@ static BUC_ENUM GetBUC( NSString * text )
 {
 	NSSize						minimumSize = [[self window] frame].size;
 	NSFont					*	groupFont	= [NSFont labelFontOfSize:15];
-	NSMutableDictionary		*	groupAttr	= [NSMutableDictionary dictionaryWithObject:groupFont forKey:NSFontAttributeName];
-	NSMutableDictionary		*	itemAttr	= [NSMutableDictionary dictionary];
 	int							how			= [menuParams how];
 	NSInteger					itemTag		= 1;
 
@@ -615,8 +613,12 @@ static BUC_ENUM GetBUC( NSString * text )
 	// add new labels
 	CGFloat groupIndent	= 25.0;
 	CGFloat itemIndent	= 40.0;
-	NSRect  viewRect = [menuView bounds];
-		
+	NSRect  viewRect = [gridView bounds];
+
+	while ( gridView.numberOfColumns > 1 ) {
+		[gridView removeColumnAtIndex:0];
+	}
+
 	// fix up the weirdness associated with #enhance menu
 	[self convertFakeGroupsToRealGroups];
 
@@ -630,59 +632,54 @@ static BUC_ENUM GetBUC( NSString * text )
 	
 	// remove true/false column in options window
 	[self convertTrueFalseTags];
-	
-	// compute tab stops for items
-	NSMutableArray * tabStops = [self computeTabStopsWithGroupAttr:groupAttr itemAttr:itemAttr];
 
-	// add tab stops to group attributes
-	NSMutableParagraphStyle *	groupPara	= [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil];
-	[groupPara setTabStops:tabStops];
-	[groupAttr setObject:groupPara forKey:NSParagraphStyleAttributeName];
-	
-	// add tab stops to item attributes
-	NSMutableParagraphStyle *	itemPara	= [[NSMutableParagraphStyle defaultParagraphStyle] mutableCopyWithZone:nil];
-	[itemPara setTabStops:tabStops];
-	[itemAttr setObject:itemPara forKey:NSParagraphStyleAttributeName];
-	
 	CGFloat checkboxWidth = 32.0;	// depends on NSButtonCell implementation
-	
+
 	// loop through menu items and create labels/button for everything
-	CGFloat yPos = 0.0;
+	int row = 0;
 	for ( NhItemGroup * group in [menuParams itemGroups] ) {
 		
 		NSString * title = [group title];
-		if ( iflags.menu_tab_sep && ![title hasPrefix:@"\t"] ) {
-			title = [@"\t" stringByAppendingString:title];
-		}
 
-		NSRect rect = NSMakeRect(groupIndent, yPos, viewRect.size.width, 10 );
+		NSRect rect = NSMakeRect(groupIndent, 0, viewRect.size.width, 10 );
 		if ( [title hasPrefix:@"\t"] ) {
 			// group is indented, so compensate for button image size
 			rect.origin.x += checkboxWidth;
 		}
 		
 		// create text box for group
-		NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
-		
+		NSMutableArray * columns = [NSMutableArray array];
+
+		// dummy cell above button column
+		if ( [title containsChar:'\t'] ) {
+			title = [@" \t" stringByAppendingString:title];
+		}
+
 		// create title attributed string
-		NSAttributedString * aTitle = [[NSAttributedString alloc] initWithString:title attributes:groupAttr];
-		[label setObjectValue:aTitle];
-
-		[label setEditable:NO];
-		[label setDrawsBackground:NO];
-		[label setBordered:NO];
-		[label setFont:groupFont];
-		[label sizeToFit];
-
-		[menuView addSubview:label];
-		yPos += [label bounds].size.height;
+		for ( NSString * text in [title componentsSeparatedByString:@"\t"] ) {
+			NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
+			[label setObjectValue:text];
+			[label setEditable:NO];
+			[label setDrawsBackground:NO];
+			[label setBordered:NO];
+			[label setFont:groupFont];
+			[label sizeToFit];
+			[columns addObject:label];
+		}
+		[gridView addRowWithViews:columns];
+		if ( row == 0 ) {
+			[gridView removeRowAtIndex:0];
+		}
+		++row;
 
 		for ( NhItem * item in [group items] ) {
-			
+
+			[columns removeAllObjects];
+
 			// button is disabled if identifier is -1 (which we set zero in convertFakeGroupsToRealGroups)
 			BOOL isEnabled = item.identifier.a_int != -1 || how == PICK_NONE;
 
-			NSRect rect = NSMakeRect(itemIndent, yPos, viewRect.size.width, 10 );
+			NSRect rect = NSMakeRect(itemIndent, 0, viewRect.size.width, 10 );
 			NSButton * button = [[NSButton alloc] initWithFrame:rect];	
 			[button setButtonType:how == PICK_ANY ? NSButtonTypeSwitch 
 								 : how == PICK_ONE ? NSButtonTypeRadio
@@ -722,13 +719,11 @@ static BUC_ENUM GetBUC( NSString * text )
 			}
 			
 			// get title
-			NSString * title = [item title];
+			NSArray * fields = [[item title] componentsSeparatedByString:@"\t"];
+			NSString * title = fields[0];
 
 			// add title to string and adjust vertical baseline of text so it aligns with icon
 			[[aString mutableString] appendString:title];
-			
-			// set paragraph style so we get tabs as we like
-			[aString addAttributes:itemAttr range:NSMakeRange(0,[[aString mutableString] length])];
 
 #if 0
 			// get blessed/cursed status
@@ -747,21 +742,35 @@ static BUC_ENUM GetBUC( NSString * text )
 			
 			// set button title
 			[button setAttributedTitle:aString];
-			
+			[button sizeToFit];
+
+			[columns addObject:button];
+
+
 #if 0
 			int maxAmt = [item maxAmount];
 #endif
-			[button sizeToFit];
-			[menuView addSubview:button];
 
-			yPos += [button bounds].size.height + 3;
+			for ( int column = 1; column < fields.count; ++column ) {
+				NSTextField * label = [[NSTextField alloc] initWithFrame:rect];
+				[label setObjectValue:fields[column]];
+				[label setEditable:NO];
+				[label setDrawsBackground:NO];
+				[label setBordered:NO];
+				[label sizeToFit];
+				[columns addObject:label];
+			}
+			[gridView addRowWithViews:columns];
+			if ( row == 0 ) {
+				[gridView removeRowAtIndex:0];
+			}
+			++row;
 		}
 	}
-	
+
 	if ( !showShortcuts ) {
 		[selectAll setHidden:YES];
 	}
-
 
 	if ( how == PICK_NONE ) {
 		[acceptButton setTitle:@"Close"];
@@ -774,20 +783,21 @@ static BUC_ENUM GetBUC( NSString * text )
 	
 	// get max item width
 	CGFloat width = 0;
-	for ( NSView * view in [menuView subviews] ) {
+	for ( NSView * view in [gridView subviews] ) {
 		NSRect rc = [view frame];
 		if ( rc.origin.x + rc.size.width > width )
 			width = rc.origin.x + rc.size.width;
 	}
 	
-	NSSize viewSizeOrig = [menuView frame].size;
+	NSSize viewSizeOrig = [gridView frame].size;
 	
-	// size view  
-	viewRect.size.height = yPos;
-	viewRect.size.width  = width;
-	[menuView setFrame:viewRect];
-	[menuView scrollPoint:NSMakePoint(0,0)];
-	[menuView setNeedsDisplay:YES];	
+	// size view
+	NSSize bestSize = [gridView fittingSize];
+	viewRect.size.height = bestSize.height;
+	viewRect.size.width  = bestSize.width;
+	[gridView setFrame:viewRect];
+	[gridView scrollPoint:NSMakePoint(0,0)];
+	[gridView setNeedsDisplay:YES];	
 
 	// size containing window
 	NSRect rc = [[self window] frame];
@@ -815,7 +825,7 @@ static BUC_ENUM GetBUC( NSString * text )
 		[[win window] setTitle:prompt];
 	}
 	[win showWindow:win];
-	[win->menuView scrollPoint:NSMakePoint(0,0)];
+	[win->gridView scrollPoint:NSMakePoint(0,0)];
 
 	if ( !RUN_MODAL && [win->menuParams how] == PICK_NONE ) {
 		// we can run detached
