@@ -619,6 +619,19 @@ static BUC_ENUM GetBUC( NSString * text )
 		[gridView removeColumnAtIndex:0];
 	}
 
+	// force gridView to be same size as containing view
+	[gridView setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[gridView.superview setTranslatesAutoresizingMaskIntoConstraints:NO];
+	[NSLayoutConstraint activateConstraints:@[
+		[gridView.leadingAnchor constraintEqualToAnchor:gridView.superview.leadingAnchor constant:20],
+		[gridView.trailingAnchor constraintEqualToAnchor:gridView.superview.trailingAnchor constant:-20],
+		[gridView.topAnchor constraintEqualToAnchor:gridView.superview.topAnchor constant:20],
+		[gridView.bottomAnchor constraintEqualToAnchor:gridView.superview.bottomAnchor constant:-20]
+	]];
+
+	// center cells vertically
+	gridView.yPlacement = NSGridCellPlacementCenter;
+
 	// fix up the weirdness associated with #enhance menu
 	[self convertFakeGroupsToRealGroups];
 
@@ -681,7 +694,7 @@ static BUC_ENUM GetBUC( NSString * text )
 
 			NSRect rect = NSMakeRect(itemIndent, 0, viewRect.size.width, 10 );
 			NSButton * button = [[NSButton alloc] initWithFrame:rect];	
-			[button setButtonType:how == PICK_ANY ? NSButtonTypeSwitch 
+			[button setButtonType:how == PICK_ANY ? NSButtonTypeSwitch
 								 : how == PICK_ONE ? NSButtonTypeRadio
 								 : NSButtonTypeMomentaryChange];
 			[button setBordered:NO];
@@ -796,8 +809,7 @@ static BUC_ENUM GetBUC( NSString * text )
 	viewRect.size.height = bestSize.height;
 	viewRect.size.width  = bestSize.width;
 	[gridView setFrame:viewRect];
-	[gridView scrollPoint:NSMakePoint(0,0)];
-	[gridView setNeedsDisplay:YES];	
+	[gridView setNeedsDisplay:YES];
 
 	// size containing window
 	NSRect rc = [[self window] frame];
@@ -815,6 +827,8 @@ static BUC_ENUM GetBUC( NSString * text )
 		rc.size.width = minimumSize.width;
 	
 	[[self window] setFrame:rc display:YES];
+
+	[gridView scrollPoint:NSMakePoint(0,gridView.bounds.size.height)];
 }
 
 + (void)menuWindowWithMenu:(NhMenuWindow *)menu
@@ -825,7 +839,6 @@ static BUC_ENUM GetBUC( NSString * text )
 		[[win window] setTitle:prompt];
 	}
 	[win showWindow:win];
-	[win->gridView scrollPoint:NSMakePoint(0,0)];
 
 	if ( !RUN_MODAL && [win->menuParams how] == PICK_NONE ) {
 		// we can run detached
