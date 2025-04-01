@@ -92,7 +92,6 @@
 	[super keyDown:theEvent];
 }
 
-
 +(void)messageWindowWithText:(NSString *)text
 {
 	MessageWindowController * win = [[MessageWindowController alloc] initWithMessage:text];
